@@ -26,9 +26,9 @@
                    '(border-color     . "black")
                    '(mouse-color      . "light gray")
                    '(cursor-color     . "light gray")
-                   '(cursor-type      . hairline-caret)
+                   ; '(cursor-type      . hairline-caret)
                    '(menu-bar-lines . 1)
-                   '(font . "MS Mincho 12")
+                   ; '(font . "MS Mincho 12")
                    ;; 東雲なら shinonome16-fontset などを指定
                    ; '(vertical-scroll-bars . nil) ;;スクロールバーはいらない
                    '(width . 202) ;; ウィンドウ幅

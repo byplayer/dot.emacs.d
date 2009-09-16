@@ -32,7 +32,7 @@
                    ;; 東雲なら shinonome16-fontset などを指定
                    ; '(vertical-scroll-bars . nil) ;;スクロールバーはいらない
                    '(width . 202) ;; ウィンドウ幅
-                   '(height . 78) ;; ウィンドウの高さ
+                   '(height . 77) ;; ウィンドウの高さ
                    ; '(top . 60) ;;表示位置
                    ; '(left . 140) ;;表示位置
                    )

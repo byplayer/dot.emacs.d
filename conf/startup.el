@@ -20,7 +20,7 @@
 )
 
 (load "init-encoding")
-(load "init-color")
+(load "init-views")
 (load "init-key")
 (load "init-c-mode")
 (load "init-ruby")

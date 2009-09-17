@@ -70,3 +70,17 @@
 (setq ansi-color-names-vector
       ["black" "dark red" "DarkOliveGreen3" "NavajoWhite2" "LightSkyBlue" "dark magenta"
        "DarkSlateGray2" "white"])
+
+; çsî‘çÜï\é¶
+(require 'wb-line-number)
+
+(setq truncate-partial-width-windows nil)
+(set-scroll-bar-mode nil)
+(setq wb-line-number-scroll-bar t)
+
+(wb-line-number-enable)
+(custom-set-faces
+ '(wb-line-number-face ((t (:foreground "light gray"))))
+ '(wb-line-number-scroll-bar-face
+   ((t (:foreground "black" :background "light gray")))))
+

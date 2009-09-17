@@ -22,3 +22,4 @@
 ;; –³”O
 ; (global-unset-key "\C-i")
 
+(global-set-key "\C-x3" 'wb-line-number-split-window-horizontally)

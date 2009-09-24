@@ -21,5 +21,3 @@
 ;; 以下を指定するとTABも解除されてしまう・・・
 ;; 無念
 ; (global-unset-key "\C-i")
-
-(global-set-key "\C-x3" 'wb-line-number-split-window-horizontally)

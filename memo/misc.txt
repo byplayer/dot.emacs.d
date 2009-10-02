@@ -1,0 +1,2 @@
+= キーバインド表示
+describe-bindings

@@ -16,6 +16,8 @@
 ;;
 ;;  * verify the example defined at the point of the current buffer (bound to `\C-c ,s`)
 ;;
+;;  * re-run the last verification process (bound to `\C-c ,r`)
+;;
 ;;  * toggle the pendingness of the example at the point (bound to
 ;;    `\C-c ,d`)
 ;;
@@ -49,34 +51,32 @@
 ;; Public License.
 
 (require 'ruby-mode)
-(require 'snippet)
 
 (defconst rspec-mode-abbrev-table (make-abbrev-table))
 
-(defun rspec-keymap ()
-  "Creates a keymap for spec files"
-  (let ((km (make-sparse-keymap)))
-    (define-key km (kbd "C-c ,v") 'rspec-verify)
-    (define-key km (kbd "C-c ,s") 'rspec-verify-single)
-    (define-key km (kbd "C-c ,a") 'rspec-verify-all)
-    (define-key km (kbd "C-c ,d") 'rspec-toggle-example-pendingness)
-    (define-key km (kbd "C-c ,t") 'rspec-toggle-spec-and-target)
-    km))
+(defconst rspec-mode-keymap (make-sparse-keymap) "Keymap used in rspec mode")
+
+(define-key rspec-mode-keymap (kbd "C-c ,v") 'rspec-verify)
+(define-key rspec-mode-keymap (kbd "C-c ,s") 'rspec-verify-single)
+(define-key rspec-mode-keymap (kbd "C-c ,a") 'rspec-verify-all)
+(define-key rspec-mode-keymap (kbd "C-c ,d") 'rspec-toggle-example-pendingness)
+(define-key rspec-mode-keymap (kbd "C-c ,t") 'rspec-toggle-spec-and-target)
 
 (define-minor-mode rspec-mode
   "Minor mode for rSpec files"
   :lighter " rSpec"
-  :keymap  (rspec-keymap))
+  :keymap  rspec-mode-keymap)
 
 ;; Snippets
-(snippet-with-abbrev-table
- 'rspec-mode-abbrev-table
- ("helper" . "require 'pathname'\nrequire Pathname(__FILE__).dirname + '../spec_helper'\n\n$.")
- ("desc"   . "describe $${ClassName} do\n  $.\nend ")
- ("descm"  . "describe $${ClassName}, \"$${modifier}\" do\n  $.\nend ")
- ("it"     . "it \"should $${what exactly?}\" do\n  $.\n  end ")
- ("bef"    . "before do\n  $.\n  end"))
-
+(if (require 'snippet nil t)
+    (snippet-with-abbrev-table
+     'rspec-mode-abbrev-table
+     ("helper" . "require 'pathname'\nrequire Pathname(__FILE__).dirname + '../spec_helper'\n\n$.")
+     ("desc"   . "describe $${ClassName} do\n  $.\nend ")
+     ("descm"  . "describe $${ClassName}, \"$${modifier}\" do\n  $.\nend ")
+     ("it"     . "it \"should $${what exactly?}\" do\n  $.\n  end ")
+     ("bef"    . "before do\n  $.\n  end"))
+  )
 
 
 (defun rspec-beginning-of-example ()
@@ -130,20 +130,18 @@
 (defun rspec-verify ()
   "Runs the specified spec, or the spec file for the current buffer."
   (interactive)
-  (rspec-run-cmd (concat ruby-command " " (rspec-spec-file-for (buffer-file-name)) " --format specdoc --reverse")))
+  (rspec-run-single-file (rspec-spec-file-for (buffer-file-name)) "--format specdoc" "--reverse"))
 
 (defun rspec-verify-single ()
   "Runs the specified example at the point of the current buffer."
   (interactive)
-  (rspec-run-cmd (concat ruby-command " " (rspec-spec-file-for (buffer-file-name)) 
-                         " --format specdoc --reverse --example '" (replace-regexp-in-string "'" "\\'" (rspec-example-name-at-point)) 
-                         "'")))
-
+  (rspec-run-single-file (rspec-spec-file-for (buffer-file-name)) "--format specdoc" "--reverse" (concat "--line " (number-to-string (line-number-at-pos)))))
+ 
 (defun rspec-verify-all ()
   "Runs the 'spec' rake task for the project of the current file."
   (interactive)
   (let ((default-directory (or (rspec-project-root) default-directory)))
-    (rspec-run-cmd "rake spec SPEC_OPTS='--format=progress'")))
+    (rspec-run "--format=progress")))
 
 (defun rspec-toggle-spec-and-target ()
   "Switches to the spec for the current buffer if it is a
@@ -226,10 +224,22 @@
     (rspec-beginning-of-example)
     (re-search-forward "it[[:space:]]+['\"]\\(.*\\)['\"][[:space:]]*\\(do\\|DO\\|Do\\|{\\)")
     (match-string 1)))
-                                            
-(defun rspec-run-cmd (cmd)
-  "Runs a command and puts the output in the compile buffer"
-  (compile cmd)
+                    
+(defun rspec-register-verify-redo (redoer)
+  "Register a bit of code that will repeat a verification process"
+  (let ((redoer-cmd (eval (append '(lambda () (interactive)) (list redoer)))))
+    (global-set-key (kbd "C-c ,r") redoer-cmd)))
+
+(defun rspec-run (&rest opts)
+  "Runs spec with the specified options"
+  (rspec-register-verify-redo (cons 'rspec-run opts))
+  (compile (concat "rake spec SPEC_OPTS=\'" (mapconcat (lambda (x) x) opts " ") "\'") t)
+  (end-of-buffer-other-window 0))
+
+(defun rspec-run-single-file (spec-file &rest opts)
+  "Runs spec with the specified options"
+  (rspec-register-verify-redo (cons 'rspec-run-single-file (cons spec-file opts)))
+  (compile (concat "rake spec SPEC=\'" spec-file "\' SPEC_OPTS=\'" (mapconcat (lambda (x) x) opts " ") "\'") t)
   (end-of-buffer-other-window 0))
 
 (defun rspec-project-root (&optional directory)

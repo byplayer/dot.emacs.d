@@ -54,7 +54,6 @@
 
 (require 'rails)
 
-(setq ruby-command "ruby.exe")
 (setq load-path
       (cons (expand-file-name "~/.emacs.d/elisp/rspec-mode/") load-path))
 (require 'rspec-mode)

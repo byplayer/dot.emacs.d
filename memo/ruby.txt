@@ -1,0 +1,16 @@
+= rspec-mode
+toggle back and forth between a spec and it's target (bound to
+;;    `\C-c ,t`)
+;;  * verify the spec defined in the current buffer if it is a spec
+;;    file (bound to `\C-c ,v`)
+;;
+;;  * verify the example defined at the point of the current buffer (bound to `\C-c ,s`)
+;;
+;;  * toggle the pendingness of the example at the point (bound to
+;;    `\C-c ,d`)
+;;
+;;  * disable the example at the point by making it pending
+;;
+;;  * reenable the disabled example at the point
+;;
+;;  * run "spec" rake task for project (bound to `\C-c ,a`)

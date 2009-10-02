@@ -36,9 +36,9 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; 折り返ししない
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-; (custom-set-variables
-; '(truncate-lines t)
-; '(truncate-partial-width-windows t))
+(custom-set-variables
+ '(truncate-lines nil)
+ '(truncate-partial-width-windows nil))
 
 ; スクロールは1行単位
 (setq scroll-step 1)

@@ -12,12 +12,14 @@
 (when run-meadow
   (load "meadow/init-fonts")
   (load "meadow/init-ime")
+  (load "meadow/init-env")
   )
 
 (when run-linux
   (load "linux/init-anthy")
   (load "linux/init-clipboard")
   (load "linux/init-font")
+  (load "linux/init-env")
 )
 
 (load "init-encoding")
@@ -29,9 +31,7 @@
 (load "init-others")
 (load "init-html")
 (load "init-config")
-(load "init-vc")
 (load "init-abbrev")
-(load "init-speedbar")
 (load "init-shell")
 (load "init-window")
 (load "init-outline")

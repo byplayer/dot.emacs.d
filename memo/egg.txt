@@ -1,5 +1,7 @@
 = キーバインド
 C-x v l    ログ参照
-C-x v =    diff 参照
-C-x v c    commit
-C-x v i    git add
+      =    diff 参照
+      c    commit
+      i    git add
+      d    git status
+

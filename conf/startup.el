@@ -17,6 +17,7 @@
 (when run-linux
   (load "linux/init-anthy")
   (load "linux/init-clipboard")
+  (load "linux/init-font")
 )
 
 (load "init-encoding")
@@ -35,5 +36,6 @@
 (load "init-window")
 (load "init-outline")
 (load "init-php")
+(load "init-egg")
 
 (load "init-hostconf")

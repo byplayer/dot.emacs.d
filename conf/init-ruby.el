@@ -128,3 +128,8 @@
   (ruby-block-mode t)
   (setq ruby-block-highlight-toggle t))
 (add-hook 'ruby-mode-hook 'my-ruby-mode-hook)
+
+; ruby-electric.elとanty.elの競合回避
+(let ((rel (assq 'ruby-electric-mode minor-mode-map-alist)))
+  (setq minor-mode-map-alist (append (delete rel minor-mode-map-alist) (list rel))))
+

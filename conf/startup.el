@@ -8,7 +8,6 @@
 ; load OS, emacs version def
 (load "init-run-ver")
 
-
 (when run-meadow
   (load "meadow/init-fonts")
   (load "meadow/init-ime")
@@ -36,6 +35,5 @@
 (load "init-window")
 (load "init-outline")
 (load "init-php")
-(load "init-egg")
-
+(load "init-git")
 (load "init-hostconf")

@@ -1,2 +1,5 @@
 = キーバインド表示
 describe-bindings
+
+= 指定行へ移動
+M-g g

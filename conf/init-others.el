@@ -21,6 +21,7 @@
 ; 前回編集位置保存
 (load "saveplace")
 (setq-default save-place t)
+(setq-default save-place-limit 50)
 
 ;; grep用の設定
 ;; JVimのgrep用です

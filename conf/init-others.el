@@ -1,54 +1,49 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; ‚¢‚ë‚¢‚ë
+;; ¤¤¤í¤¤¤í
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; ƒoƒbƒNƒAƒbƒvƒtƒ@ƒCƒ‹‚È‚µ
+;; ¥Ğ¥Ã¥¯¥¢¥Ã¥×¥Õ¥¡¥¤¥ë¤Ê¤·
 (setq make-backup-files nil)
 
-; toolbar‚È‚µ
+; toolbar¤Ê¤·
 (setq tool-bar-mode nil)
 
 ;; indent
 (setq-default indent-level 2)
-;;ƒ^ƒu•‚ğ 2 ‚Éİ’è
+;;¥¿¥ÖÉı¤ò 2 ¤ËÀßÄê
 (setq-default tab-width 2)
 
-; ƒJ[ƒ\ƒ‹—ñ•\¦
+; ¥«¡¼¥½¥ëÎóÉ½¼¨
 (column-number-mode 1)
 
-; ƒgƒbƒvƒy[ƒW‚ğ”ñ•\¦‚É
+; ¥È¥Ã¥×¥Ú¡¼¥¸¤òÈóÉ½¼¨¤Ë
 (setq inhibit-startup-message t)
 
-; ‘O‰ñ•ÒWˆÊ’u•Û‘¶
+; Á°²óÊÔ½¸°ÌÃÖÊİÂ¸
 (load "saveplace")
 (setq-default save-place t)
 (setq-default save-place-limit 50)
 
-;; grep—p‚Ìİ’è
-;; JVim‚Ìgrep—p‚Å‚·
-(setq find-grep-options "-s -q -K SSE ")
-(setq grep-command "grep -n -K SSE -e ")
-
-; ƒ^ƒCƒgƒ‹‚ğƒtƒ@ƒCƒ‹–¼‚É‚·‚é
+; ¥¿¥¤¥È¥ë¤ò¥Õ¥¡¥¤¥ëÌ¾¤Ë¤¹¤ë
 (setq frame-title-format "%b")
 
-; EOF‚ğ•\¦
+; EOF¤òÉ½¼¨
 (load "y_eof")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Ü‚è•Ô‚µ‚µ‚È‚¢
+;; ÀŞ¤êÊÖ¤·¤·¤Ê¤¤
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (custom-set-variables
  '(truncate-lines nil)
  '(truncate-partial-width-windows nil))
 
-; ƒXƒNƒ[ƒ‹‚Í1s’PˆÊ
+; ¥¹¥¯¥í¡¼¥ë¤Ï1¹ÔÃ±°Ì
 (setq scroll-step 1)
 
-; ƒJ[ƒ\ƒ‹ˆÊ’u‚É‚ ‚í‚¹‚Ä¶‰E©“®ƒXƒNƒ[ƒ‹
+; ¥«¡¼¥½¥ë°ÌÃÖ¤Ë¤¢¤ï¤»¤Æº¸±¦¼«Æ°¥¹¥¯¥í¡¼¥ë
 (setq auto-show-mode t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; ƒXƒy[ƒXAƒ^ƒu‚Ì¯•Ê
+;; ¥¹¥Ú¡¼¥¹¡¢¥¿¥Ö¤Î¼±ÊÌ
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;(defface my-face-r-1 '((t (:background "gray15"))) nil)
 (defface my-face-b-1 '((t (:background "gray"))) nil)
@@ -63,7 +58,7 @@
   (font-lock-add-keywords
    major-mode
    '(("\t" 0 my-face-b-2 append)
-     ("@" 0 my-face-b-1 append)
+     ("¡¡" 0 my-face-b-1 append)
      ("[ \t]+$" 0 my-face-u-1 append)
      ;;("[\r]*\n" 0 my-face-r-1 append)
      )))
@@ -71,12 +66,12 @@
 (ad-activate 'font-lock-mode)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; ƒo[ƒWƒ‡ƒ“ŠÇ—‰º‚ÌƒoƒbƒNƒAƒbƒvƒtƒ@ƒCƒ‹‚ğì‚ç‚È‚¢
+;; ¥Ğ¡¼¥¸¥ç¥ó´ÉÍı²¼¤Î¥Ğ¥Ã¥¯¥¢¥Ã¥×¥Õ¥¡¥¤¥ë¤òºî¤é¤Ê¤¤
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (setq vc-make-backup-files t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; ƒoƒbƒ`Aini‚È‚Ç‚Ìƒ‚[ƒh’Ç‰Á
+;; ¥Ğ¥Ã¥Á¡¢ini¤Ê¤É¤Î¥â¡¼¥ÉÄÉ²Ã
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (require 'generic-x)
 

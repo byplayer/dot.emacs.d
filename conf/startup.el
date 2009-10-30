@@ -37,3 +37,4 @@
 (load "init-php")
 (load "init-git")
 (load "init-hostconf")
+(load "init-markdown")

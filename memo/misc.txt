@@ -3,3 +3,6 @@ describe-bindings
 
 = 指定行へ移動
 M-g g
+
+= カーソル以下の単語検索
+C-s C-w

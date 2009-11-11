@@ -1,0 +1,14 @@
+M-x visit-tags-table <RET> FILE <RET>
+  Select the tag file, "FILE", to use.
+
+M-. [TAG] <RET>
+  Find the first definition of TAG.  The  default  tag  is  the
+  identifier under the cursor.
+
+M-*
+  Pop back to where you previously invoked "M-.".
+
+C-u M-.
+  Find the next definition for the last tag.
+
+For more commands, see the Tags topic in the Emacs info document.

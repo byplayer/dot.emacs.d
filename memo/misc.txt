@@ -6,3 +6,7 @@ M-g g
 
 = カーソル以下の単語検索
 C-s C-w
+
+= 挿入/上書きモードの切り替え
+
+M-x overwrite-mode

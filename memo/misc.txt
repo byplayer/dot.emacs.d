@@ -9,4 +9,4 @@ C-s C-w
 
 = 挿入/上書きモードの切り替え
 
-M-x overwrite-mode
+M-x overwrite-mode [INS キー]

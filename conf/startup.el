@@ -39,3 +39,4 @@
 (load "init-git")
 (load "init-hostconf")
 (load "init-markdown")
+(load "init-recentfile")

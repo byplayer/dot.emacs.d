@@ -10,3 +10,9 @@ C-s C-w
 = 挿入/上書きモードの切り替え
 
 M-x overwrite-mode [INS キー]
+
+= 開いたら文字化けしたファイルを文字コード指定で開き直す
+C-x RET c euc-jp-unix C-x C-f
+
+= 開いたファイルの文字コードを変えて保存
+C-x RET f euc-jp-unix

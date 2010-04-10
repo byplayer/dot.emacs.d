@@ -71,6 +71,9 @@
       ["black" "dark red" "DarkOliveGreen3" "NavajoWhite2" "LightSkyBlue" "dark magenta"
        "DarkSlateGray2" "white"])
 
+;; ツールバーを隠す
+(tool-bar-mode nil)
+
 
 ;; 行番号表示
 ;; wb-line-number

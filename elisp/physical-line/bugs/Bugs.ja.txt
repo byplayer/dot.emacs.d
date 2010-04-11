@@ -1,0 +1,88 @@
+----------------------------------------------------------------
+physical-line-mode 自体のバグ・仕様
+----------------------------------------------------------------
+
+* [Bug1]
+  (setq-default physical-line-mode t) な状態だと、mini buffer で
+  も physical-line-mode-map が有効になる。これは嬉しい場合もある
+  が、不幸せになることの方が多いような気がする。
+
+  --> hook すればいいのでこのまま。
+
+  --> 3.0 で minor mode map を使うのをやめたので関係なくなった。
+      (advice の場合は有効でも困らない。Emacs 21 だと有効の方が嬉
+      しいかも。)
+
+
+
+----------------------------------------------------------------
+Emacs のバグ / Emacs のバグ対応コードのバグ・不完全性
+----------------------------------------------------------------
+
+* [EBug1] Emacs 21.1
+  vertical-motion が意味不明。
+
+
+* [EBug2] Emacs 21.1
+  backward-char, delete-char,... が、合成文字を 1 文字と数えない。
+
+
+* [EBug3] Emacs 21.1
+  文字の「中」に narrow-to-region の境界が来ると、vertical-motion
+  で外に出ようとしたときに Emacs 自体が死ぬ。
+
+
+* [EBug4] Emacs 21.1
+  1 つの文字が複数行にわたる状態 (^A が行末で切れたとか) の時に変
+  態的な動作をする。特に、-nw だと
+  physical-line-e21-1-tty-sane-vertical-motion が無限ループを起こ
+  すことも。
+
+  --> 対応する気力なし。
+
+
+* [EBug5] Emacs 21.1 no window-system
+  行頭に ^A などがある時にポイントをそこに置くと、画面上では前の
+  行の後ろに見える。
+
+  --> 対応予定なし。というか elisp 側ではどうにもならないと思う。
+      ポイントが次の行の先頭にあると思って見れば矛盾した動作はし
+      ない。
+
+
+* [EBug6] Mule 2.3 (Emacs 19.34)
+  let の variable binding が変。buffer-local 変数を bind しても
+  let を行った buffer でしか有効にならないし、default-value も見
+  えたまま。
+  また、let に入るときの変数の値を、let から出るときに
+  current-buffer に書き戻す仕組みになっているのか、let-clause に
+  入るときと出るときで current-buffer が違うと、正しく戻らない。
+
+  --> Mule 2.3 では、moderate 系関数が使えない。
+      (pass through した先の関数が current-buffer を変更する可能
+      性があるため)
+
+  --> 3.0 で minor mode map を使うのをやめたので、moderate 系関数
+      も消えた。
+
+
+* [EBug7] Emacs 21.1 with window-system
+  truncate-lines, truncate-partial-width-windows によって
+  truncate されていて、バッファの最終行が window-width より長い場
+  合、EOB から数えて window-width 以前の位置から
+  (vertical-motion 9999) などとすると、本来の返り値より 1 大きい
+  値が返る。
+
+
+* [EBug8] Emacs 21.1 with window-system
+  pos に合成文字の先頭があるとすると、(narrow-to-region pos pos)
+  したときに、その合成文字が見え(移動はできない)、その後
+  (vertical-motion 1) すると Emacs 自体が死ぬ。
+  cf. [EBug3]
+  without window-system では、? が見えるが Emacs は死なない。
+
+
+* [EBug9] Emacs 22.1
+  1 文字が複数行にレンンダリングされる場合 (タブ、^A など) で、
+  physical-line-slip-backward が t の場合、ポイントが前の行に
+  slip してしまう。

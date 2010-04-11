@@ -1,0 +1,128 @@
+2007-10-08 (version 3.2)
+ * Change the default value of physical-line-slip-backward to nil (to
+   be consistent with the default behavior of Emacs).
+
+2007-05-24
+ * Workaround for Emacs 22.1's buggy vertical-motion.
+
+2006-03-12 (version 3.1)
+
+2002-11-27
+ * Hack for the Emacs 21.3's buggy vertical-motion.
+
+2002-08-23
+ * On a composite character,
+   (progn (narrow-to-region (point) (point)) (vertical-motion 1))
+   crashes Emacs 21.  A workaround for this is added.
+
+2002-08-15
+ * Replace physical-line-e21-1-backward-composite-char1.
+
+2002-03-29 (version 3.0)
+ * Returns to advice only.
+ * Bugs of `vertical-motion' and `*-char' remain on Emacs 21.2,
+   so minor-version check of workarounds are commented out.
+
+
+2002-01-12 (version 2.6)
+ * Bug fix: point did not move up by
+   (physical-line-e21-win-sane-vertical-motion -1) when
+   truncate-lines or truncate-partial-width-windows.
+
+2002-01-08 (version 2.5)
+ * New user variable physical-line-slip-backward.
+
+2002-01-07
+ * Unnecessary quotes to lambda expressions were removed.
+ * New user variable physical-line-mode-string-alist.
+
+2001-12-11
+ * Robust physical-line-disable-keymap against keyboard-quit.
+
+2001-11-29 (version 2.4)
+ * 3 (precisely 2) shims are introduced; none, advice, and moderate.
+   Advice was given up at version 2.0, but revives here as one of
+   shims.
+
+2001-11-27
+ * physical-line-e21-1-win-sane-vertical-motion0 came to be fast
+   when a logical line is long.
+ * Own minor mode map is added at the end of minor-mode-map-alist
+   not to hide other minor modes' keymaps.
+
+2001-11-22 (version 2.3)
+ * Bug fix: physical-line-e21-1-win-sane-vertical-motion0 could
+   not correctly treat such a line as "...[physical-newline][eob]".
+
+2001-11-22
+ * Emacs 21.1's vertical-motion also has a bug in no-windows mode.
+   A workaround for this is added.
+
+2001-11-13 (version 2.2)
+ * physical-line-mode-map-setup-hook is added.
+
+2001-11-11 (version 2.1)
+ * Support for variable pitch.  (This means "Not collapse with
+   variable pitch", not "Point moves with consideration to pitch.")
+
+2001-11-11
+ * Emacs 21.1's forward-char, backward-char, delete-char, etc.
+   seem not to treat a composite character as a unit.
+   A workaround for this is added.
+
+2001-11-10
+ * Bug fix: physical-line-beginning-of-line and
+   physical-line-end-of-line did not accept nil as an argument.
+ * Bug fix: physical-line-e21-1-sane-vertical-motion0 acted
+   differently from ideal (vertical-motion 0) when
+   inhibit-field-text-motion is non-nil.
+
+2001-11-10
+ * physical-line-beginning-of-line and physical-line-end-of-line
+   are added.
+
+2001-11-06 (version 2.0)
+ * Docstring of function physical-line-mode is fixed. (Since it
+   is also used in M-x describe-mode.)
+
+
+2001-11-05
+ * Minor mode came to be utilized. (got rid of advice to
+   line-move)
+   - (setq next-line-add-newlines t) will meet your expectations.
+   - Behavior of (next-line) and (previous-line) is not changed.
+     Major modes which depend on behavior of these functions
+     (e.g. dired) will work with physical-line-mode on.
+
+2001-11-01 (vertion 1.3)
+ * The special care for the bug of Emacs 21.1's vertical-motion is
+   reimplemented.
+
+2001-10-31
+ * When making a new mode-line-format, default-value of
+   mode-line-format is used as a seed. (instead of current local
+   value)
+ * Version 1.2 was also incomplete.  This is not yet fixed.
+
+2001-10-30 (vertion 1.2)
+ * The care of version 1.1 was incomplete.  On Emacs 21.1,
+   vertical-motion is replaced after all.
+
+2001-10-29 (version 1.1)
+ * An adhoc care for a bug of Emacs 21.1's vertical-motion is
+   added. (since Emacs 21.1 has released.)
+
+2000-12-03  (version 1.0)
+ * completely rewritten  (using advice)
+ * All codes derived from vz.el are removed.
+ * Cursor slipping when used with non-single-width characters is fixed.
+ * Strange behavior at the right edge of a window is corrected.
+
+
+2000-02-20
+ * modified for Emacs 20
+
+2000-01-28
+ * from vz.el (ftp://ftp.st.ryukoku.ac.jp/pub/emacs-lisp/vzel/)
+ * physical-line can be activated/inactivated
+ * mode-line

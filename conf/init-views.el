@@ -39,6 +39,25 @@
                    )
                   initial-frame-alist)))
 
+;====================================
+; スクロール設定
+;====================================
+(setq scroll-conservatively 35
+  scroll-margin 0
+  scroll-step 4) ;4行ずつスクロールする
+
+;====================================
+; カーソル移動設定
+;====================================
+(setq load-path
+      (cons (expand-file-name "~/.emacs.d/elisp/physical-line/") load-path))
+
+;カーソル移動を論理行ではなく、物理行（見たまま）単位で移動する。
+(require 'physical-line)
+(setq-default physical-line-mode t)
+;; dired-mode は論理行移動のままにする.
+(setq physical-line-ignoring-mode-list '(dired-mode))
+
 (set-face-foreground 'font-lock-comment-face "NavajoWhite2")
 (set-face-foreground 'font-lock-string-face "tomato2")
 (set-face-foreground 'font-lock-keyword-face "DarkSeaGreen3")

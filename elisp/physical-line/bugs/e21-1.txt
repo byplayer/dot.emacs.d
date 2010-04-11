@@ -1,0 +1,60 @@
+;; -*-Lisp-Interaction-*-
+
+
+(defalias 'physical-line-vertical-motion
+  (function vertical-motion))
+(defalias 'physical-line-vertical-motion
+  (function physical-line-e21-1-win-sane-vertical-motion))
+(defalias 'physical-line-vertical-motion
+  (function physical-line-e21-1-tty-sane-vertical-motion))
+
+(defalias 'physical-line-backward-composite-char1
+  (function (lambda () (forward-char -1))))
+(defalias 'physical-line-backward-composite-char1
+  (function physical-line-e21-1-backward-composite-char1))
+
+
+
+;; ----------------------------------------------------------------
+;; forward-char, backward-char, delete-char, etc.
+;; ----------------------------------------------------------------
+
+;; test of composite characters.
+;; (backward-char) just after a composite char
+;; (forward-char) on a composite char
+;; (delete-char) on a composite char
+;; Thai (7 chars) (7 chars, 10 elms), (6 chars, 9 elms)
+      _______           _c_c_c_  _c_cc_
+Thai (,T@RIRd7B)		,TJ0GQ1J04U1$0CQ1:(B, ,TJ0GQ1J04U10$h1P
+
+
+
+;; ----------------------------------------------------------------
+;; vertical-motion
+;; ----------------------------------------------------------------
+
+;; test patterns for Emacs 21.1 with window-system (window-width = 80)
+;; (vertical-motion 1) @ (not (physical-bolp))
+;; (vertical-motion 0) @ あ
+;; (vertical-motion 0) @ A
+;; (vertical-motion 0) @ C
+;; (physical-line-e21-1-win-sane-vertical-motion0) @ 0,TGQ1(B
+;; (physical-line-e21-1-win-sane-vertical-motion0) @ q
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa	aaaaaaaaaaaaaaaaaaaaaaaaa
+bbbbbbbbb	bbbb	bbbbbbbbbbbbbbbbbbbbbbbbbb	bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbBCbbbbbbbb       bbbbbbbAbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccあcccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccいcccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccうccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+0,TGQ1(B
+qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq[EOF]
+
+
+
+;; test patterns for Emacs 21.1 character terminal mode (window-width = 80)
+;; (vertical-motion 1) @ D
+;; (vertical-motion 1) @ B
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa	aaaaaaaaaaaaaaaaaaaaaaaaa
+bbbbbbbbb	bbbb	えbbbbbbbbbbbbbbbbbb		bbbbbbbbbbbbbbbbbbbbbbbbbbbbbBCbbbbbbbb		bbbbbbbAbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+bbbbbbあいうえおbbbb	bbbb	bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbDbbbbbbbbb	bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb
+ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccあccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccいccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccうcccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
+bbbbbbあいうえおbbbb	bbbb	bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbDbbbbbbbbb	bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb	
+abc
+qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq

@@ -35,6 +35,7 @@
                    '(height . 77) ;; ウィンドウの高さ
                    ; '(top . 60) ;;表示位置
                    ; '(left . 140) ;;表示位置
+                   '(line-spae 0)
                    )
                   initial-frame-alist)))
 

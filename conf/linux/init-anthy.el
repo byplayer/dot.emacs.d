@@ -7,7 +7,8 @@
 (global-set-key "\C-\\" 'anthy-mode)
 
 ;変換時の文字の色
-(set-face-foreground 'anthy-highlight-face "black")
+; (set-face-foreground 'anthy-highlight-face "black")
+
 ;アンダーライン消去
 (set-face-underline 'anthy-highlight-face nil)
 (set-face-underline 'anthy-underline-face nil)

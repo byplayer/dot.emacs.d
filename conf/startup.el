@@ -21,7 +21,6 @@
   (load "linux/init-env")
 )
 
-(load "init-first")
 (load "init-encoding")
 (load "init-views")
 (load "init-key")
@@ -40,3 +39,4 @@
 (load "init-hostconf")
 (load "init-markdown")
 (load "init-recentfile")
+(load "init-utils")

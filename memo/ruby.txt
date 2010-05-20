@@ -14,3 +14,14 @@ toggle back and forth between a spec and it's target (bound to
 ;;  * reenable the disabled example at the point
 ;;
 ;;  * run "spec" rake task for project (bound to `\C-c ,a`)
+
+(mapcar 'car minor-mode-map-alist)
+を評価してみると、おそらくruby-electric-modeがanthy-modeよりも前にあると
+思われます。
+
+ruby-electric-modeとanthyのロード順を入れ替えるか、以下の式を評価すると
+解決するでしょう。
+以下の式はruby-electric-modeの優先順位を最下位にするものです。
+
+(let ((rel (assq 'ruby-electric-mode minor-mode-map-alist)))
+  (setq minor-mode-map-alist (append (delete rel minor-mode-map-alist) (list rel))))

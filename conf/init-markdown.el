@@ -7,4 +7,4 @@
                 ("\\.md$" . markdown-mode)
                 ) auto-mode-alist))
 
-(setq markdown-command "maruku")
+(setq markdown-command "bluecloth")

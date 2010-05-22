@@ -1,3 +1,8 @@
+emacs用タグを作る
+ctags -e
+-Rで再帰的にサブディレクトリも処理
+
+
 M-x visit-tags-table <RET> FILE <RET>
   Select the tag file, "FILE", to use.
 

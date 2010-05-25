@@ -1,0 +1,1 @@
+(setq bookmark-save-flag 1)

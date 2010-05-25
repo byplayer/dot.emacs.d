@@ -40,3 +40,4 @@
 (load "init-markdown")
 (load "init-recentfile")
 (load "init-utils")
+(load "init-register")

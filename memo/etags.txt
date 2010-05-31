@@ -16,4 +16,13 @@ M-*
 C-u M-.
   Find the next definition for the last tag.
 
+M-TAG
+  TAGSファイルを読み込んでいる状態で関数名の補完入力ができる。
+
+M-x visit-tags-table
+  change TAGS file
+
+M-x tags-search
+　TAGSファイルに登録されているファイルから検索
+
 For more commands, see the Tags topic in the Emacs info document.

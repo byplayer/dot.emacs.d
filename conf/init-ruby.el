@@ -119,6 +119,21 @@
 ; (setq ruby-block-highlight-toggle t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; cucumber.el
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(setq load-path
+      (cons (expand-file-name "~/.emacs.d/elisp/cucumber.el/") load-path))
+
+;; ;(setq feature-default-language "fi")
+;; ;; point to cucumber languages.yml or gherkin i18n.yml to use
+;; ;; exactly the same localization your cucumber uses
+;; ;(setq feature-default-i18n-file "/path/to/gherkin/gem/i18n.yml")
+;; ;; and load feature-mode
+(require 'feature-mode)
+(add-to-list 'auto-mode-alist '("\.feature$" . feature-mode))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; ruby-mode用フック処理追加
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (defun my-ruby-mode-hook()

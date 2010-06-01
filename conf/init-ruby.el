@@ -132,6 +132,10 @@
 (require 'feature-mode)
 (add-to-list 'auto-mode-alist '("\.feature$" . feature-mode))
 
+; bind return to newline-and-indent
+(defun my-feature-mode-hook()
+  (define-key feature-mode-map "\C-m" 'newline-and-indent))
+(add-hook 'feature-mode-hook 'my-feature-mode-hook)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; ruby-mode用フック処理追加

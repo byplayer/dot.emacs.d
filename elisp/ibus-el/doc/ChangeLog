@@ -1,0 +1,16 @@
+2010-05-29  IRIE Shinsuke <irieshinsuke@yahoo.co.jp>
+	* Version0.1.0
+	* Initial release
+	* Added support for multi-displays environment
+	* Added support for isearch-mode
+	* Added support for INHERIT-INPUT-METHOD
+	* Added support for Japanese kana typing method
+	* Added support for Japanese thumb shift typing method
+	* Added debian directory
+	* Fixed a lot of bugs
+2010-05-09  IRIE Shinsuke <irieshinsuke@yahoo.co.jp>
+	* Version0.0.2
+	* Imported many functions from scim-bridge.el
+2010-04-12  IRIE Shinsuke <irieshinsuke@yahoo.co.jp>
+	* Version0.0.1
+	* Initial experimental version

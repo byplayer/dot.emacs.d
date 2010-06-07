@@ -42,3 +42,4 @@
 (load "init-recentfile")
 (load "init-utils")
 (load "init-register")
+(load "init-remember")

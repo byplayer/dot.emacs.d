@@ -15,7 +15,8 @@
   )
 
 (when run-linux
-  (load "linux/init-anthy")
+  ; (load "linux/init-anthy")
+  (load "linux/init-ibus")
   (load "linux/init-clipboard")
   (load "linux/init-font")
   (load "linux/init-env")

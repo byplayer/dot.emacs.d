@@ -290,21 +290,21 @@
 
 ;; Add verify related spec keybinding to ruby ruby modes
 ;;;###autoload
-;; (eval-after-load 'ruby-mode
-;;   '(add-hook 'ruby-mode-hook
-;;              (lambda ()
+ (eval-after-load 'ruby-mode
+   '(add-hook 'ruby-mode-hook
+              (lambda ()
 ;;                (local-set-key (kbd "C-c ,v") 'rspec-verify)
 ;;                (local-set-key (kbd "C-c ,a") 'rspec-verify-all)
-;;                (local-set-key (kbd "C-c ,t") 'rspec-toggle-spec-and-target))))
+                (local-set-key (kbd "C-c ,t") 'rspec-toggle-spec-and-target))))
 
 ;; Add verify related spec keybinding to ruby ruby modes
 ;;;###autoload
-;; (eval-after-load 'ruby-mode
-;;   '(add-hook 'rails-minor-mode-hook
-;;              (lambda ()
+ (eval-after-load 'ruby-mode
+   '(add-hook 'rails-minor-mode-hook
+              (lambda ()
 ;;                (local-set-key (kbd "C-c ,v") 'rspec-verify)
 ;;                (local-set-key (kbd "C-c ,a") 'rspec-verify-all)
-;;                (local-set-key (kbd "C-c ,t") 'rspec-toggle-spec-and-target))))
+                (local-set-key (kbd "C-c ,t") 'rspec-toggle-spec-and-target))))
 
 ;; This hook makes any abbreviation that are defined in
 ;; rspec-mode-abbrev-table available in rSpec buffers

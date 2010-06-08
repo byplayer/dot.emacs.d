@@ -3,11 +3,6 @@
 (set-face-foreground 'comint-highlight-prompt "LightSkyBlue")
 (set-face-bold-p 'comint-highlight-input nil)
 
-(autoload 'ansi-color-for-comint-mode-on "ansi-color"
-          "Set `ansi-color-for-comint-mode' to t." t)
-(add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
-
-
 ;; ÉGÉRÅ[í‚é~
 (add-hook 'comint-mode-hook (lambda () (setq comint-process-echoes t)))
 

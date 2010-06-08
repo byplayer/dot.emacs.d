@@ -35,7 +35,7 @@
 ;;    `\C-c ,t`)
 ;;
 ;;  * verify the spec file associated with the current buffer (bound to `\C-c ,v`)
-;;
+;;  
 ;;  * verify the spec defined in the current buffer if it is a spec
 ;;    file (bound to `\C-c ,v`)
 ;;
@@ -50,16 +50,26 @@
 ;;
 ;;  * reenable the disabled example at the point
 ;;
-;;  * run "spec" rake task for project (bound to `\C-c ,a`)
+;;  * run spec for entire project (bound to `\C-c ,a`)
+;;
+;; You can choose whether to run specs using 'rake spec' or the 'spec'
+;; command. Use the customization interface (customize-group
+;; rspec-mode) or override using (setq rspec-use-rake-flag TVAL).
+;;
+;; Options will be loaded from spec.opts if it exists, otherwise it
+;; will fallback to defaults.
 ;;
 ;; Dependencies
 ;; ------------
 ;;
 ;; This minor mode depends on `mode-compile`.  The expectations depend
 ;; `on el-expectataions.el`.
-;;
+;; 
 
 ;;; Change Log:
+;;
+;; 0.3 - Dave Nolan implements respect for spec.opts config and
+;;       custom option to use 'rake spec' task or 'spec' command
 ;; 0.2 - Tim Harper implemented support for imenu to generate a basic
 ;;       tag outline
 ;; 0.1 - Pezra's version in master
@@ -76,6 +86,16 @@
 (define-key rspec-mode-keymap (kbd "C-c ,a") 'rspec-verify-all)
 (define-key rspec-mode-keymap (kbd "C-c ,d") 'rspec-toggle-example-pendingness)
 (define-key rspec-mode-keymap (kbd "C-c ,t") 'rspec-toggle-spec-and-target)
+
+(defgroup rspec-mode nil
+  "Rspec minor mode.")
+
+(defcustom rspec-use-rake-flag t
+  "*Whether rspec runner is run using rake spec task or the spec command"
+  :tag "Rspec runner command"
+  :type '(radio (const :tag "Use 'rake spec' task" t)
+                (const :tag "Use 'spec' command" nil))
+  :group 'rspec-mode)
 
 ;;;###autoload
 (define-minor-mode rspec-mode
@@ -113,7 +133,7 @@
   "Moves point to the beginning of the example in which the point current is."
   (interactive)
   (let ((start (point)))
-    (goto-char
+    (goto-char 
      (save-excursion
        (end-of-line)
        (unless (and (search-backward-regexp "^[[:space:]]*it[[:space:]]*(?[\"']" nil t)
@@ -139,7 +159,7 @@
 (defun rspec-disable-example ()
   "Disable the example in which the point is located"
   (interactive)
-  (when (not (rspec-example-pending-p))
+  (when (not (rspec-example-pending-p))   
     (save-excursion
       (rspec-beginning-of-example)
       (end-of-line)
@@ -154,24 +174,24 @@
       (rspec-beginning-of-example)
       (search-forward-regexp "^[[:space:]]*pending\\([[:space:](]\\|$\\)" (save-excursion (ruby-end-of-block) (point)))
       (beginning-of-line)
-      (delete-region (save-excursion (beginning-of-line) (point))
+      (delete-region (save-excursion (beginning-of-line) (point)) 
                      (save-excursion (forward-line 1) (point))))))
-
+  
 (defun rspec-verify ()
   "Runs the specified spec, or the spec file for the current buffer."
   (interactive)
-  (rspec-run-single-file (rspec-spec-file-for (buffer-file-name)) "--format specdoc" "--reverse"))
+  (rspec-run-single-file (rspec-spec-file-for (buffer-file-name)) (rspec-core-options ())))
 
 (defun rspec-verify-single ()
   "Runs the specified example at the point of the current buffer."
   (interactive)
-  (rspec-run-single-file (rspec-spec-file-for (buffer-file-name)) "--format specdoc" "--reverse" (concat "--line " (number-to-string (line-number-at-pos)))))
-
+  (rspec-run-single-file (rspec-spec-file-for (buffer-file-name)) (rspec-core-options ()) (concat "--line " (number-to-string (line-number-at-pos)))))
+ 
 (defun rspec-verify-all ()
   "Runs the 'spec' rake task for the project of the current file."
   (interactive)
   (let ((default-directory (or (rspec-project-root) default-directory)))
-    (rspec-run "--format=progress")))
+    (rspec-run (rspec-core-options "--format=progress"))))
 
 (defun rspec-toggle-spec-and-target ()
   "Switches to the spec for the current buffer if it is a
@@ -187,13 +207,13 @@
   "Find spec for the specified file"
   (if (rspec-spec-file-p a-file-name)
       a-file-name
-    (rspec-specize-file-name (expand-file-name (replace-regexp-in-string "^\\.\\./[^/]+/" "" (file-relative-name a-file-name (rspec-spec-directory a-file-name)))
+    (rspec-specize-file-name (expand-file-name (replace-regexp-in-string "^\\.\\./[^/]+/" "" (file-relative-name a-file-name (rspec-spec-directory a-file-name))) 
                                                (rspec-spec-directory a-file-name)))))
 
 (defun rspec-target-file-for (a-spec-file-name)
   "Find the target for a-spec-file-name"
-  (first
-   (file-expand-wildcards
+  (first 
+   (file-expand-wildcards 
     (replace-regexp-in-string "/spec/" "/*/" (rspec-targetize-file-name a-spec-file-name)))))
 
 (defun rspec-specize-file-name (a-file-name)
@@ -205,19 +225,19 @@
 (defun rspec-targetize-file-name (a-file-name)
   "Returns a-file-name but converted into a non-spec file name"
      (concat (file-name-directory a-file-name)
-             (rspec-file-name-with-default-extension
+             (rspec-file-name-with-default-extension 
               (replace-regexp-in-string "_spec\\.rb" "" (file-name-nondirectory a-file-name)))))
-
+  
 (defun rspec-file-name-with-default-extension (a-file-name)
   "Adds .rb file extension to a-file-name if it does not already have an extension"
   (if (file-name-extension a-file-name)
       a-file-name ;; file has a extension already so do nothing
     (concat a-file-name ".rb")))
-
+        
 (defun rspec-directory-subdirectories (directory)
   "Returns list of subdirectories"
-  (remove-if
-   (lambda (dir) (or (string-match "^\\.\\.?$" (file-name-nondirectory dir))
+  (remove-if 
+   (lambda (dir) (or (string-match "^\\.\\.?$" (file-name-nondirectory dir)) 
                      (not (file-directory-p dir))))
    (directory-files directory t)))
 
@@ -228,7 +248,7 @@
 (defun rspec-root-directory-p (a-directory)
   "Returns t if a-directory is the root"
   (equal a-directory (rspec-parent-directory a-directory)))
-
+   
 (defun rspec-spec-directory (a-file)
   "Returns the nearest spec directory that could contain specs for a-file"
   (if (file-directory-p a-file)
@@ -243,6 +263,32 @@
   "Returns true if the specified file is a spec"
   (string-match "\\(_\\|-\\)spec\\.rb$" a-file-name))
 
+(defun rspec-core-options (&optional default-options)
+  "Returns string of options that instructs spec to use spec.opts file if it exists, or sensible defaults otherwise"
+  (if (file-readable-p (rspec-spec-opts-file))
+      (concat "--options " (rspec-spec-opts-file))
+    (if default-options
+        default-options
+        (concat "--format specdoc " "--reverse"))))
+
+(defun rspec-spec-opts-file ()
+  "Returns filename of spec opts file (usually spec/spec.opts)"
+  (concat (rspec-spec-directory (rspec-project-root)) "/spec.opts"))
+
+(defun rspec-runner ()
+  "Returns command line to run rspec"
+  (if rspec-use-rake-flag "rake spec" "spec"))
+
+(defun rspec-runner-options (&optional opts)
+  "Returns string of options for command line"
+  (concat (when rspec-use-rake-flag "SPEC_OPTS=\'")
+          (mapconcat 'identity opts " ")
+          (when rspec-use-rake-flag "\'")))
+
+(defun rspec-runner-target (target)
+  "Returns target file/directory wrapped in SPEC if using rake"
+  (concat (when rspec-use-rake-flag "SPEC=\'") target (when rspec-use-rake-flag "\'")))
+
 ;;;###autoload
 (defun rspec-buffer-is-spec-p ()
   "Returns true if the current buffer is a spec"
@@ -251,26 +297,26 @@
 
 (defun rspec-example-name-at-point ()
   "Returns the name of the example in which the point is currently positioned; or nil if it is outside of and example"
-  (save-excursion
+  (save-excursion 
     (rspec-beginning-of-example)
     (re-search-forward "it[[:space:]]+['\"]\\(.*\\)['\"][[:space:]]*\\(do\\|DO\\|Do\\|{\\)")
     (match-string 1)))
-
+                    
 (defun rspec-register-verify-redo (redoer)
   "Register a bit of code that will repeat a verification process"
   (let ((redoer-cmd (eval (append '(lambda () (interactive)) (list redoer)))))
     (global-set-key (kbd "C-c ,r") redoer-cmd)))
 
-(defun rspec-run (&rest opts)
+(defun rspec-run (&optional opts)
   "Runs spec with the specified options"
   (rspec-register-verify-redo (cons 'rspec-run opts))
-  (compile (concat "rake spec SPEC_OPTS=\'" (mapconcat (lambda (x) x) opts " ") "\'"))
+  (compile (mapconcat 'identity (list (rspec-runner) (rspec-runner-target) (rspec-spec-directory rspec-project-root) (rspec-runner-options opts)) " "))
   (end-of-buffer-other-window 0))
 
 (defun rspec-run-single-file (spec-file &rest opts)
-  "Runs spec with the specified options"
+  "Runs spec on a file with the specified options"
   (rspec-register-verify-redo (cons 'rspec-run-single-file (cons spec-file opts)))
-  (compile (concat "rake spec SPEC=\'" spec-file "\' SPEC_OPTS=\'" (mapconcat (lambda (x) x) opts " ") "\'"))
+  (compile (mapconcat 'identity (list (rspec-runner) (rspec-runner-target spec-file) (rspec-runner-options opts)) " "))
   (end-of-buffer-other-window 0))
 
 (defun rspec-project-root (&optional directory)
@@ -280,7 +326,7 @@
           ((file-exists-p (concat directory "Rakefile")) directory)
           (t (rspec-project-root (file-name-directory (directory-file-name directory)))))))
 
-;; Makes sure that rSpec buffers are given the rspec minor mode by default
+;; Makes sure that Rspec buffers are given the rspec minor mode by default
 ;;;###autoload
 (eval-after-load 'ruby-mode
   '(add-hook 'ruby-mode-hook
@@ -290,30 +336,28 @@
 
 ;; Add verify related spec keybinding to ruby ruby modes
 ;;;###autoload
-;; (eval-after-load 'ruby-mode
-;;   '(add-hook 'ruby-mode-hook
-;;              (lambda ()
-;;                (local-set-key (kbd "C-c ,v") 'rspec-verify)
-;;                (local-set-key (kbd "C-c ,a") 'rspec-verify-all)
-;;                (local-set-key (kbd "C-c ,t") 'rspec-toggle-spec-and-target))))
+(eval-after-load 'ruby-mode
+  '(add-hook 'ruby-mode-hook
+             (lambda ()
+               ; (local-set-key (kbd "C-c ,v") 'rspec-verify)
+               ; (local-set-key (kbd "C-c ,a") 'rspec-verify-all)
+               (local-set-key (kbd "C-c ,t") 'rspec-toggle-spec-and-target))))
 
 ;; Add verify related spec keybinding to ruby ruby modes
 ;;;###autoload
-;; (eval-after-load 'ruby-mode
-;;   '(add-hook 'rails-minor-mode-hook
-;;              (lambda ()
-;;                (local-set-key (kbd "C-c ,v") 'rspec-verify)
-;;                (local-set-key (kbd "C-c ,a") 'rspec-verify-all)
-;;                (local-set-key (kbd "C-c ,t") 'rspec-toggle-spec-and-target))))
+(eval-after-load 'rails
+  '(add-hook 'rails-minor-mode-hook
+             (lambda ()
+               ; (local-set-key (kbd "C-c ,v") 'rspec-verify)
+               ; (local-set-key (kbd "C-c ,a") 'rspec-verify-all)
+               (local-set-key (kbd "C-c ,t") 'rspec-toggle-spec-and-target))))
 
 ;; This hook makes any abbreviation that are defined in
 ;; rspec-mode-abbrev-table available in rSpec buffers
-;;;###autoload
-(eval-after-load 'ruby-mode
-  '(add-hook 'rspec-mode-hook
-             (lambda ()
-               (merge-abbrev-tables rspec-mode-abbrev-table
-                                    local-abbrev-table))))
+(add-hook 'rspec-mode-hook
+          (lambda ()
+            (merge-abbrev-tables rspec-mode-abbrev-table
+                                 local-abbrev-table)))
 
 ;; abbrev
 ;; from http://www.opensource.apple.com/darwinsource/Current/emacs-59/emacs/lisp/derived.el
@@ -335,8 +379,8 @@ as the value of the symbol, and the hook as the function definition."
      old)))
 
 
-(add-to-list 'compilation-error-regexp-alist-alist
-       '(rspec "\\([0-9A-Za-z_./\:-]+\\.rb\\):\\([0-9]+\\)" 1 2))
+(add-to-list 'compilation-error-regexp-alist-alist 
+	     '(rspec "\\([0-9A-Za-z_./\:-]+\\.rb\\):\\([0-9]+\\)" 1 2))
 (add-to-list 'compilation-error-regexp-alist 'rspec)
 
 (provide 'rspec-mode)

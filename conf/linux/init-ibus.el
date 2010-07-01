@@ -12,3 +12,6 @@
 (setq ibus-cursor-color '("SteelBlue" "gray" "dark sea green"))
 ;; Use s-SPC to toggle input status
 (global-set-key "\C-\\" 'ibus-toggle)
+
+; 予測候補ウィンドウの表示位置の変更
+(setq ibus-prediction-window-position t)

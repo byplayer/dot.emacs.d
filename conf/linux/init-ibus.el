@@ -3,6 +3,12 @@
 
 ;; load ibus.el
 (require 'ibus)
+
+; for XFce
+; http://d.hatena.ne.jp/grandVin/20100608/1275973364
+(defun ibus-get-active-window-id ()
+  (string-to-number (frame-parameter (selected-frame) 'outer-window-id)))
+
 (add-hook 'after-init-hook 'ibus-mode-on)
 ;; Use C-SPC for Set Mark command
 (ibus-define-common-key ?\C-\s nil)

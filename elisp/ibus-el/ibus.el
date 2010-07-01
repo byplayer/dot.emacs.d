@@ -8,7 +8,7 @@
 ;; Maintainer: S. Irie
 ;; Keywords: Input Method, i18n
 
-(defconst ibus-mode-version "0.1.0")
+(defconst ibus-mode-version "0.1.1")
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -93,6 +93,13 @@
 ;;
 
 ;;; History:
+;; 2010-06-11  S. Irie
+;;         * Version 0.1.1
+;;         * Improved performance and stability
+;;         * Add option `ibus-prediction-window-position'
+;;         * Add option `ibus-agent-buffering-time'
+;;         * Bug fixes
+;;
 ;; 2010-05-29  S. Irie
 ;;         * Version 0.1.0
 ;;         * Initial release
@@ -113,6 +120,10 @@
 
 ;; ToDo:
 
+;;  * Don't use xwininfo
+;;  * Don't use xmodmap
+;;  * Xming rootless mode support (Don't use _NET_ACTIVE_WINDOW)
+;;  * Text-only frame support
 ;;  * leim support
 ;;  * performance issue
 
@@ -394,6 +405,17 @@ the cursor is put to the tail of the preediting area."
   :type 'boolean
   :group 'ibus-appearance)
 
+(defcustom ibus-prediction-window-position
+  0
+  "Specify position showing a prediction window of some input methods
+such as ibus-mozc. A value of t means show it under cursor. An integer
+0 means under the start point of preediting text. If you won't use
+prediction window, you can set nil not to send the coordinates to IBus."
+  :type '(choice (const :tag "Don't use prediction" nil)
+		 (const :tag "Head of preediting area" 0)
+		 (const :tag "Below cursor" t))
+  :group 'ibus-appearance)
+
 ;; Advanced settings
 (defgroup ibus-expert nil
   "Advanced settings"
@@ -465,6 +487,13 @@ substitute KeySym for backslash key to distinguish it from yen-mark key."
   "Specify the maximum waiting time for data reception from IBus.
 A floating point number means the number of seconds, otherwise an integer
 the milliseconds."
+  :type 'number
+  :group 'ibus-expert)
+
+(defcustom ibus-agent-buffering-time 50
+  "Specify the time waiting after starting data reception for some
+particular cases such as focusing out. A floating point number means the
+number of seconds, otherwise an integer the milliseconds."
   :type 'number
   :group 'ibus-expert)
 
@@ -862,6 +891,7 @@ use either \\[customize] or the function `ibus-mode'."
 (defvar ibus-string-insertion-failed nil)
 (defvar ibus-last-rejected-event nil)
 (defvar ibus-last-command nil)
+(defvar ibus-cursor-prev-location nil)
 
 ;; IMContexts
 (defvar ibus-buffer-group nil)
@@ -1004,14 +1034,6 @@ use either \\[customize] or the function `ibus-mode'."
 		 (setq mod1 (rassq mask1 ibus-modifier-alist)))
 	    (push (car mod1) mods)))
       (event-convert-list (nconc mods (list bas))))))
-
-(defun ibus-null-command ()
-  (interactive)
-;#  (ibus-log "dummy event")
-  (when (interactive-p)
-    (setq this-command last-command)
-    (setq unread-command-events
-	  (delq 'ibus-dummy-event unread-command-events))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; buffer-undo-list
@@ -1268,7 +1290,6 @@ use either \\[customize] or the function `ibus-mode'."
     (unless (keymapp ibus-mode-map)
       (setq ibus-mode-map (make-sparse-keymap)))
     (define-key ibus-mode-map [ibus-receive-event] 'ibus-exec-callback)
-    (define-key ibus-mode-map [ibus-dummy-event] 'ibus-null-command)
     (ibus-set-keymap-parent))
   (when (memq symbol '(nil ibus-preedit-function-key-list))
 ;#    (ibus-log "update ibus-mode-preedit-map")
@@ -1407,12 +1428,12 @@ restart ibus-mode so that this settings may become effective."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defun ibus-get-x-display ()
-  ;; Don't use (frame-parameter nil 'display) because
-  ;; this expression returns nil if frame is on text-only terminal.
-  (let ((env (getenv "DISPLAY")))
-    (and env (let* ((display (substring env (string-match ":[0-9]+" env)))
-		    (screen (and (not (string-match "\\.[0-9]+$" display)) ".0")))
-	       (concat display screen)))))
+  (let ((env (or (frame-parameter nil 'display)
+		 (getenv "DISPLAY"))))
+    (and env
+	 (let* ((display (substring env (string-match ":[0-9]+" env)))
+		(screen (and (not (string-match "\\.[0-9]+$" display)) ".0")))
+	   (concat display screen)))))
 
 (defun ibus-mode-line-string ()
   (let ((status (cdr (assoc ibus-selected-display
@@ -1509,6 +1530,7 @@ If FRAME is omitted, use selected-frame.
 Users can also get the frame coordinates by referring the variable
 `ibus-saved-frame-coordinates' just after calling this function."
   ;; Note: This function was imported from pos-tip.el ver. 0.0.3
+;#  (ibus-log "get frame coordinates")
   (with-current-buffer (get-buffer-create " *xwininfo*")
     (let ((case-fold-search nil))
       (buffer-disable-undo)
@@ -1517,7 +1539,8 @@ Users can also get the frame coordinates by referring the variable
 		    (concat "xwininfo -id " (frame-parameter frame 'window-id)))
       (goto-char (point-min))
       (search-forward "\n  Absolute")
-      (setq ibus-saved-frame-coordinates
+      (setq ibus-cursor-prev-location nil
+	    ibus-saved-frame-coordinates
 	    (cons (progn (string-to-number (buffer-substring-no-properties
 					    (search-forward "X: ")
 					    (line-end-position))))
@@ -1525,10 +1548,9 @@ Users can also get the frame coordinates by referring the variable
 					    (search-forward "Y: ")
 					    (line-end-position)))))))))
 
-(defun ibus-compute-pixel-position
-  (&optional pos window frame-coordinates)
+(defun ibus-compute-pixel-position (&optional pos window frame-coordinates)
   "Return the absolute pixel coordinates of POS in WINDOW as a list like
-\(X Y W H), here W and H are the pixel width and height of object at POS.
+\(X Y H), here H is the pixel height of object at POS.
 
 Omitting POS and WINDOW means use current position and selected window,
 respectively.
@@ -1542,36 +1564,55 @@ This option makes the calculations slightly faster, but can be used only
 when it's clear that frame is in the specified position. Users can get
 the previous values of frame coordinates by referring the variable
 `ibus-saved-frame-coordinates'."
-  (unless frame-coordinates
-    (ibus-frame-top-left-coordinates
-     (window-frame (or window (selected-window)))))
-  (let* ((x-y (or (pos-visible-in-window-p (or pos (window-point window)) window t)
-		  '(0 0)))
-	 ;; `posn-object-width-height' returns an incorrect value
-	 ;; when the header line is displayed (Emacs bug #4426).
-	 (w-h (if header-line-format
-		  (cons (frame-char-width) (frame-char-height))
-		(posn-object-width-height
-		 (posn-at-x-y (max (car x-y) 0) (cadr x-y)))))
-	 (ax (+ (car ibus-saved-frame-coordinates)
-		(car (window-inside-pixel-edges))
-		(car x-y)))
-	 (ay (+ (cdr ibus-saved-frame-coordinates)
-		(cadr (window-pixel-edges))
-		(cadr x-y))))
-    (list ax ay (car w-h) (cdr w-h))))
+  (unless window
+    (setq window (selected-window)))
+  (let ((frame (window-frame window)))
+    (unless frame-coordinates
+      (ibus-frame-top-left-coordinates frame))
+    (let* ((x-y (or (pos-visible-in-window-p (or pos (window-point window)) window t)
+		    '(0 0)))
+	   (ax (+ (car ibus-saved-frame-coordinates)
+		  (car (window-inside-pixel-edges window))
+		  (car x-y)))
+	   (ay (+ (cdr ibus-saved-frame-coordinates)
+		  (cadr (window-pixel-edges window))
+		  (cadr x-y)))
+	   ;; `posn-object-width-height' returns an incorrect value
+	   ;; when the header line is displayed (Emacs bug #4426).
+	   (height (with-current-buffer (window-buffer window)
+		     (cond
+		      ((null header-line-format)
+		       (cdr (posn-object-width-height
+			     (posn-at-x-y (max (car x-y) 0) (cadr x-y) window))))
+		      ((and (boundp 'text-scale-mode-amount)
+			    (not (zerop text-scale-mode-amount)))
+		       (round (* (frame-char-height frame)
+				 (with-no-warnings
+				   (expt text-scale-mode-step
+					 text-scale-mode-amount)))))
+		      (t
+		       (frame-char-height frame))))))
+      (list ax ay height))))
 
 ;;; TODO: FIXME: Does anyone know how to get the actual character height
 ;;;              even if the header line is displayed?
 
-(defun ibus-set-cursor-location ()
-  (let* ((rect (ibus-compute-pixel-position
-		(+ ibus-preedit-point ibus-preedit-curpos) nil
-		ibus-saved-frame-coordinates)))
-;#    (ibus-log "cursor position (x y w h): %s" rect)
-    ;; Finite value of width seems to locate candidate window in incorrect position
-    (ibus-agent-send "set_cursor_location(%d, %d, %d, 0, %d)" ibus-imcontext-id
-		     (car rect) (cadr rect) (nth 3 rect)))) ; Send only
+(defun ibus-set-cursor-location (&optional prediction)
+  (unless (and prediction
+	       (null ibus-prediction-window-position))
+    (let* ((rect (ibus-compute-pixel-position
+		  (if (and prediction
+			   (eq ibus-prediction-window-position 0)
+			   (not (minibufferp)))
+		      ibus-preedit-point
+		    (+ ibus-preedit-point ibus-preedit-curpos))
+		  nil ibus-saved-frame-coordinates)))
+;#      (ibus-log "cursor position (x y h): %s" rect)
+      (unless (equal rect ibus-cursor-prev-location)
+	(setq ibus-cursor-prev-location rect)
+	;; Finite width seems to locate candidate window in incorrect position
+	(ibus-agent-send "set_cursor_location(%d, %d, %d, 0, %d)" ibus-imcontext-id
+			 (car rect) (cadr rect) (nth 2 rect)))))) ; Send only
 
 ;; Frame input focuses
 
@@ -1642,13 +1683,12 @@ i.e. input focus is in this window."
 		    ibus-preediting-p)
 	  (ibus-agent-receive)) ; Receive
 	(when ibus-frame-focus
-	  (ibus-frame-top-left-coordinates)))
-      (unless (or focus-in
-		  (memq 'ibus-receive-event unread-command-events))
-	;; Set dummy event as a trigger of `post-command-hook'
-	(setq unread-command-events
-	      (cons 'ibus-dummy-event
-		    (delq 'ibus-dummy-event unread-command-events)))))))
+	  (ibus-frame-top-left-coordinates)
+	  (when ibus-preediting-p
+	    (ibus-remove-preedit)
+	    (ibus-show-preedit))))
+      (unless focus-in
+	(ibus-check-current-buffer)))))
 
 (defun ibus-cancel-focus-update-timer ()
   (when ibus-focus-update-timer
@@ -1765,7 +1805,7 @@ i.e. input focus is in this window."
 	       (not (memq 'background attrs))))
       (unless (= ibus-preedit-curpos ibus-preedit-prev-curpos)
 	(goto-char (+ ibus-preedit-point ibus-preedit-curpos))
-	(ibus-set-cursor-location)
+	(ibus-set-cursor-location t)
 	(setq ibus-preedit-prev-curpos ibus-preedit-curpos)))
      (t
       (if ibus-preediting-p
@@ -1846,10 +1886,11 @@ i.e. input focus is in this window."
 			(or (and (local-variable-p 'cursor-type) cursor-type)
 			    1))) ; 1 means that global value has been used
 		(if ibus-put-cursor-on-candidate
-		    (goto-char (+ ibus-preedit-point ibus-preedit-curpos))))
+		    (goto-char (+ ibus-preedit-point ibus-preedit-curpos)))
+		(ibus-set-cursor-location))
 	    ;; When the string is preedited or prediction window is shown
-	    (goto-char (+ ibus-preedit-point ibus-preedit-curpos)))
-	  (ibus-set-cursor-location))
+	    (goto-char (+ ibus-preedit-point ibus-preedit-curpos))
+	    (ibus-set-cursor-location t)))
 	(run-hooks 'ibus-preedit-show-hook))
       ))))
 
@@ -1977,7 +2018,7 @@ i.e. input focus is in this window."
      (ibus-message "Couldn't send command to agent %S" err)
      nil))) ; Failed
 
-(defun ibus-agent-receive (&optional passive)
+(defun ibus-agent-receive (&optional passive wait)
   (let (repl)
     (save-current-buffer
       (when (or passive
@@ -1988,6 +2029,10 @@ i.e. input focus is in this window."
 	      (msec (and (integerp ibus-agent-timeout) ibus-agent-timeout)))
 	  (when (= (point-max) 1)
 	    (accept-process-output ibus-agent-process sec msec t))
+	  (when wait
+	    (sleep-for (or (and (floatp ibus-agent-buffering-time)
+				ibus-agent-buffering-time)
+			   (/ ibus-agent-buffering-time 1000.0))))
 	  (goto-char (point-min))
 	  (while (let ((pos (point)))
 		   (condition-case err
@@ -2008,8 +2053,7 @@ i.e. input focus is in this window."
 ;#	  (ibus-log "receive:\n%s" (buffer-string))
 	  (erase-buffer)
 	  (setq unread-command-events
-		(delq 'ibus-receive-event
-		      (delq 'ibus-dummy-event unread-command-events))))
+		(delq 'ibus-receive-event unread-command-events)))
 	(if repl
 	    (ibus-process-signals repl passive)
 	  (ibus-message "Couldn't receive data from agent."))))))
@@ -2041,9 +2085,7 @@ i.e. input focus is in this window."
     (unless (eq last-command 'ibus-handle-event)
       (setq ibus-string-insertion-failed nil))
     (setq this-command last-command
-	  unread-command-events
-	  (delq 'ibus-receive-event
-		(delq 'ibus-dummy-event unread-command-events))))
+	  unread-command-events (delq 'ibus-receive-event unread-command-events)))
   (when (buffer-live-p ibus-current-buffer)
     (with-current-buffer ibus-current-buffer
 ;#      (ibus-log "callback queue: %s" (pp-to-string ibus-callback-queue))
@@ -2093,8 +2135,7 @@ i.e. input focus is in this window."
 	      (setq ibus-callback-queue queue1))
 	    (setq unread-command-events
 		  (cons 'ibus-receive-event
-			(delq 'ibus-receive-event
-			      (delq 'ibus-dummy-event unread-command-events)))))
+			(delq 'ibus-receive-event unread-command-events))))
 	(when (buffer-live-p ibus-current-buffer)
 	  (with-current-buffer ibus-current-buffer
 	    (ibus-exec-callback-1 (nreverse rsexplist))
@@ -2118,7 +2159,7 @@ i.e. input focus is in this window."
 
 (defun ibus-commit-text-cb (id text)
   (cond
-   ((not (= id ibus-imcontext-id))
+   ((not (eq id ibus-imcontext-id))
     (ibus-message "IMContext ID (%s) is mismatched." id))
    (isearch-mode
     (isearch-process-search-string text text))
@@ -2152,19 +2193,19 @@ i.e. input focus is in this window."
     (ibus-show-preedit t))))
 
 (defun ibus-hide-preedit-text-cb (id)
-  (if (not (= id ibus-imcontext-id))
+  (if (not (eq id ibus-imcontext-id))
       (ibus-message "IMContext ID (%s) is mismatched." id)
     (setq ibus-preedit-shown nil
 	  ibus-preedit-update t)))
 
 (defun ibus-show-preedit-text-cb (id)
-  (if (not (= id ibus-imcontext-id))
+  (if (not (eq id ibus-imcontext-id))
       (ibus-message "IMContext ID (%s) is mismatched." id)
     (setq ibus-preedit-shown t
 	  ibus-preedit-update t)))
 
 (defun ibus-update-preedit-text-cb (id text cursor-pos visible &rest attributes)
-  (if (not (= id ibus-imcontext-id))
+  (if (not (eq id ibus-imcontext-id))
       (ibus-message "IMContext ID (%s) is mismatched." id)
     (setq ibus-preedit-text text
 	  ibus-preedit-curpos cursor-pos
@@ -2173,19 +2214,19 @@ i.e. input focus is in this window."
 	  ibus-preedit-update t)))
 
 (defun ibus-hide-auxiliary-text-cb (id)
-  (if (not (= id ibus-imcontext-id))
+  (if (not (eq id ibus-imcontext-id))
       (ibus-message "IMContext ID (%s) is mismatched." id)
     (setq ibus-auxiliary-shown nil
 	  ibus-preedit-update t)))
 
 (defun ibus-show-auxiliary-text-cb (id)
-  (if (not (= id ibus-imcontext-id))
+  (if (not (eq id ibus-imcontext-id))
       (ibus-message "IMContext ID (%s) is mismatched." id)
     (setq ibus-auxiliary-shown t
 	  ibus-preedit-update t)))
 
 (defun ibus-update-auxiliary-text-cb (id text visible)
-  (if (not (= id ibus-imcontext-id))
+  (if (not (eq id ibus-imcontext-id))
       (ibus-message "IMContext ID (%s) is mismatched." id)
     (setq ibus-auxiliary-text text
 	  ibus-auxiliary-shown visible
@@ -2209,7 +2250,7 @@ i.e. input focus is in this window."
 
 (defun ibus-delete-surrounding-text-cb (id offset length)
   (cond
-   ((not (= id ibus-imcontext-id))
+   ((not (eq id ibus-imcontext-id))
     (ibus-message "IMContext ID (%s) is mismatched." id))
    (buffer-read-only
     (ibus-message "Buffer is read-only: %S" (current-buffer)))
@@ -2238,7 +2279,7 @@ i.e. input focus is in this window."
     (if event
 	(if pressed
 	    (setq unread-command-events (cons event unread-command-events)))
-      (if (not (= id ibus-imcontext-id))
+      (if (not (eq id ibus-imcontext-id))
 	  (ibus-message "IMContext ID (%s) is mismatched." id)
 	(ibus-agent-send-key-event keyval modmask nil pressed)))))
 
@@ -2250,7 +2291,9 @@ i.e. input focus is in this window."
   (when (ibus-agent-send "process_key_event(%d, %d, 0x%x, %s, %s)"
 			 ibus-imcontext-id keyval modmask
 			 (or backslash "None")
-			 (if pressed "True" "False"))
+			 (nth (or (and (numberp pressed) pressed)
+				  (if pressed 1 0))
+			      '("False" "True" "None")))
     (let ((time-limit (+ (float-time)
 			 (or (and (floatp ibus-agent-timeout)
 				  ibus-agent-timeout)
@@ -2260,7 +2303,8 @@ i.e. input focus is in this window."
 		  (< (float-time) time-limit))
 	(ibus-agent-receive))
       (when (and (car ibus-agent-key-event-handled)
-		 (string= ibus-preedit-prev-text ""))
+		 (not ibus-surrounding-text-modified)
+		 (not ibus-preediting-p))
 	;; Send cursor location for displaying candidate window without preedit
 	(let ((ibus-preedit-point (point)))
 	  (ibus-set-cursor-location))))))
@@ -2357,7 +2401,8 @@ i.e. input focus is in this window."
 	(let ((ibus-simultaneous-pressing-time nil))
 	  (undo-boundary)
 	  (setq this-command 'ibus-handle-event)
-	  (ibus-process-key-event event))))))
+	  (ibus-process-key-event event))))
+    (ibus-agent-send-key-event keyval modmask backslash nil)))
 
 (defun ibus-process-key-event (event)
   (let* ((decoded (ibus-decode-event event))
@@ -2387,9 +2432,7 @@ i.e. input focus is in this window."
 		     ibus-imcontext-status)
 		;; Thumb shift typing method
 		(ibus-wait-following-key-event event keyval modmask backslash)
-	      (ibus-agent-send-key-event keyval modmask backslash t))
-	    (unless ibus-string-insertion-failed
-	      (ibus-agent-send-key-event keyval modmask backslash nil)))
+	      (ibus-agent-send-key-event keyval modmask backslash 2)))
 	;; IMContext is not registered or key event is not recognized
 	(ibus-process-key-event-cb ibus-imcontext-id nil))))
   ;; Repair post-command-hook
@@ -2454,7 +2497,10 @@ i.e. input focus is in this window."
   (when (and (numberp ibus-imcontext-id)
 	     ibus-frame-focus)
     (ibus-change-focus nil)
-    (ibus-agent-receive))
+    (ibus-agent-receive nil t)
+    (if (buffer-live-p ibus-preediting-p)
+	(with-current-buffer ibus-preediting-p
+	  (ibus-cleanup-preedit))))
   (let ((group (assq ibus-buffer-group ibus-buffer-group-alist)))
     (when (and group
 	       (null (setcar (nthcdr 3 group)
@@ -2477,6 +2523,8 @@ i.e. input focus is in this window."
       (setq ibus-current-buffer nil)))
 
 (defun ibus-enable (&optional engine-name)
+  "Enable IBus input method.
+ENGINE-NAME, if given as a string, specify input method engine."
   (interactive)
   (when (and (interactive-p)
 	     (null ibus-current-buffer))
@@ -2484,26 +2532,28 @@ i.e. input focus is in this window."
   (when (and (processp ibus-agent-process)
 	     (numberp ibus-imcontext-id))
     (if engine-name
-	(ibus-agent-send-receive "set_engine(%d, %S)" ibus-imcontext-id engine-name)
-    (ibus-agent-send-receive "enable(%d)" ibus-imcontext-id))))
+	(ibus-agent-send "set_engine(%d, %S)" ibus-imcontext-id engine-name)
+      (ibus-agent-send "enable(%d)" ibus-imcontext-id))
+    (ibus-agent-receive nil t)))
 
 (defun ibus-disable ()
+  "Disable IBus input method."
   (interactive)
   (when (and (interactive-p)
 	     (null ibus-current-buffer))
     (ibus-check-current-buffer))
   (when (and (processp ibus-agent-process)
 	     (numberp ibus-imcontext-id))
-    (ibus-agent-send-receive "disable(%d)" ibus-imcontext-id))
+    (ibus-agent-send "disable(%d)" ibus-imcontext-id)
+    (ibus-agent-receive nil t))
   (if ibus-imcontext-status
       (ibus-status-changed-cb ibus-imcontext-id nil)))
 
 (defun ibus-status-changed-cb (id status)
-  (if (not (= id ibus-imcontext-id))
+  (if (not (eq id ibus-imcontext-id))
       (ibus-message "IMContext ID (%s) is mismatched." id)
-    (unless (string= ibus-preedit-prev-text "")
-      (ibus-commit-text-cb id ibus-preedit-prev-text)
-      (ibus-cleanup-preedit))
+    (if ibus-preediting-p
+	(ibus-cleanup-preedit))
     (setq ibus-imcontext-status status)
     (setcdr (assoc ibus-selected-display
 		   (nth 2 (assq ibus-buffer-group ibus-buffer-group-alist)))
@@ -2515,6 +2565,7 @@ i.e. input focus is in this window."
       (ibus-update-kana-onbiki-key))))
 
 (defun ibus-toggle ()
+  "Toggle IBus' input status."
   (interactive)
   (when (and (interactive-p)
 	     (null ibus-current-buffer))
@@ -2544,8 +2595,9 @@ i.e. input focus is in this window."
       (let ((buffer (current-buffer))
 	    (visited-p ibus-buffer-group)
 	    (non-x-p (not (eq window-system 'x)))
-	    (display-unchanged-p (equal (ibus-get-x-display)
-					ibus-selected-display)))
+	    (display-unchanged-p (or (eq (selected-frame) ibus-selected-frame)
+				     (equal (ibus-get-x-display)
+					    ibus-selected-display))))
 	;; Switch IMContext between global and local
 	(unless (or non-x-p
 		    (not visited-p)
@@ -2568,11 +2620,11 @@ i.e. input focus is in this window."
 	      (when (numberp ibus-imcontext-id)
 		(when ibus-frame-focus
 		  (ibus-change-focus nil) ; Send
-		  (ibus-agent-receive)) ; Receive
+		  (ibus-agent-receive nil t)) ; Receive
 		(if ibus-preediting-p
 		    ;; Cleenup preedit if focus change become timeout
-		    (ibus-abort-preedit)))))
-	;; Setup currently selected buffer
+		    (ibus-cleanup-preedit)))))
+	  ;; Setup currently selected buffer
 	  (unless display-unchanged-p
 	    (condition-case err
 		(ibus-change-x-display)
@@ -2644,8 +2696,11 @@ i.e. input focus is in this window."
 	  (kill-local-variable 'ibus-cursor-type-saved))))
       ;; Check selected frame
       (unless (eq (selected-frame) ibus-selected-frame)
-	(if (eq window-system 'x)
-	    (ibus-frame-top-left-coordinates))
+	(when (and ibus-preediting-p
+		   (eq window-system 'x))
+	  (ibus-frame-top-left-coordinates)
+	  (ibus-remove-preedit)
+	  (ibus-show-preedit))
 	(setq ibus-selected-frame (selected-frame))
 	(ibus-update-cursor-color)))
     (ibus-start-focus-observation)))
@@ -2872,6 +2927,7 @@ i.e. input focus is in this window."
 	ibus-last-command nil))
 
 (defun ibus-mode-on ()
+  "Turn ibus-mode on."
   (interactive)
   (if (not (or (eq window-system 'x) ; X frame
 	       (getenv "DISPLAY")))  ; non-X frame under X session
@@ -2960,6 +3016,7 @@ i.e. input focus is in this window."
   ibus-mode)
 
 (defun ibus-mode-off ()
+  "Turn ibus-mode off."
   (interactive)
   (when (and (numberp ibus-imcontext-id)
 	     ibus-frame-focus)

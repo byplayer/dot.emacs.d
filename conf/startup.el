@@ -44,3 +44,4 @@
 (load "init-register")
 (load "init-remember")
 (load "init-ansi-color")
+(load "init-diff")

@@ -4,6 +4,7 @@
 ;; Copyright (C) 2008  Linh Dang
 ;; Copyright (C) 2008  Marius Vollmer
 ;; Copyright (C) 2009  Tim Moore
+;; Copyright (C) 2009  byplayer
 ;;
 ;; Egg is free software; you can redistribute it and/or modify it
 ;; under the terms of the GNU General Public License as published by
@@ -24,10 +25,17 @@
 ;;;    This is my fork of Marius's excellent magit. his work is at:
 ;;;    http://zagadka.vm.bytemark.co.uk/magit
 ;;;
+;;;    This is my fork of bogolisk egg . his work is at
+;;     http://github.com/bogolisk/egg
+;;;
 
+;;; Options
 ;;; If you want to auto-update egg-status on file save,
 ;;;   you set follow value on your .emacs.
 ;;; (setq egg-auto-update t)
+;;;
+;;;Set to nonnil for egg-status to switch to the status buffer in the same window.
+;;; (setq egg-switch-to-buffer t)
 
 (require 'cl)
 (require 'electric)
@@ -234,7 +242,7 @@ Many Egg faces inherit from this one by default."
   '((((class color) (background light))
      :foreground "blue1")
     (((class color) (background dark))
-     :foreground "white"))
+     :foreground "ForestGreen"))
   "Face for lines in a diff that have been added."
   :group 'egg-faces)
 
@@ -2338,7 +2346,7 @@ rebase session."
     "\\<egg-unstaged-diff-section-map>\n"
     "\\[egg-diff-section-cmd-visit-file-other-window]:visit file/line  "
     "\\[egg-diff-section-cmd-stage]:stage/unstage file/hunk  "
-    "\\[egg-diff-section-cmd-undo]:undo file/hunk's modificatons\n")))
+    "\\[egg-diff-section-cmd-undo]:undo file/hunk's modifications\n")))
   
 (defun egg-sb-insert-repo-section ()
   "Insert the repo section into the status buffer."
@@ -2756,6 +2764,7 @@ If INIT was not nil, then perform 1st-time initializations as well."
   (define-key menu [next] '(menu-item "Goto Next Block" egg-buffer-cmd-navigate-next
 				      :enable (egg-navigation-at-point))))
 
+(defvar egg-switch-to-buffer nil "Set to nonnil for egg-status to switch to the status buffer in the same window.")
 
 (defun egg-status (&optional select caller)
   (interactive "P")
@@ -2766,6 +2775,7 @@ If INIT was not nil, then perform 1st-time initializations as well."
       (egg-status-buffer-redisplay buf 'init))
     (cond ((eq caller :sentinel) (pop-to-buffer buf))
 	  (select (pop-to-buffer buf t))
+	  (egg-switch-to-buffer (switch-to-buffer buf))
 	  ((interactive-p) (display-buffer buf t))
 	  (t (pop-to-buffer buf t)))))
 
@@ -3711,11 +3721,6 @@ If INIT was not nil, then perform 1st-time initializations as well."
 			     (cdr (assoc full-ref-name ref-alist)))
 			   refs))
 
-	(mapcar (lambda (full-ref-name) 
-		  (print full-ref-name))
-		full-refs)
-
-
 	;; common line decorations
 	(setq line-props (list :navigation sha1 :commit sha1))
 
@@ -3732,9 +3737,8 @@ If INIT was not nil, then perform 1st-time initializations as well."
 	      (if full-refs
 		  (propertize
 		   (mapconcat (lambda (full-ref-name)
-				; (cdr (assoc full-ref-name 
-				;         dec-ref-alist)))
-                        full-ref-name)
+				(cdr (assoc full-ref-name
+					    dec-ref-alist)))
 			      full-refs separator)
 		   :navigation sha1 :commit sha1
 		   :references refs)))
@@ -4881,7 +4885,9 @@ Each remote ref on the commit line has extra extra extra keybindings:\\<egg-log-
 			   'egg-run-git-log-HEAD)))))
       (if help (plist-put egg-internal-log-buffer-closure :help help))
       (egg-log-buffer-redisplay buf 'init))
-    (pop-to-buffer buf t)))
+    (cond
+     (egg-switch-to-buffer (switch-to-buffer buf))
+     (t (pop-to-buffer buf t)))))
 ;;;========================================================
 ;;; file history
 ;;;========================================================

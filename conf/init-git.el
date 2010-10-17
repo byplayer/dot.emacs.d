@@ -2,3 +2,5 @@
 
 (require 'egg)
 
+; no change
+(setq egg-switch-to-buffer t)

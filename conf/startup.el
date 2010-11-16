@@ -46,3 +46,4 @@
 (load "init-ansi-color")
 (load "init-diff")
 (load "init-dired")
+(load "init-term")

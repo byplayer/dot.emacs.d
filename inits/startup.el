@@ -1,7 +1,7 @@
 
 ; ŠÂ‹«İ’è“Ç‚İ‚İ
 (setq load-path
-     (cons (expand-file-name "~/.emacs.d/conf/") load-path))
+     (cons (expand-file-name "~/.emacs.d/inits/") load-path))
 (setq load-path
      (cons (expand-file-name "~/.emacs.d/elisp/") load-path))
 

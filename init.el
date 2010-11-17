@@ -1,2 +1,2 @@
-(load "~/.emacs.d/conf/startup")
+(load "~/.emacs.d/inits/startup")
 

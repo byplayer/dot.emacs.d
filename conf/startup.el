@@ -22,6 +22,8 @@
   (load "linux/init-env")
 )
 
+(load "init-auto-install")
+(load "init-anything")
 (load "init-encoding")
 (load "init-views")
 (load "init-key")

@@ -14,7 +14,7 @@
 (setq hostname (car (split-string hostname "\\.")))
 
 ; ~/.emacs.ホスト名
-(setq hostconf (expand-file-name (concat "~/.emacs.d/conf/hosts/" hostname ".el")))
+(setq hostconf (expand-file-name (concat "~/.emacs.d/inits/hosts/" hostname ".el")))
 
 ; ~/.emacs.ホスト名 があれば読み出す
 (if (file-exists-p hostconf)

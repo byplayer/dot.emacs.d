@@ -1,3 +1,4 @@
+[TODO]
 color-theme
 color-moccur
 moccur-edit
@@ -8,12 +9,15 @@ auto-complete-mode
 elscreen
 anything
 
-[doing] multi-term
+[doing]
+multi-term
   http://d.hatena.ne.jp/sugyan/20100604/1275618413
   need configuration
 
+[done]
 install init-loader
   ;; init-loader
   ;; http://coderepos.org/share/browser/lang/elisp/init-loader/init-loader.el
+  ;; https://github.com/sugyan/dotfiles
 
 

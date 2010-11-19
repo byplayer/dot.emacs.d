@@ -1,3 +1,5 @@
+;; configuration for anything
+;; install: auto-install-batch RET anything RET
 (require 'anything)
 
 (require 'anything-config)

@@ -1,13 +1,9 @@
 [TODO]
 color-theme
 color-moccur
-moccur-edit
-grep-edit
-undo-tree
-[done] wdired
 auto-complete-mode
 elscreen
-anything
+point-undo
 
 [doing]
 multi-term
@@ -20,4 +16,9 @@ install init-loader
   ;; http://coderepos.org/share/browser/lang/elisp/init-loader/init-loader.el
   ;; https://github.com/sugyan/dotfiles
 
-
+anything
+moccur
+moccur-edit
+grep-edit
+undo-tree
+wdired

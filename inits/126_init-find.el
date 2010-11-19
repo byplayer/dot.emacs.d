@@ -3,3 +3,5 @@
 ;; (install-elisp "http://www.emacswiki.org/emacs/download/moccur-edit.el")
 ;; M-x moccur
 ;; type r find window
+
+;; (install-elisp "http://www.emacswiki.org/emacs/download/grep-edit.el")

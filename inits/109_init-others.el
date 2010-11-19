@@ -84,3 +84,10 @@
 ;; (install-elisp "http://dr-qubit.org/undo-tree/undo-tree.el")
 (when (require 'undo-tree nil t)
   (global-undo-tree-mode))
+
+;; point-undo
+;; (install-elisp "http://emacswiki.org/cgi-bin/wiki/download/point-undo.el")
+;; (when (require 'point-undo nil t)
+;;   (define-key global-map [f7] 'point-undo)
+;;   (define-key global-map [S-f7] 'point-redo))
+;; doesn't work my environtment ...

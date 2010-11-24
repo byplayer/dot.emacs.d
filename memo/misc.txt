@@ -19,3 +19,6 @@ C-x RET c euc-jp-unix C-x C-v RET
 
 = 開いたファイルの文字コードを変えて保存
 C-x RET f euc-jp-unix
+
+= undo tree
+C-x u

@@ -4,6 +4,8 @@ color-moccur
 auto-complete-mode
 elscreen
 point-undo
+rvm.el
+rspec-mode, problem of  end-of-buffer-other-window
 
 [doing]
 multi-term

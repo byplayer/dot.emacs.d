@@ -1,8 +1,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; php-modeÇÃê›íË
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(setq load-path
-      (cons (expand-file-name "~/.emacs.d/elisp/php-mode/") load-path))
+(add-to-list 'load-path "~/.emacs.d/elisp/php-mode/")
 
 
 (autoload 'php-mode "php-mode" "PHP mode" t)

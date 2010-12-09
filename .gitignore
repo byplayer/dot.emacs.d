@@ -3,3 +3,4 @@
 /.org-id-locations
 /anything-c-adaptive-history
 /elisp/*.elc
+/ac-comphist.dat

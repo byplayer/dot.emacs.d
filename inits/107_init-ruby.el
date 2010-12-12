@@ -1,5 +1,5 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; ruby-mode$B$N@_Dj(B
+;; ruby-modeの設定
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (add-to-list 'load-path "~/.emacs.d/elisp/ruby/")
 (require 'rvm)
@@ -26,10 +26,10 @@
                 )
               interpreter-mode-alist))
 
-;; $B$h$/$"$k%3!<%I$r!"<+F0A^F~$9$k!#(B
+;; よくあるコードを、自動挿入する。
 (require 'ruby-electric)
 
-;; flymake-mode$B$GJd40$9$kBP>]$rDI2C(B
+;; flymake-modeで補完する対象を追加
 ; (push '(".+\\.rb$" flymake-ruby-init) flymake-allowed-file-name-masks)
 ; (push '("Rakefile$" flymake-ruby-init) flymake-allowed-file-name-masks)
 ; (push '(".+\\.rjs$" flymake-ruby-init) flymake-allowed-file-name-masks)
@@ -77,7 +77,7 @@
 (add-hook 'feature-mode-hook 'my-feature-mode-hook)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; rspec-mode$B$N@_Dj(B
+;; rspec-modeの設定
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (setq load-path
       (cons (expand-file-name "~/.emacs.d/elisp/rspec-mode/") load-path))
@@ -87,21 +87,21 @@
 ;; (define-key rails-minor-mode-map "\C-c\C-p" 'rails-lib:run-primary-switch)
 ;; (define-key rails-minor-mode-map "\C-c\C-n" 'rails-lib:run-secondary-switch)
 
-;; ;; emacs -nw$B$@$H!"%-!<%P%$%s%I$rJQ99$7$J$$$H(B
-;; ;; rails-goto-file-on-current-line$B$,F0$+$J$$!#(B
+;; ;; emacs -nwだと、キーバインドを変更しないと
+;; ;; rails-goto-file-on-current-lineが動かない。
 ;; ;; http://d.hatena.ne.jp/kabus/20070822/1187806296
 ;; (define-key rails-minor-mode-map "\C-cj"    'rails-goto-file-on-current-line)
 
-;; ;; emacs-rails$B$G!"(BC-c C-c C-t$B$7$?;~$K(Btags$B$r:n$k%U%!%$%k$NCV$+$l$?%G%#%l%/%H%j(B
+;; ;; emacs-railsで、C-c C-c C-tした時にtagsを作るファイルの置かれたディレクトリ
 ;; ;; http://d.hatena.ne.jp/Rommy/20070906/p1
 ;; (setq rails-tags-dirs '("app" "lib" "test" "db" "vendor"))
 ;; (setq rails-tags-command "ctags -e --Ruby-kinds=-f -o %s --exclude='*.html' -R %s")
 
-;; ;; Emacs$BFb$+$i(BReFe$B$N%I%-%e%a%s%H$rFI$`!#(BM-x refe$B$G<B9T!#(B
+;; ;; Emacs内からReFeのドキュメントを読む。M-x refeで実行。
 ;; ;; http://i.loveruby.net/ja/prog/refe.html
 ;; (require 'refe)
 
-;; ;; Emacs$BFb$G(Bautotest$B<B9T!#(BM-x autotest$B$G<B9T!#(B
+;; ;; Emacs内でautotest実行。M-x autotestで実行。
 ;; ;; http://www.emacswiki.org/cgi-bin/emacs/download/autotest.el
 ;; (require 'autotest)
 
@@ -134,17 +134,17 @@
 (require 'ruby-block)
 ; (ruby-block-mode t)
 
-; ;; $B2?$b$7$J$$(B
+; ;; 何もしない
 ; (setq ruby-block-highlight-toggle 'noghing)
-;; $B%_%K%P%C%U%!$KI=<((B
+;; ミニバッファに表示
 ; (setq ruby-block-highlight-toggle 'minibuffer)
-;; $B%*!<%P%l%$$9$k(B
+;; オーバレイする
 ; (setq ruby-block-highlight-toggle 'overlay)
-;; $B%_%K%P%C%U%!$KI=<($7(B, $B$+$D(B, $B%*!<%P%l%$$9$k(B.
+;; ミニバッファに表示し, かつ, オーバレイする.
 ; (setq ruby-block-highlight-toggle t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; ruby-mode$BMQ%U%C%/=hM}DI2C(B
+;; ruby-mode用フック処理追加
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (defun my-ruby-mode-hook()
   (define-key ruby-mode-map "\C-m" 'ruby-reindent-then-newline-and-indent)
@@ -154,7 +154,7 @@
   (setq ruby-block-highlight-toggle t))
 (add-hook 'ruby-mode-hook 'my-ruby-mode-hook)
 
-; ruby-electric.el$B$H(Banty.el$B$N6%9g2sHr(B
+; ruby-electric.elとanty.elの競合回避
 (let ((rel (assq 'ruby-electric-mode minor-mode-map-alist)))
   (setq minor-mode-map-alist (append (delete rel minor-mode-map-alist) (list rel))))
 

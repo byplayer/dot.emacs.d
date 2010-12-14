@@ -26,6 +26,9 @@
 ; タイトルをファイル名にする
 (setq frame-title-format "%b")
 
+; auto scroll on compile buffer
+(setq compilation-scroll-output t)
+
 ; EOFを表示
 (load "y_eof")
 

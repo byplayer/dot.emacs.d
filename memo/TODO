@@ -4,8 +4,12 @@ color-moccur
 auto-complete-mode
 elscreen
 point-undo
-rvm.el
+
 rspec-mode, problem of  end-of-buffer-other-window
+
+Rinari for developing Rails
+  http://d.hatena.ne.jp/willnet/20090110/1231595231
+
 
 [doing]
 multi-term
@@ -13,6 +17,7 @@ multi-term
   need configuration
 
 [done]
+rvm.el
 install init-loader
   ;; init-loader
   ;; http://coderepos.org/share/browser/lang/elisp/init-loader/init-loader.el

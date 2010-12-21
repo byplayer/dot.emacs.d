@@ -51,15 +51,13 @@
       '(try-complete-abbrev
         try-complete-file-name
         try-expand-dabbrev))
-(setq rails-use-mongrel t)
 
 (require 'rails)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; cucumber.el
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(setq load-path
-      (cons (expand-file-name "~/.emacs.d/elisp/cucumber.el/") load-path))
+(add-to-list 'load-path "~/.emacs.d/elisp/cucumber.el/")
 
 ;; ;(setq feature-default-language "fi")
 ;; ;; point to cucumber languages.yml or gherkin i18n.yml to use

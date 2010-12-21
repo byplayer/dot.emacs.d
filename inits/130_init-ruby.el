@@ -4,8 +4,7 @@
 (add-to-list 'load-path "~/.emacs.d/elisp/ruby/")
 (require 'rvm)
 
-(setq load-path
-      (cons (expand-file-name "~/.emacs.d/elisp/ruby-mode/") load-path))
+(add-to-list 'load-path "~/.emacs.d/elisp/ruby-mode/")
 
 (require 'ruby-mode)
 (autoload 'ruby-mode "ruby-mode" "Mode for editing ruby source files" t)
@@ -43,8 +42,7 @@
 
 ;; rails
 ;; http://d.hatena.ne.jp/higepon/20061222/1166774270
-(setq load-path
-       (cons (expand-file-name "~/.emacs.d/elisp/emacs-rails/") load-path))
+(add-to-list 'load-path "~/.emacs.d/elisp/emacs-rails/")
 
 (defun try-complete-abbrev (old)
   (if (expand-abbrev) t nil))
@@ -79,8 +77,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; rspec-modeの設定
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(setq load-path
-      (cons (expand-file-name "~/.emacs.d/elisp/rspec-mode/") load-path))
+(add-to-list 'load-path "~/.emacs.d/elisp/rspec-mode/")
 (require 'rspec-mode)
 
 ;; (setq rails-use-mongrel t)
@@ -108,10 +105,9 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; ri
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(setq load-path
-      (cons (expand-file-name "~/.emacs.d/elisp/ri-emacs/") load-path))
+(add-to-list 'load-path "~/.emacs.d/elisp/ri-emacs/")
 
-(setq ri-ruby-script "C:/Gotou/home/.emacs.d/elisp/ri-emacs/ri-emacs.rb")
+(setq ri-ruby-script "~/.emacs.d/elisp/ri-emacs/ri-emacs.rb")
 (autoload 'ri "ri-ruby.el" nil t)
 
 (add-hook 'ruby-mode-hook (lambda ()
@@ -128,8 +124,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; ruby-block
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(setq load-path
-      (cons (expand-file-name "~/.emacs.d/elisp/ruby-block/") load-path))
+(add-to-list 'load-path "~/.emacs.d/elisp/ruby-block/")
 
 (require 'ruby-block)
 ; (ruby-block-mode t)
@@ -153,8 +148,4 @@
   (ruby-block-mode t)
   (setq ruby-block-highlight-toggle t))
 (add-hook 'ruby-mode-hook 'my-ruby-mode-hook)
-
-; ruby-electric.elとanty.elの競合回避
-(let ((rel (assq 'ruby-electric-mode minor-mode-map-alist)))
-  (setq minor-mode-map-alist (append (delete rel minor-mode-map-alist) (list rel))))
 

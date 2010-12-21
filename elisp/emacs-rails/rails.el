@@ -400,9 +400,9 @@ necessary."
             (modify-syntax-entry ?: "w" (syntax-table))
             (modify-syntax-entry ?_ "w" (syntax-table))
             (local-set-key (kbd "C-.") 'complete-tag)
-            (local-set-key (if rails-use-another-define-key
-                               (kbd "TAB") (kbd "<tab>"))
-                           'indent-or-complete)
+            ;; (local-set-key (if rails-use-another-define-key
+            ;;                    (kbd "TAB") (kbd "<tab>"))
+            ;;                'indent-or-complete)
             (local-set-key (rails-key "f") '(lambda()
                                               (interactive)
                                               (mouse-major-mode-menu (rails-core:menu-position))))
@@ -420,9 +420,9 @@ necessary."
             (rails-project:with-root
              (root)
              (progn
-               (local-set-key (if rails-use-another-define-key
-                                  (kbd "TAB") (kbd "<tab>"))
-                              'indent-or-complete)
+               ;; (local-set-key (if rails-use-another-define-key
+               ;;                    (kbd "TAB") (kbd "<tab>"))
+               ;;                'indent-or-complete)
                (rails-minor-mode t)
                (rails-apply-for-buffer-type)))))
 

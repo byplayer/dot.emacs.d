@@ -116,13 +116,14 @@ e.x, 00_hoge.el, 01_huga.el ... 99_keybind.el"
     (if s (and (stringp s) (push s err-logs)) (mapconcat 'identity (reverse err-logs) "\n"))))
 
 (defun init-loader-re-load (re dir &optional sort)
-  (let ((load-path (cons dir load-path)))
-    (dolist (el (init-loader--re-load-files re dir sort))
-      (condition-case e
-          (let ((time (car (benchmark-run (load (file-name-sans-extension el))))))
-            (init-loader-log (format "loaded %s. %s" (locate-library el) time)))
-        (error
-         (init-loader-error-log (error-message-string e)))))))
+  (add-to-list 'load-path dir)
+  (dolist (el (init-loader--re-load-files re dir sort))
+    (condition-case e
+        (let ((time (car (benchmark-run (load (file-name-sans-extension el))))))
+          (init-loader-log (format "loaded %s. %s" (locate-library el) time)))
+      (error
+       (init-loader-error-log (error-message-string e)))))
+  (delq dir load-path))
 
 (defun init-loader--re-load-files (re dir &optional sort)
     (loop for el in (directory-files dir t)

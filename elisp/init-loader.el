@@ -173,7 +173,7 @@ e.x, 00_hoge.el, 01_huga.el ... 99_keybind.el"
 
 (dont-compile
   (when (fboundp 'expectations)
-    (expectations 
+    (expectations
       (desc "init-loader--re-load-files")
       (expect  '("00_utils.el" "01_ik-cmd.el" "20_elisp.el" "21_javascript.el" "23_yaml.el" "25_perl.el" "96_color.el" "98_emacs-config.el" "99_global-keys.el")
         (stub directory-files => init-loader-test-files)

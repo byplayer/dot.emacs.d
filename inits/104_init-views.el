@@ -49,8 +49,7 @@
 ;====================================
 ; カーソル移動設定
 ;====================================
-(setq load-path
-      (cons (expand-file-name "~/.emacs.d/elisp/physical-line/") load-path))
+(add-to-list 'load-path "~/.emacs.d/elisp/physical-line/")
 
 ;カーソル移動を論理行ではなく、物理行（見たまま）単位で移動する。
 (require 'physical-line)

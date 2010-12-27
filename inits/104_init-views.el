@@ -93,6 +93,10 @@
 ;; ツールバーを隠す
 (tool-bar-mode nil)
 
+(add-to-list 'load-path "~/.emacs.d/elisp/color-theme/")
+(when (require 'color-theme nil t)
+  (color-theme-initialize))
+
 
 ;; 行番号表示
 ;; wb-line-number

@@ -15,8 +15,7 @@
 
 ; 色設定
 ;; region の色
-(set-face-background 'region "snow3")
-(set-face-foreground 'region "black")
+
 
 (if (boundp 'window-system)
     (setq initial-frame-alist
@@ -31,8 +30,8 @@
                    ; '(font . "MS Mincho 12")
                    ;; 東雲なら shinonome16-fontset などを指定
                    ; '(vertical-scroll-bars . nil) ;;スクロールバーはいらない
-                   '(width . 202) ;; ウィンドウ幅
-                   '(height . 77) ;; ウィンドウの高さ
+                   '(width . 205) ;; ウィンドウ幅
+                   '(height . 68) ;; ウィンドウの高さ
                    ; '(top . 60) ;;表示位置
                    ; '(left . 140) ;;表示位置
                    '(line-spae 0)
@@ -57,6 +56,22 @@
 ;; dired-mode は論理行移動のままにする.
 (setq physical-line-ignoring-mode-list '(dired-mode))
 
+
+;; ツールバーを隠す
+(tool-bar-mode nil)
+
+(add-to-list 'load-path "~/.emacs.d/elisp/color-theme/")
+(when (require 'color-theme nil t)
+  (color-theme-initialize)
+
+  ;; load additional color-theme
+  (setq old-init-loader-default-regexp init-loader-default-regexp)
+  (setq init-loader-default-regexp "\\(?:^color-theme-\\)")
+  (init-loader-load "~/.emacs.d/elisp/color-theme-optional/")
+  (setq init-loader-default-regexp old-init-loader-default-regexp))
+
+
+
 (set-face-foreground 'font-lock-comment-face "NavajoWhite2")
 (set-face-foreground 'font-lock-string-face "tomato2")
 (set-face-foreground 'font-lock-keyword-face "DarkSeaGreen3")
@@ -75,13 +90,8 @@
 (set-face-bold-p 'compilation-info nil)
 (set-face-foreground 'compilation-info "DarkOliveGreen3")
 
-; コンパイルの警告
-(set-face-bold-p 'compilation-warning nil)
-(set-face-foreground 'compilation-warning "NavajoWhite2")
-
 (set-face-bold-p 'font-lock-warning-face nil)
 (setq default-frame-alist initial-frame-alist)
-
 ;
 (set-face-foreground 'escape-glyph "aquamarine3")
 (set-face-foreground 'link "LightSkyBlue")
@@ -89,13 +99,6 @@
 (setq ansi-color-names-vector
       ["black" "dark red" "DarkOliveGreen3" "NavajoWhite2" "LightSkyBlue" "dark magenta"
        "DarkSlateGray2" "white"])
-
-;; ツールバーを隠す
-(tool-bar-mode nil)
-
-(add-to-list 'load-path "~/.emacs.d/elisp/color-theme/")
-(when (require 'color-theme nil t)
-  (color-theme-initialize))
 
 
 ;; 行番号表示

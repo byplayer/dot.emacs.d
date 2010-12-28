@@ -20,12 +20,6 @@
 (if (boundp 'window-system)
     (setq initial-frame-alist
           (append (list
-                   '(foreground-color . "light gray") ;; 文字が白
-                   '(background-color . "black") ;; 背景は黒
-                   '(border-color     . "black")
-                   '(mouse-color      . "light gray")
-                   '(cursor-color     . "light gray")
-                   ; '(cursor-type      . hairline-caret)
                    '(menu-bar-lines . 1)
                    ; '(font . "MS Mincho 12")
                    ;; 東雲なら shinonome16-fontset などを指定
@@ -68,37 +62,8 @@
   (setq old-init-loader-default-regexp init-loader-default-regexp)
   (setq init-loader-default-regexp "\\(?:^color-theme-\\)")
   (init-loader-load "~/.emacs.d/elisp/color-theme-optional/")
-  (setq init-loader-default-regexp old-init-loader-default-regexp))
-
-
-
-(set-face-foreground 'font-lock-comment-face "NavajoWhite2")
-(set-face-foreground 'font-lock-string-face "tomato2")
-(set-face-foreground 'font-lock-keyword-face "DarkSeaGreen3")
-(set-face-foreground 'font-lock-constant-face "aquamarine3")
-(set-face-foreground 'font-lock-type-face "DarkOliveGreen3")
-(set-face-foreground 'font-lock-variable-name-face "burlywood3")
-
-(set-face-foreground 'minibuffer-prompt "LightSkyBlue")
-
-;; 警告系
-(require 'flymake)
-(set-face-foreground 'flymake-errline "black")
-(set-face-foreground 'flymake-warnline "black")
-
-; grep で見つかったファイル名など
-(set-face-bold-p 'compilation-info nil)
-(set-face-foreground 'compilation-info "DarkOliveGreen3")
-
-(set-face-bold-p 'font-lock-warning-face nil)
-(setq default-frame-alist initial-frame-alist)
-;
-(set-face-foreground 'escape-glyph "aquamarine3")
-(set-face-foreground 'link "LightSkyBlue")
-
-(setq ansi-color-names-vector
-      ["black" "dark red" "DarkOliveGreen3" "NavajoWhite2" "LightSkyBlue" "dark magenta"
-       "DarkSlateGray2" "white"])
+  (setq init-loader-default-regexp old-init-loader-default-regexp)
+  (color-theme-byplayer))
 
 
 ;; 行番号表示

@@ -15,6 +15,8 @@ Created by byplayer <byplayer100@gmail.com> Dec 27 2010"
       (background-mode . dark))
      (default ((t (nil))))
      (region ((t (:foreground "black" :background "snow3"))))
+
+     ;; fond-lock
      (font-lock-warning-face ((t (:foreground "NavajoWhite2" :bold nil :weight normal))))
      (font-lock-comment-face ((t (:foreground "NavajoWhite2"))))
      (font-lock-string-face ((t (:foreground "tomato2"))))
@@ -26,7 +28,18 @@ Created by byplayer <byplayer100@gmail.com> Dec 27 2010"
      (compilation-info ((t (:foreground "DarkOliveGreen3" :bold nil :weight normal))))
      (escape-glyph ((t (:foreground "aquamarine3"))))
      (link ((t (:foreground "LightSkyBlue"))))
+
      (comint-highlight-prompt ((t (:foreground "LightSkyBlue" :bold nil :weight normal))))
+
+     ;; diff
+     (diff-context-face ((t (:foreground "grey50"))))
+     (diff-header-face ((t (:background "black" :bold t :weight bold))))
+     (diff-file-header-face ((t (:foreground "MediumSeaGreen" :background "black" ))))
+     (diff-index-face ((t (:foreground "MediumSeaGreen" :background "black" ))))
+     (diff-hunk-header-face ((t (:foreground "plum" :background "black" ))))
+     (diff-removed-face ((t (:foreground "gray5"))))
+     (diff-added-face ((t (:foreground "white" :background "SaddleBrown" ))))
+     (diff-changed-face ((t (:foreground "DeepSkyBlue1"))))
      )))
 
 

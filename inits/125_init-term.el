@@ -24,9 +24,6 @@
 
 (require 'shell)
 
-(set-face-foreground 'comint-highlight-prompt "LightSkyBlue")
-(set-face-bold-p 'comint-highlight-input nil)
-
 ;; stop echo
 (add-hook 'comint-mode-hook (lambda () (setq comint-process-echoes t)))
 

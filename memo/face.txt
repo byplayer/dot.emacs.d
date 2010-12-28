@@ -1,0 +1,2 @@
+* check cursor point face
+M-x describe-face

@@ -1,15 +1,11 @@
 [TODO]
-color-theme
 color-moccur
-auto-complete-mode
-elscreen
 point-undo
-
-rspec-mode, problem of  end-of-buffer-other-window
 
 Rinari for developing Rails
   http://d.hatena.ne.jp/willnet/20090110/1231595231
 
+create own color-theme
 
 [doing]
 multi-term
@@ -29,3 +25,5 @@ moccur-edit
 grep-edit
 undo-tree
 wdired
+color-theme
+auto-complete-mode

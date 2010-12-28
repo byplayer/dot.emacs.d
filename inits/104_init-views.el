@@ -1,63 +1,63 @@
-; ‘I‘ğ”ÍˆÍiƒŠ[ƒWƒ‡ƒ“j‚ğƒnƒCƒ‰ƒCƒg
+; é¸æŠç¯„å›²ï¼ˆãƒªãƒ¼ã‚¸ãƒ§ãƒ³ï¼‰ã‚’ãƒã‚¤ãƒ©ã‚¤ãƒˆ
 (transient-mark-mode 1)
 
-; ‘Î‰‚·‚éop‚ğƒnƒCƒ‰ƒCƒg
+; å¯¾å¿œã™ã‚‹ï½›ï½ã‚’ãƒã‚¤ãƒ©ã‚¤ãƒˆ
 (show-paren-mode 1)
 
-;; ƒVƒ“ƒ^ƒbƒNƒXƒnƒCƒ‰ƒCƒg‚ğ—LŒø‚É‚·‚é
+;; ã‚·ãƒ³ã‚¿ãƒƒã‚¯ã‚¹ãƒã‚¤ãƒ©ã‚¤ãƒˆã‚’æœ‰åŠ¹ã«ã™ã‚‹
 (global-font-lock-mode t)
 
-;; font-lock‚Å‚Ì‘•üƒŒƒxƒ‹
+;; font-lockã§ã®è£…é£¾ãƒ¬ãƒ™ãƒ«
 (setq font-lock-maximum-decoration t)
 (setq fast-lock nil)
 (setq lazy-lock nil)
 (setq jit-lock t)
 
-; Fİ’è
-;; region ‚ÌF
+; è‰²è¨­å®š
+;; region ã®è‰²
 
 
 (if (boundp 'window-system)
     (setq initial-frame-alist
           (append (list
-                   '(foreground-color . "light gray") ;; •¶š‚ª”’
-                   '(background-color . "black") ;; ”wŒi‚Í•
+                   '(foreground-color . "light gray") ;; æ–‡å­—ãŒç™½
+                   '(background-color . "black") ;; èƒŒæ™¯ã¯é»’
                    '(border-color     . "black")
                    '(mouse-color      . "light gray")
                    '(cursor-color     . "light gray")
                    ; '(cursor-type      . hairline-caret)
                    '(menu-bar-lines . 1)
                    ; '(font . "MS Mincho 12")
-                   ;; “Œ‰_‚È‚ç shinonome16-fontset ‚È‚Ç‚ğw’è
-                   ; '(vertical-scroll-bars . nil) ;;ƒXƒNƒ[ƒ‹ƒo[‚Í‚¢‚ç‚È‚¢
-                   '(width . 205) ;; ƒEƒBƒ“ƒhƒE•
-                   '(height . 68) ;; ƒEƒBƒ“ƒhƒE‚Ì‚‚³
-                   ; '(top . 60) ;;•\¦ˆÊ’u
-                   ; '(left . 140) ;;•\¦ˆÊ’u
+                   ;; æ±é›²ãªã‚‰ shinonome16-fontset ãªã©ã‚’æŒ‡å®š
+                   ; '(vertical-scroll-bars . nil) ;;ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ãƒãƒ¼ã¯ã„ã‚‰ãªã„
+                   '(width . 205) ;; ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦å¹…
+                   '(height . 68) ;; ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®é«˜ã•
+                   ; '(top . 60) ;;è¡¨ç¤ºä½ç½®
+                   ; '(left . 140) ;;è¡¨ç¤ºä½ç½®
                    '(line-spae 0)
                    )
                   initial-frame-alist)))
 
 ;====================================
-; ƒXƒNƒ[ƒ‹İ’è
+; ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«è¨­å®š
 ;====================================
 (setq scroll-conservatively 35
   scroll-margin 0
-  scroll-step 4) ;4s‚¸‚ÂƒXƒNƒ[ƒ‹‚·‚é
+  scroll-step 4) ;4è¡Œãšã¤ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«ã™ã‚‹
 
 ;====================================
-; ƒJ[ƒ\ƒ‹ˆÚ“®İ’è
+; ã‚«ãƒ¼ã‚½ãƒ«ç§»å‹•è¨­å®š
 ;====================================
 (add-to-list 'load-path "~/.emacs.d/elisp/physical-line/")
 
-;ƒJ[ƒ\ƒ‹ˆÚ“®‚ğ˜_—s‚Å‚Í‚È‚­A•¨—siŒ©‚½‚Ü‚Üj’PˆÊ‚ÅˆÚ“®‚·‚éB
+;ã‚«ãƒ¼ã‚½ãƒ«ç§»å‹•ã‚’è«–ç†è¡Œã§ã¯ãªãã€ç‰©ç†è¡Œï¼ˆè¦‹ãŸã¾ã¾ï¼‰å˜ä½ã§ç§»å‹•ã™ã‚‹ã€‚
 (require 'physical-line)
 (setq-default physical-line-mode t)
-;; dired-mode ‚Í˜_—sˆÚ“®‚Ì‚Ü‚Ü‚É‚·‚é.
+;; dired-mode ã¯è«–ç†è¡Œç§»å‹•ã®ã¾ã¾ã«ã™ã‚‹.
 (setq physical-line-ignoring-mode-list '(dired-mode))
 
 
-;; ƒc[ƒ‹ƒo[‚ğ‰B‚·
+;; ãƒ„ãƒ¼ãƒ«ãƒãƒ¼ã‚’éš ã™
 (tool-bar-mode nil)
 
 (add-to-list 'load-path "~/.emacs.d/elisp/color-theme/")
@@ -81,12 +81,12 @@
 
 (set-face-foreground 'minibuffer-prompt "LightSkyBlue")
 
-;; ŒxŒn
+;; è­¦å‘Šç³»
 (require 'flymake)
 (set-face-foreground 'flymake-errline "black")
 (set-face-foreground 'flymake-warnline "black")
 
-; grep ‚ÅŒ©‚Â‚©‚Á‚½ƒtƒ@ƒCƒ‹–¼‚È‚Ç
+; grep ã§è¦‹ã¤ã‹ã£ãŸãƒ•ã‚¡ã‚¤ãƒ«åãªã©
 (set-face-bold-p 'compilation-info nil)
 (set-face-foreground 'compilation-info "DarkOliveGreen3")
 
@@ -101,9 +101,9 @@
        "DarkSlateGray2" "white"])
 
 
-;; s”Ô†•\¦
+;; è¡Œç•ªå·è¡¨ç¤º
 ;; wb-line-number
-;; d‚¢‚Ì‚Åíœ
+;; é‡ã„ã®ã§å‰Šé™¤
 ;; (require 'wb-line-number)
 
 ;; (setq truncate-partial-width-windows nil)

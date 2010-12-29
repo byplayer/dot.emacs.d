@@ -125,12 +125,12 @@
 (add-to-list 'load-path "~/.emacs.d/elisp/ruby-block/")
 
 (require 'ruby-block)
-; (ruby-block-mode t)
+(ruby-block-mode t)
 
 ; ;; 何もしない
 ; (setq ruby-block-highlight-toggle 'noghing)
 ;; ミニバッファに表示
-; (setq ruby-block-highlight-toggle 'minibuffer)
+(setq ruby-block-highlight-toggle 'minibuffer)
 ;; オーバレイする
 ; (setq ruby-block-highlight-toggle 'overlay)
 ;; ミニバッファに表示し, かつ, オーバレイする.

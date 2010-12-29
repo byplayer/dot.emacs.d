@@ -5,8 +5,6 @@ point-undo
 Rinari for developing Rails
   http://d.hatena.ne.jp/willnet/20090110/1231595231
 
-create own color-theme
-
 [doing]
 multi-term
   http://d.hatena.ne.jp/sugyan/20100604/1275618413
@@ -27,3 +25,4 @@ undo-tree
 wdired
 color-theme
 auto-complete-mode
+create own color-theme

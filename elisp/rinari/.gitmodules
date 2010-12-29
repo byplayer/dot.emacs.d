@@ -1,0 +1,6 @@
+[submodule "util/jump"]
+	path = util/jump
+	url = https://github.com/eschulte/jump.el.git
+[submodule "util/test/ert"]
+	path = util/test/ert
+	url = https://github.com/nex3/ert.git

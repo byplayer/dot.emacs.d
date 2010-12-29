@@ -51,6 +51,9 @@
     (lambda () (rinari-launch)))
 (add-to-list 'auto-mode-alist '("\\.rxml$" . rhtml-mode))
 
+;; snipet
+(yas/load-directory "~/.emacs.d/elisp/yasnippets-rails/rails-snippets")
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; cucumber.el
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

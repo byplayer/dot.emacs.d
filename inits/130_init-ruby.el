@@ -17,8 +17,6 @@
                 ("\\.rjs" . ruby-mode)
                 ) auto-mode-alist))
 
-(setq auto-mode-alist (cons '("\\.rhtml" . rhtml-mode) auto-mode-alist))
-
 (setq interpreter-mode-alist
       (append '(
                 ("ruby" . ruby-mode)
@@ -40,19 +38,18 @@
 ;;              (abbrev-mode nil)
 ;;              (flymake-mode t)))
 
-;; rails
-;; http://d.hatena.ne.jp/higepon/20061222/1166774270
-(add-to-list 'load-path "~/.emacs.d/elisp/emacs-rails/")
+;; rinari
+;; https://github.com/eschulte/rinari
+(add-to-list 'load-path "~/.emacs.d/elisp/rinari/")
+(require 'rinari)
 
-(defun try-complete-abbrev (old)
-  (if (expand-abbrev) t nil))
-
-(setq hippie-expand-try-functions-list
-      '(try-complete-abbrev
-        try-complete-file-name
-        try-expand-dabbrev))
-
-(require 'rails)
+;; rhtml-mode
+;; https://github.com/eschulte/rhtml
+(add-to-list 'load-path "~/.emacs.d/elisp/rhtml/")
+(require 'rhtml-mode)
+(add-hook 'rhtml-mode-hook
+    (lambda () (rinari-launch)))
+(add-to-list 'auto-mode-alist '("\\.rxml$" . rhtml-mode))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; cucumber.el

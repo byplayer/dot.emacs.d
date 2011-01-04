@@ -4,3 +4,6 @@
 (ac-config-default)
 
 (define-key ac-mode-map (kbd "M-TAB") 'auto-complete)
+
+;; extentions
+(require 'auto-complete-etags)

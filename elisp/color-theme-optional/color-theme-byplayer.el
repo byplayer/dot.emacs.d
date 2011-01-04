@@ -44,6 +44,6 @@ Created by byplayer <byplayer100@gmail.com> Dec 27 2010"
 
 
 
-;; (setq ansi-color-names-vector
-;;       ["black" "dark red" "DarkOliveGreen3" "NavajoWhite2" "LightSkyBlue" "dark magenta"
-;;        "DarkSlateGray2" "white"])
+(setq ansi-color-names-vector
+      ["black" "dark red" "DarkOliveGreen3" "NavajoWhite2" "LightSkyBlue" "dark magenta"
+       "DarkSlateGray2" "white"])

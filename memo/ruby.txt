@@ -45,6 +45,6 @@ C-c ; f w  rinari-find-worker
 C-c ; f x  rinari-find-fixture
 C-c ; f y  rinari-find-stylesheet
 
-= rhtml-mode snipet
+= rhtml-mode snippet
 %   <% -%>
 %%  <%= %>

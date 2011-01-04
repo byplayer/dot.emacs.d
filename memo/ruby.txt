@@ -27,23 +27,29 @@ ruby-electric-modeとanthyのロード順を入れ替えるか、以下の式を
   (setq minor-mode-map-alist (append (delete rel minor-mode-map-alist) (list rel))))
 
 = rinari
-C-c ; f c  rinari-find-controller
-C-c ; f e  rinari-find-environment
-C-c ; f f  rinari-find-file-in-project
-C-c ; f h  rinari-find-helper
-C-c ; f i  rinari-find-migration
-C-c ; f j  rinari-find-javascript
-C-c ; f l  rinari-find-plugin
-C-c ; f m  rinari-find-model
-C-c ; f n  rinari-find-configuration
-C-c ; f o  rinari-find-log
-C-c ; f p  rinari-find-public
-C-c ; f s  rinari-find-script
-C-c ; f t  rinari-find-test
-C-c ; f v  rinari-find-view
-C-c ; f w  rinari-find-worker
-C-c ; f x  rinari-find-fixture
-C-c ; f y  rinari-find-stylesheet
+C-c ; f f RAILS_ROOT/
+C-c ; f c app/controller/
+C-c ; f m app/models/
+C-c ; f v app/views/
+C-c ; f h app/helper/
+C-c ; f i db/migrate/
+C-c ; f n config/
+C-c ; f e config/environment/
+C-c ; f j pubic/javascript/
+C-c ; f l vendor/plugin/
+C-c ; f o log/
+C-c ; f p public/
+C-c ; f s script/
+C-c ; f t test/
+C-c ; f w lib/workers/
+C-c ; f x test/fixtures/
+C-c ; f y public/stylesheets/
+C-c ; f r spec/
+C-c ; f z spec/fixtures
+
+C-c ; ;とすると、<%= render の部分を探して、指しているテンプレートへ飛べるらしい
+renderメソッドを使用している行でC-c ; pとすると、指しているテンプレートへ飛べます。
+
 
 = rhtml-mode snippet
 %   <% -%>

@@ -15,6 +15,7 @@
                 ("\\.rb$" . ruby-mode)
                 ("Rakefile" . ruby-mode)
                 ("\\.rjs" . ruby-mode)
+                ("\\.rake" . ruby-mode)
                 ) auto-mode-alist))
 
 (setq interpreter-mode-alist

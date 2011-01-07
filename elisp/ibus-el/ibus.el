@@ -8,7 +8,7 @@
 ;; Maintainer: S. Irie
 ;; Keywords: Input Method, i18n
 
-(defconst ibus-mode-version "0.1.1")
+(defconst ibus-mode-version "0.2.1")
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -93,6 +93,21 @@
 ;;
 
 ;;; History:
+;; 2010-11-03  S. Irie
+;;         * Version 0.2.1
+;;         * Add support for vim-mode
+;;         * Bug fixes
+;;
+;; 2010-08-19  S. Irie
+;;         * Version 0.2.0
+;;         * Add `i18n' to parent groups of `ibus'
+;;         * Add option `ibus-agent-start-ibus-daemon'
+;;         * Change not to start ibus-daemon automatically by default
+;;         * Change not to use xwininfo
+;;         * Change not to ask X root window the property "_NET_ACTIVE_WINDOW"
+;;         * Delete internal option `ibus-meta-key-exists'
+;;         * Bug fixes
+;;
 ;; 2010-06-11  S. Irie
 ;;         * Version 0.1.1
 ;;         * Improved performance and stability
@@ -120,9 +135,7 @@
 
 ;; ToDo:
 
-;;  * Don't use xwininfo
 ;;  * Don't use xmodmap
-;;  * Xming rootless mode support (Don't use _NET_ACTIVE_WINDOW)
 ;;  * Text-only frame support
 ;;  * leim support
 ;;  * performance issue
@@ -135,7 +148,7 @@
 (defgroup ibus nil
   "Intelligent Input Bus (IBus)"
   :prefix "ibus-"
-  :group 'editing :group 'wp)
+  :group 'editing :group 'wp :group 'i18n)
 
 ;; Basic settings
 (defgroup ibus-basic nil
@@ -143,16 +156,16 @@
   :group 'ibus)
 
 (defcustom ibus-mode-local t
-  "If the value is non-nil, IMContexts are registered for each buffer
-so that the input method of buffers can be toggled individually.
-Otherwise, the input method is globally toggled."
+  "Non-nil means input statuses can be individually switched at each
+buffer by using multiple input contexts. Otherwise, the input status
+is globally changed for all buffers."
   :type 'boolean
   :group 'ibus-basic)
 
 (defcustom ibus-imcontext-temporary-for-minibuffer t
-  "If non-nil, an one-time IMContext is used for a minibuffer so that
-the minibuffer always starts with IBus's input status off. This option
-is effective only when the option `ibus-mode-local' is active (non-nil)."
+  "Non-nil means use one-time input context at minibuffer so that
+the minibuffer input starts with IBus' input status off. This option
+is ineffectual unless `ibus-mode-local' is non-nil."
   :type 'boolean
   :group 'ibus-basic)
 
@@ -163,7 +176,7 @@ is effective only when the option `ibus-mode-local' is active (non-nil)."
       (ibus-setup-isearch)))
 
 (defcustom ibus-use-in-isearch-window t
-  "If non-nil, IBus can be used with isearch-mode. Otherwise, it can't."
+  "Non-nil means IBus can be used together with isearch-mode."
   :set 'ibus-customize-isearch
   :type 'boolean
   :group 'ibus-basic)
@@ -219,11 +232,13 @@ is effective only when the option `ibus-mode-local' is active (non-nil)."
     (kp-7)
     (kp-8)
     (kp-9))
-  "This list indicates which keystrokes IBus takes over at both direct
-insert mode and preediting mode. You can also add/remove the elements
-using the function `ibus-define-common-key'.
-NOTICE: Don't set prefix keys in this option, such as ESC and C-x.
-If you do so, operating Emacs might become impossible."
+  "List of keystrokes that IBus takes over regardless of input status.
+To add or remove the elements, you should use a function
+`ibus-define-common-key'. Note that `meta' modifier in the element
+doesn't indicate alt keys but actual meta key.
+
+WARNING: Don't set an entry of prefix key such as ESC and C-x, or
+key sequences starting with the prefix become unusable."
   :set 'ibus-customize-key
   :type '(repeat (list :format "%v"
 		       (set :format "%v"
@@ -264,9 +279,10 @@ If you do so, operating Emacs might become impossible."
     (delete)
     (kp-enter)
     (kp-tab))
-  "This list indicates which keystrokes IBus takes over when the
-preediting area exists. You can also add/remove the elements using
-the function `ibus-define-preedit-key'."
+  "List of keystrokes that IBus takes over only when preediting.
+To add or remove the elements, you should use a function
+`ibus-define-preedit-key'. Note that `meta' modifier in the element
+doesn't indicate alt keys but actual meta key."
   :set 'ibus-customize-key
   :type '(repeat (list :format "%v"
 		       (set :format "%v"
@@ -283,42 +299,43 @@ the function `ibus-define-preedit-key'."
   :group 'ibus-basic)
 
 (defcustom ibus-use-kana-onbiki-key nil
-  "If you use Japanese kana typing method with jp-106 keyboard, turn
-on (non-nil) this option to input a kana prolonged sound mark (`ー')
-without pushing the shift key.
- This option is made effectual by temporarily modifying the X-window
-system's keyboard configurations with a shell command `xmodmap'."
+  "Non-nil means you can input a kana prolonged sound mark (\"ー\")
+without pushing the shift key when using Japanese kana typing method
+with jp-106 keyboard.
+
+This option uses a shell command \"xmodmap\" to modify X's keymap."
   :set 'ibus-customize-key
   :type 'boolean
   :group 'ibus-basic)
 
 (defcustom ibus-simultaneous-pressing-time nil
-  "If you use Japanese thumb shift typing method on IBus-Anthy,
-specify the time interval in seconds. Two keystrokes within this time
-interval are sent to IBus as a simultaneous keystroke."
+  "Maximum time interval that two keystrokes are recognized as a
+simultaneous keystroke. Measured in seconds. The value nil means
+any keystrokes are recognized as separate ones.
+
+You must specify the time interval if using Japanese thumb shift
+typing method with IBus-Anthy."
   :type '(choice (const :tag "none" nil)
 		 (number :tag "interval (sec.)" :value 0.1))
   :group 'ibus-basic)
 
 (defcustom ibus-undo-by-committed-string nil
-  "If the value is nil, undo is performed bringing some short
-committed strings together or dividing the long committed string
-within the range which does not exceed 20 columns. Otherwise, undo
-is performed to each committed string."
+  "Non-nil means perform undoing to each committed string.
+Otherwise, insertions of committed strings modify undo boundaries to
+simulate `self-insert-command' so that undo is performed by nearly 20
+columns."
   :type 'boolean
   :group 'ibus-basic)
 
 (defcustom ibus-clear-preedit-when-unexpected-event nil
-  "If the value is non-nil, the preediting area is cleared in the
-situations that the unexpected event happens during preediting.
-The unexpected event is, for example, that the string is pasted
-with the mouse."
+  "If non-nil, clear preediting area when an unexpected event happens.
+The unexpected event is, for example, string insertion by mouse clicking."
   :type 'boolean
   :group 'ibus-basic)
 
 ;; Appearance
 (defgroup ibus-appearance nil
-  "Faces, candidate window, etc."
+  "Behaviors of cursor, candidate window, etc."
   :group 'ibus)
 
 (defun ibus-customize-cursor-color (var value)
@@ -329,12 +346,12 @@ with the mouse."
 
 (defcustom ibus-cursor-color
   nil
-  "If the value is a string, it specifies the cursor color applied
-when IBus is on. If a cons cell, its car and cdr are the cursor colors
-which indicate that IBus is on and off, respectively. If a list, the
-first, second and third (if any) elements correspond to that IBus is
-on, off and disabled, respectively. The value nil means that the cursor
-color is not controlled at all."
+  "Specify cursor color(s) corresponding to IBus' status.
+If the value is a string, specify the cursor color applied when IBus is
+on. If a cons cell, its car and cdr are the cursor colors which indicate
+that IBus is on and off, respectively. If a list, the first, second and
+third (if any) elements correspond to that IBus is on, off and disabled,
+respectively. The value nil means don't change the cursor color at all."
   :set 'ibus-customize-cursor-color
   :type '(choice (const :tag "none (nil)" nil)
 		 (color :tag "red" :format "red (%{sample%})\n" :value "red")
@@ -357,9 +374,8 @@ color is not controlled at all."
 
 (defcustom ibus-isearch-cursor-type
   0
-  "This option specifies the cursor shape which is applied when
-isearch-mode is active. If an integer 0, this option is not active so
-that the cursor shape is not changed.
+  "Cursor shape which is applied when isearch-mode is active.
+A value of integer 0 means don't change the cursor shape.
 See `cursor-type'."
   :type '(choice (const :tag "don't specify (0)" 0)
 		 (const :tag "use frame parameter" t)
@@ -378,9 +394,9 @@ See `cursor-type'."
 
 (defcustom ibus-cursor-type-for-candidate
   'bar
-  "This option specifies the cursor shape which is applied when the
-preediting area shows conversion candidates. If an integer 0, this
-option is not active so that the cursor shape is not changed.
+  "Cursor shape which is applied when showing conversion candidates
+within the preediting area. A value of integer 0 means don't change
+the cursor shape.
 See `cursor-type'."
   :type '(choice (const :tag "don't specify (0)" 0)
 		 (const :tag "use frame parameter" t)
@@ -399,9 +415,9 @@ See `cursor-type'."
 
 (defcustom ibus-put-cursor-on-candidate
   t
-  "When the preediting area shows conversion candidates, the cursor
-is put on the selected segment if this option is non-nil. Otherwise,
-the cursor is put to the tail of the preediting area."
+  "Non-nil means put cursor on a selected segment of preediting area.
+Otherwise, the cursor is put to the tail of the preediting area when
+showing conversion candidates."
   :type 'boolean
   :group 'ibus-appearance)
 
@@ -409,8 +425,9 @@ the cursor is put to the tail of the preediting area."
   0
   "Specify position showing a prediction window of some input methods
 such as ibus-mozc. A value of t means show it under cursor. An integer
-0 means under the start point of preediting text. If you won't use
-prediction window, you can set nil not to send the coordinates to IBus."
+0 means under the start point of preediting area. If you won't use
+prediction window at all, you can set nil in order not to send data of
+the coordinates to ibus-daemon."
   :type '(choice (const :tag "Don't use prediction" nil)
 		 (const :tag "Head of preediting area" 0)
 		 (const :tag "Below cursor" t))
@@ -425,76 +442,94 @@ prediction window, you can set nil not to send the coordinates to IBus."
   (let ((dir-list `(,(file-name-directory load-file-name)
 		    "~/bin/"
 		    "/usr/local/bin/"
+		    "/usr/local/libexec/"
+		    "/usr/local/libexec/ibus-el/"
+		    "/usr/local/libexec/emacs-ibus/"
 		    "/usr/local/lib/ibus-el/"
+		    "/usr/local/lib/emacs-ibus/"
 		    "/usr/local/share/ibus-el/"
+		    "/usr/local/share/emacs-ibus/"
 		    "/usr/bin/"
+		    "/usr/libexec/"
+		    "/usr/libexec/ibus-el/"
+		    "/usr/libexec/emacs-ibus/"
 		    "/usr/lib/ibus-el/"
-		    "/usr/share/ibus-el/"))
+		    "/usr/lib/emacs-ibus/"
+		    "/usr/share/ibus-el/"
+		    "/usr/share/emacs-ibus/"))
 	file-name)
     (while dir-list
       (setq file-name (concat (pop dir-list) "ibus-el-agent"))
       (if (file-exists-p file-name)
 	  (setq dir-list nil)))
     file-name)
-  "Specify file name of the agent script of ibus-mode.
-If `ibus-python-shell-command-name' is nil, the agent must be executable."
+  "File name of the agent script used for communicating with
+ibus-daemon and X servers. If `ibus-python-shell-command-name' is
+nil, the agent is executed directly as a shell command so it must
+be executable."
   :type '(file :must-match t)
   :group 'ibus-expert)
 
 (defcustom ibus-python-shell-command-name "python"
-  "Specify shell command for executing Python interpreter, which is
-used for invoking ibus-el-agent. nil means execute the agent
+  "String specifying shell command of Python interpreter, which is
+used for executing ibus-el-agent. The value nil means execute the agent
 directly as a shell command."
   :type '(choice (const :tag "Execute agent directly (nil)" nil)
 		 (file :tag "Path of interpreter" :must-match t))
   :group 'ibus-expert)
 
 (defcustom ibus-focus-update-interval 0.3
-  "The window focus is checked with this cycle measured in seconds.
-When IBus is off or input focus is in the other application, the slower
-time cycle given by `ibus-focus-update-interval-long' is used instead."
-  :type 'number
-  :group 'ibus-expert)
-
-(defcustom ibus-focus-update-interval-long 1.0
-  "This value might be used as a slow time cycle for the observation
-of input focus instead of `ibus-focus-update-interval'.
-
-See `ibus-focus-update-interval' for details."
+  "Time interval (in seconds) for checking frame focus periodically."
   :type 'number
   :group 'ibus-expert)
 
 (defcustom ibus-kana-onbiki-x-keysym "F24"
-  "When Japanese prolonged sound mark (onbiki) key is used, this
-option specifies the substitute KeySym name used in X window system for
-the key. This program sets the substitute KeySym for backslash key to
-distinguish it from yen-mark key."
+  "String specifying a name of X keysym which is used as a substitute
+of keysym corresponding to Japanese prolonged sound mark (onbiki) key. The
+value nil means don't use the substitutive keysym. ibus-mode modifies X's
+keymap according to this option in order to distinguish yen-mark key from
+backslash key. This option is ineffectual unless using jp-106 keyboard."
   :set 'ibus-customize-key
-  :type 'string
+  :type '(choice (string :tag "keysym name" :value "F24")
+		 (const :tag "none" nil))
   :group 'ibus-expert)
 
 (defcustom ibus-kana-onbiki-key-symbol 'f24
-  "When Japanese prolonged sound mark (onbiki) key is used, this
-option specifies the event corresponding to the substitute KeySym given
-in `ibus-kana-onbiki-x-keysym' as a symbol. This program sets the
-substitute KeySym for backslash key to distinguish it from yen-mark key."
+  "Symbol or integer specifying an event of Japanese prolonged sound
+mark (onbiki) key. The value nil means don't use that key. If setting
+`ibus-kana-onbiki-x-keysym' a substitutive X keysym, you must specify
+the event corresponding to that keysym. This option is ineffectual
+unless using jp-106 keyboard."
   :set 'ibus-customize-key
-  :type '(choice (symbol)
+  :type '(choice (symbol :tag "symbol" :value 'f24)
+		 (integer :tag "character code (integer)" :value ?|)
 		 (const :tag "none" nil))
   :group 'ibus-expert)
 
 (defcustom ibus-agent-timeout 3.0
-  "Specify the maximum waiting time for data reception from IBus.
+  "Maximum waiting time for data reception from IBus.
 A floating point number means the number of seconds, otherwise an integer
 the milliseconds."
   :type 'number
   :group 'ibus-expert)
 
 (defcustom ibus-agent-buffering-time 50
-  "Specify the time waiting after starting data reception for some
-particular cases such as focusing out. A floating point number means the
-number of seconds, otherwise an integer the milliseconds."
+  "Waiting time for data reception which happen in some particular
+cases such as focusing out. A floating point number means the number of
+seconds, otherwise an integer the milliseconds."
   :type 'number
+  :group 'ibus-expert)
+
+(defcustom ibus-agent-start-ibus-daemon nil
+  "Specify what to do for ibus-daemon not running.
+The value nil means do nothing, so ibus-mode will stop immediately.
+If the value is a function, start the daemon automatically if the
+function returns non-nil and the daemon is not running. The other
+non-nil value means start the daemon unconditionally."
+  :type '(choice (const :tag "Do nothing (nil)" nil)
+		 (const :tag "Start ibus-daemon (t)" t)
+		 (function :tag "According to function"
+			   (lambda () (equal (getenv "GTK_IM_MODULE") "ibus"))))
   :group 'ibus-expert)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -503,12 +538,6 @@ number of seconds, otherwise an integer the milliseconds."
 
 (defvar ibus-debug nil)
 (defvar ibus-log-buffer "*ibus-mode log*")
-
-(defvar ibus-meta-key-exists
-  (string< "" (shell-command-to-string "xmodmap -pke | grep '= Meta'"))
-  "t is set in this variable if there is mata modifier key in the
-keyboard. When automatic detection doesn't go well, please set the
-value manually before ibus.el is loaded.")
 
 (defvar ibus-agent-buffer-name " *IBus*")
 
@@ -532,16 +561,22 @@ unconditionally inherited.")
 ;; Constants
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(defvar ibus-modifier-alist
-  (mapcar (lambda (pair)
-	    (cons (car pair)
-		  (lsh 1 (cdr pair))))
-	  `((shift . 0)
-	    (control . 2)
-	    (,(if ibus-meta-key-exists 'alt 'meta) . 3)
-	    (super . 26)
-	    (hyper . 27)
-	    ,@(if ibus-meta-key-exists '((meta . 28))))))
+(defvar ibus-modifier-alists
+  '((
+     (shift . 0)
+     (control . 2)
+     (alt . 3)
+     (super . 26)
+     (hyper . 27)
+     (meta . 28)
+     )
+    (
+     (shift . 0)
+     (control . 2)
+     (meta . 3)
+     (super . 26)
+     (hyper . 27)
+     )))
 
 (defvar ibus-alt-modifier-alist
   '(
@@ -862,6 +897,8 @@ use either \\[customize] or the function `ibus-mode'."
 (defvar ibus-preedit-show-hook nil)
 
 ;; Manage key bindings
+(defvar ibus-meta-key-exist-p nil)
+(defvar ibus-modifier-alist nil)
 (defvar ibus-mode-map nil)
 (defvar ibus-mode-preedit-map nil)
 (defvar ibus-mode-common-map nil)
@@ -887,7 +924,7 @@ use either \\[customize] or the function `ibus-mode'."
 (defvar ibus-current-buffer nil)
 (defvar ibus-selected-frame nil)
 (defvar ibus-frame-focus nil)
-(defvar ibus-focus-update-timer nil)
+(defvar ibus-focused-window-id nil)
 (defvar ibus-string-insertion-failed nil)
 (defvar ibus-last-rejected-event nil)
 (defvar ibus-last-command nil)
@@ -934,7 +971,6 @@ use either \\[customize] or the function `ibus-mode'."
 (defvar ibus-preedit-overlays nil)
 (defvar ibus-auxiliary-text "")
 (defvar ibus-auxiliary-shown nil)
-(defvar ibus-saved-frame-coordinates '(0 . 0))
 (defvar ibus-surrounding-text-modified nil)
 (defvar ibus-cursor-type-saved 0)
 (make-variable-buffer-local 'ibus-cursor-type-saved)
@@ -950,7 +986,8 @@ use either \\[customize] or the function `ibus-mode'."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defun ibus-log1 (format-string args)
-  (let ((log-str (apply 'format format-string args)))
+  (let ((log-str (concat (format-time-string "%T ")
+			 (apply 'format format-string args))))
     (with-current-buffer (get-buffer-create ibus-log-buffer)
       (let ((window (get-buffer-window (current-buffer))))
 	(save-selected-window
@@ -977,8 +1014,8 @@ use either \\[customize] or the function `ibus-mode'."
       (ibus-log1 " 4th: %S" (list (nth 3 buffer-undo-list))))))
 
 (defun ibus-message (format-string &rest args)
-  (apply 'message (concat "IBus: " format-string) args)
-  (apply 'ibus-log (concat "message: " format-string) args))
+  (apply 'ibus-log (concat "message: " format-string) args)
+  (apply 'message (concat "IBus: " format-string) args))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Miscellaneous
@@ -997,10 +1034,10 @@ use either \\[customize] or the function `ibus-mode'."
 		 (>= keyval ?a)
 		 (<= keyval ?z))
 	    (setq keyval (- keyval 32)))
-      (if (not (zerop (logand modmask 8))) ; 8 = 2^3 => Alt keys
-	  (setq keyval
-		(or (cdr (assq keyval ibus-alt-modifier-alist))
-		    keyval)))
+      (unless (or (zerop (logand modmask 8)) ; 8 = 2^3 => Alt keys
+		  ibus-meta-key-exist-p)
+	(setq keyval (or (cdr (assq keyval ibus-alt-modifier-alist))
+			 keyval)))
       (if (and ibus-use-kana-onbiki-key
 	       ibus-kana-onbiki-key-symbol)
 	  (cond
@@ -1025,9 +1062,10 @@ use either \\[customize] or the function `ibus-mode'."
 	     (eq bas ?\xa5) ; ¥
 	     (not ibus-mode-map-prev-disabled))
 	(setq bas ibus-kana-onbiki-key-symbol))
-    (if (logand modmask 8) ; 8 = 2^3 => Alt keys
-	(setq bas (or (car (rassq bas ibus-alt-modifier-alist))
-		      bas)))
+    (unless (or (zerop (logand modmask 8)) ; 8 = 2^3 => Alt keys
+		ibus-meta-key-exist-p)
+      (setq bas (or (car (rassq bas ibus-alt-modifier-alist))
+		    bas)))
     (when bas
       (dotimes (i 28)
 	(if (and (not (zerop (setq mask1 (logand modmask (lsh 1 i)))))
@@ -1126,7 +1164,7 @@ use either \\[customize] or the function `ibus-mode'."
 (defun ibus-set-keymap-parent ()
   (set-keymap-parent ibus-mode-map
 		     (cond
-		      ((or (not ibus-frame-focus)
+		      ((or (not (eq window-system 'x))
 			   ibus-mode-map-prev-disabled)
 ;#		       (ibus-log "use empty keymap")
 		       nil)
@@ -1136,6 +1174,20 @@ use either \\[customize] or the function `ibus-mode'."
 		      (t
 ;#		       (ibus-log "use minimum keymap")
 		       ibus-mode-minimum-map))))
+
+(defun ibus-update-meta-key-exist-p ()
+  "Return t if there is mata modifier key on the keyboard of currently selected
+display."
+  (setq ibus-meta-key-exist-p
+	(string< "" (shell-command-to-string "xmodmap -pke | grep '= Meta'"))))
+
+(defun ibus-set-modifier-alist ()
+  (setq ibus-modifier-alist (mapcar (lambda (pair)
+				      (cons (car pair)
+					    (lsh 1 (cdr pair))))
+				    (if ibus-meta-key-exist-p
+					(car ibus-modifier-alists)
+				      (cadr ibus-modifier-alists)))))
 
 (defun ibus-enable-kana-onbiki-key (&optional keysym)
   (unless keysym (setq keysym ibus-kana-onbiki-x-keysym))
@@ -1219,11 +1271,11 @@ use either \\[customize] or the function `ibus-mode'."
 	     (mods (cdr key)))
 	(if (stringp bas)
 	    (setq bas (string-to-char bas)))
-	(when (memq 'alt mods)
-	  (unless ibus-meta-key-exists
-	    (setq mods (cons 'meta (delq 'alt mods))))
+	(when (and (memq 'alt mods)
+		   (not ibus-meta-key-exist-p))
 	  (setq bas (or (car (rassq bas ibus-alt-modifier-alist))
-			bas)))
+			bas)
+		mods (cons 'meta (delq 'alt mods))))
 	(define-key map (vector (nconc mods (list bas))) 'ibus-handle-event)
 	(setq keys (cdr keys))))
     map))
@@ -1258,6 +1310,9 @@ use either \\[customize] or the function `ibus-mode'."
 			     '(0 . 26) '(28 . 31)))
 
 (defun ibus-update-key-bindings (&optional symbol)
+  "Update keymaps of ibus-mode according to `ibus-common-function-key-list'
+and `ibus-preedit-function-key-list'. The optional argument SYMBOL, if
+given, specifies a keymap variable to be updated."
   (when (and ibus-frame-focus
 	     (not ibus-mode-map-prev-disabled)
 	     (or (null symbol)
@@ -1270,6 +1325,8 @@ use either \\[customize] or the function `ibus-mode'."
     (when (memq symbol '(nil ibus-kana-onbiki-x-keysym))
       (ibus-update-kana-onbiki-key t))
     (ibus-update-kana-onbiki-key))
+  (ibus-update-meta-key-exist-p)
+  (ibus-set-modifier-alist)
   (when (null symbol)
 ;#    (ibus-log "update ibus-mode-minimum-map")
     (if (keymapp ibus-mode-minimum-map)
@@ -1335,21 +1392,29 @@ use either \\[customize] or the function `ibus-mode'."
     (symbol-value symbol))) ; Return value
 
 (defun ibus-define-common-key (key handle)
-  "Specify which key events IBus anytime takes over. If HANDLE
-is non-nil, IBus handles the key events given by KEY. When KEY is
-given as an array, it doesn't indicate key sequence, but multiple
-definitions of single keystroke.
- It is necessary to call a function `ibus-update-key-bindings' or
-restart ibus-mode so that this settings may become effective."
+  "Specify which key events IBus anytime takes over. If HANDLE is non-nil,
+IBus handles the key events given by KEY. Otherwise, IBus ignores that key
+events. When KEY is given as an array, it doesn't indicate key sequence,
+but multiple definitions of single keystrokes. Note that `meta' modifier
+included in KEY doesn't indicate alt keys but actual meta key.
+
+Calling this function merely modifies `ibus-common-function-key-list',
+so it doesn't take the effect to keymap immediately. To update the
+keymap, you must additionally call a function `ibus-update-key-bindings'
+or restart ibus-mode."
   (ibus-define-key 'ibus-common-function-key-list key handle))
 
 (defun ibus-define-preedit-key (key handle)
-  "Specify which key events IBus takes over when preediting. If
-HANDLE is non-nil, IBus handles the key events given by KEY. When
-KEY is given as an array, it doesn't indicate key sequence, but
-multiple definitions of single keystroke.
- It is necessary to call a function `ibus-update-key-bindings' or
-restart ibus-mode so that this settings may become effective."
+  "Specify which key events IBus takes over when preediting. If HANDLE is
+non-nil, IBus handles the key events given by KEY. Otherwise, IBus ignores
+that key events. When KEY is given as an array, it doesn't indicate key
+sequence, but multiple definitions of single keystrokes. Note that `meta'
+modifier included in KEY doesn't indicate alt keys but actual meta key.
+
+Calling this function merely modifies `ibus-preedit-function-key-list',
+so it doesn't take the effect to keymap immediately. To update the
+keymap, you must additionally call a function `ibus-update-key-bindings'
+or restart ibus-mode."
   (ibus-define-key 'ibus-preedit-function-key-list key handle))
 
 ;; Advice for `describe-key'
@@ -1483,7 +1548,7 @@ restart ibus-mode so that this settings may become effective."
 	(orig-frame (selected-frame)))
 ;#    (ibus-log "set cursor color: %S" color)
     (condition-case err
-	(while (progn
+	(while (save-current-buffer
 		 (unless single-frame
 		   (select-frame (next-frame nil t)))
 		 (when (or (and (eq window-system 'x)
@@ -1492,7 +1557,13 @@ restart ibus-mode so that this settings may become effective."
 				    ibus-current-buffer))
 			   (not ibus-mode))
 		   (unless color
-		     (setq color (frame-parameter nil 'foreground-color)))
+		     (let ((spec (or (get 'cursor 'customized-face)
+				     (cadr (assq (car custom-enabled-themes)
+						 (get 'cursor 'theme-face))))))
+		       (setq color (if spec
+				       (cadr (memq :background
+						   (face-spec-choose spec)))
+				     (frame-parameter nil 'foreground-color)))))
 		   (if viper
 		       (with-no-warnings
 			 (setq viper-insert-state-cursor-color color)
@@ -1521,92 +1592,63 @@ restart ibus-mode so that this settings may become effective."
 
 ;; Cursor location
 
-(defun ibus-frame-top-left-coordinates (&optional frame)
-  "Return the pixel coordinates of FRAME as a cons cell (LEFT . TOP),
-which are relative to top left corner of screen.
+(defun ibus-agent-update-frame-coordinates (&optional frame)
+;#  (ibus-log "update frame coordinates")
+  (ibus-agent-send "update_frame_coordinates(%s)"
+		   (frame-parameter frame 'window-id))
+  (setq ibus-cursor-prev-location nil))
 
-If FRAME is omitted, use selected-frame.
-
-Users can also get the frame coordinates by referring the variable
-`ibus-saved-frame-coordinates' just after calling this function."
-  ;; Note: This function was imported from pos-tip.el ver. 0.0.3
-;#  (ibus-log "get frame coordinates")
-  (with-current-buffer (get-buffer-create " *xwininfo*")
-    (let ((case-fold-search nil))
-      (buffer-disable-undo)
-      (erase-buffer)
-      (call-process shell-file-name nil t nil shell-command-switch
-		    (concat "xwininfo -id " (frame-parameter frame 'window-id)))
-      (goto-char (point-min))
-      (search-forward "\n  Absolute")
-      (setq ibus-cursor-prev-location nil
-	    ibus-saved-frame-coordinates
-	    (cons (progn (string-to-number (buffer-substring-no-properties
-					    (search-forward "X: ")
-					    (line-end-position))))
-		  (progn (string-to-number (buffer-substring-no-properties
-					    (search-forward "Y: ")
-					    (line-end-position)))))))))
-
-(defun ibus-compute-pixel-position (&optional pos window frame-coordinates)
-  "Return the absolute pixel coordinates of POS in WINDOW as a list like
-\(X Y H), here H is the pixel height of object at POS.
+(defun ibus-compute-pixel-position (&optional pos window)
+  "Return geometry of object at POS in WINDOW as a list like \(X Y H).
+X and Y are pixel coordinates relative to top left corner of frame which
+WINDOW is in. H is the pixel height of the object.
 
 Omitting POS and WINDOW means use current position and selected window,
-respectively.
-
-If FRAME-COORDINATES is omitted, automatically obtain the absolute
-coordinates of the top left corner of frame which WINDOW is on. Here,
-`top left corner of frame' represents the origin of `window-pixel-edges'
-and its coordinates are essential for calculating the return value. If
-non-nil, specifies the frame location as a cons cell like (LEFT . TOP).
-This option makes the calculations slightly faster, but can be used only
-when it's clear that frame is in the specified position. Users can get
-the previous values of frame coordinates by referring the variable
-`ibus-saved-frame-coordinates'."
-  (unless window
-    (setq window (selected-window)))
-  (let ((frame (window-frame window)))
-    (unless frame-coordinates
-      (ibus-frame-top-left-coordinates frame))
-    (let* ((x-y (or (pos-visible-in-window-p (or pos (window-point window)) window t)
-		    '(0 0)))
-	   (ax (+ (car ibus-saved-frame-coordinates)
-		  (car (window-inside-pixel-edges window))
-		  (car x-y)))
-	   (ay (+ (cdr ibus-saved-frame-coordinates)
-		  (cadr (window-pixel-edges window))
-		  (cadr x-y)))
-	   ;; `posn-object-width-height' returns an incorrect value
-	   ;; when the header line is displayed (Emacs bug #4426).
-	   (height (with-current-buffer (window-buffer window)
-		     (cond
-		      ((null header-line-format)
-		       (cdr (posn-object-width-height
-			     (posn-at-x-y (max (car x-y) 0) (cadr x-y) window))))
-		      ((and (boundp 'text-scale-mode-amount)
-			    (not (zerop text-scale-mode-amount)))
-		       (round (* (frame-char-height frame)
-				 (with-no-warnings
-				   (expt text-scale-mode-step
-					 text-scale-mode-amount)))))
-		      (t
-		       (frame-char-height frame))))))
-      (list ax ay height))))
-
-;;; TODO: FIXME: Does anyone know how to get the actual character height
-;;;              even if the header line is displayed?
+respectively."
+  (let* ((frame (window-frame (or window (selected-window))))
+	 (posn (posn-at-point (or pos (window-point window)) window))
+	 (line (cdr (posn-actual-col-row posn)))
+	 (line-height (and line
+			   (or (window-line-height line window)
+			       (and (redisplay t)
+				    (window-line-height line window)))))
+	 (x-y (or (posn-x-y posn)
+		  (let ((geom (pos-visible-in-window-p
+			       (or pos (window-point window)) window t)))
+		    (and geom (cons (car geom) (cadr geom))))
+		  '(0 . 0)))
+	 (ax (+ (car (window-inside-pixel-edges window))
+		(car x-y)))
+	 (ay (+ (cadr (window-pixel-edges window))
+		(or (nth 2 line-height) (cdr x-y))))
+	 (height (or (car line-height)
+		     (with-current-buffer (window-buffer window)
+		       (cond
+			;; `posn-object-width-height' returns an incorrect value
+			;; when the header line is displayed (Emacs bug #4426).
+			((and posn
+			      (null header-line-format))
+			 (cdr (posn-object-width-height posn)))
+			((and (bound-and-true-p text-scale-mode)
+			      (not (zerop (with-no-warnings
+					    text-scale-mode-amount))))
+			 (round (* (frame-char-height frame)
+				   (with-no-warnings
+				     (expt text-scale-mode-step
+					   text-scale-mode-amount)))))
+			(t
+			 (frame-char-height frame)))))))
+    (list ax ay height)))
 
 (defun ibus-set-cursor-location (&optional prediction)
   (unless (and prediction
 	       (null ibus-prediction-window-position))
-    (let* ((rect (ibus-compute-pixel-position
-		  (if (and prediction
-			   (eq ibus-prediction-window-position 0)
-			   (not (minibufferp)))
-		      ibus-preedit-point
-		    (+ ibus-preedit-point ibus-preedit-curpos))
-		  nil ibus-saved-frame-coordinates)))
+    (let ((rect (ibus-compute-pixel-position
+		 (if (and prediction
+			  (eq ibus-prediction-window-position 0)
+			  (not (minibufferp)))
+		     ibus-preedit-point
+		   (+ ibus-preedit-point ibus-preedit-curpos)))))
 ;#      (ibus-log "cursor position (x y h): %s" rect)
       (unless (equal rect ibus-cursor-prev-location)
 	(setq ibus-cursor-prev-location rect)
@@ -1616,19 +1658,48 @@ the previous values of frame coordinates by referring the variable
 
 ;; Frame input focuses
 
-(defun ibus-get-active-window-id ()
-  "Return the number of the window-system window which is foreground,
-i.e. input focus is in this window."
-  (let ((x-active-window (x-window-property "_NET_ACTIVE_WINDOW" nil "WINDOW" 0 nil t)))
-    (if x-active-window
-	;; It's possible that `x-active-window' take the value of 0. Why?
-	(condition-case err
-	    (+ (ash (car x-active-window) 16)  (cdr x-active-window))
-	  (wrong-type-argument -1)))))
+(defun ibus-agent-start-focus-observation ()
+  (setq ibus-focused-window-id nil)
+  (let ((time-limit (+ (float-time)
+		       (or (and (floatp ibus-agent-timeout)
+				ibus-agent-timeout)
+			   (/ ibus-agent-timeout 1000.0)))))
+    (ibus-agent-send-receive "start_focus_observation(%d)"
+			     (* ibus-focus-update-interval 1000))
+    (while (and (not (numberp ibus-focused-window-id))
+		(< (float-time) time-limit))
+      (ibus-agent-receive)))
+  (unless (numberp ibus-focused-window-id)
+    (ibus-mode-quit)
+    (error "Couldn't detect input focus. Turned off ibus-mode.")))
+
+(defun ibus-start-focus-observation-cb (window-id)
+  (setq ibus-focused-window-id window-id))
+
+(defun ibus-agent-stop-focus-observation ()
+  (setq ibus-focused-window-id nil)
+  (ibus-agent-send "stop_focus_observation()"))
+
+(defun ibus-focus-changed-cb (window-id)
+;#  (ibus-log "frame focus changed: %s" window-id)
+  (setq ibus-focused-window-id window-id)
+  (unless window-system
+    (let ((frames (frame-list)))
+      (while frames
+	(let* ((frame (pop frames))
+	       (id (frame-parameter frame 'outer-window-id)))
+	  (when (and id (eq (string-to-number id) window-id))
+;#	    (ibus-log "non-X frame => X frame")
+	    (save-current-buffer
+	      (select-frame frame))
+	    (setq frames nil))))))
+  (ibus-check-frame-focus))
 
 (defun ibus-change-x-display ()
   (let ((display (ibus-get-x-display)))
 ;#    (ibus-log "change display from %s to %s" ibus-selected-display display)
+    (if ibus-agent-process
+	(ibus-agent-stop-focus-observation))
     (setq ibus-agent-process (cdr (assoc display ibus-agent-process-alist)))
     (if ibus-agent-process
 	(setq ibus-selected-display display)
@@ -1641,22 +1712,22 @@ i.e. input focus is in this window."
 					       ibus-agent-process-alist)
 		ibus-selected-display display)
 	(ibus-mode-quit)
-	(error "Unable to launch agent for display %S. Turned off ibus-mode" display)))))
+	(error "Unable to launch agent for display %S. Turned off ibus-mode" display)))
+    (ibus-agent-start-focus-observation)
+    (ibus-update-key-bindings)))
 
 (defun ibus-change-focus (focus-in)
   (ibus-agent-send (if focus-in "focus_in(%d)" "focus_out(%d)")
 		   ibus-imcontext-id))
 
 (defun ibus-check-frame-focus (&optional focus-in)
-  (let* (active-win
-	 redirect
+  (let* (redirect
 	 (focused-p
 	  (and (eq window-system 'x)
-	       (setq active-win (ibus-get-active-window-id))
-	       (or (eq active-win
+	       (or (eq ibus-focused-window-id
 		       (string-to-number
 			(frame-parameter nil 'outer-window-id)))
-		   (eq active-win
+		   (eq ibus-focused-window-id
 		       (and (setq redirect
 				  (car (delq nil
 					     (mapcar (lambda (frame)
@@ -1676,34 +1747,20 @@ i.e. input focus is in this window."
 	    (setq ibus-keyboard-layout (ibus-get-keyboard-layout)))
 	(when (and ibus-use-kana-onbiki-key
 		   ibus-kana-onbiki-x-keysym)
-	  (ibus-update-kana-onbiki-key nil t))
+	  (ibus-update-kana-onbiki-key nil (not focus-in)))
 	(ibus-set-keymap-parent)
 	(ibus-change-focus ibus-frame-focus) ; Send
 	(unless (or ibus-frame-focus
 		    ibus-preediting-p)
 	  (ibus-agent-receive)) ; Receive
 	(when ibus-frame-focus
-	  (ibus-frame-top-left-coordinates)
+	  (ibus-agent-update-frame-coordinates)
 	  (when ibus-preediting-p
 	    (ibus-remove-preedit)
 	    (ibus-show-preedit))))
-      (unless focus-in
+      (unless (or focus-in
+		  this-command)
 	(ibus-check-current-buffer)))))
-
-(defun ibus-cancel-focus-update-timer ()
-  (when ibus-focus-update-timer
-    (cancel-timer ibus-focus-update-timer)
-    (setq ibus-focus-update-timer nil)))
-
-(defun ibus-start-focus-observation ()
-  (let ((cycle (if (or ibus-mode-map-prev-disabled
-		       (not ibus-imcontext-status)
-		       (not ibus-frame-focus))
-		   ibus-focus-update-interval-long
-		 ibus-focus-update-interval)))
-    (ibus-cancel-focus-update-timer)
-    (setq ibus-focus-update-timer
-	  (run-at-time cycle cycle 'ibus-check-frame-focus))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Preediting area
@@ -1811,7 +1868,7 @@ i.e. input focus is in this window."
       (if ibus-preediting-p
 	  (ibus-remove-preedit)
 	(if (eq window-system 'x)
-	    (ibus-frame-top-left-coordinates)))
+	    (ibus-agent-update-frame-coordinates)))
       ;; Put String
       (setq ibus-preediting-p (current-buffer))
       (setq ibus-keymap-overlay (make-overlay (point-min) (1+ (point-max)) nil nil t))
@@ -1953,11 +2010,15 @@ i.e. input focus is in this window."
 	 (buffer (progn
 		   (string-match "\\(\\**\\)$" ibus-agent-buffer-name)
 		   (replace-match (concat "(" display ")\\1")
-				  t nil ibus-agent-buffer-name))))
+				  t nil ibus-agent-buffer-name)))
+	 (args (unless (if (functionp ibus-agent-start-ibus-daemon)
+			   (funcall ibus-agent-start-ibus-daemon)
+			 ibus-agent-start-ibus-daemon)
+		 '("-q"))))
     (if ibus-python-shell-command-name
-	(start-process "ibus-agent" buffer ibus-python-shell-command-name
-		       (expand-file-name ibus-agent-file-name))
-      (start-process "ibus-agent" buffer ibus-agent-file-name))))
+	(apply 'start-process "ibus-agent" buffer ibus-python-shell-command-name
+	       (expand-file-name ibus-agent-file-name) args)
+      (apply 'start-process "ibus-agent" buffer ibus-agent-file-name args))))
 
 (defun ibus-agent-start ()
   (if (and (processp ibus-agent-process)
@@ -1975,7 +2036,7 @@ i.e. input focus is in this window."
 	(set-process-coding-system proc 'utf-8 'utf-8)
 	(with-current-buffer (process-buffer proc)
 ;#	  (ibus-log "temp buffer: %S" (current-buffer))
-	  (unless ibus-debug (buffer-disable-undo))
+	  (buffer-disable-undo)
 	  (erase-buffer)
 	  ;; `make-local-hook' is an obsolete function (as of Emacs 21.1)
 ;	  (make-local-hook 'after-change-functions)
@@ -2028,11 +2089,13 @@ i.e. input focus is in this window."
 	      (sec (and (floatp ibus-agent-timeout) ibus-agent-timeout))
 	      (msec (and (integerp ibus-agent-timeout) ibus-agent-timeout)))
 	  (when (= (point-max) 1)
-	    (accept-process-output ibus-agent-process sec msec t))
+	    (save-current-buffer
+	      (accept-process-output ibus-agent-process sec msec t)))
 	  (when wait
-	    (sleep-for (or (and (floatp ibus-agent-buffering-time)
-				ibus-agent-buffering-time)
-			   (/ ibus-agent-buffering-time 1000.0))))
+	    (save-current-buffer
+	      (sleep-for (or (and (floatp ibus-agent-buffering-time)
+				  ibus-agent-buffering-time)
+			     (/ ibus-agent-buffering-time 1000.0)))))
 	  (goto-char (point-min))
 	  (while (let ((pos (point)))
 		   (condition-case err
@@ -2045,7 +2108,8 @@ i.e. input focus is in this window."
 			     repl)
 		     (end-of-file
 		      (goto-char pos)
-		      (accept-process-output ibus-agent-process sec msec t))
+		      (save-current-buffer
+			(accept-process-output ibus-agent-process sec msec t)))
 		     (error
 		      nil)))
 	    (beginning-of-line 2))
@@ -2109,19 +2173,37 @@ i.e. input focus is in this window."
       (ibus-do-update-preedit))))
 
 (defun ibus-process-signals (sexplist &optional passive)
-  (let (rsexplist)
+  (let (rsexplist
+	focus-changed
+	(need-check (and passive
+			 (null ibus-isearch-minibuffer)
+			 (buffer-live-p ibus-current-buffer)
+			 (buffer-local-value 'isearch-mode ibus-current-buffer)))
+	resume-preedit)
     (while sexplist
-      (let ((sexp (pop sexplist)))
+      (let* ((sexp (pop sexplist))
+	     (fun (car-safe sexp)))
 	(cond
-	 ((and (consp sexp)
-	       (symbolp (car sexp))
-	       (fboundp (car sexp)))
-	  (push sexp rsexplist))
+	 ((eq fun 'ibus-focus-changed-cb)
+	  (setq focus-changed sexp))
+	 ((and (symbolp fun)
+	       (fboundp fun))
+	  (push sexp rsexplist)
+	  (if (and need-check
+		   (not resume-preedit)
+		   (memq fun '(ibus-commit-text-cb
+			       ibus-update-preedit-text-cb
+			       ibus-hide-preedit-text-cb
+			       ibus-show-preedit-text-cb
+			       ibus-delete-surrounding-text-cb)))
+	      (setq resume-preedit t)))
 	 ((stringp sexp)
 	  (ibus-message "%s" sexp))
 	 (t
 ;#	  (ibus-log "ignore: %S" sexp)
 	  ))))
+    (if focus-changed
+	(apply 'run-with-timer 0 nil focus-changed))
     (when rsexplist
 ;#      (ibus-log "this-command: %s" this-command)
 ;#      (ibus-log "last-command: %s" last-command)
@@ -2135,7 +2217,10 @@ i.e. input focus is in this window."
 	      (setq ibus-callback-queue queue1))
 	    (setq unread-command-events
 		  (cons 'ibus-receive-event
-			(delq 'ibus-receive-event unread-command-events))))
+			(delq 'ibus-receive-event unread-command-events)))
+	    (if resume-preedit
+		(setq unread-command-events
+		      (cons ?a (cons 'ibus-resume-preedit unread-command-events)))))
 	(when (buffer-live-p ibus-current-buffer)
 	  (with-current-buffer ibus-current-buffer
 	    (ibus-exec-callback-1 (nreverse rsexplist))
@@ -2168,7 +2253,13 @@ i.e. input focus is in this window."
    ((not ibus-string-insertion-failed)
     (ibus-remove-preedit)
     (condition-case err
-	(progn
+	(if (and (not ibus-preediting-p)
+		 (eq this-command 'ibus-handle-event)
+		 (= (length text) 1)
+		 (eq (string-to-char text) last-command-event))
+	    (let ((ibus-last-command-event last-command-event)
+		  ibus-agent-key-event-handled)
+	      (ibus-process-key-event-cb id nil))
 	  (cond
 	   ;; ansi-term
 	   ((and (eq major-mode 'term-mode)
@@ -2182,7 +2273,7 @@ i.e. input focus is in this window."
 	   ;; Normal commit
 	   (ibus-undo-by-committed-string
 	    (insert-and-inherit text))
-	   ;; Normal commit (Undoing will be performed every 20 characters)
+	   ;; Normal commit (Undoing will be performed every 20 columns)
 	   (t
 	    (ibus-insert-and-modify-undo-list text)))
 	  (setq ibus-last-command 'self-insert-command)
@@ -2410,7 +2501,9 @@ i.e. input focus is in this window."
 	 (modmask (pop decoded))
 	 (backslash (car decoded)))
     (when (numberp keyval)
-      (unless ibus-frame-focus (ibus-check-frame-focus t))
+      (unless ibus-frame-focus
+	(ibus-agent-start-focus-observation)
+	(ibus-check-frame-focus t))
       (ibus-check-current-buffer))
 ;#    (ibus-log "event: %s  keyval: %s  modmask: %s" event keyval modmask)
     (when (eq backslash ?|)
@@ -2436,8 +2529,9 @@ i.e. input focus is in this window."
 	;; IMContext is not registered or key event is not recognized
 	(ibus-process-key-event-cb ibus-imcontext-id nil))))
   ;; Repair post-command-hook
-  (unless (memq 'ibus-fallback-pre-function
-		(default-value 'pre-command-hook))
+  (when (and ibus-mode
+	     (not (memq 'ibus-fallback-pre-function
+			(default-value 'pre-command-hook))))
     (when (and (local-variable-p 'post-command-hook)
 	       (not (memq t post-command-hook)))
       (if post-command-hook
@@ -2453,7 +2547,9 @@ i.e. input focus is in this window."
   (interactive "*p")
   (unless (eq last-command 'ibus-handle-event)
     (setq ibus-last-command last-command))
-  (ibus-process-key-event last-command-event))
+  (ibus-process-key-event last-command-event)
+  (if ibus-preediting-p
+      (setq this-command 'ibus-handle-event)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Manage IMContexts
@@ -2562,7 +2658,9 @@ ENGINE-NAME, if given as a string, specify input method engine."
     (ibus-set-keymap-parent)
     (when (and ibus-use-kana-onbiki-key
 	       ibus-kana-onbiki-x-keysym)
-      (ibus-update-kana-onbiki-key))))
+      (ibus-update-kana-onbiki-key))
+    (if isearch-mode
+	(isearch-update))))
 
 (defun ibus-toggle ()
   "Toggle IBus' input status."
@@ -2589,7 +2687,9 @@ ENGINE-NAME, if given as a string, specify input method engine."
 (defun ibus-check-current-buffer ()
 ;#;  (ibus-log "check current buffer")
   (catch 'exit
-    (ibus-cancel-focus-update-timer)
+    (unless ibus-mode
+      (remove-hook 'post-command-hook 'ibus-check-current-buffer)
+      (throw 'exit nil))
     (setq ibus-last-rejected-event nil)
     (with-current-buffer (window-buffer)
       (let ((buffer (current-buffer))
@@ -2667,7 +2767,8 @@ ENGINE-NAME, if given as a string, specify input method engine."
 	    (if (numberp ibus-imcontext-id)
 		(ibus-check-frame-focus t)))
 	  (ibus-set-keymap-parent)
-	  (ibus-update-cursor-color)))
+	  (unless non-x-p
+	    (ibus-update-cursor-color))))
       (setq ibus-parent-buffer-group nil)
       ;; Disable keymap if buffer is read-only, explicitly disabled, or vi-mode.
       (if (eq (and (or buffer-read-only
@@ -2675,6 +2776,9 @@ ENGINE-NAME, if given as a string, specify input method engine."
 		       (eq major-mode 'vi-mode)
 		       (and (boundp 'vip-current-mode)
 			    (eq vip-current-mode 'vi-mode))
+		       (and (bound-and-true-p vim-mode)
+			    (with-no-warnings
+			      (eq vim:active-mode 'vim:normal-mode)))
 		       (and (boundp 'viper-current-state)
 			    (eq viper-current-state 'vi-state)))
 		   (not (and isearch-mode
@@ -2698,12 +2802,11 @@ ENGINE-NAME, if given as a string, specify input method engine."
       (unless (eq (selected-frame) ibus-selected-frame)
 	(when (and ibus-preediting-p
 		   (eq window-system 'x))
-	  (ibus-frame-top-left-coordinates)
+	  (ibus-agent-update-frame-coordinates)
 	  (ibus-remove-preedit)
 	  (ibus-show-preedit))
 	(setq ibus-selected-frame (selected-frame))
-	(ibus-update-cursor-color)))
-    (ibus-start-focus-observation)))
+	(ibus-update-cursor-color)))))
 
 (defun ibus-kill-buffer-function ()
   (ibus-destroy-imcontext))
@@ -2799,14 +2902,16 @@ ENGINE-NAME, if given as a string, specify input method engine."
   (let ((overriding-terminal-local-map nil)
 	(prompt (isearch-message-prefix))
 	(minibuffer-local-map (with-no-warnings isearch-minibuffer-local-map))
-	(current-input-method nil)
+	(current-input-method (unless (equal current-input-method "IBus")
+				current-input-method))
 	(ibus-imcontext-temporary-for-minibuffer nil)
 	(ibus-isearch-minibuffer nil)
 	(ibus-current-buffer nil)
 	str junk-hist)
     (add-hook 'post-command-hook 'ibus-isearch-read-string-pre-function t)
     (if (eq (car unread-command-events) 'ibus-resume-preedit)
-	(setq unread-command-events (cdr unread-command-events))
+	(setq unread-command-events (cdr unread-command-events)
+	      ibus-surrounding-text-modified nil)
       (setq unread-command-events (cons last-char unread-command-events)))
     (setq str (read-string prompt isearch-string 'junk-hist nil t)
 	  isearch-string ""
@@ -2839,7 +2944,8 @@ ENGINE-NAME, if given as a string, specify input method engine."
 
 (defadvice isearch-printing-char
   (around ibus-isearch-printing-char ())
-  (if ibus-imcontext-status
+  (if (and ibus-imcontext-status
+	   (null current-input-method))
       (let ((current-input-method "IBus"))
 	ad-do-it)
     ad-do-it))
@@ -2859,9 +2965,13 @@ ENGINE-NAME, if given as a string, specify input method engine."
   (if (and ibus-imcontext-status
 	   (not nonincremental)
 	   (not (eq this-command 'isearch-edit-string)))
-      (let ((current-input-method "IBus")
-	    (current-input-method-title "IBus"))
-	ad-do-it)
+      (if current-input-method-title
+	  (let ((current-input-method-title
+		 (format "%s IBus" current-input-method-title)))
+	    ad-do-it)
+	(let ((current-input-method "IBus")
+	      (current-input-method-title "IBus"))
+	  ad-do-it))
     ad-do-it))
 
 ;; Advices for `isearch-x.el'
@@ -2880,9 +2990,15 @@ ENGINE-NAME, if given as a string, specify input method engine."
 
 (defadvice isearch-process-search-multibyte-characters
   (around ibus-isearch-process-search-characters ())
-  (if (and (string= current-input-method "IBus")
+  (if (and ibus-mode
 	   (eq this-command 'isearch-printing-char))
-      (ibus-isearch-process-search-characters last-char)
+      (if ibus-imcontext-status
+	  (ibus-isearch-process-search-characters last-char)
+	(let ((ibus-imcontext-temporary-for-minibuffer nil))
+	  (remove-hook 'post-command-hook 'ibus-check-current-buffer)
+	  (unwind-protect
+	      ad-do-it
+	    (add-hook 'post-command-hook 'ibus-check-current-buffer))))
     ad-do-it))
 
 ;; Commands and functions
@@ -2949,6 +3065,8 @@ ENGINE-NAME, if given as a string, specify input method engine."
 	(setq ibus-selected-display (ibus-get-x-display)
 	      ibus-agent-process-alist (list (cons ibus-selected-display
 						   ibus-agent-process)))
+	(let ((ibus-current-buffer (current-buffer)))
+	  (ibus-agent-start-focus-observation))
 	;; Turn on minor mode
 	(setq-default ibus-mode t)
 	(ibus-cleanup-variables)
@@ -3002,7 +3120,6 @@ ENGINE-NAME, if given as a string, specify input method engine."
   (ibus-activate-advices-inherit-im nil)
   (ibus-activate-advice-describe-key nil)
   (ibus-disable-isearch)
-  (ibus-cancel-focus-update-timer)
   (ibus-cleanup-preedit)
   (mapc (lambda (pair)
 	  (setq ibus-agent-process (cdr pair))

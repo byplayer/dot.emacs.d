@@ -12,6 +12,9 @@
 ;;タブ幅を 2 に設定
 (setq-default tab-width 2)
 
+;; use space insted of tab
+(setq-default indent-tabs-mode nil)
+
 ; カーソル列表示
 (column-number-mode 1)
 

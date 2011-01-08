@@ -111,47 +111,30 @@
   "Face for the yasnippet selected candidate."
   :group 'auto-complete)
 
-(defun ac-yasnippet-table-hash (table)
-  (cond
-   ((fboundp 'yas/snippet-table-hash)
-    (yas/snippet-table-hash table))
-   ((fboundp 'yas/table-hash)
-    (yas/table-hash table))))
-
-(defun ac-yasnippet-table-parent (table)
-  (cond
-   ((fboundp 'yas/snippet-table-parent)
-    (yas/snippet-table-parent table))
-   ((fboundp 'yas/table-parent)
-    (yas/table-parent table))))
-
 (defun ac-yasnippet-candidate-1 (table)
-  (with-no-warnings
-    (let ((hashtab (ac-yasnippet-table-hash table))
-          (parent (ac-yasnippet-table-parent table))
-          candidates)
-      (maphash (lambda (key value)
-                 (push key candidates))
-               hashtab)
-      (setq candidates (all-completions ac-prefix (nreverse candidates)))
-      (if parent
-          (setq candidates
-                (append candidates (ac-yasnippet-candidate-1 parent))))
-      candidates)))
+  (let ((hashtab (yas/snippet-table-hash table))
+        (parents (yas/snippet-table-parents table))
+        candidates)
+    (maphash (lambda (key value)
+               (push key candidates))
+             hashtab)
+    (setq candidates (all-completions ac-prefix (nreverse candidates)))
+    (when parents
+      (mapc (lambda (table)
+              (setq candidates
+                    (append candidates (ac-yasnippet-candidate-1 table))))
+            parents))
+    candidates))
 
 (defun ac-yasnippet-candidates ()
-  (with-no-warnings
-    (if (fboundp 'yas/get-snippet-tables)
-        ;; >0.6.0
-        (apply 'append (mapcar 'ac-yasnippet-candidate-1 (yas/get-snippet-tables major-mode)))
-      (let ((table
-             (if (fboundp 'yas/snippet-table)
-                 ;; <0.6.0
-                 (yas/snippet-table major-mode)
-               ;; 0.6.0
-               (yas/current-snippet-table))))
-        (if table
-            (ac-yasnippet-candidate-1 table))))))
+  (let ((tables (yas/get-snippet-tables major-mode))
+        candidate)
+    (when tables
+      (mapc (lambda (table)
+              (setq candidate
+                    (append candidate (ac-yasnippet-candidate-1 table))))
+            tables))
+    candidate))
 
 (ac-define-source yasnippet
   '((depends yasnippet)

@@ -148,6 +148,8 @@
   ; (pabbrev-mode t)
   (ruby-electric-mode t)
   (ruby-block-mode t)
-  (setq ruby-block-highlight-toggle t))
+  (setq ruby-block-highlight-toggle t)
+  (add-to-list 'ac-sources 'ac-source-yasnippet)
+  (add-to-list 'ac-sources 'ac-source-etags))
 (add-hook 'ruby-mode-hook 'my-ruby-mode-hook)
 

@@ -1,0 +1,3 @@
+[submodule "elisp/rspec-mode"]
+	path = elisp/rspec-mode
+	url = https://github.com/byplayer/rspec-mode.git

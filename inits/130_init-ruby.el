@@ -81,6 +81,9 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (add-to-list 'load-path "~/.emacs.d/elisp/rspec-mode/")
 (require 'rspec-mode)
+(add-hook 'rspec-mode-hook
+          '(lambda ()
+             (setq yas/mode-symbol 'rspec-mode)))
 
 ;; (setq rails-use-mongrel t)
 ;; (define-key rails-minor-mode-map "\C-c\C-p" 'rails-lib:run-primary-switch)

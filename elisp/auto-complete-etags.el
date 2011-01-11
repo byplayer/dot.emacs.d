@@ -48,9 +48,13 @@
   '((t (:background "deep sky blue" :foreground "white")))
   "Face for the etags selected candidate.")
 
+(defun ac-etags-candidate ()
+  (when tags-file-name
+    (ignore-errors
+        (all-completions ac-target (tags-completion-table)))))
+
 (defvar ac-source-etags
-  '((candidates . (lambda () 
-         (all-completions ac-target (tags-completion-table))))
+  '((candidates . ac-etags-candidate)
     (candidate-face . ac-etags-candidate-face)
     (selection-face . ac-etags-selection-face)
     (requires . 3))

@@ -115,12 +115,6 @@
 (setq ri-ruby-script "~/.emacs.d/elisp/ri-emacs/ri-emacs.rb")
 (autoload 'ri "ri-ruby.el" nil t)
 
-(add-hook 'ruby-mode-hook (lambda ()
-                            (local-set-key [f1] 'ri)
-                            (local-set-key "\M-\C-i" 'ri-ruby-complete-symbol)
-                            (local-set-key [f4] 'ri-ruby-show-args)
-                            ))
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; refe
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -152,7 +146,12 @@
   (ruby-electric-mode t)
   (ruby-block-mode t)
   (setq ruby-block-highlight-toggle t)
-  (add-to-list 'ac-sources 'ac-source-yasnippet)
-  (add-to-list 'ac-sources 'ac-source-etags))
+  (local-set-key [f1] 'ri)
+  (local-set-key "\M-\C-i" 'ri-ruby-complete-symbol)
+  (local-set-key [f4] 'ri-ruby-show-args)
+  (setq ac-sources (append ac-sources
+                           '(ac-source-words-in-same-mode-buffers
+                             ac-source-etags
+                             ac-source-yasnippet))))
 (add-hook 'ruby-mode-hook 'my-ruby-mode-hook)
 

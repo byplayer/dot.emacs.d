@@ -54,3 +54,4 @@
 ;; add anything-etags
 (add-to-list 'load-path "~/.emacs.d/elisp/anything-etags/")
 (require 'anything-etags)
+(define-key global-map (kbd "M-.") 'anything-etags-select-from-here)

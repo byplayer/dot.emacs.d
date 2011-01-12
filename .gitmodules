@@ -1,3 +1,6 @@
 [submodule "elisp/rspec-mode"]
 	path = elisp/rspec-mode
 	url = https://github.com/byplayer/rspec-mode.git
+[submodule "elisp/anything-etags"]
+	path = elisp/anything-etags
+	url = https://github.com/byplayer/anything-etags.git

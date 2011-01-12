@@ -4,8 +4,7 @@ point-undo
 
 move vendor lisp into git submodules
 
-yasnippet anything
-  http://d.hatena.ne.jp/IMAKADO/20080324/1206370301
+
 
 [doing]
 multi-term
@@ -30,3 +29,5 @@ auto-complete-mode
 create own color-theme
 Rinari for developing Rails
   http://d.hatena.ne.jp/willnet/20090110/1231595231
+yasnippet anything
+  http://d.hatena.ne.jp/IMAKADO/20080324/1206370301

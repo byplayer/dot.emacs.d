@@ -50,3 +50,7 @@
             anything-c-source-emacs-commands))
 
 (define-key global-map (kbd "C-;") 'anything)
+
+;; add anything-etags
+(add-to-list 'load-path "~/.emacs.d/elisp/anything-etags/")
+(require 'anything-etags)

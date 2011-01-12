@@ -4,3 +4,6 @@
 [submodule "elisp/anything-etags"]
 	path = elisp/anything-etags
 	url = https://github.com/byplayer/anything-etags.git
+[submodule "elisp/egg"]
+	path = elisp/egg
+	url = https://github.com/byplayer/egg.git

@@ -16,3 +16,9 @@
                              (get-char-property (point) 'face))))
            '(require-snippet-condition . force-in-comment)))
 (yas/initialize)
+
+;; anything-c-yasnippet
+(add-to-list 'load-path "~/.emacs.d/elisp/anything-c-yasnippet/")
+(require 'anything-c-yasnippet)
+(setq anything-c-yas-space-match-any-greedy t)
+(global-set-key (kbd "C-c y") 'anything-c-yas-complete)

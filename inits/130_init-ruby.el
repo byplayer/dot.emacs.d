@@ -14,6 +14,7 @@
       (append '(
                 ("\\.rb$" . ruby-mode)
                 ("Rakefile" . ruby-mode)
+                ("Gemfile" . ruby-mode)
                 ("\\.rjs" . ruby-mode)
                 ("\\.rake" . ruby-mode)
                 ) auto-mode-alist))

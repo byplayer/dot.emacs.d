@@ -42,9 +42,9 @@ Created by byplayer <byplayer100@gmail.com> Dec 27 2010"
      (diff-changed-face ((t (:foreground "DeepSkyBlue1"))))
 
      ;; anything
-     (anything-file-name ((t (:foreground "LightSteelBlue"))))
-     ;; anything-dir-heading
-     ;; anything-dir-priv
+     (anything-file-name ((t (:foreground "yellow green"))))
+     (anything-dir-heading ((t (:foreground "aquamarine3"))))
+     (anything-dir-priv ((t (:foreground "DarkSeaGreen3"))))
      )))
 
 

@@ -1,3 +1,5 @@
+(require 'recentf-ext)
+
 (add-to-list 'load-path "~/.emacs.d/elisp/yasnippet/")
 (require 'yasnippet)
 (setq yas/trigger-key nil)

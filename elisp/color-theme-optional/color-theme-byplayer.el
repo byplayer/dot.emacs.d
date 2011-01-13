@@ -40,6 +40,11 @@ Created by byplayer <byplayer100@gmail.com> Dec 27 2010"
      (diff-removed-face ((t (:foreground "gray5"))))
      (diff-added-face ((t (:foreground "white" :background "SaddleBrown" ))))
      (diff-changed-face ((t (:foreground "DeepSkyBlue1"))))
+
+     ;; anything
+     (anything-file-name ((t (:foreground "LightSteelBlue"))))
+     ;; anything-dir-heading
+     ;; anything-dir-priv
      )))
 
 

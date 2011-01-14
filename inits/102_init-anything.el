@@ -53,3 +53,5 @@
 
 ;; add anything-gtags
 (require 'anything-gtags)
+
+(define-key global-map (kbd "C-x b") 'anything-for-files)

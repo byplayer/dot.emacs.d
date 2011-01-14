@@ -150,9 +150,10 @@
   (local-set-key [f1] 'ri)
   (local-set-key "\M-\C-i" 'ri-ruby-complete-symbol)
   (local-set-key [f4] 'ri-ruby-show-args)
+  (gtags-mode 1)
   (setq ac-sources (append ac-sources
                            '(ac-source-words-in-same-mode-buffers
-                             ac-source-etags
+                             ac-source-gtags
                              ac-source-yasnippet))))
 (add-hook 'ruby-mode-hook 'my-ruby-mode-hook)
 

@@ -1,28 +1,31 @@
-emacs用タグを作る
-ctags -e
--Rで再帰的にサブディレクトリも処理
+gtagsのruby向け設定を入れる
+----
+
+https://github.com/byplayer/dotfiles/blob/master/ubuntu/.globalrc
+
+
+
+タグを作る
+----
+
+    gtags
+
+-v コマンドを付けることで処理ファイルの詳細も出せる
+
+(define-key gtags-mode-map "\M-," 'gtags-find-rtag)
+(define-key gtags-mode-map "\M-s" 'gtags-find-symbol)
+(define-key gtags-mode-map "\M-/" 'gtags-find-pattern)
 
 
 M-x visit-tags-table <RET> FILE <RET>
   Select the tag file, "FILE", to use.
 
-M-. [TAG] <RET>
-  Find the first definition of TAG.  The  default  tag  is  the
-  identifier under the cursor.
+M-. gtags-find-tag
+  find-tag
 
 M-*
   Pop back to where you previously invoked "M-.".
 
-C-u M-.
-  Find the next definition for the last tag.
+M-x gtags-visit-rootdir
+  change GTAGS root directory
 
-M-TAG
-  TAGSファイルを読み込んでいる状態で関数名の補完入力ができる。
-
-M-x visit-tags-table
-  change TAGS file
-
-M-x tags-search
-　TAGSファイルに登録されているファイルから検索
-
-For more commands, see the Tags topic in the Emacs info document.

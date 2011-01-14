@@ -4,3 +4,4 @@
 /anything-c-adaptive-history
 *.elc
 /ac-comphist.dat
+/tramp

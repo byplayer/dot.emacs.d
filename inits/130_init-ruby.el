@@ -50,7 +50,9 @@
 (add-to-list 'load-path "~/.emacs.d/elisp/rhtml/")
 (require 'rhtml-mode)
 (add-hook 'rhtml-mode-hook
-    (lambda () (rinari-launch)))
+    (lambda ()
+      (rinari-launch)
+      (gtags-mode 1)))
 (add-to-list 'auto-mode-alist '("\\.rxml$" . rhtml-mode))
 
 ;; rail snippet

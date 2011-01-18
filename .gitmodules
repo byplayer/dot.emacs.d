@@ -7,3 +7,6 @@
 [submodule "elisp/egg"]
 	path = elisp/egg
 	url = https://github.com/byplayer/egg.git
+[submodule "elisp/cucumber.el"]
+	path = elisp/cucumber.el
+	url = https://github.com/byplayer/cucumber.el.git

@@ -5,6 +5,7 @@
 
 (add-to-list 'ac-modes 'yaml-mode)
 (add-to-list 'ac-modes 'rhtml-mode)
+(add-to-list 'ac-modes 'outline-mode)
 
 ;; (define-key ac-mode-map (kbd "M-TAB") 'auto-complete)
 

@@ -4,6 +4,7 @@
   (setq skeleton-pair-on-word t)
   (setq skeleton-pair t)
   (make-variable-buffer-local 'skeleton-pair-alist)
+  (gtags-mode 1)
   (local-set-key (kbd "(") 'skeleton-pair-insert-maybe)
   (local-set-key (kbd "[") 'skeleton-pair-insert-maybe)
   (local-set-key (kbd "{") 'skeleton-pair-insert-maybe)

@@ -45,6 +45,7 @@ Created by byplayer <byplayer100@gmail.com> Dec 27 2010"
      (anything-file-name ((t (:foreground "yellow green"))))
      (anything-dir-heading ((t (:foreground "aquamarine3"))))
      (anything-dir-priv ((t (:foreground "DarkSeaGreen3"))))
+     (anything-visible-mark ((t (:foreground "black" :background "DarkSeaGreen3"))))
      )))
 
 

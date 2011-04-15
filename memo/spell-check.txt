@@ -1,0 +1,9 @@
+= prepare
+install ispell
+
+= command
+M-$ (ispell-word)
+spell check current word .
+
+M-x ispell-region や M-x ispell-buffer
+spell check region or buffer

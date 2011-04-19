@@ -53,7 +53,12 @@
     (lambda ()
       (rinari-launch)
       (gtags-mode 1)))
-(add-to-list 'auto-mode-alist '("\\.rxml$" . rhtml-mode))
+(setq auto-mode-alist
+      (append '(
+                ("\\.rxml$" . rhtml-mode)
+                ("\\.erb$". rhtml-mode)
+                ("\\.rhtml$". rhtml-mode)
+                ) auto-mode-alist))
 
 ;; rail snippet
 (yas/load-directory "~/.emacs.d/elisp/yasnippets-rails/rails-snippets")

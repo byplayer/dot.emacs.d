@@ -10,3 +10,6 @@
 [submodule "elisp/cucumber.el"]
 	path = elisp/cucumber.el
 	url = https://github.com/byplayer/cucumber.el.git
+[submodule "elisp/rinari"]
+	path = elisp/rinari
+	url = https://github.com/byplayer/rinari.git

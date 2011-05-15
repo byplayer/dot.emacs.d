@@ -81,8 +81,14 @@
 
 ; bind return to newline-and-indent
 (defun my-feature-mode-hook()
-  (define-key feature-mode-map "\C-m" 'newline-and-indent))
+  (define-key feature-mode-map "\C-m" 'newline-and-indent)
+  (rinari-launch)
+  (gtags-mode 1))
+
 (add-hook 'feature-mode-hook 'my-feature-mode-hook)
+
+;; set rspec-mode like key map
+(define-key feature-mode-map  (kbd "C-c ,a") 'feature-verify-all-scenarios-in-project)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; rspec-modeの設定

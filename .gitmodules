@@ -13,3 +13,9 @@
 [submodule "elisp/rinari"]
 	path = elisp/rinari
 	url = https://github.com/byplayer/rinari.git
+[submodule "elisp/gist.el"]
+	path = elisp/gist.el
+	url = https://github.com/byplayer/gist.el.git
+[submodule "elisp/anything-gist.el"]
+	path = elisp/anything-gist.el
+	url = https://github.com/byplayer/anything-gist.el.git

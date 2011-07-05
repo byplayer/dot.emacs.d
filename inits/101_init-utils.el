@@ -1,11 +1,13 @@
 (require 'recentf-ext)
 
-(defun copy-full-path-to-kill-ring ()
+(defun copy-full-path-and-linenum ()
   "copy buffer's full path to kill ring"
   (interactive)
   (when buffer-file-name
-    (kill-new (file-truename buffer-file-name))
-    (message "copied: %s" buffer-file-name)
-    ))
+    (let
+        ((msg  (format "copied: %s L:%d" (file-truename buffer-file-name) (line-number-at-pos))))
 
-(global-set-key  "\C-cf" 'copy-full-path-to-kill-ring)
+      (kill-new msg)
+      (message msg))))
+
+(global-set-key  "\C-cf" 'copy-full-path-and-linenum)

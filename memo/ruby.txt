@@ -54,3 +54,8 @@ renderメソッドを使用している行でC-c ; pとすると、指してい�
 = rhtml-mode snippet
 %   <% -%>
 %%  <%= %>
+
+= ruby-mode
+emacsで .rbファイルをruby-modeで編集中に
+C-cC-s (run-ruby) -> irbが別バッファで起動
+C-cC-l (ruby-load-file) -> irbのいるバッファで現在編集中の.rbを実行

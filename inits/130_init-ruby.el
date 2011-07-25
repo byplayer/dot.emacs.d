@@ -170,3 +170,6 @@
                              ac-source-yasnippet))))
 (add-hook 'ruby-mode-hook 'my-ruby-mode-hook)
 
+;; anything ruima
+(require 'anything-rurima)
+(setq anything-rurima-index-file "~/projects/rurima/rurima.e")

@@ -46,6 +46,10 @@ Created by byplayer <byplayer100@gmail.com> Dec 27 2010"
      (anything-dir-heading ((t (:foreground "aquamarine3"))))
      (anything-dir-priv ((t (:foreground "DarkSeaGreen3"))))
      (anything-visible-mark ((t (:foreground "black" :background "DarkSeaGreen3"))))
+
+     ;; whitespace
+     (whitespace-space ((t (:foreground "LightSlateGray" :background "DarkSlateGray"))))
+     (whitespace-tab ((t (:foreground "LightSlateGray" :background "DarkSlateGray"))))
      )))
 
 

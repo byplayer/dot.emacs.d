@@ -30,11 +30,8 @@
 (setq cssm-indent-level 2)
 (setq cssm-indent-function #'cssm-c-style-indenter)
 
-;; javascript-mode‚Ìİ’è
-;; (defun my-js-mode-hook ()
-;;   (setq js-indent-level 2))
-;; (add-hook 'javascript-mode-hook 'my-js-mode-hook)
-(setq javascript-indent-level 2)
+(setq load-path
+      (cons (expand-file-name "~/.emacs.d/elisp/js2/") load-path))
 
-(autoload 'javascript-mode "javascript" nil t)
-(setq auto-mode-alist (cons '("\\.js$" . javascript-mode) auto-mode-alist))
+(autoload 'js2-mode "js2" nil t)
+(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))

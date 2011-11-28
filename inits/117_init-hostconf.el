@@ -1,9 +1,5 @@
 ; ホスト名
-(setq hostname (getenv "HOSTNAME"))
-(if (null hostname)
-    (setq hostname (getenv "HOST")))
-(if (null hostname)
-    (setq hostname (getenv "COMPUTERNAME")))
+(setq hostname  (system-name))
 (if (null hostname)
     (setq hostname "no_host"))
 

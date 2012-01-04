@@ -7,6 +7,7 @@
 (add-to-list 'ac-modes 'rhtml-mode)
 (add-to-list 'ac-modes 'outline-mode)
 (add-to-list 'ac-modes 'feature-mode)
+(add-to-list 'ac-modes 'octave-mode)
 
 ;; (define-key ac-mode-map (kbd "M-TAB") 'auto-complete)
 

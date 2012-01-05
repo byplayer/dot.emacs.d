@@ -4,5 +4,5 @@
 (define-key gtags-mode-map "\M-/" 'gtags-find-pattern)
 
 ;; change synbol regexp for finding emacs function
-(setq gtags-symbol-regexp "[A-Za-z_][A-Za-z_0-9---]*")
+(setq gtags-symbol-regexp "[A-Za-z_][A-Za-z_0-9---\?]*")
 

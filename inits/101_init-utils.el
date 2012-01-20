@@ -1,4 +1,5 @@
 (require 'recentf-ext)
+(require 'lisp-mnt)
 
 (defun copy-full-path-and-linenum ()
   "copy buffer's full path to kill ring"

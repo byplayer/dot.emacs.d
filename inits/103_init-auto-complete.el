@@ -8,6 +8,8 @@
 (add-to-list 'ac-modes 'outline-mode)
 (add-to-list 'ac-modes 'feature-mode)
 (add-to-list 'ac-modes 'octave-mode)
+(add-to-list 'ac-modes 'c-mode)
+(add-to-list 'ac-modes 'c++-mode)
 
 ;; (define-key ac-mode-map (kbd "M-TAB") 'auto-complete)
 

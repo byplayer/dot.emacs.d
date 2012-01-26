@@ -5,3 +5,5 @@
 *.elc
 /ac-comphist.dat
 /tramp
+/server
+/url

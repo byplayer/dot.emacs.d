@@ -49,8 +49,9 @@
 (setq auto-show-mode t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; スペース、タブの識別
+;; show tab and space
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; show white space of end of line
 (defface my-face-u-1 '((t (:foreground "SteelBlue" :underline t))) nil)
 (defvar my-face-u-1 'my-face-u-1)
 
@@ -62,14 +63,15 @@
 (ad-enable-advice 'font-lock-mode 'before 'my-font-lock-mode)
 (ad-activate 'font-lock-mode)
 
+;; show white space
+(require 'whitespace)
 (setq whitespace-style
-      '(tabs tab-mark spaces space-mark))
-; (setq whitespace-space-regexp "\\(\x3000+\\)")
+      '(face tabs tab-mark spaces space-mark))
+(setq whitespace-space-regexp "\\(\x3000+\\)")
 (setq whitespace-display-mappings
       '((space-mark ?\x3000 [?\□])
         (tab-mark   ?\t   [?\xBB ?\t])
         ))
-(require 'whitespace)
 (global-whitespace-mode 1)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

@@ -65,4 +65,4 @@
   (setq init-loader-default-regexp old-init-loader-default-regexp)
   (color-theme-byplayer))
 
-(global-linum-mode 1)
+; (global-linum-mode 1)

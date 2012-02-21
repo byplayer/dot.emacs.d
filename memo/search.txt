@@ -1,0 +1,2 @@
+isearch C-s
+Regexp-isearch C-uC-s

@@ -65,19 +65,4 @@
   (setq init-loader-default-regexp old-init-loader-default-regexp)
   (color-theme-byplayer))
 
-
-;; 行番号表示
-;; wb-line-number
-;; 重いので削除
-;; (require 'wb-line-number)
-
-;; (setq truncate-partial-width-windows nil)
-;; (set-scroll-bar-mode nil)
-;; (setq wb-line-number-scroll-bar t)
-
-;; (wb-line-number-enable)
-;; (custom-set-faces
-;;  '(wb-line-number-face ((t (:foreground "light gray"))))
-;;  '(wb-line-number-scroll-bar-face
-;;    ((t (:foreground "black" :background "light gray")))))
-;; (global-set-key "\C-x3" 'wb-line-number-split-window-horizontally)
+; (global-linum-mode 1)

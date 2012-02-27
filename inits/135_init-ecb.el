@@ -28,11 +28,23 @@
 (provide 'semantic-load)
 
 (setq semantic-load-turn-useful-things-on t)
-
 (require 'ecb)
+
+;; custom layout
+(ecb-layout-define "method-analyse" left nil
+  (dotimes (i 2) (other-window 1) (if (equal (selected-window) ecb-compile-window) (other-window 1)))
+  (if (fboundp (quote ecb-set-methods-buffer)) (ecb-set-methods-buffer) (ecb-set-default-ecb-buffer))
+  (ecb-split-ver 0.8 t)
+  (dotimes (i 1) (other-window 1) (if (equal (selected-window) ecb-compile-window) (other-window 1)))
+  (if (fboundp (quote ecb-set-analyse-buffer)) (ecb-set-analyse-buffer) (ecb-set-default-ecb-buffer))
+  )
+
 (setq ecb-windows-width 0.25)
 (defun ecb-toggle ()
   (interactive)
   (if ecb-minor-mode
       (ecb-deactivate)
-    (ecb-activate)))
+    (progn
+      (ecb-activate)
+      (ecb-layout-switch "method-analyse")
+      )))

@@ -10,8 +10,12 @@
 (add-to-list 'ac-modes 'octave-mode)
 (add-to-list 'ac-modes 'c-mode)
 (add-to-list 'ac-modes 'c++-mode)
+(add-to-list 'ac-modes 'emacs-lisp-mode)
+(add-to-list 'ac-modes 'js2-mode)
+
+(setq ac-sources '(ac-source-yasnippet
+                   ac-source-dictionary
+                   ac-source-gtags
+                   ac-source-words-in-buffer))
 
 ;; (define-key ac-mode-map (kbd "M-TAB") 'auto-complete)
-
-;; extentions
-(require 'auto-complete-etags)

@@ -50,6 +50,10 @@ Created by byplayer <byplayer100@gmail.com> Dec 27 2010"
      ;; whitespace
      (whitespace-space ((t (:foreground "LightSlateGray" :background "DarkSlateGray"))))
      (whitespace-tab ((t (:foreground "LightSlateGray" :background "DarkSlateGray"))))
+
+     ;; ecb
+     (ecb-default-highlight-face ((t (:background "steelblue"))))
+     (ecb-tag-header-face ((t (:foreground "black" :background "DarkSeaGreen3"))))
      )))
 
 

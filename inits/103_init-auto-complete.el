@@ -21,4 +21,31 @@
                    ac-source-gtags
                    ac-source-words-in-buffer))
 
+(defun ac-emacs-lisp-mode-setup ()
+  (setq ac-sources '(ac-source-symbols
+                     ac-source-words-in-same-mode-buffers
+                     ac-source-yasnippet
+                     ac-source-gtags
+                     ac-source-dictionary)))
+
+(defun ac-c++-mode-setup ()
+  (setq ac-sources '(ac-source-words-in-same-mode-buffers
+                     ac-source-yasnippet
+                     ac-source-semantic
+                     ac-source-gtags
+                     ac-source-dictionary)))
+
+(defun ac-c-mode-setup ()
+  (setq ac-sources '(ac-source-words-in-same-mode-buffers
+                     ac-source-yasnippet
+                     ac-source-semantic
+                     ac-source-gtags
+                     ac-source-dictionary)))
+
+(add-hook 'c-mode-common-hook
+          (lambda ()
+            (semantic-mode 1)
+             (local-set-key (kbd "C-c .") 'ac-complete-semantic)))
+
+
 ;; (define-key ac-mode-map (kbd "M-TAB") 'auto-complete)

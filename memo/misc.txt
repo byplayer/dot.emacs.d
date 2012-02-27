@@ -22,3 +22,11 @@ C-x RET f euc-jp-unix
 
 = undo tree
 C-x u
+
+
+= 見えにくい部分のフェイスを調べる
+ M-x eval-expression 
+(get-char-property (point) 'face)
+
+ list-faces-display
+ で、一覧を確認したほうが良いかも

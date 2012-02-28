@@ -1,1 +1,0 @@
-(setq semanticdb-default-save-directory "~/.emacs.d/semanticdb/")

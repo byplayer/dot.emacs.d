@@ -23,13 +23,18 @@
 (require 'ecb)
 
 ;; custom layout
-(ecb-layout-define "method-analyse" left nil
-  (dotimes (i 2) (other-window 1) (if (equal (selected-window) ecb-compile-window) (other-window 1)))
-  (if (fboundp (quote ecb-set-methods-buffer)) (ecb-set-methods-buffer) (ecb-set-default-ecb-buffer))
-  (ecb-split-ver 0.8 t)
-  (dotimes (i 1) (other-window 1) (if (equal (selected-window) ecb-compile-window) (other-window 1)))
-  (if (fboundp (quote ecb-set-analyse-buffer)) (ecb-set-analyse-buffer) (ecb-set-default-ecb-buffer))
-  )
+(ecb-layout-define "left-method-analyse" left nil
+                   (dotimes (i 2) (other-window 1) (if (equal (selected-window) ecb-compile-window) (other-window 1)))
+                   (if (fboundp (quote ecb-set-methods-buffer)) (ecb-set-methods-buffer) (ecb-set-default-ecb-buffer))
+                   (ecb-split-ver 0.5 t)
+                   (dotimes (i 1) (other-window 1) (if (equal (selected-window) ecb-compile-window) (other-window 1)))
+                   (if (fboundp (quote ecb-set-analyse-buffer)) (ecb-set-analyse-buffer) (ecb-set-default-ecb-buffer))
+                   )
+
+(ecb-layout-define "left-method" left nil
+                   (dotimes (i 2) (other-window 1) (if (equal (selected-window) ecb-compile-window) (other-window 1)))
+                   (if (fboundp (quote ecb-set-methods-buffer)) (ecb-set-methods-buffer) (ecb-set-default-ecb-buffer))
+                   )
 
 (setq ecb-windows-width 0.25)
 (defun ecb-toggle ()
@@ -38,5 +43,5 @@
       (ecb-deactivate)
     (progn
       (ecb-activate)
-      (ecb-layout-switch "method-analyse")
+      (ecb-layout-switch "left-method")
       )))

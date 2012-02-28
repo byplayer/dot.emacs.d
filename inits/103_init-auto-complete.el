@@ -44,8 +44,7 @@
 
 (add-hook 'c-mode-common-hook
           (lambda ()
-            (semantic-mode 1)
-             (local-set-key (kbd "C-c m") 'ac-complete-semantic)))
+            (local-set-key (kbd "C-c m") 'ac-complete-semantic)))
 
 
 ;; (define-key ac-mode-map (kbd "M-TAB") 'auto-complete)

@@ -5,8 +5,9 @@
   (turn-on-font-lock)
   (local-set-key "\C-cc" 'compile)
   (gtags-mode 1)
+  (local-set-key  "\C-co" 'ff-find-other-file)
   )
 
-(add-hook 'c-mode-hook 'my-c-mode-hook)
-(add-hook 'c++-mode-hook 'my-c-mode-hook)
+(add-hook 'c-mode-common-hook 'my-c-mode-hook)
+
 

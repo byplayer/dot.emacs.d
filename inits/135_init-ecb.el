@@ -19,20 +19,29 @@
 
 (add-to-list 'load-path "~/.emacs.d/elisp/ecb-2.40")
 
-(require 'semantic/analyze)
-(provide 'semantic-analyze)
-(provide 'semantic-ctxt)
-(provide 'semanticdb)
-(provide 'semanticdb-find)
-(provide 'semanticdb-mode)
-(provide 'semantic-load)
-
 (setq semantic-load-turn-useful-things-on t)
-
 (require 'ecb)
+
+;; custom layout
+(ecb-layout-define "left-method-analyse" left nil
+                   (dotimes (i 2) (other-window 1) (if (equal (selected-window) ecb-compile-window) (other-window 1)))
+                   (if (fboundp (quote ecb-set-methods-buffer)) (ecb-set-methods-buffer) (ecb-set-default-ecb-buffer))
+                   (ecb-split-ver 0.5 t)
+                   (dotimes (i 1) (other-window 1) (if (equal (selected-window) ecb-compile-window) (other-window 1)))
+                   (if (fboundp (quote ecb-set-analyse-buffer)) (ecb-set-analyse-buffer) (ecb-set-default-ecb-buffer))
+                   )
+
+(ecb-layout-define "left-method" left nil
+                   (dotimes (i 2) (other-window 1) (if (equal (selected-window) ecb-compile-window) (other-window 1)))
+                   (if (fboundp (quote ecb-set-methods-buffer)) (ecb-set-methods-buffer) (ecb-set-default-ecb-buffer))
+                   )
+
 (setq ecb-windows-width 0.25)
 (defun ecb-toggle ()
   (interactive)
   (if ecb-minor-mode
       (ecb-deactivate)
-    (ecb-activate)))
+    (progn
+      (ecb-activate)
+      (ecb-layout-switch "left-method")
+      )))

@@ -3,6 +3,8 @@
 
 (global-ede-mode t)
 (semantic-load-enable-minimum-features)
+;; Increase the delay before activation
+(setq semantic-idle-scheduler-idle-time 10)
 
 (setq semanticdb-default-save-directory "~/.emacs.d/semanticdb/")
 

@@ -1,0 +1,5 @@
+= switch header/source
+
+ff-find-other-file
+
+#include のところで実行すると include するファイルを開く

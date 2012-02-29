@@ -1,3 +1,11 @@
+;; fix load error on NTEmacs
+(add-to-list 'load-path "~/.emacs.d/elisp/cedet-1.0.1/cogre/")
+(add-to-list 'load-path "~/.emacs.d/elisp/cedet-1.0.1/ede/")
+(add-to-list 'load-path "~/.emacs.d/elisp/cedet-1.0.1/eieio/")
+(add-to-list 'load-path "~/.emacs.d/elisp/cedet-1.0.1/semantic/")
+(add-to-list 'load-path "~/.emacs.d/elisp/cedet-1.0.1/speedbar/")
+(add-to-list 'load-path "~/.emacs.d/elisp/cedet-1.0.1/srecode/")
+
 (load-file "~/.emacs.d/elisp/cedet-1.0.1/common/cedet.el")
 
 (global-ede-mode t)

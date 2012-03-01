@@ -55,3 +55,4 @@
 (require 'anything-gtags)
 
 (define-key global-map (kbd "C-x b") 'anything-for-files)
+(define-key global-map (kbd "C-x C-f") 'anything-find-file)

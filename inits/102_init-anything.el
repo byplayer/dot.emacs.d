@@ -39,15 +39,25 @@
 (provide 'anything-startup)
 
 (setq anything-sources
-      (list anything-c-source-buffers
+      (list anything-c-source-buffers-list
             anything-c-source-bookmarks
-            anything-c-source-files-in-current-dir
-            anything-c-source-file-name-history
+            anything-c-source-files-in-current-dir+
+            anything-c-source-recentf
             anything-c-source-man-pages
             anything-c-source-info-pages
             anything-c-source-calculation-result
             anything-c-source-locate
             anything-c-source-emacs-commands))
+
+(setq anything-for-files-prefered-list
+      (list anything-c-source-buffers-list
+            anything-c-source-ffap-line
+            anything-c-source-ffap-guesser
+            anything-c-source-bookmarks
+            anything-c-source-files-in-current-dir+
+            anything-c-source-recentf
+            anything-c-source-locate
+            anything-c-source-file-cache))
 
 (define-key global-map (kbd "C-;") 'anything)
 

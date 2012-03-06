@@ -49,6 +49,8 @@ Created by byplayer <byplayer100@gmail.com> Dec 27 2010"
      (anything-ff-directory ((t (:foreground "light gray" :background "steelblue"))))
      (anything-candidate-number ((t (:foreground "black" :background "sandybrown"))))
      (anything-ff-prefix ((t (:foreground "black" :background "sandybrown"))))
+     (anything-grep-running ((t (:foreground "Darkorange1" ))))
+     (anything-lisp-completion-info ((t (:foreground "Darkorange1" ))))
 
      ;; whitespace
      (whitespace-space ((t (:foreground "LightSlateGray" :background "DarkSlateGray"))))

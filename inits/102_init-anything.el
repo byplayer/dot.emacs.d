@@ -59,6 +59,9 @@
             anything-c-source-locate
             anything-c-source-file-cache))
 
+(setq anything-find-file-additional-sources
+      (list anything-c-source-locate))
+
 (define-key global-map (kbd "C-;") 'anything)
 
 ;; add anything-gtags

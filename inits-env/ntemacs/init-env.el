@@ -1,6 +1,7 @@
 (setq ruby-command "ruby.exe")
 
-(setq default-file-name-coding-system 'japanese-shift-jis-dos)
+; (setq default-file-name-coding-system 'japanese-shift-jis-dos)
+(setq default-file-name-coding-system 'shift_jis)
 
 (require 'server)
 (when (and (= emacs-major-version 23)

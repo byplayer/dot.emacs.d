@@ -15,6 +15,7 @@
 (add-to-list 'ac-modes 'c++-mode)
 (add-to-list 'ac-modes 'emacs-lisp-mode)
 (add-to-list 'ac-modes 'js2-mode)
+(add-to-list 'ac-modes 'nsis-mode)
 
 (setq ac-sources '(ac-source-yasnippet
                    ac-source-dictionary

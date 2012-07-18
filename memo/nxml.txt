@@ -1,0 +1,24 @@
+他のタグが書けないところでは補完キー（C-RET）で終了タグが補完される。
+終了タグ開始記号（"</"）の後ろで C-RET と打つと補完される（"</tag>"）。
+変数 nxml-slash-auto-complete-flag を t にしておくと、終了タグ開始記号のスラッシュを打ったときに自動的に補完される。
+
+C-c C-f（nxml-finish-element）
+C-c C-i（nxml-balanced-close-start-tag-inline）
+C-c C-b（nxml-balanced-close-start-tag-block）
+C-c C-f は単に終了タグを挿入するやつです（nxml-finish-element）。"f" は "finish" の "f" です。
+
+<p>Hello World■
+<p>Hello World</p>■
+開始タグ、内容、終了タグと順番に書く場合は、この C-c C-f かスラッシュでの自動補完が良い。
+
+先に開始タグ＆終了タグを書いてから内容を書く場合は、C-c C-i か C-c C-b を使う。これらは開始タグの終わりの ">" と終了タグを挿入して、ポイントを開始タグと終了タグの間に移動させる。C-c C-i を使うと次のようになる。
+
+<a href="http://example.com/"■
+<a href="http://example.com/">■</a>
+このように C-c C-i は同じ行に終了タグを入れる。C-c C-b の場合は次のように、開始タグと終了タグの間に１行できて、そこにポイントを移動する。
+
+<blockquote■
+<blockquote>
+    ■
+</blockquote>
+"i" は "inline" の "i", "b" は "block" の "b" だそうな。"b" の方は、開始タグの前に空白以外の文字があると、ブロックレベル要素とは見なされず、上記のような動作にならない、と思う。

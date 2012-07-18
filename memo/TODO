@@ -1,11 +1,9 @@
 [TODO]
+mmm-mode
 color-moccur
 point-undo
 
 move vendor lisp into git submodules
-ECB
-  http://d.hatena.ne.jp/yuko1658/20071213/1197517201
-  http://d.hatena.ne.jp/hiro_nemu/20090519/1242743910
 
 
 [doing]
@@ -33,3 +31,6 @@ Rinari for developing Rails
   http://d.hatena.ne.jp/willnet/20090110/1231595231
 yasnippet anything
   http://d.hatena.ne.jp/IMAKADO/20080324/1206370301
+ECB
+  http://d.hatena.ne.jp/yuko1658/20071213/1197517201
+  http://d.hatena.ne.jp/hiro_nemu/20090519/1242743910

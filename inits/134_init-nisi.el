@@ -1,3 +1,4 @@
+(add-to-list 'load-path "~/.emacs.d/elisp/nsis-mode/")
 (autoload 'nsis-mode "nsis-mode" "NSIS mode" t)
 (setq auto-mode-alist (append '(("\\.\\([Nn][Ss][Ii]\\)$" .
                                  nsis-mode)) auto-mode-alist))

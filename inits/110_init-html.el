@@ -1,8 +1,7 @@
-; html関連用のパス設定
 (setq load-path
       (cons (expand-file-name "~/.emacs.d/elisp/html/") load-path))
 
-;; html-helper-mode の設定
+;; html-helper-mode
 (add-hook 'html-helper-load-hook '(lambda () (require 'html-font)))
 (add-hook 'html-helper-mode-hook '(lambda () (font-lock-mode 1)))
 
@@ -14,7 +13,7 @@
                        '("\\.html$" . html-helper-mode)
                        auto-mode-alist))
 
-;; css-mode の設定
+;; css-mode
 (defun my-css-mode-hook ()
   (c-set-style "gnu")
   (c-set-offset 'statement-block-intro 2)
@@ -31,9 +30,9 @@
 (setq cssm-indent-function #'cssm-c-style-indenter)
 
 (setq load-path
-      (cons (expand-file-name "~/.emacs.d/elisp/js2/") load-path))
+      (cons (expand-file-name "~/.emacs.d/elisp/js2-mode/") load-path))
 
-(autoload 'js2-mode "js2" nil t)
+(autoload 'js2-mode "js2-mode" nil t)
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 (add-to-list 'auto-mode-alist '("\\.json$" . js2-mode))
 (add-hook 'js2-mode-hook

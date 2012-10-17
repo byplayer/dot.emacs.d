@@ -36,5 +36,8 @@
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 (add-to-list 'auto-mode-alist '("\\.json$" . js2-mode))
 (add-hook 'js2-mode-hook
-    (lambda ()
-      (gtags-mode 1)))
+          '(lambda ()
+             (gtags-mode 1)
+             (setq js2-bounce-indent-flag nil)
+             (define-key js2-mode-map "\C-m" 'newline-and-indent)
+             (define-key js2-mode-map "\C-i" 'indent-and-back-to-indentation)))

@@ -25,3 +25,6 @@
 [submodule "elisp/js2-mode"]
 	path = elisp/js2-mode
 	url = https://github.com/byplayer/js2-mode.git
+[submodule "elisp/nxhtml"]
+	path = elisp/nxhtml
+	url = https://github.com/byplayer/nxhtml.git

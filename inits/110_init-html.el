@@ -1,9 +1,17 @@
 (setq load-path
       (cons (expand-file-name "~/.emacs.d/elisp/html/") load-path))
 
-;; nxhtml for html
-(load "~/.emacs.d/elisp/nxhtml/autostart")
-(add-to-list 'auto-mode-alist '("\\.html\\.erb\\'" . eruby-nxhtml-mumamo))
+;; html-helper-mode
+(add-hook 'html-helper-load-hook '(lambda () (require 'html-font)))
+(add-hook 'html-helper-mode-hook '(lambda () (font-lock-mode 1)))
+
+(setq html-helper-basic-offset 2)
+(setq html-helper-item-continue-indent 0)
+
+(autoload 'html-helper-mode "html-helper-mode" "Yay HTML" t)
+(setq auto-mode-alist (cons
+                       '("\\.html$" . html-helper-mode)
+                       auto-mode-alist))
 
 ;; css-mode
 (defun my-css-mode-hook ()
@@ -21,7 +29,6 @@
 (setq cssm-indent-level 2)
 (setq cssm-indent-function #'cssm-c-style-indenter)
 
-;; for js
 (setq load-path
       (cons (expand-file-name "~/.emacs.d/elisp/js2-mode/") load-path))
 

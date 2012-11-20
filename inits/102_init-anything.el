@@ -77,3 +77,6 @@
         ('berkeley-unix "locate -i %s")
         ('windows-nt "es -i -r %s")
         (t "locate %s")))
+
+;; tramp
+(setq anything-su-or-sudo "sudo")

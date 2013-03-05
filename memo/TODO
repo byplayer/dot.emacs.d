@@ -2,6 +2,7 @@
 mmm-mode
 color-moccur
 point-undo
+text-scale-mode
 
 move vendor lisp into git submodules
 
@@ -34,3 +35,14 @@ yasnippet anything
 ECB
   http://d.hatena.ne.jp/yuko1658/20071213/1197517201
   http://d.hatena.ne.jp/hiro_nemu/20090519/1242743910
+
+
+;; text-scale
+(global-set-key (kbd "<C-mouse-4>") 'text-scale-increase)
+(global-set-key (kbd "<C-mouse-5>") 'text-scale-decrease)
+(global-set-key (kbd "<C-mouse-6>") 'text-scale-increase)
+(global-set-key (kbd "<C-mouse-7>") 'text-scale-decrease)
+(define-key global-map (kbd "C-0")
+  '(lambda ()
+     (interactive)
+     (progn (text-scale-mode 0)(buffer-face-mode 0))))

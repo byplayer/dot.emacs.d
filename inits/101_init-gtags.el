@@ -36,6 +36,17 @@
       (goto-line line)
       (gtags-mode 1))))
 
+;; auto update gtags files
+(defun my-c-mode-update-gtags ()
+  (let* ((file (buffer-file-name (current-buffer)))
+     (dir (directory-file-name (file-name-directory file))))
+    (when (executable-find "global")
+      (start-process "gtags-update" nil
+             "global" "-uv"))))
+
+(add-hook 'after-save-hook
+      'my-c-mode-update-gtags)
+
 (define-key gtags-mode-map "\M-." 'gtags-find-tag)
 (define-key gtags-mode-map "\M-," 'gtags-find-rtag)
 (define-key gtags-mode-map "\M-s" 'gtags-find-symbol)

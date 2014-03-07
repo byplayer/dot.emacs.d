@@ -3,6 +3,4 @@
 ;; github.user=????
 ;; github.token=????
 (add-to-list 'load-path "~/.emacs.d/elisp/gist.el/")
-(add-to-list 'load-path "~/.emacs.d/elisp/anything-gist.el/")
 
-(require 'anything-gist)

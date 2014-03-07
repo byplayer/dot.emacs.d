@@ -1,0 +1,33 @@
+* package
+
+** list packages
+update package list and show list
+(package-list-packages)
+
+show list without fetch
+(package-list-packages-no-fetch)
+
+i - mark as install
+u - unmark
+d - mark as uninstall
+x - install/uninstall marked packages
+r - refresh package
+U - Upgrade all
+q - quit list
+
+
+** install
+package-install
+
+** refresh
+(package-refresh-contents)
+
+(byte-recompile-directory pkg-dir 0 t)
+
+* TODO
+How to use yasnippet ?
+configuration yasnippet
+fix byte compile error in inits
+
+git-gutter.el
+  https://github.com/syohex/emacs-git-gutter

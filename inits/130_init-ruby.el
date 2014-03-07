@@ -1,7 +1,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; ruby-modeの設定
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(add-to-list 'load-path "~/.emacs.d/elisp/ruby/")
 (require 'rvm)
 
 (add-to-list 'load-path "~/.emacs.d/elisp/ruby-mode/")
@@ -60,11 +59,6 @@
                 ("\\.rhtml$". rhtml-mode)
                 ) auto-mode-alist))
 
-;; rail snippet
-(yas/load-directory "~/.emacs.d/elisp/yasnippets-rails/rails-snippets")
-
-;; rspec snippet
-(yas/load-directory "~/.emacs.d/elisp/yasnippets-rspec/rspec-snippets")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; cucumber.el
@@ -170,6 +164,3 @@
                              ac-source-yasnippet))))
 (add-hook 'ruby-mode-hook 'my-ruby-mode-hook)
 
-;; anything ruima
-(require 'anything-rurima)
-(setq anything-rurima-index-file "~/projects/rurima/rurima.e")

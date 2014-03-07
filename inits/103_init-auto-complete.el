@@ -1,6 +1,4 @@
-(add-to-list 'load-path "~/.emacs.d/elisp/auto-complete")
 (require 'auto-complete-config)
-(add-to-list 'ac-dictionary-directories "~/.emacs.d/elisp/auto-complete/ac-dict")
 (ac-config-default)
 
 (define-key ac-complete-mode-map "\C-n" 'ac-next)
@@ -16,6 +14,7 @@
 (add-to-list 'ac-modes 'emacs-lisp-mode)
 (add-to-list 'ac-modes 'js2-mode)
 (add-to-list 'ac-modes 'nsis-mode)
+(add-to-list 'ac-modes 'text-mode)
 
 (setq ac-sources '(ac-source-yasnippet
                    ac-source-dictionary

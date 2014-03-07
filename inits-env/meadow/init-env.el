@@ -1,1 +1,0 @@
-(setq ruby-command "ruby.exe")

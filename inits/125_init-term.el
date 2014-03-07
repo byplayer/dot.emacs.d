@@ -1,13 +1,3 @@
-;; setup multi-term
-(setq load-path
-      (cons (expand-file-name "~/.emacs.d/elisp/term/") load-path))
-
-(require 'multi-term)
-(setq multi-term-program shell-file-name)
-
-;; set unbind key for term
-(add-to-list 'term-unbind-key-list '"C-r")
-
 ;; setup ansi-color
 (autoload 'ansi-color-for-comint-mode-on "ansi-color"
           "Set `ansi-color-for-comint-mode' to t." t)

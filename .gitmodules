@@ -16,9 +16,6 @@
 [submodule "elisp/gist.el"]
 	path = elisp/gist.el
 	url = https://github.com/byplayer/gist.el.git
-[submodule "elisp/anything-gist.el"]
-	path = elisp/anything-gist.el
-	url = https://github.com/byplayer/anything-gist.el.git
 [submodule "elisp/nsis-mode"]
 	path = elisp/nsis-mode
 	url = https://github.com/byplayer/nsis-mode.git

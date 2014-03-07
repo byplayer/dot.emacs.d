@@ -35,6 +35,11 @@
     ; helm-package
     ; helm-rails
 
+    ;; region and cursor
+    expand-region
+    multiple-cursors
+    smartrep
+
     ;; flymake
     ; flycheck
 

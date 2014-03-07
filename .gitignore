@@ -5,6 +5,7 @@
 /tutorial
 /.org-id-locations
 /.emacs.desktop*
+/.mc-lists.el
 /anything-c-adaptive-history
 /ac-comphist.dat
 /tramp

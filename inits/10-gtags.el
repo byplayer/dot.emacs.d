@@ -13,27 +13,21 @@
 (add-hook 'after-save-hook
       'my-c-mode-update-gtags)
 
-;; for helm completion
-(defun gtags-find-tag-for-helm (&optional other-win)
-  "Input tag name and move to the definition."
-  (interactive)
-  (let (tagname prompt input)
-    (setq tagname (gtags-current-token))
-    (if tagname
-      (setq prompt (concat "Find tag: (default " tagname ") "))
-     (setq prompt "Find tag: "))
-    (setq input (completing-read prompt 'gtags-completing-gtags
-                  nil nil tagname gtags-history-list))
-    (if (not (equal "" input))
-      (setq tagname input))
-    (gtags-push-context)
-    (gtags-goto-tag tagname "" other-win)))
-
-(define-key gtags-mode-map "\M-." 'gtags-find-tag-for-helm)
-(define-key gtags-mode-map "\M-," 'gtags-find-rtag)
-(define-key gtags-mode-map "\M-s" 'gtags-find-symbol)
-(define-key gtags-mode-map "\M-/" 'gtags-find-pattern)
-(define-key gtags-mode-map "\M-*" 'gtags-pop-stack)
+;; TODO
+;; -(define-key gtags-mode-map "\M-/" 'gtags-find-pattern)
+(setq gtags-mode-hook
+      '(lambda ()
+         (local-set-key (kbd "M-.") 'helm-gtags-find-tag)
+         (local-set-key (kbd "M-,") 'helm-gtags-find-rtag)
+         (local-set-key (kbd "M-s") 'helm-gtags-find-symbol)
+         (local-set-key (kbd "M-*") 'helm-gtags-pop-stack)))
 
 ;; change synbol regexp for finding emacs function
-(setq gtags-symbol-regexp "[A-Za-z_][A-Za-z_0-9---\?]*")
+(defun helm-gtags-token-at-point ()
+  (save-excursion
+    (let (start)
+      (when (looking-at "[a-zA-Z0-9_]")
+        (skip-chars-backward "a-zA-Z0-9_-")
+        (setq start (point))
+        (skip-chars-forward "a-zA-Z0-9_-")
+        (buffer-substring-no-properties start (point))))))

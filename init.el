@@ -35,6 +35,7 @@
     helm-git-files
     helm-projectile
     helm-ag
+    helm-gtags
     ; helm-package
     ; helm-rails
 

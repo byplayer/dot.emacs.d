@@ -37,3 +37,6 @@ fix byte compile error in inits
 
 git-gutter.el
   https://github.com/syohex/emacs-git-gutter
+
+send elisp method patch to helm-gtags
+;; -(define-key gtags-mode-map "\M-/" 'gtags-find-pattern)

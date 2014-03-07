@@ -19,6 +19,3 @@
 [submodule "elisp/nsis-mode"]
 	path = elisp/nsis-mode
 	url = https://github.com/byplayer/nsis-mode.git
-[submodule "elisp/js2-mode"]
-	path = elisp/js2-mode
-	url = https://github.com/byplayer/js2-mode.git

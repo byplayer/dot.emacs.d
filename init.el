@@ -24,6 +24,9 @@
     ;; ruby
     rvm
 
+    ;;
+    js2-mode
+
     ;; helm
     helm
     ac-helm

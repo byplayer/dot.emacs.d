@@ -4,9 +4,12 @@
 
 ;; regin
 (require 'expand-region)
+(global-set-key (kbd "C-,") 'er/expand-region)
+(global-set-key (kbd "C-M-,") 'er/contract-region)
+
+;; select
 (require 'multiple-cursors)
 (require 'smartrep)
-
 (declare-function smartrep-define-key "smartrep")
 
 (global-set-key (kbd "C-M-c") 'mc/edit-lines)

@@ -35,9 +35,20 @@
 (add-hook 'js2-mode-hook
           '(lambda ()
              (gtags-mode 1)
-             (setq js2-bounce-indent-flag nil)
+             (require 'js)
+             (setq tab-width 4
+                   js-indent-level 4
+                   js-expr-indent-offset 4
+                   indent-tabs-mode t
+                   js2-cleanup-whitespace nil
+                   skeleton-pair 1)
              (define-key js2-mode-map "\C-m" 'newline-and-indent)
-             (define-key js2-mode-map "\C-i" 'indent-and-back-to-indentation)))
+             (define-key js2-mode-map "\C-i" 'indent-and-back-to-indentation)
+             (local-set-key (kbd "(") 'skeleton-pair-insert-maybe)
+             (local-set-key (kbd "[") 'skeleton-pair-insert-maybe)
+             (local-set-key (kbd "{") 'skeleton-pair-insert-maybe)
+             (local-set-key (kbd "`") 'skeleton-pair-insert-maybe)
+             (local-set-key (kbd "\"") 'skeleton-pair-insert-maybe)))
 
 (defun indent-and-back-to-indentation ()
   (interactive)

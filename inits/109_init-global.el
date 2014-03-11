@@ -32,8 +32,9 @@
 ; auto scroll on compile buffer
 (setq compilation-scroll-output t)
 
-; EOFを表示
-(load "y_eof")
+;; show EOF
+(setq-default indicate-empty-lines t)
+(setq-default indicate-buffer-boundaries 'right)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; 折り返ししない

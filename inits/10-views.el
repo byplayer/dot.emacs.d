@@ -42,14 +42,8 @@
 ;====================================
 ; カーソル移動設定
 ;====================================
-(add-to-list 'load-path "~/.emacs.d/elisp/physical-line/")
-
-;カーソル移動を論理行ではなく、物理行（見たまま）単位で移動する。
-(require 'physical-line)
-(setq-default physical-line-mode t)
-;; dired-mode は論理行移動のままにする.
-(setq physical-line-ignoring-mode-list '(dired-mode))
-
+(setq visual-line-mode nil)
+(setq line-move-visual nil)
 
 ;; ツールバーを隠す
 (tool-bar-mode 0)

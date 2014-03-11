@@ -15,6 +15,7 @@
 (add-to-list 'ac-modes 'js2-mode)
 (add-to-list 'ac-modes 'nsis-mode)
 (add-to-list 'ac-modes 'text-mode)
+(add-to-list 'ac-modes 'nxml-mode)
 
 (setq ac-sources '(ac-source-yasnippet
                    ac-source-dictionary

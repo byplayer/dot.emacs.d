@@ -45,7 +45,8 @@
     smartrep
 
     ;; flymake
-    ; flycheck
+    flycheck
+    flycheck-pos-tip
 
     ;; git
     git-commit-mode

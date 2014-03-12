@@ -30,6 +30,12 @@ C-tを押した後にsを押すとキーワードをスキップ, uで一つ前�
 範囲を選択してC-M-cで全ての行にカーソルを作成
 範囲を選択してC-M-rで対話的にキーワードを入力してカーソルを作成
 
+* flycheck
+C-c ! n next error
+C-c ! p previous error
+C-c ! l list error
+C-c ! c check buffer
+
 * TODO
 How to use yasnippet ?
 configuration yasnippet

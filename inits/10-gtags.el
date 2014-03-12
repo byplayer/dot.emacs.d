@@ -33,6 +33,3 @@
          (local-set-key (kbd "M-/") 'helm-gtags-find-pattern)
          (local-set-key (kbd "M-s") 'helm-gtags-find-symbol)
          (local-set-key (kbd "M-*") 'helm-gtags-pop-stack)))
-
-;; change synbol regexp for finding emacs function
-(setq helm-gtags-symbol-skip-chars "a-zA-Z0-9_-")

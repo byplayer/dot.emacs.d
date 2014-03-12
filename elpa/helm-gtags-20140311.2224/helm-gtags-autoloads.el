@@ -6,10 +6,11 @@
 ;;;### (autoloads (helm-gtags-mode helm-gtags-update-tags helm-gtags-clear-all-stacks
 ;;;;;;  helm-gtags-clear-stack helm-gtags-show-stack helm-gtags-pop-stack
 ;;;;;;  helm-gtags-parse-file helm-gtags-find-tag-from-here helm-gtags-find-files
-;;;;;;  helm-gtags-find-symbol helm-gtags-find-rtag helm-gtags-find-tag
-;;;;;;  helm-gtags-select-path helm-gtags-select helm-gtags-previous-history
-;;;;;;  helm-gtags-next-history helm-gtags-clear-cache helm-gtags-clear-all-cache)
-;;;;;;  "helm-gtags" "helm-gtags.el" (21273 40703 43117 74000))
+;;;;;;  helm-gtags-find-pattern helm-gtags-find-symbol helm-gtags-find-rtag
+;;;;;;  helm-gtags-find-tag helm-gtags-select-path helm-gtags-select
+;;;;;;  helm-gtags-previous-history helm-gtags-next-history helm-gtags-clear-cache
+;;;;;;  helm-gtags-clear-all-cache) "helm-gtags" "helm-gtags.el"
+;;;;;;  (21279 64441 917154 334000))
 ;;; Generated autoloads from helm-gtags.el
 
 (autoload 'helm-gtags-clear-all-cache "helm-gtags" "\
@@ -54,6 +55,11 @@ Jump to referenced point
 
 (autoload 'helm-gtags-find-symbol "helm-gtags" "\
 Jump to the symbol location
+
+\(fn)" t nil)
+
+(autoload 'helm-gtags-find-pattern "helm-gtags" "\
+Jump to pattern
 
 \(fn)" t nil)
 
@@ -109,8 +115,8 @@ the mode if ARG is omitted or nil, and toggle it if ARG is `toggle'.
 
 ;;;***
 
-;;;### (autoloads nil nil ("helm-gtags-pkg.el") (21273 40703 66465
-;;;;;;  851000))
+;;;### (autoloads nil nil ("helm-gtags-pkg.el") (21279 64441 942392
+;;;;;;  178000))
 
 ;;;***
 

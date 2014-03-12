@@ -1,12 +1,12 @@
-;;; helm-gtags.el --- GNU GLOBAL helm interface
+;;; helm-gtags.el --- GNU GLOBAL helm interface  -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2014 by Syohei YOSHIDA
 
 ;; Author: Syohei YOSHIDA <syohex@gmail.com>
 ;; URL: https://github.com/syohex/emacs-helm-gtags
-;; Version: 20140223.638
-;; X-Original-Version: 1.2.1
-;; Package-Requires: ((helm "1.5.6") (cl-lib "0.4"))
+;; Version: 20140311.2224
+;; X-Original-Version: 1.2.4
+;; Package-Requires: ((helm "1.5.6") (cl-lib "0.5"))
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -132,6 +132,7 @@ Always update if value of this variable is nil."
 
 (defvar helm-gtags-prompt-alist
   '((:tag    . "Find Definition: ")
+    (:pattern . "Find Pattern: ")
     (:rtag   . "Find Reference: ")
     (:symbol . "Find Symbol: ")
     (:file   . "Find File: ")))
@@ -163,6 +164,8 @@ Always update if value of this variable is nil."
 ;; completsion function for completing-read.
 (defun helm-gtags-completing-gtags (string predicate code)
   (helm-gtags-complete :tag string predicate code))
+(defun helm-gtags-completing-pattern (string predicate code)
+  (helm-gtags-complete :pattern string predicate code))
 (defun helm-gtags-completing-grtags (string predicate code)
   (helm-gtags-complete :rtag string predicate code))
 (defun helm-gtags-completing-gsyms (string predicate code)
@@ -172,6 +175,7 @@ Always update if value of this variable is nil."
 
 (defvar helm-gtags-comp-func-alist
   '((:tag    . helm-gtags-completing-gtags)
+    (:pattern . helm-gtags-completing-pattern)
     (:rtag   . helm-gtags-completing-grtags)
     (:symbol . helm-gtags-completing-gsyms)
     (:file   . helm-gtags-completing-files)))
@@ -197,14 +201,8 @@ Always update if value of this variable is nil."
         (try-completion string candidates-list predicate)
       (all-completions string candidates-list predicate))))
 
-(defun helm-gtags-token-at-point ()
-  (save-excursion
-    (let (start)
-      (when (looking-at "[a-zA-Z0-9_]")
-        (skip-chars-backward "a-zA-Z0-9_")
-        (setq start (point))
-        (skip-chars-forward "a-zA-Z0-9_")
-        (buffer-substring-no-properties start (point))))))
+(defsubst helm-gtags-token-at-point ()
+  (thing-at-point 'symbol))
 
 (defsubst helm-gtags-type-is-not-file-p (type)
   (not (eq type :file)))
@@ -343,8 +341,7 @@ Always update if value of this variable is nil."
   (let* ((context-info (helm-gtags--get-context-info))
          (current-index (plist-get context-info :index))
          (context-stack (plist-get context-info :stack))
-         (context-length (length context-stack))
-         context)
+         (context-length (length context-stack)))
     (cl-incf current-index)
     (when (>= current-index context-length)
       (error "This context is last in context stack"))
@@ -399,6 +396,7 @@ Always update if value of this variable is nil."
 
 (defvar helm-gtags-command-option-alist
   '((:tag    . "")
+    (:pattern . "-g")
     (:rtag   . "-r")
     (:symbol . "-s")
     (:file   . "-Poa")))
@@ -427,6 +425,10 @@ Always update if value of this variable is nil."
 
 (defun helm-gtags-tags-init (&optional input)
   (let ((cmd (helm-gtags-construct-command :tag input)))
+    (helm-gtags-exec-global-command cmd)))
+
+(defun helm-gtags-pattern-init (&optional input)
+  (let ((cmd (helm-gtags-construct-command :pattern input)))
     (helm-gtags-exec-global-command cmd)))
 
 (defun helm-gtags-rtags-init (&optional input)
@@ -470,8 +472,7 @@ Always update if value of this variable is nil."
 (defun helm-gtags--push-context (context)
   (let* ((context-info (helm-gtags--get-or-create-context-info))
          (current-index (plist-get context-info :index))
-         (context-stack (plist-get context-info :stack))
-         (last-index (1- (length context-stack))))
+         (context-stack (plist-get context-info :stack)))
     (unless (= current-index -1)
       (setq context-stack (nthcdr (1+ current-index) context-stack)))
     (setq helm-gtags--current-position nil)
@@ -543,6 +544,15 @@ Always update if value of this variable is nil."
 (defvar helm-source-gtags-tags
   `((name . "GNU GLOBAL")
     (init . helm-gtags-tags-init)
+    (candidates-in-buffer)
+    (candidate-number-limit . ,helm-gtags-maximum-candidates)
+    (real-to-display . helm-gtags--candidate-transformer)
+    (persistent-action . helm-gtags-tags-persistent-action)
+    (action . helm-gtags-action-openfile)))
+
+(defvar helm-source-gtags-pattern
+  `((name . "GNU GLOBAL")
+    (init . helm-gtags-pattern-init)
     (candidates-in-buffer)
     (candidate-number-limit . ,helm-gtags-maximum-candidates)
     (real-to-display . helm-gtags--candidate-transformer)
@@ -748,6 +758,12 @@ Always update if value of this variable is nil."
   (helm-gtags-common '(helm-source-gtags-gsyms)))
 
 ;;;###autoload
+(defun helm-gtags-find-pattern ()
+  "Jump to pattern"
+  (interactive)
+  (helm-gtags-common '(helm-source-gtags-pattern)))
+
+;;;###autoload
 (defun helm-gtags-find-files ()
   "Find file with gnu global"
   (interactive)
@@ -808,7 +824,7 @@ Always update if value of this variable is nil."
   (interactive)
   (setq helm-gtags-context-stack (make-hash-table :test 'equal)))
 
-(defun helm-gtags--update-tags-sentinel (process state)
+(defun helm-gtags--update-tags-sentinel (process _state)
   (when (eq (process-status process) 'exit)
     (if (zerop (process-exit-status process))
         (message "Update TAGS successfully")

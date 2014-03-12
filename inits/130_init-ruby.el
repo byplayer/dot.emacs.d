@@ -50,8 +50,7 @@
 (require 'rhtml-mode)
 (add-hook 'rhtml-mode-hook
     (lambda ()
-      (rinari-launch)
-      (gtags-mode 1)))
+      (rinari-launch)))
 (setq auto-mode-alist
       (append '(
                 ("\\.rxml$" . rhtml-mode)
@@ -76,8 +75,7 @@
 ; bind return to newline-and-indent
 (defun my-feature-mode-hook()
   (define-key feature-mode-map "\C-m" 'newline-and-indent)
-  (rinari-launch)
-  (gtags-mode 1))
+  (rinari-launch))
 
 (add-hook 'feature-mode-hook 'my-feature-mode-hook)
 
@@ -157,7 +155,6 @@
   (local-set-key [f1] 'ri)
   (local-set-key "\M-\C-i" 'ri-ruby-complete-symbol)
   (local-set-key [f4] 'ri-ruby-show-args)
-  (gtags-mode 1)
   (setq ac-sources (append ac-sources
                            '(ac-source-words-in-same-mode-buffers
                              ac-source-gtags

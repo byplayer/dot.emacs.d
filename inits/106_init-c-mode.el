@@ -4,7 +4,6 @@
   (setq c-basic-offset 2)
   (turn-on-font-lock)
   (local-set-key "\C-cc" 'compile)
-  (gtags-mode 1)
   (local-set-key  "\C-co" 'ff-find-other-file)
 
   (make-variable-buffer-local 'skeleton-pair)

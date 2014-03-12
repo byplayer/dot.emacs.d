@@ -34,7 +34,6 @@
 (add-to-list 'auto-mode-alist '("\\.json$" . js2-mode))
 (add-hook 'js2-mode-hook
           '(lambda ()
-             (gtags-mode 1)
              (require 'js)
              (setq tab-width 4
                    js-indent-level 4

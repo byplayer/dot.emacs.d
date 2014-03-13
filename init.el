@@ -36,6 +36,7 @@
     helm-projectile
     helm-ag
     helm-gtags
+    helm-projectile
     ; helm-package
     ; helm-rails
 

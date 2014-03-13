@@ -25,3 +25,17 @@
 (global-set-key "\M-x" 'helm-M-x)
 (global-set-key "\C-xb" 'my-helm)
 (global-set-key "\M-y" 'helm-show-kill-ring)
+
+(require 'helm-ag)
+(require 'projectile)
+(defun helm-ag-from-project-root ()
+  (interactive)
+  (let* ((project-root (projectile-project-root))
+         (print project-root)
+         (helm-ag-default-directory (if project-root
+                                        project-root
+                                      default-directory))
+         (header-name (format "Search at %s" helm-ag-default-directory)))
+    (helm-attrset 'search-this-file nil helm-ag-source)
+    (helm-attrset 'name header-name helm-ag-source)
+    (helm :sources (helm-ag--select-source) :buffer "*helm-ag*")))

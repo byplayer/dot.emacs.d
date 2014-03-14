@@ -7,7 +7,6 @@
   "`helm' for opening files all resource."
   (interactive)
   (helm-other-buffer `(helm-source-buffers-list
-                       helm-c-source-files-in-current-dir
                        helm-source-locate
                        helm-source-recentf
                        helm-git-files:modified-source
@@ -15,7 +14,8 @@
                        helm-git-files:all-source
                        ,@(helm-git-files:submodule-sources
                           '(modified untracked all))
-                       helm-source-bookmarks)
+                       helm-source-bookmarks
+                       helm-c-source-files-in-current-dir)
                      "*my helm*"))
 
 (setq helm-ff-auto-update-initial-value nil)

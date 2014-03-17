@@ -33,5 +33,11 @@
     ("o"        . 'mc/sort-regions)
     ("O"        . 'mc/reverse-regions)))
 
+;; undohist
 (require 'undohist)
 (undohist-initialize)
+
+;; point-undo
+(require 'point-undo)
+(define-key global-map [f5] 'point-undo)
+(define-key global-map [f6] 'point-redo)

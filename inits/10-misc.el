@@ -39,5 +39,5 @@
 
 ;; point-undo
 (require 'point-undo)
-(define-key global-map [f5] 'point-undo)
-(define-key global-map [f6] 'point-redo)
+(global-set-key (kbd "M-[") 'point-undo)
+(global-set-key (kbd "M-]") 'point-redo)

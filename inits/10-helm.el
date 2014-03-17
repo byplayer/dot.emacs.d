@@ -26,6 +26,12 @@
 (global-set-key "\C-xb" 'my-helm)
 (global-set-key "\M-y" 'helm-show-kill-ring)
 
+;; open helm list top of new split window in current buffer
+(setq helm-display-function (lambda (buf)
+                             (split-window-vertically)
+                             (switch-to-buffer buf)
+                             ))
+
 (require 'helm-ag)
 (require 'projectile)
 (defun helm-ag-from-project-root ()

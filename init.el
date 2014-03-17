@@ -55,6 +55,8 @@
 
     ;; other
     undo-tree
+
+    markdown-mode
     ))
 
 (let ((not-installed (loop for x in my-installing-package-list

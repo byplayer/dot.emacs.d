@@ -56,6 +56,7 @@
 
     ;; other
     undo-tree
+    undohist
 
     markdown-mode
     ))

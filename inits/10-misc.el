@@ -32,3 +32,6 @@
     ("i"        . 'mc/insert-numbers)
     ("o"        . 'mc/sort-regions)
     ("O"        . 'mc/reverse-regions)))
+
+(require 'undohist)
+(undohist-initialize)

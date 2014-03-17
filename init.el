@@ -51,6 +51,7 @@
 
     ;; git
     git-commit-mode
+    gitignore-mode
     ; egg
 
     ;; other

@@ -35,6 +35,9 @@
     ;; javascript
     js2-mode
 
+    ;; php
+    php-mode
+
     ;; helm
     helm
     ac-helm

@@ -1,18 +1,9 @@
-[submodule "elisp/rspec-mode"]
-	path = elisp/rspec-mode
-	url = https://github.com/byplayer/rspec-mode.git
 [submodule "elisp/anything-etags"]
 	path = elisp/anything-etags
 	url = https://github.com/byplayer/anything-etags.git
 [submodule "elisp/egg"]
 	path = elisp/egg
 	url = https://github.com/byplayer/egg.git
-[submodule "elisp/cucumber.el"]
-	path = elisp/cucumber.el
-	url = https://github.com/byplayer/cucumber.el.git
-[submodule "elisp/rinari"]
-	path = elisp/rinari
-	url = https://github.com/byplayer/rinari.git
 [submodule "elisp/gist.el"]
 	path = elisp/gist.el
 	url = https://github.com/byplayer/gist.el.git

@@ -1,7 +1,9 @@
 ;; package configuration
 (require 'package)
 (add-to-list 'package-archives
-  '("melpa" . "http://melpa.milkbox.net/packages/") t)
+             '("melpa" . "http://melpa.milkbox.net/packages/") t)
+(add-to-list 'package-archives
+             '("tromey" . "http://tromey.com/elpa/") t)
 (package-initialize)
 
 (require 'cl)
@@ -23,8 +25,14 @@
 
     ;; ruby
     rvm
+    ruby-mode
+    rhtml-mode
+    rinari
+    ruby-block
+    rspec-mode
+    feature-mode
 
-    ;;
+    ;; javascript
     js2-mode
 
     ;; helm
@@ -59,8 +67,8 @@
     undo-tree
     undohist
     point-undo
-
     markdown-mode
+    yaml-mode
     ))
 
 (let ((not-installed (loop for x in my-installing-package-list

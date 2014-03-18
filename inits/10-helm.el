@@ -6,6 +6,7 @@
 (defun my-helm ()
   "`helm' for opening files all resource."
   (interactive)
+  (vc-file-setprop default-directory 'git-root (helm-git-files:root-1))
   (helm-other-buffer `(helm-source-buffers-list
                        helm-source-locate
                        helm-source-recentf

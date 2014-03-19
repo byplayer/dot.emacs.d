@@ -54,8 +54,6 @@
           (lambda ()
             (local-set-key (kbd "C-c m") 'ac-complete-semantic)))
 
-(ac-set-trigger-key "TAB")
-(ac-set-trigger-key "<tab>")
 (defun ac-quick-help-force ()
   "Show auto-complete help."
   (interactive)

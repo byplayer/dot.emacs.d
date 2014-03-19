@@ -1,3 +1,6 @@
+;;; package --- Summary
+;;; Commentary:
+;;; Code:
 ; 選択範囲（リージョン）をハイライト
 (transient-mark-mode 1)
 
@@ -12,10 +15,6 @@
 (setq fast-lock nil)
 (setq lazy-lock nil)
 (setq jit-lock t)
-
-; 色設定
-;; region の色
-
 
 (if (boundp 'window-system)
     (setq initial-frame-alist
@@ -55,4 +54,15 @@
   (setq init-loader-default-regexp old-init-loader-default-regexp)
   (color-theme-byplayer))
 
-; (global-linum-mode 1)
+;; text-scale
+(global-set-key (kbd "<C-mouse-4>") 'text-scale-decrease)
+(global-set-key (kbd "<C-mouse-5>") 'text-scale-increase)
+(global-set-key (kbd "<C-mouse-6>") 'text-scale-decrease)
+(global-set-key (kbd "<C-mouse-7>") 'text-scale-increase)
+(define-key global-map (kbd "C-0")
+  '(lambda ()
+     (interactive)
+     (progn (text-scale-mode 0)(buffer-face-mode 0))))
+
+(provide '10-views)
+;;; 10-views.el ends here

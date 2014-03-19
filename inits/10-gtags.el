@@ -1,4 +1,3 @@
-(add-to-list 'load-path "/usr/local/global/share/gtags/")
 (require 'gtags)
 (require 'helm-gtags)
 

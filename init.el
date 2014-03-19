@@ -1,10 +1,14 @@
-;; package configuration
+;;; package --- Summary
+;;; Commentary:
+;;; Code:
 (require 'package)
 (add-to-list 'package-archives
              '("melpa" . "http://melpa.milkbox.net/packages/") t)
 (add-to-list 'package-archives
              '("tromey" . "http://tromey.com/elpa/") t)
 (package-initialize)
+
+(add-to-list 'load-path "/usr/local/global/share/gtags/")
 
 (require 'cl)
 
@@ -65,7 +69,7 @@
     git-commit-mode
     gitignore-mode
     git-gutter
-    ; egg
+    egg
 
     ;; other
     undo-tree
@@ -109,3 +113,6 @@
 (setq init-loader-byte-compile t)
 (setq init-loader-show-log-after-init nil)
 (init-loader-load)
+
+(provide 'init)
+;;; init.el ends here

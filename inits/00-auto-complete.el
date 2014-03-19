@@ -56,7 +56,13 @@
 
 (ac-set-trigger-key "TAB")
 (ac-set-trigger-key "<tab>")
+(defun ac-quick-help-force ()
+  "Show auto-complete help."
+  (interactive)
+  (ac-quick-help t))
+(define-key ac-completing-map (kbd "C-h") 'ac-quick-help-force)
 (setq ac-dwim t)
+
 
 (provide '00-auto-complete)
 ;;; 00-auto-complete.el ends here

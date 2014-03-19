@@ -1,3 +1,5 @@
+;;; package --- Summary
+;;; Commentary:
 ;;; Code:
 (require 'desktop)
 (setq desktop-globals-to-save '(extended-command-history))
@@ -45,3 +47,91 @@
 
 ;; git-gutter
 (global-git-gutter-mode t)
+
+;; no backup file
+(setq make-backup-files nil)
+;; no backup under vc-mode
+(setq vc-make-backup-files nil)
+
+;; support bat moad, ini mode
+(require 'generic-x)
+
+;; no toolbar
+(tool-bar-mode 0)
+
+;; indent
+(setq-default indent-level 2)
+;; default tab witdh
+(setq-default tab-width 2)
+;; use space insted of tab
+(setq-default indent-tabs-mode nil)
+
+;; show column
+(column-number-mode 1)
+
+;; no show start page
+(setq inhibit-startup-message t)
+
+;;; winner-mode
+(when (fboundp 'winner-mode)
+  (winner-mode t))
+
+;; move window using meta
+(windmove-default-keybindings 'meta)
+
+;; save edit place
+(require 'saveplace)
+(setq-default save-place t)
+(setq-default save-place-limit 100)
+
+;; show buffer name to title
+(setq frame-title-format "%b")
+
+; auto scroll on compile buffer
+(eval-after-load "compilation-mode"
+  '(progn
+     (setq compilation-scroll-output t)))
+
+;; show EOF
+(setq-default indicate-empty-lines t)
+(setq-default indicate-buffer-boundaries 'right)
+
+(custom-set-variables
+ '(truncate-lines nil)
+ '(truncate-partial-width-windows nil))
+
+;; scroll step
+(setq scroll-step 1)
+
+;; show white space of end of line
+(defface my-face-u-1 '((t (:foreground "SteelBlue" :underline t))) nil
+  :group 'font-lock-highlighting-faces)
+(defvar my-face-u-1 'my-face-u-1)
+
+(defadvice font-lock-mode (before my-font-lock-mode ())
+  "Set font lock mode."
+  (font-lock-add-keywords
+   major-mode
+     '(("[ \t]+$" 0 my-face-u-1 append)
+     )))
+(ad-enable-advice 'font-lock-mode 'before 'my-font-lock-mode)
+(ad-activate 'font-lock-mode)
+
+;; show white space
+(require 'whitespace)
+(setq whitespace-style
+      '(face tabs tab-mark spaces space-mark))
+(setq whitespace-space-regexp "\\(\x3000+\\)")
+(setq whitespace-display-mappings
+      '((space-mark ?\x3000 [?\□])
+        (tab-mark   ?\t   [?\xBB ?\t])
+        ))
+(global-whitespace-mode 1)
+
+
+;; undo-tree
+(when (require 'undo-tree nil t)
+  (global-undo-tree-mode))
+
+(provide '10-misc)
+;;; 10-misc.el ends here

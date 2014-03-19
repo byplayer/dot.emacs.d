@@ -45,9 +45,6 @@
 (setq visual-line-mode nil)
 (setq line-move-visual nil)
 
-;; ツールバーを隠す
-(tool-bar-mode 0)
-
 (when (require 'color-theme nil t)
   (color-theme-initialize)
 

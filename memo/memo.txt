@@ -40,6 +40,13 @@ C-c ! c check buffer
 <left> next source
 <right> previous source
 
+* window
+move window
+Meta + cursor key
+
+undo/redo window
+C-c <-/->
+
 * TODO
 How to use yasnippet ?
 configuration yasnippet

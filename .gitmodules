@@ -7,3 +7,6 @@
 [submodule "elisp/nsis-mode"]
 	path = elisp/nsis-mode
 	url = https://github.com/byplayer/nsis-mode.git
+[submodule "snippets/ruby-mode"]
+	path = snippets/ruby-mode
+	url = https://github.com/byplayer/yasnippet-ruby-mode.git

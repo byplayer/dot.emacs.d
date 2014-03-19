@@ -31,7 +31,6 @@
     ;; ruby
     rvm
     ruby-mode
-    ruby-electric
     rhtml-mode
     rinari
     ruby-block

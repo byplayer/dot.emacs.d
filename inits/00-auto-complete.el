@@ -54,8 +54,9 @@
           (lambda ()
             (local-set-key (kbd "C-c m") 'ac-complete-semantic)))
 
-(define-key ac-completing-map (kbd "<tab>") 'nil)
-(define-key ac-completing-map (kbd "RET") nil)
+(ac-set-trigger-key "TAB")
+(ac-set-trigger-key "<tab>")
+(setq ac-dwim t)
 
 (provide '00-auto-complete)
 ;;; 00-auto-complete.el ends here

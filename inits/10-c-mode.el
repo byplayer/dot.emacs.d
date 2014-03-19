@@ -1,3 +1,7 @@
+;;; package --- Summary
+;; configuration for c-mode
+;;; Commentary:
+;;; Code:
 (defun my-c-mode-hook ()
   (c-set-style "gnu")
   (c-set-offset 'statement-block-intro 2)
@@ -19,5 +23,5 @@
   )
 
 (add-hook 'c-mode-common-hook 'my-c-mode-hook)
-
-
+(provide '10-c-mode)
+;;; 10-c-mode ends here

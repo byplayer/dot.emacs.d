@@ -1,8 +1,15 @@
+;;; package --- Summary
+;;; Commentary:
+;;; Code:
+(require 'auto-complete)
 (require 'auto-complete-config)
 (ac-config-default)
+(global-auto-complete-mode t)
 
-(define-key ac-complete-mode-map "\C-n" 'ac-next)
-(define-key ac-complete-mode-map "\C-p" 'ac-previous)
+(setq ac-auto-show-menu 0.5)
+
+;; C-n/C-p for select list
+(setq ac-use-menu-map t)
 
 (add-to-list 'ac-modes 'yaml-mode)
 (add-to-list 'ac-modes 'rhtml-mode)
@@ -47,5 +54,8 @@
           (lambda ()
             (local-set-key (kbd "C-c m") 'ac-complete-semantic)))
 
+(define-key ac-completing-map (kbd "<tab>") 'nil)
+(define-key ac-completing-map (kbd "RET") nil)
 
-;; (define-key ac-mode-map (kbd "M-TAB") 'auto-complete)
+(provide '00-auto-complete)
+;;; 00-auto-complete.el ends here

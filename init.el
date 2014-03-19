@@ -79,6 +79,7 @@
     point-undo
     markdown-mode
     yaml-mode
+    yasnippet
     ))
 
 (let ((not-installed (loop for x in my-installing-package-list

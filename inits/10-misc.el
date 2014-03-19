@@ -49,9 +49,6 @@
 (global-set-key (kbd "M-[") 'point-undo)
 (global-set-key (kbd "M-]") 'point-redo)
 
-;; git-gutter
-(global-git-gutter-mode t)
-
 ;; no backup file
 (setq make-backup-files nil)
 ;; no backup under vc-mode

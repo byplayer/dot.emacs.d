@@ -1,6 +1,6 @@
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; ruby-modeの設定
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; package --- Summary
+;;; Commentary:
+;;; Code:
 (require 'rvm)
 (require 'ruby-mode)
 
@@ -117,6 +117,9 @@
 ;; ミニバッファに表示し, かつ, オーバレイする.
 ; (setq ruby-block-highlight-toggle t)
 
+(eval-after-load "ruby-mode"
+      '(add-hook 'ruby-mode-hook 'ruby-electric-mode))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; ruby-mode用フック処理追加
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -133,3 +136,5 @@
                              ac-source-yasnippet))))
 (add-hook 'ruby-mode-hook 'my-ruby-mode-hook)
 
+(provide '10-ruby)
+;;; 10-ruby.el ends here

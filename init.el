@@ -64,6 +64,7 @@
     ;; git
     git-commit-mode
     gitignore-mode
+    git-gutter
     ; egg
 
     ;; other

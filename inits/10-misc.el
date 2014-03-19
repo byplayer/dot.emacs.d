@@ -1,3 +1,4 @@
+;;; Code:
 (require 'desktop)
 (setq desktop-globals-to-save '(extended-command-history))
 (setq desktop-files-not-to-save "")
@@ -41,3 +42,6 @@
 (require 'point-undo)
 (global-set-key (kbd "M-[") 'point-undo)
 (global-set-key (kbd "M-]") 'point-redo)
+
+;; git-gutter
+(global-git-gutter-mode t)

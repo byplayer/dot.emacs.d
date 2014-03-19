@@ -33,6 +33,26 @@
                              (switch-to-buffer buf)
                              ))
 
+(setq projectile-project-root-files
+  '(".projectile"        ; projectile project marker
+    "rebar.config"       ; Rebar project file
+    "project.clj"        ; Leiningen project file
+    "pom.xml"            ; Maven project file
+    "build.sbt"          ; SBT project file
+    "build.gradle"       ; Gradle project file
+    "Gemfile"            ; Bundler file
+    "requirements.txt"   ; Pip file
+    "package.json"       ; npm package file
+    "Gruntfile.js"       ; Grunt project file
+    "bower.json"         ; Bower project file
+    "composer.json"      ; Composer project file
+    ".git"               ; Git VCS root dir
+    ".hg"                ; Mercurial VCS root dir
+    ".bzr"               ; Bazaar VCS root dir
+    ".fslckout"          ; Fossil VCS root dir
+    "_darcs"             ; Darcs VCS root dir
+    ))
+
 (require 'helm-ag)
 (require 'projectile)
 (defun helm-ag-from-project-root ()

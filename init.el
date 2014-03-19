@@ -9,6 +9,7 @@
 (package-initialize)
 
 (add-to-list 'load-path "/usr/local/global/share/gtags/")
+(add-to-list 'load-path "~/.emacs.d/elisp/bat-mode/")
 
 (require 'cl)
 

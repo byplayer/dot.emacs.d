@@ -1,6 +1,7 @@
-(add-to-list 'load-path "~/.emacs.d/elisp/bat-mode/")
+;;; package --- Summary
+;;; Commentary:
+;;; Code:
 
-;; bat-mode
 (setq auto-mode-alist
        (append
         (list (cons "\\.[bB][aA][tT]$" 'bat-mode))
@@ -11,3 +12,6 @@
 
 (autoload 'bat-mode "bat-mode"
       "DOS and Windows BAT files" t)
+
+(provide '10-bat)
+;;; 10-bat.el ends here

@@ -1,6 +1,10 @@
 ;;; package --- Summary
 ;;; Commentary:
 ;;; Code:
+
+;; start server
+(server-start)
+
 (require 'desktop)
 (setq desktop-globals-to-save '(extended-command-history))
 (setq desktop-files-not-to-save "")

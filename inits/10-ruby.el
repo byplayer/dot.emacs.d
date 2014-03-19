@@ -117,6 +117,14 @@
 ;; ミニバッファに表示し, かつ, オーバレイする.
 ; (setq ruby-block-highlight-toggle t)
 
+(defun ruby-insert-end ()
+  "This function insert end for ruby.
+ruby-electric-mode use this function, so I need add this method."
+  (interactive)
+  (insert "end")
+  (ruby-indent-line t)
+  (end-of-line))
+
 (eval-after-load "ruby-mode"
       '(add-hook 'ruby-mode-hook 'ruby-electric-mode))
 
@@ -124,7 +132,6 @@
 ;; ruby-mode用フック処理追加
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (defun my-ruby-mode-hook()
-  (define-key ruby-mode-map "\C-m" 'ruby-reindent-then-newline-and-indent)
   (ruby-block-mode t)
   (setq ruby-block-highlight-toggle t)
   (local-set-key [f1] 'ri)

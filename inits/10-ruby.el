@@ -135,6 +135,7 @@
   (local-set-key (kbd "[") 'skeleton-pair-insert-maybe)
   (local-set-key (kbd "{") 'skeleton-pair-insert-maybe)
   (local-set-key (kbd "`") 'skeleton-pair-insert-maybe)
+  (local-set-key (kbd "'") 'skeleton-pair-insert-maybe)
   (local-set-key (kbd "\"") 'skeleton-pair-insert-maybe)
   (setq ac-sources (append ac-sources
                            '(ac-source-words-in-same-mode-buffers

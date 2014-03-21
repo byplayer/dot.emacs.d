@@ -5,8 +5,7 @@
 ;; Author: MATSUYAMA Tomohiro <tomo@cx4a.org>
 ;; Package-Requires: ((cl-lib "1.0"))
 ;; Keywords: convenience
-;; Version: 20140211.300
-;; X-Original-Version: 0.1
+;; Version: 0.1
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -171,7 +170,11 @@ To use undohist, you just call this function."
       (with-temp-buffer
         (insert-file-contents undo-file)
         (goto-char (point-min))
-        (let ((alist (undohist-decode (read (current-buffer)))))
+        (let ((alist (undohist-decode (condition-case err-var
+                                          (read (current-buffer))
+                                        (error
+                                         (message "undohist %s load error: %s" undo-file err-var)
+                                         ())))))
           (if (string= (md5 buffer) (assoc-default 'digest alist))
               (setq undo-list (assoc-default 'undo-list alist))
             (message "File digest doesn't match, so undo history will be discarded."))))

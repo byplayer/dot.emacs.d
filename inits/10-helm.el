@@ -1,3 +1,6 @@
+;;; package --- Summary
+;;; Commentary:
+;;; Code:
 (require 'helm-config)
 (helm-mode t)
 
@@ -8,15 +11,15 @@
   (interactive)
   (vc-file-setprop default-directory 'git-root (helm-git-files:root-1))
   (helm-other-buffer `(helm-source-buffers-list
-                       helm-source-locate
+                       helm-source-bookmarks
                        helm-source-recentf
                        helm-git-files:modified-source
                        helm-git-files:untracked-source
                        helm-git-files:all-source
                        ,@(helm-git-files:submodule-sources
                           '(modified untracked all))
-                       helm-source-bookmarks
-                       helm-c-source-files-in-current-dir)
+                       helm-c-source-files-in-current-dir
+                       helm-source-locate)
                      "*my helm*"))
 
 (setq helm-ff-auto-update-initial-value nil)
@@ -56,6 +59,7 @@
 (require 'helm-ag)
 (require 'projectile)
 (defun helm-ag-from-project-root ()
+  "Helm ag from project root."
   (interactive)
   (let* ((project-root (projectile-project-root))
          (print project-root)
@@ -66,3 +70,6 @@
     (helm-attrset 'search-this-file nil helm-ag-source)
     (helm-attrset 'name header-name helm-ag-source)
     (helm :sources (helm-ag--select-source) :buffer "*helm-ag*")))
+
+(provide '10-helm)
+;;; 10-helm.el ends here

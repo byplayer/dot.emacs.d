@@ -71,7 +71,6 @@
 
     ;; other
     undo-tree
-    undohist
     point-undo
     markdown-mode
     yaml-mode

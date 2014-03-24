@@ -40,10 +40,6 @@
     ("o"        . 'mc/sort-regions)
     ("O"        . 'mc/reverse-regions)))
 
-;; undohist
-(require 'undohist)
-(undohist-initialize)
-
 ;; point-undo
 (require 'point-undo)
 (global-set-key (kbd "M-[") 'point-undo)
@@ -131,8 +127,17 @@
 
 
 ;; undo-tree
-(when (require 'undo-tree nil t)
-  (global-undo-tree-mode))
+(eval-after-load "undo-tree"
+  '(progn
+     (global-undo-tree-mode)
+     (setq undo-tree-auto-save-history t
+           undo-tree-history-directory-alist `(("." .,
+                                                (expand-file-name "~/.emacs.d/undo-tree-hist/"))))
+     (defadvice undo-tree-make-history-save-file-name
+       (after undo-tree activate)
+       (setq ad-return-value (concat ad-return-value ".gz")))))
+(require 'undo-tree)
+
 
 (provide '10-misc)
 ;;; 10-misc.el ends here

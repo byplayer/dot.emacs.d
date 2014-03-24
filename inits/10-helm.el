@@ -18,8 +18,8 @@
                        helm-git-files:all-source
                        ,@(helm-git-files:submodule-sources
                           '(modified untracked all))
-                       helm-c-source-files-in-current-dir
-                       helm-source-locate)
+                       helm-source-locate
+                       helm-source-find-files)
                      "*my helm*"))
 
 (setq helm-ff-auto-update-initial-value nil)

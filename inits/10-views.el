@@ -41,6 +41,7 @@
 ;====================================
 ; カーソル移動設定
 ;====================================
+(set-default 'truncate-lines t)
 (setq visual-line-mode nil)
 (setq line-move-visual nil)
 

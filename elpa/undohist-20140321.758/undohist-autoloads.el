@@ -3,8 +3,8 @@
 ;;; Code:
 
 
-;;;### (autoloads nil nil ("undohist-pkg.el" "undohist.el") (21286
-;;;;;;  22663 643019 275000))
+;;;### (autoloads nil nil ("undohist-pkg.el" "undohist.el") (21295
+;;;;;;  32224 685511 198000))
 
 ;;;***
 

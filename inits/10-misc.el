@@ -45,11 +45,6 @@
 (global-set-key (kbd "M-[") 'point-undo)
 (global-set-key (kbd "M-]") 'point-redo)
 
-;; no backup file
-(setq make-backup-files nil)
-;; no backup under vc-mode
-(setq vc-make-backup-files nil)
-
 ;; support bat moad, ini mode
 (require 'generic-x)
 
@@ -138,6 +133,13 @@
        (setq ad-return-value (concat ad-return-value ".gz")))))
 (require 'undo-tree)
 
+;; backup directory configuration
+(setq backup-directory-alist
+  (cons (cons ".*" (expand-file-name "~/.emacs.d/backup"))
+        backup-directory-alist))
+
+(setq auto-save-file-name-transforms
+  `((".*", (expand-file-name "~/.emacs.d/backup/") t)))
 
 (provide '10-misc)
 ;;; 10-misc.el ends here

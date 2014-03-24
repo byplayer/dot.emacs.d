@@ -75,6 +75,7 @@
     markdown-mode
     yaml-mode
     yasnippet
+    recentf-ext
     ))
 
 (let ((not-installed (loop for x in my-installing-package-list

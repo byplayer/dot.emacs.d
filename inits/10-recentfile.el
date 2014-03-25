@@ -12,6 +12,7 @@
 (add-to-list 'recentf-exclude "COMMIT_EDITMSG")
 (add-to-list 'recentf-exclude "bookmarks")
 (add-to-list 'recentf-exclude "\\.recentf")
+(add-to-list 'recentf-exclude "\\.revive\\.el")
 (setq recentf-auto-cleanup 10)
 (setq recentf-auto-save-timer
       (run-with-idle-timer 30 t 'recentf-save-list))

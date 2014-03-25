@@ -76,6 +76,7 @@
     yaml-mode
     yasnippet
     recentf-ext
+    revive
     ))
 
 (let ((not-installed (loop for x in my-installing-package-list

@@ -2,5 +2,5 @@
           (lambda ()
             (c-set-style "java")
             (setq tab-width 4)
-            (setq indent-tabs-mode t)
+            (setq indent-tabs-mode nil)
             (setq c-basic-offset 4)))

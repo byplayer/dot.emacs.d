@@ -7,7 +7,6 @@
             (c-set-style "java")
             (setq tab-width 4)
             (setq indent-tabs-mode nil)
-            (define-key java-mode-map "\C-m" 'c-indent-new-comment-line)
             (setq c-basic-offset 4)))
 
 (provide '10-java)

@@ -43,6 +43,32 @@ C-c ! c check buffer
 * window
 move window
 Meta + cursor key
+or
+C-x + cursor key
+
+* info
+** move cursor
+b   top of buffer
+SPC  scroll one page or next node
+DEL  scroll previous page or previous node
+
+** node
+[    move previous node
+]    move next node
+u    move up node
+t    move current info top
+f    move reference node
+l    move previous history
+r    move next history
+m    move node
+
+** search
+i    text search
+,    next search item
+I    search index
+s    search in info regex
+
+
 
 undo/redo window
 C-c <-/->

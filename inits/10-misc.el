@@ -71,6 +71,12 @@
 ;; move window using meta
 (windmove-default-keybindings 'meta)
 
+;; use C-x and arrow keys to move focus
+(global-set-key (kbd "C-x <right>") 'windmove-right)
+(global-set-key (kbd "C-x <left>") 'windmove-left)
+(global-set-key (kbd "C-x <down>") 'windmove-down)
+(global-set-key (kbd "C-x <up>") 'windmove-up)
+
 ;; save edit place
 (require 'saveplace)
 (setq-default save-place t)

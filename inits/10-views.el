@@ -65,5 +65,7 @@
      (interactive)
      (progn (text-scale-mode 0)(buffer-face-mode 0))))
 
+(global-linum-mode)
+
 (provide '10-views)
 ;;; 10-views.el ends here

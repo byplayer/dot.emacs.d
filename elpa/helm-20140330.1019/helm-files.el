@@ -128,16 +128,6 @@ and `helm-read-file-map' for this take effect."
   :group 'helm-files
   :type 'boolean)
 
-(defcustom helm-ff-ido-style-backspace t
-  "Use backspace to navigate with `helm-find-files'.
-You will have to restart Emacs or reeval `helm-find-files-map'
-and `helm-read-file-map' for this to take effect."
-  :group 'helm-files
-  :type '(choice
-          (const :tag "Do not use ido-style backspace")
-          (const :tag "Always Use ido-style backspace in find-file" 'always)
-          (const :tag "Use ido-style backspace while auto-updating" t)))
-
 (defcustom helm-ff-history-max-length 100
   "Number of elements shown in `helm-find-files' history."
   :group 'helm-files
@@ -340,8 +330,6 @@ WARNING: Setting this to nil is unsafe and can cause deletion of a whole tree."
     (when helm-ff-lynx-style-map
       (define-key map (kbd "<left>")      'helm-find-files-down-one-level)
       (define-key map (kbd "<right>")     'helm-execute-persistent-action))
-    (when helm-ff-ido-style-backspace
-      (define-key map (kbd "<backspace>") 'helm-ff-backspace))
     (delq nil map))
   "Keymap for `helm-find-files'.")
 
@@ -486,7 +474,7 @@ ACTION must be an action supported by `helm-dired-action'."
          helm-split-window-in-side-p
          (parg   helm-current-prefix-arg)
          helm-display-source-at-screen-top ; prevent setting window-start.
-         helm-ff-auto-update-flag
+         helm-ff-auto-update-initial-value
          (dest   (with-helm-display-marked-candidates
                    helm-marked-buffer-name
                    (mapcar #'(lambda (f)
@@ -825,22 +813,6 @@ other directories.
 See `helm-ff-serial-rename-1'."
   (helm-ff-serial-rename-action 'copy))
 
-(defun helm-ff-backspace (_arg)
-  "Call global backspace or `helm-find-files-down-one-level'.
-If sitting at the end of a file directory ending with \"/\"
-and `helm-ff-auto-update-flag' is turned off,
-run `helm-find-files-down-one-level', otherwise run the global command
-bounded to <backspace>."
-  (interactive "P")
-  (cond
-    ((and (looking-back "[/\\]")
-          (or helm-ff-auto-update-flag
-              (eq helm-ff-ido-style-backspace 'always)))
-     (call-interactively 'helm-find-files-down-one-level))
-    (t (call-interactively
-        (lookup-key (current-global-map)
-                    (read-kbd-macro "DEL"))))))
-
 (defun helm-ff-toggle-auto-update (_candidate)
   (setq helm-ff-auto-update-flag (not helm-ff-auto-update-flag))
   (message "[Auto expansion %s]"
@@ -1098,7 +1070,7 @@ The checksum is copied to kill-ring."
         (not helm-ff-transformer-show-only-basename))
   (let ((target (if helm-ff-transformer-show-only-basename
                     (helm-basename candidate) candidate)))
-    (helm-force-update target)))
+    (helm-force-update (regexp-quote target))))
 
 (defun helm-ff-run-toggle-basename ()
   (interactive)
@@ -1169,7 +1141,7 @@ If prefix numeric arg is given go ARG level down."
                (setq helm-ff-last-expanded helm-pattern))
               ((and cur-cand (file-exists-p cur-cand))
                (setq helm-ff-last-expanded cur-cand)))
-        (helm-set-pattern new-pattern)
+        (helm-set-pattern new-pattern helm-suspend-update-flag)
         (with-helm-after-update-hook (helm-ff-retrieve-last-expanded))
         (helm-check-minibuffer-input)))))
 
@@ -1354,12 +1326,14 @@ purpose."
         (reg "\\`/\\([^[/:]+\\|[^/]+]\\):.*:")
         cur-method tramp-name)
     (cond ((string= pattern "") "")
+          ((string-match pattern "\\`[.]\\{1,2\\}/\\'")
+           (expand-file-name pattern))
           ((string-match ".*\\(~?/?[.]\\{1\\}/\\)\\'" pattern)
            (expand-file-name default-directory))
           ((and (string-match ".*\\(~//\\|//\\)\\'" pattern)
                 (not (string-match helm-ff-url-regexp helm-pattern)))
            (expand-file-name "/")) ; Expand to "/" or "c:/"
-          ((string-match "\\`~/\\|.*/~/\\'" pattern)
+          ((string-match "\\`\\(~/\\|.*/~/\\)\\'" pattern)
            (expand-file-name "~/"))
           ;; Match "/method:maybe_hostname:"
           ((and (string-match reg pattern)
@@ -1389,7 +1363,7 @@ purpose."
           ;; `helm-ff-auto-update-flag' is enabled to avoid quick expansion.
           ((and (file-accessible-directory-p pattern)
                 helm-ff-auto-update-flag)
-           (file-name-as-directory pattern))
+           (file-name-as-directory (expand-file-name pattern)))
           ;; Return PATTERN unchanged.
           (t pattern))))
 
@@ -1569,10 +1543,11 @@ Note that only directories are saved here."
          (append helm-files-save-history-extra-sources
                  helm-file-completion-sources)))
     (when (or force (helm-file-completion-source-p))
-      (let ((mkd (helm-marked-candidates :with-wildcard t))
+      (let ((mkd (helm-marked-candidates))
             (history-delete-duplicates t))
         (cl-loop for sel in mkd
-                 when (and (file-exists-p sel)
+                 when (and sel
+                           (file-exists-p sel)
                            (not (file-directory-p sel)))
                  do
                  ;; we use `abbreviate-file-name' here because
@@ -1923,8 +1898,7 @@ If a prefix arg is given or `helm-follow-mode' is on open file."
                                        (set-text-properties 0 (length fname)
                                                             nil fname)
                                        (insert fname))))))
-    (cond ((and (string= (helm-ff-set-pattern helm-pattern)
-                         "Invalid tramp file name")
+    (cond ((and (helm-ff-invalid-tramp-name-p)
                 (string-match helm-tramp-file-name-regexp candidate))
            ;; First hit insert hostname and
            ;; second hit insert ":" and expand.
@@ -2176,7 +2150,8 @@ Argument FOLLOW when non--nil specify to follow FILES to destination."
                    (helm-find-files-1 (file-name-directory target)
                                       (if helm-ff-transformer-show-only-basename
                                           (helm-basename target) target))
-                   (helm-find-files-1 (expand-file-name candidate))))
+                   (helm-find-files-1 (file-name-as-directory
+                                       (expand-file-name candidate)))))
           (setq helm-ff-cand-to-mark nil))))))
 
 (defun helm-get-dest-fnames-from-list (flist dest-cand rename-dir-flag)
@@ -2720,7 +2695,7 @@ This is the starting point for nearly all actions you can do on files."
                             (if helm-ff-transformer-show-only-basename
                                 (helm-basename it) it))))
     (set-text-properties 0 (length input) nil input)
-    (helm-find-files-1 input presel)))
+    (helm-find-files-1 input (and presel (regexp-quote presel)))))
 
 ;;;###autoload
 (defun helm-for-files ()

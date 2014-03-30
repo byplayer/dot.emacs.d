@@ -56,11 +56,17 @@
               ;; Remove it for the helm one. (Fixed in Emacs24)
               (remove-hook 'minibuffer-setup-hook 'eshell-mode)))
     (candidates . helm-esh-get-candidates)
+    (nomark)
+    (persistent-action . ignore)
     (filtered-candidate-transformer
      (lambda (candidates _sources)
        (cl-loop for i in (sort candidates 'helm-generic-sort-fn)
                 collect
-                (cons (abbreviate-file-name i) i))))
+                (cond ((string-match "\\`~/?" helm-ec-target)
+                       (abbreviate-file-name i))
+                      ((string-match "\\`/" helm-ec-target) i)
+                      (t
+                       (file-relative-name i))))))
     (action . helm-ec-insert))
   "Helm source for Eshell completion.")
 
@@ -74,9 +80,14 @@ The function that call this should set `helm-ec-target' to thing at point."
                (search-backward helm-ec-target nil t)
                (string= (buffer-substring (point) pt) helm-ec-target))
       (delete-region (point) pt)))
-  (if (string-match "\\`~/" helm-ec-target)
-      (insert (helm-quote-whitespace (abbreviate-file-name candidate)))
-      (insert (helm-quote-whitespace candidate))))
+  (cond ((string-match "\\`~/?" helm-ec-target)
+         (insert (helm-quote-whitespace (abbreviate-file-name candidate))))
+        ((string-match "\\`/" helm-ec-target)
+         (insert (helm-quote-whitespace candidate)))
+        (t
+         (insert (concat (and (string-match "\\`[.]/" helm-ec-target) "./")
+                         (helm-quote-whitespace
+                          (file-relative-name candidate)))))))
 
 (defun helm-esh-get-candidates ()
   "Get candidates for eshell completion using `pcomplete'."
@@ -143,6 +154,7 @@ The function that call this should set `helm-ec-target' to thing at point."
               ;; Same comment as in `helm-source-esh'
               (remove-hook 'minibuffer-setup-hook 'eshell-mode)))
     (candidates-in-buffer)
+    (nomark)
     (keymap . ,helm-eshell-history-map)
     (filtered-candidate-transformer . (lambda (candidates sources)
                                         (reverse candidates)))

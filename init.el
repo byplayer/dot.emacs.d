@@ -77,6 +77,7 @@
     yasnippet
     recentf-ext
     revive
+    anzu
     ))
 
 (let ((not-installed (loop for x in my-installing-package-list

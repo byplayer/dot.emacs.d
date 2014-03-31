@@ -147,5 +147,7 @@
 (setq auto-save-file-name-transforms
   `((".*", (expand-file-name "~/.emacs.d/backup/") t)))
 
+(global-anzu-mode +1)
+
 (provide '10-misc)
 ;;; 10-misc.el ends here

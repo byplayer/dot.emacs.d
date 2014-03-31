@@ -28,6 +28,7 @@
 (global-set-key "\M-x" 'helm-M-x)
 (global-set-key "\C-xb" 'my-helm)
 (global-set-key "\M-y" 'helm-show-kill-ring)
+(global-set-key (kbd "C-:") 'helm-resume)
 
 ;; open helm list top of new split window in current buffer
 (setq helm-display-function (lambda (buf)

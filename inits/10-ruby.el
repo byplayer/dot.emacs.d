@@ -143,7 +143,7 @@
                              ac-source-yasnippet))))
 (add-hook 'ruby-mode-hook 'my-ruby-mode-hook)
 
-(define-key ruby-mode-map [return] 'indent-new-comment-line)
+(define-key ruby-mode-map [return] 'newline-and-indent)
 
 (provide '10-ruby)
 ;;; 10-ruby.el ends here

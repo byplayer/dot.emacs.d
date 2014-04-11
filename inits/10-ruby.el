@@ -137,6 +137,14 @@
   (local-set-key (kbd "`") 'skeleton-pair-insert-maybe)
   (local-set-key (kbd "'") 'skeleton-pair-insert-maybe)
   (local-set-key (kbd "\"") 'skeleton-pair-insert-maybe)
+  ;; modify : as punctuation character
+  ;; helm-gtags can't jump ModuleName::Class string,
+  ;; so change ruby-mode-syntax-table, and select only
+  ;; class name if I use M-. .
+  (modify-syntax-entry ?: "." ruby-mode-syntax-table)
+  ;; add following characters into syntax
+  (modify-syntax-entry ?@ "_" ruby-mode-syntax-table)
+  (modify-syntax-entry ?! "_" ruby-mode-syntax-table)
   (setq ac-sources (append ac-sources
                            '(ac-source-words-in-same-mode-buffers
                              ac-source-gtags

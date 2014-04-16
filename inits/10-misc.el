@@ -126,7 +126,6 @@
         ))
 (global-whitespace-mode 1)
 
-
 ;; undo-tree
 (eval-after-load "undo-tree"
   '(progn
@@ -148,6 +147,8 @@
   `((".*", (expand-file-name "~/.emacs.d/backup/") t)))
 
 (global-anzu-mode +1)
+
+(require 'savekill)
 
 (provide '10-misc)
 ;;; 10-misc.el ends here

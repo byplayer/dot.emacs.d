@@ -6,7 +6,7 @@
 /.org-id-locations
 /.emacs.desktop*
 /.mc-lists.el
-/anything-c-adaptive-history
+/kill-ring-saved.el
 /ac-comphist.dat
 /tramp
 /server

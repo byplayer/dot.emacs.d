@@ -78,6 +78,7 @@
     recentf-ext
     revive
     anzu
+    savekill
     ))
 
 (let ((not-installed (loop for x in my-installing-package-list

@@ -24,6 +24,7 @@
 (add-to-list 'ac-modes 'text-mode)
 (add-to-list 'ac-modes 'nxml-mode)
 (add-to-list 'ac-modes 'markdown-mode)
+(add-to-list 'ac-modes 'rabbit-mode)
 
 (setq ac-sources '(ac-source-yasnippet
                    ac-source-dictionary

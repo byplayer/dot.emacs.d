@@ -80,7 +80,7 @@
 ;; save edit place
 (require 'saveplace)
 (setq-default save-place t)
-(setq-default save-place-limit 100)
+(setq-default save-place-limit 1000)
 
 ;; show buffer name to title
 (setq frame-title-format "%b")
@@ -149,6 +149,7 @@
 (global-anzu-mode +1)
 
 (require 'savekill)
+(setq savekill-max-saved-items 1000)
 
 (provide '10-misc)
 ;;; 10-misc.el ends here

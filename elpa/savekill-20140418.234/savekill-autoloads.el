@@ -3,8 +3,8 @@
 ;;; Code:
 
 
-;;;### (autoloads nil nil ("savekill-pkg.el" "savekill.el") (21325
-;;;;;;  62526 20773 990000))
+;;;### (autoloads nil nil ("savekill-pkg.el" "savekill.el") (21332
+;;;;;;  32309 100864 221000))
 
 ;;;***
 

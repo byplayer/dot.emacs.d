@@ -79,6 +79,7 @@
     revive
     anzu
     savekill
+    crontab-mode
     ))
 
 (let ((not-installed (loop for x in my-installing-package-list

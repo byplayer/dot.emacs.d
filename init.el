@@ -69,6 +69,9 @@
     git-gutter
     egg
 
+    ;; docker
+    dockerfile-mode
+
     ;; other
     undo-tree
     point-undo

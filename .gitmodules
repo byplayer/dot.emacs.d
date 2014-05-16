@@ -13,3 +13,6 @@
 [submodule "snippets/rabbit-mode"]
 	path = snippets/rabbit-mode
 	url = https://github.com/byplayer/yasnippet-rabbit-mode.git
+[submodule "snippets/sh-mode"]
+	path = snippets/sh-mode
+	url = https://github.com/byplayer/yasnippet-sh-mode.git

@@ -151,5 +151,11 @@
 (require 'savekill)
 (setq savekill-max-saved-items 1000)
 
+(defun kill-all-buffer()
+  (interactive)
+  (yes-or-no-p "kill all buffer? ")
+  (dolist (buf (buffer-list))
+    (kill-buffer buf)))
+
 (provide '10-misc)
 ;;; 10-misc.el ends here

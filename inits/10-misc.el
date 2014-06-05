@@ -158,6 +158,7 @@
     (kill-buffer buf)))
 
 (smartparens-global-mode t)
+(global-rainbow-delimiters-mode)
 
 (provide '10-misc)
 ;;; 10-misc.el ends here

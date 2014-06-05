@@ -39,15 +39,9 @@
                    js-indent-level 4
                    js-expr-indent-offset 4
                    indent-tabs-mode t
-                   js2-cleanup-whitespace nil
-                   skeleton-pair 1)
+                   js2-cleanup-whitespace nil)
              (define-key js2-mode-map "\C-m" 'newline-and-indent)
-             (define-key js2-mode-map "\C-i" 'indent-and-back-to-indentation)
-             (local-set-key (kbd "(") 'skeleton-pair-insert-maybe)
-             (local-set-key (kbd "[") 'skeleton-pair-insert-maybe)
-             (local-set-key (kbd "{") 'skeleton-pair-insert-maybe)
-             (local-set-key (kbd "`") 'skeleton-pair-insert-maybe)
-             (local-set-key (kbd "\"") 'skeleton-pair-insert-maybe)))
+             (define-key js2-mode-map "\C-i" 'indent-and-back-to-indentation)))
 
 (defun indent-and-back-to-indentation ()
   (interactive)

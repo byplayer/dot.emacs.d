@@ -126,17 +126,6 @@
   (local-set-key [f1] 'ri)
   (local-set-key "\M-\C-i" 'ri-ruby-complete-symbol)
   (local-set-key [f4] 'ri-ruby-show-args)
-  (make-variable-buffer-local 'skeleton-pair)
-  (make-variable-buffer-local 'skeleton-pair-on-word)
-  (setq skeleton-pair-on-word t)
-  (setq skeleton-pair t)
-  (make-variable-buffer-local 'skeleton-pair-alist)
-  (local-set-key (kbd "(") 'skeleton-pair-insert-maybe)
-  (local-set-key (kbd "[") 'skeleton-pair-insert-maybe)
-  (local-set-key (kbd "{") 'skeleton-pair-insert-maybe)
-  (local-set-key (kbd "`") 'skeleton-pair-insert-maybe)
-  (local-set-key (kbd "'") 'skeleton-pair-insert-maybe)
-  (local-set-key (kbd "\"") 'skeleton-pair-insert-maybe)
   ;; modify : as punctuation character
   ;; helm-gtags can't jump ModuleName::Class string,
   ;; so change ruby-mode-syntax-table, and select only

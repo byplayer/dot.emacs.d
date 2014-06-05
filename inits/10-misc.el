@@ -157,5 +157,7 @@
   (dolist (buf (buffer-list))
     (kill-buffer buf)))
 
+(smartparens-global-mode t)
+
 (provide '10-misc)
 ;;; 10-misc.el ends here

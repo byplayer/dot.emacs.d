@@ -83,6 +83,7 @@
     anzu
     savekill
     crontab-mode
+    smartparens
     ))
 
 (let ((not-installed (loop for x in my-installing-package-list

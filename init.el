@@ -85,6 +85,7 @@
     crontab-mode
     smartparens
     rainbow-delimiters
+    volatile-highlights
     ))
 
 (let ((not-installed (loop for x in my-installing-package-list
@@ -106,7 +107,7 @@
   "If any packages installed with package.el aren't compiled yet, compile them."
   (--each (f-directories package-user-dir)
     (unless (was-compiled-p it)
-      (byte-recompile-directory it 0)))
+      (byte-recompile-directory it 0))))
 
 (ensure-packages-compiled)
 

@@ -160,5 +160,8 @@
 (smartparens-global-mode t)
 (global-rainbow-delimiters-mode)
 
+(require 'volatile-highlights)
+(volatile-highlights-mode t)
+
 (provide '10-misc)
 ;;; 10-misc.el ends here

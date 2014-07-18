@@ -4,7 +4,7 @@
 
 
 ;;;### (autoloads (helm-flycheck) "helm-flycheck" "helm-flycheck.el"
-;;;;;;  (21273 7597 256302 807000))
+;;;;;;  (21448 61492 398348 941000))
 ;;; Generated autoloads from helm-flycheck.el
 
 (autoload 'helm-flycheck "helm-flycheck" "\
@@ -14,8 +14,8 @@ Show flycheck errors with `helm'.
 
 ;;;***
 
-;;;### (autoloads nil nil ("helm-flycheck-pkg.el") (21273 7597 265080
-;;;;;;  655000))
+;;;### (autoloads nil nil ("helm-flycheck-pkg.el") (21448 61492 409113
+;;;;;;  919000))
 
 ;;;***
 

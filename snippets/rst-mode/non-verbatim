@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: verbatim
+# key:|||||
+#
+# replace key | to ||||| for not to work table-recognize
+# --

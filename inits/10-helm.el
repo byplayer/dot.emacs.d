@@ -67,6 +67,7 @@
                                         project-root
                                       default-directory))
          (header-name (format "Search at %s" helm-ag-default-directory)))
+    (helm-ag--query)
     (helm-attrset 'search-this-file nil helm-ag-source)
     (helm-attrset 'name header-name helm-ag-source)
     (helm :sources (helm-ag--select-source) :buffer "*helm-ag*")))

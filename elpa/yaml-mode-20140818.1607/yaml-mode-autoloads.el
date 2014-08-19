@@ -3,8 +3,8 @@
 ;;; Code:
 
 
-;;;### (autoloads (yaml-mode yaml) "yaml-mode" "yaml-mode.el" (21288
-;;;;;;  5456 489365 669000))
+;;;### (autoloads (yaml-mode yaml) "yaml-mode" "yaml-mode.el" (21490
+;;;;;;  56934 739923 474000))
 ;;; Generated autoloads from yaml-mode.el
 
 (let ((loads (get 'yaml 'custom-loads))) (if (member '"yaml-mode" loads) nil (put 'yaml 'custom-loads (cons '"yaml-mode" loads))))
@@ -20,8 +20,8 @@ Simple mode to edit YAML.
 
 ;;;***
 
-;;;### (autoloads nil nil ("yaml-mode-pkg.el") (21288 5456 498752
-;;;;;;  920000))
+;;;### (autoloads nil nil ("yaml-mode-pkg.el") (21490 56934 749165
+;;;;;;  151000))
 
 ;;;***
 

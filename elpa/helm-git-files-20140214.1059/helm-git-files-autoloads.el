@@ -5,7 +5,7 @@
 
 ;;;### (autoloads (helm-git-files helm-git-files:submodule-sources
 ;;;;;;  helm-git-files:git-p) "helm-git-files" "helm-git-files.el"
-;;;;;;  (21448 61493 129973 738000))
+;;;;;;  (21501 26381 245857 40000))
 ;;; Generated autoloads from helm-git-files.el
 
 (autoload 'helm-git-files:git-p "helm-git-files" "\
@@ -31,8 +31,8 @@
 
 ;;;***
 
-;;;### (autoloads nil nil ("helm-git-files-pkg.el") (21448 61493
-;;;;;;  139394 246000))
+;;;### (autoloads nil nil ("helm-git-files-pkg.el") (21501 26381
+;;;;;;  258617 879000))
 
 ;;;***
 

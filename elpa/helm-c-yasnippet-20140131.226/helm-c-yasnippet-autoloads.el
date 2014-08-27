@@ -5,7 +5,7 @@
 
 ;;;### (autoloads (helm-yas-create-snippet-on-region helm-yas-visit-snippet-file
 ;;;;;;  helm-yas-complete) "helm-c-yasnippet" "helm-c-yasnippet.el"
-;;;;;;  (21448 61488 508343 869000))
+;;;;;;  (21501 26380 157870 717000))
 ;;; Generated autoloads from helm-c-yasnippet.el
 
 (autoload 'helm-yas-complete "helm-c-yasnippet" "\
@@ -25,8 +25,8 @@ Create a snippet from region.
 
 ;;;***
 
-;;;### (autoloads nil nil ("helm-c-yasnippet-pkg.el") (21448 61488
-;;;;;;  521220 71000))
+;;;### (autoloads nil nil ("helm-c-yasnippet-pkg.el") (21501 26380
+;;;;;;  164790 871000))
 
 ;;;***
 

@@ -40,6 +40,8 @@
     ;; php
     php-mode
 
+    projectile
+
     ;; helm
     helm
     ac-helm

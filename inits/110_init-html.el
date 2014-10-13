@@ -35,11 +35,10 @@
 (add-hook 'js2-mode-hook
           '(lambda ()
              (require 'js)
-             (setq tab-width 4
-                   js-indent-level 4
-                   js-expr-indent-offset 4
-                   indent-tabs-mode t
-                   js2-cleanup-whitespace nil)
+             (setq js2-basic-offset 2
+                   indent-tabs-mode nil
+                   js2-cleanup-whitespace nil
+                   js2-bounce-indent-flag nil)
              (define-key js2-mode-map "\C-m" 'newline-and-indent)
              (define-key js2-mode-map "\C-i" 'indent-and-back-to-indentation)))
 

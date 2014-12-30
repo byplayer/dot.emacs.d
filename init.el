@@ -40,6 +40,9 @@
     ;; php
     php-mode
 
+    ;; html
+    web-mode
+
     projectile
 
     ;; helm

@@ -10,7 +10,6 @@
   (setq web-mode-markup-indent-offset 2) ;; html indent
   (setq web-mode-css-indent-offset 2)    ;; css indent
   (setq web-mode-code-indent-offset 2)   ;; script indent(js,php,etc..)
-  (local-set-key (kbd "C-c /") 'web-mode-element-close)
   )
 (add-hook 'web-mode-hook  'web-mode-hook)
 ;; 色の設定

@@ -5,21 +5,27 @@
 
 ;;;### (autoloads (rspec-enable-appropriate-mode rspec-buffer-is-spec-p
 ;;;;;;  rspec-dired-mode rspec-verifiable-mode rspec-mode) "rspec-mode"
-;;;;;;  "rspec-mode.el" (21288 5453 889365 620000))
+;;;;;;  "rspec-mode.el" (21679 33210 521732 336000))
 ;;; Generated autoloads from rspec-mode.el
 
 (autoload 'rspec-mode "rspec-mode" "\
 Minor mode for RSpec files
+
+\\{rspec-mode-map}
 
 \(fn &optional ARG)" t nil)
 
 (autoload 'rspec-verifiable-mode "rspec-mode" "\
 Minor mode for Ruby files that have specs
 
+\\{rspec-verifiable-mode-map}
+
 \(fn &optional ARG)" t nil)
 
 (autoload 'rspec-dired-mode "rspec-mode" "\
 Minor mode for Dired buffers with spec files
+
+\\{rspec-dired-mode-map}
 
 \(fn &optional ARG)" t nil)
 
@@ -39,8 +45,8 @@ Returns true if the current buffer is a spec
 
 ;;;***
 
-;;;### (autoloads nil nil ("rspec-mode-pkg.el") (21288 5453 895537
-;;;;;;  280000))
+;;;### (autoloads nil nil ("rspec-mode-pkg.el") (21679 33210 591910
+;;;;;;  873000))
 
 ;;;***
 

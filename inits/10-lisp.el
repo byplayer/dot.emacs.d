@@ -4,10 +4,13 @@
 (add-hook 'emacs-lisp-mode-hook
           '(lambda()
              (progn
-               (setq indent-tabs-mode nil))))
+               (setq indent-tabs-mode nil)
+               (rainbow-mode))))
 
 (add-hook 'lisp-mode-hook
           '(lambda()
              (progn
-               (setq indent-tabs-mode nil))))
-;;; 128_init-lisp.el ends here
+               (setq indent-tabs-mode nil)
+               (rainbow-mode))))
+
+;;; 10-lisp.el ends here

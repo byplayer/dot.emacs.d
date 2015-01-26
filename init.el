@@ -42,6 +42,7 @@
 
     ;; html
     web-mode
+    rainbow-mode
 
     projectile
 

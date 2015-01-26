@@ -5,6 +5,8 @@
                        '("\\.html$" . web-mode)
                        auto-mode-alist))
 
+(require 'rainbow-mode)
+
 (require 'web-mode)
 (defun web-mode-hook ()
   (setq web-mode-markup-indent-offset 2) ;; html indent
@@ -42,6 +44,8 @@
   (turn-on-font-lock))
 
 (add-hook 'css-mode-hook 'my-css-mode-hook)
+(add-hook 'css-mode-hook 'rainbow-mode)
+(add-hook 'scss-mode-hook 'rainbow-mode)
 
 (autoload 'css-mode "css-mode")
 (setq auto-mode-alist (cons

@@ -5,7 +5,7 @@
 
 ;;;### (autoloads (helm-descbinds helm-descbinds-uninstall helm-descbinds-install
 ;;;;;;  helm-descbinds-mode) "helm-descbinds" "helm-descbinds.el"
-;;;;;;  (21501 26403 593576 94000))
+;;;;;;  (21701 63934 658400 669000))
 ;;; Generated autoloads from helm-descbinds.el
 
 (defvar helm-descbinds-mode nil "\
@@ -39,8 +39,8 @@ Yet Another `describe-bindings' with `helm'.
 
 ;;;***
 
-;;;### (autoloads nil nil ("helm-descbinds-pkg.el") (21501 26403
-;;;;;;  613981 197000))
+;;;### (autoloads nil nil ("helm-descbinds-pkg.el") (21701 63934
+;;;;;;  687267 643000))
 
 ;;;***
 

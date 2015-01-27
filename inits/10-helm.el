@@ -6,6 +6,10 @@
 
 (require 'helm-git-files)
 
+;; for support lazy initialize
+(setq helm-source-buffers-list
+      (helm-make-source "Buffers" 'helm-source-buffers))
+
 (defun my-helm ()
   "`helm' for opening files all resource."
   (interactive)

@@ -4,8 +4,8 @@
 
 
 ;;;### (autoloads (helm-do-ag helm-ag helm-ag-this-file helm-ag-clear-stack
-;;;;;;  helm-ag-pop-stack) "helm-ag" "helm-ag.el" (21705 61981 357400
-;;;;;;  890000))
+;;;;;;  helm-ag-pop-stack) "helm-ag" "helm-ag.el" (21713 52959 215194
+;;;;;;  277000))
 ;;; Generated autoloads from helm-ag.el
 
 (autoload 'helm-ag-pop-stack "helm-ag" "\
@@ -35,8 +35,8 @@
 
 ;;;***
 
-;;;### (autoloads nil nil ("helm-ag-pkg.el") (21705 61981 369144
-;;;;;;  606000))
+;;;### (autoloads nil nil ("helm-ag-pkg.el") (21713 52959 240080
+;;;;;;  786000))
 
 ;;;***
 

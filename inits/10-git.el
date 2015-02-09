@@ -13,7 +13,7 @@
 (defun my-git-commit-mode-hook()
   (progn
     (setq buffer-undo-list nil)
-    (flyspell-mode)
+    (flyspell-mode 1)
     (turn-on-auto-fill)))
 (add-hook 'git-commit-mode-hook 'my-git-commit-mode-hook)
 

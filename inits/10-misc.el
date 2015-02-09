@@ -157,6 +157,9 @@
   (dolist (buf (buffer-list))
     (kill-buffer buf)))
 
+(dolist (hook '(text-mode-hook))
+  (add-hook hook (lambda () (flyspell-mode 1))))
+
 (smartparens-global-mode t)
 (global-rainbow-delimiters-mode)
 

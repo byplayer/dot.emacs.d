@@ -134,6 +134,7 @@
   ;; add following characters into syntax
   (modify-syntax-entry ?@ "_" ruby-mode-syntax-table)
   (modify-syntax-entry ?! "_" ruby-mode-syntax-table)
+  (flyspell-prog-mode)
   (setq ac-sources (append ac-sources
                            '(ac-source-words-in-same-mode-buffers
                              ac-source-gtags

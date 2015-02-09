@@ -2,6 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 (require 'egg)
+(require 'git-commit-mode)
 
 ; no change
 (setq egg-switch-to-buffer t)

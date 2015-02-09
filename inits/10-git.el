@@ -11,8 +11,10 @@
 (global-git-gutter-mode t)
 
 (defun my-git-commit-mode-hook()
-  (setq buffer-undo-list nil)
-  )
+  (progn
+    (setq buffer-undo-list nil)
+    (flyspell-mode)
+    (turn-on-auto-fill)))
 (add-hook 'git-commit-mode-hook 'my-git-commit-mode-hook)
 
 (provide '10-git)

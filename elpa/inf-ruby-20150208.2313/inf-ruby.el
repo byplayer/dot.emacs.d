@@ -10,7 +10,7 @@
 ;; URL: http://github.com/nonsequitur/inf-ruby
 ;; Created: 8 April 1998
 ;; Keywords: languages ruby
-;; Version: 20141005.550
+;; Version: 20150208.2313
 ;; X-Original-Version: 2.4.0
 
 ;; This program is free software: you can redistribute it and/or modify
@@ -588,7 +588,7 @@ keymaps to bind `inf-ruby-switch-from-compilation' to `С-x C-q'."
        'inf-ruby-switch-from-compilation)))
 
 (defvar inf-ruby-console-patterns-alist
-  '(("config/application.rb" . rails)
+  '(("bin/rails" . rails)
     ("*.gemspec" . gem)
     ("Gemfile" . default))
   "Mapping from file name patterns to name symbols.

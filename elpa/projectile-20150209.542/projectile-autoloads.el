@@ -16,7 +16,7 @@
 ;;;;;;  projectile-find-file-dwim projectile-multi-occur projectile-project-buffers-other-buffer
 ;;;;;;  projectile-display-buffer projectile-switch-to-buffer-other-window
 ;;;;;;  projectile-switch-to-buffer projectile-cache-current-file)
-;;;;;;  "projectile" "projectile.el" (21720 14199 76470 605000))
+;;;;;;  "projectile" "projectile.el" (21721 22799 528937 519000))
 ;;; Generated autoloads from projectile.el
 
 (autoload 'projectile-cache-current-file "projectile" "\
@@ -260,8 +260,8 @@ See `projectile-mode' for more information on Projectile mode.
 
 ;;;***
 
-;;;### (autoloads nil nil ("projectile-pkg.el") (21720 14199 84681
-;;;;;;  950000))
+;;;### (autoloads nil nil ("projectile-pkg.el") (21721 22799 557014
+;;;;;;  896000))
 
 ;;;***
 

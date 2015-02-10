@@ -4,7 +4,7 @@
 
 ;; Author: Syohei YOSHIDA <syohex@gmail.com>
 ;; URL: https://github.com/syohex/emacs-helm-gtags
-;; Version: 20150127.802
+;; Version: 20150209.558
 ;; X-Original-Version: 1.4.6
 ;; Package-Requires: ((helm "1.5.6") (cl-lib "0.5"))
 
@@ -120,6 +120,11 @@ Always update if value of this variable is nil."
 
 (defcustom helm-gtags-suggested-key-mapping nil
   "If non-nil, suggested key mapping is enabled."
+  :type 'boolean
+  :group 'helm-gtags)
+
+(defcustom helm-gtags-preselect nil
+  "If non-nil, preselect current file and line."
   :type 'boolean
   :group 'helm-gtags)
 
@@ -939,11 +944,23 @@ Always update if value of this variable is nil."
             (error "Faild: 'gtags -q'"))
           tagroot))))
 
+(defun helm-gtags--current-file-and-line ()
+  (let* ((buffile (buffer-file-name))
+         (path (cl-case helm-gtags-path-style
+                 (absolute buffile)
+                 (root
+                  (file-relative-name buffile (helm-gtags--find-tag-directory)))
+                 (relative
+                  (file-relative-name buffile (helm-gtags--base-directory))))))
+    (format "%s:%d" path (line-number-at-pos))))
+
 (defun helm-gtags--common (srcs tagname)
   (let ((helm-quit-if-no-candidate t)
         (helm-execute-action-at-once-if-one t)
         (dir (helm-gtags--searched-directory))
-        (src (car srcs)))
+        (src (car srcs))
+        (preselect-regexp (when helm-gtags-preselect
+                            (regexp-quote (helm-gtags--current-file-and-line)))))
     (when (symbolp src)
       (setq src (symbol-value src)))
     (unless helm-gtags--use-otherwin
@@ -953,7 +970,8 @@ Always update if value of this variable is nil."
     (let ((tagroot (helm-gtags--find-tag-simple)))
       (helm-attrset 'helm-gtags-base-directory dir src)
       (helm-attrset 'name (concat "GNU Global at " (or dir tagroot)) src)
-      (helm :sources srcs :buffer helm-gtags--buffer))))
+      (helm :sources srcs :buffer helm-gtags--buffer
+            :preselect preselect-regexp))))
 
 ;;;###autoload
 (defun helm-gtags-find-tag (tag)

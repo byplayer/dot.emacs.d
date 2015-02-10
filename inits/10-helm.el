@@ -65,6 +65,7 @@
 (defun helm-ag-from-project-root ()
   "Helm ag from project root."
   (interactive)
+  (helm-ag--clear-variables)
   (let* ((project-root (projectile-project-root))
          (print project-root)
          (helm-ag-default-directory (if project-root
@@ -73,8 +74,9 @@
          (header-name (format "Search at %s" helm-ag-default-directory)))
     (helm-ag--query)
     (helm-attrset 'search-this-file nil helm-ag-source)
-    (helm-attrset 'name header-name helm-ag-source)
-    (helm :sources (helm-ag--select-source) :buffer "*helm-ag*")))
+    (helm-attrset 'name (helm-ag--helm-header helm-ag--default-directory) helm-ag-source)
+    (helm :sources (helm-ag--select-source) :buffer "*helm-ag*"
+          :keymap helm-ag-map)))
 
 (provide '10-helm)
 ;;; 10-helm.el ends here

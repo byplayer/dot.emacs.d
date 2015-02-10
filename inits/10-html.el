@@ -57,6 +57,7 @@
                    indent-tabs-mode nil
                    js2-cleanup-whitespace nil
                    js2-bounce-indent-flag nil)
+             (flyspell-prog-mode)
              (define-key js2-mode-map "\C-m" 'newline-and-indent)
              (define-key js2-mode-map "\C-i" 'indent-and-back-to-indentation)))
 

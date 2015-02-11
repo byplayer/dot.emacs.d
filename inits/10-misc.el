@@ -157,6 +157,9 @@
   (dolist (buf (buffer-list))
     (kill-buffer buf)))
 
+(setq-default ispell-program-name "aspell")
+(eval-after-load "ispell"
+ '(add-to-list 'ispell-skip-region-alist '("[^\000-\377]+")))
 (setq flyspell-default-dictionary "english")
 (setq ispell-dictionary "english")
 (setq ispell-personal-dictionary "~/.emacs.d/.aspell.en.pws")

@@ -37,8 +37,8 @@
   (setq ac-sources (append '(ac-source-words-in-buffer
                              ac-source-yasnippet
                              ac-source-dictionary
-                             ac-source-words-in-same-mode-buffers
                              ac-source-words-in-buffer
+                             ac-source-words-in-same-mode-buffers
                              )))
   (ac-ispell-ac-setup)
   )
@@ -58,10 +58,7 @@
 (defun my-setup-ac-program-source ()
   (my-setup-ac-source)
   (setq ac-sources '(ac-source-symbols
-                     ac-source-words-in-same-mode-buffers
-                     ac-source-yasnippet
-                     ac-source-gtags
-                     ac-source-dictionary)))
+                     ac-source-gtags)))
 
 (mapc
  (lambda (hook)

@@ -31,37 +31,50 @@
 (add-to-list 'ac-modes 'rabbit-mode)
 (add-to-list 'ac-modes 'rst-mode)
 
-(setq ac-sources '(ac-source-yasnippet
-                   ac-source-dictionary
-                   ac-source-gtags
-                   ac-source-words-in-buffer
-                   ac-source-ispell-fuzzy
-                   ac-source-ispell))
 
-(defun ac-emacs-lisp-mode-setup ()
+
+(defun my-setup-ac-source ()
+  (setq ac-sources (append '(ac-source-words-in-buffer
+                             ac-source-yasnippet
+                             ac-source-dictionary
+                             ac-source-words-in-same-mode-buffers
+                             ac-source-words-in-buffer
+                             )))
+  (ac-ispell-ac-setup)
+  )
+
+(mapc
+ (lambda (hook)
+   (add-hook hook 'my-setup-ac-source))
+ '(
+   yaml-mode-hook
+   rhtml-mode-hook
+   outline-mode-hook
+   text-mode-hook
+   rst-mode-hook
+   nxml-mode-hook
+   ))
+
+(defun my-setup-ac-program-source ()
+  (my-setup-ac-source)
   (setq ac-sources '(ac-source-symbols
                      ac-source-words-in-same-mode-buffers
                      ac-source-yasnippet
                      ac-source-gtags
                      ac-source-dictionary)))
 
-(defun ac-c++-mode-setup ()
-  (setq ac-sources '(ac-source-words-in-same-mode-buffers
-                     ac-source-yasnippet
-                     ac-source-semantic
-                     ac-source-gtags
-                     ac-source-dictionary)))
-
-(defun ac-c-mode-setup ()
-  (setq ac-sources '(ac-source-words-in-same-mode-buffers
-                     ac-source-yasnippet
-                     ac-source-semantic
-                     ac-source-gtags
-                     ac-source-dictionary)))
-
-(add-hook 'c-mode-common-hook
-          (lambda ()
-            (local-set-key (kbd "C-c m") 'ac-complete-semantic)))
+(mapc
+ (lambda (hook)
+   (add-hook hook 'my-setup-ac-program-source))
+ '(
+   c-mode-hook
+   c++-mode-hook
+   emacs-lisp-mode-hook
+   lisp-mode-hook
+   nsis-mode-hook
+   ruby-mode-hook
+   java-mode-hook
+   ))
 
 (defun ac-quick-help-force ()
   "Show auto-complete help."

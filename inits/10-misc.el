@@ -157,6 +157,10 @@
   (dolist (buf (buffer-list))
     (kill-buffer buf)))
 
+(setq flyspell-default-dictionary "english")
+(setq ispell-dictionary "english")
+(setq ispell-personal-dictionary "~/.emacs.d/.aspell.en.pws")
+
 (dolist (hook '(text-mode-hook))
   (add-hook hook (lambda () (flyspell-mode 1))))
 

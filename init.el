@@ -60,6 +60,9 @@
     ; helm-package
     ; helm-rails
 
+    ;; auto complete
+    ac-ispell
+
     ;; region and cursor
     expand-region
     multiple-cursors

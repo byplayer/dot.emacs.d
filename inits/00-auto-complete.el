@@ -8,6 +8,10 @@
 
 (setq ac-auto-show-menu 0.5)
 
+(eval-after-load "auto-complete"
+  '(progn
+      (ac-ispell-setup)))
+
 ;; C-n/C-p for select list
 (setq ac-use-menu-map t)
 
@@ -30,7 +34,9 @@
 (setq ac-sources '(ac-source-yasnippet
                    ac-source-dictionary
                    ac-source-gtags
-                   ac-source-words-in-buffer))
+                   ac-source-words-in-buffer
+                   ac-source-ispell-fuzzy
+                   ac-source-ispell))
 
 (defun ac-emacs-lisp-mode-setup ()
   (setq ac-sources '(ac-source-symbols
@@ -63,7 +69,6 @@
   (ac-quick-help t))
 (define-key ac-completing-map (kbd "C-h") 'ac-quick-help-force)
 (setq ac-dwim t)
-
 
 (provide '00-auto-complete)
 ;;; 00-auto-complete.el ends here

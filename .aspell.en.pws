@@ -1,10 +1,22 @@
-personal_ws-1.1 en 9 
-API
+personal_ws-1.1 en 21 
+http
+hipchat
+GPG
+conf
+api
 WLSE
 emacs
+https
+yaml
 san
 RDCS
 SessionM
 Ishiwata
 Hadoop
+bundler
+json
+rspec
+rubocop
+rakuten
 Inoue
+url

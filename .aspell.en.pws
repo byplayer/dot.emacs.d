@@ -1,4 +1,4 @@
-personal_ws-1.1 en 21 
+personal_ws-1.1 en 23 
 http
 hipchat
 GPG
@@ -14,9 +14,11 @@ SessionM
 Ishiwata
 Hadoop
 bundler
+csv
 json
 rspec
 rubocop
+rst
 rakuten
 Inoue
 url

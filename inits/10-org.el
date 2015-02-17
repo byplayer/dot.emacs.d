@@ -6,10 +6,10 @@
   '((sequence "TODO(t)" "STARTED(!)" "WAITING(w@/!)" "|" "DONE(d!)")))
 
 (setq org-todo-keyword-faces
-  '(("TODO" . org-warning)
+  '(("TODO" . "orange red")
    ("STARTED" . "yellow")
    ("WAITING" . "orange")
-   ("DONE" . "green")))
+   ("DONE" . "lime green")))
 
 ;; write done date
 (setq org-log-done 'time)

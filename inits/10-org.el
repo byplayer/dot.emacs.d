@@ -41,5 +41,17 @@
 (add-hook 'org-after-todo-state-change-hook
           'sacha/org-clock-out-if-waiting)
 
+(setq org-agenda-files (list (expand-file-name "~/projects/misc/goal/agenda")))
+(setq org-capture-templates
+      '(("p" "Project Task" entry
+         (file+headline (expand-file-name "~/projects/misc/goal/agenda/project.org") "Inbox")
+         "** TODO %?\n    %i\n    %a\n    %T")
+        ("t" "TODO" entry
+         (file+headline "~/projects/misc/goal/agenda/todo.org" "Inbox")
+         "** TODO %?\n    CAPTURED_AT: %a\n    %i")))
+
+(global-set-key "\C-caa" 'org-agenda)
+(global-set-key "\C-cap" 'org-capture)
+
 (provide '10-org)
 ;;; 10-org.el ends here

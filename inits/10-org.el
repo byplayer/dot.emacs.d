@@ -21,8 +21,6 @@
 
 (defun sacha/org-clock-in-if-starting ()
   "Clock in when the task is marked STARTED."
-  (print org-last-state)
-  (print org-state)
   (when (and (string= org-state "STARTED")
              (not (string= org-last-state org-state)))
     (org-clock-in)))

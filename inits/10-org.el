@@ -2,6 +2,8 @@
 ;;; Commentary:
 ;;; Code:
 
+(require 'org-habit)
+
 (setq org-todo-keywords 
   '((sequence "TODO(t)" "STARTED(!)" "WAITING(w@/!)" "|" "DONE(d!)")))
 
@@ -14,10 +16,6 @@
 ;; write done date
 (setq org-log-done 'time)
 
-(custom-set-variables
-  '(org-display-custom-times t)
-  '(org-time-stamp-custom-formats (quote ("<%Y.%m.%d>" . "<%Y.%m.%d %H:%M>")))
-)
 
 (defun sacha/org-clock-in-if-starting ()
   "Clock in when the task is marked STARTED."

@@ -75,6 +75,14 @@ C-c <-/->
 
 * org(TODO)
 
+** agenda
+
+C-caa
+
+** create todo
+
+C-cap
+
 ** change status
 
 C-c C-t on title

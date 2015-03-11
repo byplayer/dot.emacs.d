@@ -45,6 +45,7 @@
     rainbow-mode
 
     projectile
+    migemo
 
     ;; helm
     helm
@@ -57,6 +58,7 @@
     helm-gtags
     helm-projectile
     helm-descbinds
+    helm-migemo
     ; helm-package
     ; helm-rails
 

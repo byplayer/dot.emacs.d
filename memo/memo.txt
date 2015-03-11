@@ -72,3 +72,6 @@ s    search in info regex
 
 undo/redo window
 C-c <-/->
+
+* rst
+C-= rst-adjust

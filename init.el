@@ -97,6 +97,7 @@
     smartparens
     rainbow-delimiters
     volatile-highlights
+    popwin
     ))
 
 (let ((not-installed (loop for x in my-installing-package-list

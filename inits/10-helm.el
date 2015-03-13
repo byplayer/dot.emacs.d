@@ -79,9 +79,8 @@
           :keymap helm-ag-map)))
 
 ;; for popwin
-(setq helm-full-frame nil)
 (push '("^\*helm.+\*$" :regexp t) popwin:special-display-config)
-(push '("*my helm*" :regexp t) popwin:special-display-config)
+(push '("\*my helm\*" :regexp t) popwin:special-display-config)
 
 (provide '10-helm)
 ;;; 10-helm.el ends here

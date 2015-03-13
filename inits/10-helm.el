@@ -78,9 +78,7 @@
     (helm :sources (helm-ag--select-source) :buffer "*helm-ag*"
           :keymap helm-ag-map)))
 
-;; for popwin
-(push '("^\*helm.+\*$" :regexp t) popwin:special-display-config)
-(push '("\*my helm\*" :regexp t) popwin:special-display-config)
+(helm-autoresize-mode t)
 
 (provide '10-helm)
 ;;; 10-helm.el ends here

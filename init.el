@@ -59,6 +59,7 @@
     helm-projectile
     helm-descbinds
     helm-migemo
+    helm-swoop
     ; helm-package
     ; helm-rails
 

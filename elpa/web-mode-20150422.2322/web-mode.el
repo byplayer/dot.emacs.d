@@ -3,8 +3,8 @@
 
 ;; Copyright 2011-2015 François-Xavier Bois
 
-;; Version: 11.0.38
-;; Package-Version: 20150420.1223
+;; Version: 11.0.40
+;; Package-Version: 20150422.2322
 ;; Author: François-Xavier Bois <fxbois AT Google Mail Service>
 ;; Maintainer: François-Xavier Bois
 ;; Created: July 2011
@@ -27,7 +27,7 @@
 
 ;;---- CONSTS ------------------------------------------------------------------
 
-(defconst web-mode-version "11.0.38"
+(defconst web-mode-version "11.0.40"
   "Web Mode version.")
 
 ;;---- GROUPS ------------------------------------------------------------------
@@ -6330,6 +6330,8 @@ the environment as needed for ac-sources, right before they're used.")
             )
            (web-mode-attr-indent-offset
             (setq offset (+ (current-column) web-mode-attr-indent-offset)))
+           ((string-match-p "/>" curr-line)
+            (setq offset (current-column)))
            (t
             (let ((skip (next-single-property-change (point) 'tag-attr)))
               (when skip
@@ -8672,6 +8674,8 @@ Pos should be in a tag."
 
     (when (and web-mode-expand-previous-state
                (not (eq this-command 'web-mode-mark-and-expand)))
+      (when (eq this-command 'keyboard-quit)
+        (goto-char web-mode-expand-initial-pos))
       (deactivate-mark)
       (setq web-mode-expand-previous-state nil
             web-mode-expand-initial-pos nil))

@@ -54,7 +54,7 @@
     helm-flycheck
     helm-git-files
     helm-projectile
-    helm-ag
+    helm-ag-r
     helm-gtags
     helm-projectile
     helm-descbinds

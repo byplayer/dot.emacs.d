@@ -4,3 +4,6 @@ C-h C-h lisp help
     f function-name 関数の説明
     v 変数名 変数の説明
 
+
+debug when error has occurred
+(setq debug-on-error t)

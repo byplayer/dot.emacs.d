@@ -8,11 +8,16 @@
   (save-buffer)
   (with-temp-buffer
     (while (and (not (or (file-exists-p "build.xml")
-                         (file-exists-p "pom.xml")))
+                         (file-exists-p "pom.xml")
+                         (file-exists-p "build.gradle")))
         (not (equal "/" default-directory)))
       (cd ".."))
     (set (make-local-variable 'compile-command)
-     (if (file-exists-p "build.xml") "ant -emacs" "mvn compile"))
+     (if (file-exists-p "build.xml")
+         "ant -emacs"
+       (if (file-exists-p "build.gradle")
+           "gradle build"
+           "mvn compile")))
     (call-interactively 'compile)))
 
 (add-hook 'java-mode-hook

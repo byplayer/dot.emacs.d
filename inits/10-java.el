@@ -12,13 +12,14 @@
                          (file-exists-p "build.gradle")))
         (not (equal "/" default-directory)))
       (cd ".."))
-    (set (make-local-variable 'compile-command)
-     (if (file-exists-p "build.xml")
-         "ant -emacs"
-       (if (file-exists-p "build.gradle")
-           "gradle build"
-           "mvn compile")))
     (call-interactively 'compile)))
+    ;; (set (make-local-variable 'compile-command)
+    ;;  (if (file-exists-p "build.xml")
+    ;;      "ant -emacs"
+    ;;    (if (file-exists-p "build.gradle")
+    ;;        "gradle build"
+    ;;        "mvn compile")))
+    ;; (call-interactively 'compile)))
 
 (add-hook 'java-mode-hook
           (lambda ()

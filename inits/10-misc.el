@@ -173,5 +173,7 @@
 (require 'volatile-highlights)
 (volatile-highlights-mode t)
 
+(setq confirm-kill-emacs 'y-or-n-p)
+
 (provide '10-misc)
 ;;; 10-misc.el ends here

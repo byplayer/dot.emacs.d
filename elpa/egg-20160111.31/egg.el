@@ -4,11 +4,11 @@
 ;; Copyright (C) 2008  Marius Vollmer
 ;; Copyright (C) 2009  Tim Moore
 ;; Copyright (C) 2010  Alexander Prusov
-;; Copyright (C) 2011-2014 byplayer
+;; Copyright (C) 2011-2016 byplayer
 ;;
 ;; Author: Bogolisk <bogolisk@gmail.com>
 ;; Created: 19 Aug 2008
-;; Version: 1.0.2
+;; Version: 1.1.0
 ;; Keywords: git, version control, release management
 ;;
 ;; Special Thanks to
@@ -16,6 +16,7 @@
 ;;   Christian Köstlin
 ;;   Max Mikhanosha
 ;;   Aleksandar Simic
+;;   Maksim Golubev
 ;;
 ;; Egg is free software; you can redistribute it and/or modify it
 ;; under the terms of the GNU General Public License as published by
@@ -70,7 +71,7 @@
 (require 'diff-mode)
 (require 'rx)
 
-(defconst egg-version "1.0.9")
+(defconst egg-version "1.1.0")
 
 (defconst egg-basic-map
   (let ((map (make-sparse-keymap "Egg:Basic")))
@@ -4068,7 +4069,8 @@ Jump to line LINE if it's not nil."
       (goto-char pos)
       (while (> (skip-chars-forward "^ ,:" dec-ref-end) 0)
 	(setq ref-full-name (buffer-substring-no-properties pos (point)))
-	(forward-char 2)
+	(when (looking-at " *-> *\\|, *\\|: *\\| +")
+          (goto-char (match-end 0)))
 	(setq pos (point))
 	(unless (or 
 		 ;; (equal ref-full-name "HEAD") 
@@ -4151,9 +4153,12 @@ REMOTE-SITE-MAP is used as local keymap for the name of a remote site."
 	  (setq graph-len (if (= beg sha-beg) 0 (- sha-beg beg 1))
 		sha1 (buffer-substring-no-properties sha-beg sha-end)
 		subject-beg (if (or (/= (char-after subject-beg) ?\()
-				    (not (member (buffer-substring-no-properties 
-						  subject-beg (+ subject-beg 6))
-						 '("(refs/" "(tag: " "(HEAD," "(HEAD)"))))
+				    (and (not (member (buffer-substring-no-properties 
+						       subject-beg (+ subject-beg 6))
+						      '("(refs/" "(tag: " "(HEAD," "(HEAD)")))
+					 (not (member (buffer-substring-no-properties 
+						       subject-beg (+ subject-beg 8))
+						      '("(HEAD ->")))))
 				subject-beg
 			      (setq refs-start (1+ subject-beg))
 			      (goto-char subject-beg)

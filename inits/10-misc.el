@@ -173,5 +173,10 @@
 (require 'volatile-highlights)
 (volatile-highlights-mode t)
 
+;; dired
+(setq dired-dwim-target t)
+(setq dired-recursive-copies 'always)
+(setq dired-isearch-filenames t)
+
 (provide '10-misc)
 ;;; 10-misc.el ends here

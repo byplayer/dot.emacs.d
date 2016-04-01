@@ -1,10 +1,9 @@
 ;;; egg-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-
+(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads (egg-minor-mode-find-file-hook egg-minor-mode)
-;;;;;;  "egg" "egg.el" (22165 42818 129255 0))
+;;;### (autoloads nil "egg" "egg.el" (22269 52431 33330 782000))
 ;;; Generated autoloads from egg.el
 
 (autoload 'egg-minor-mode "egg" "\
@@ -36,8 +35,8 @@ egg in current buffer.\\<egg-minor-mode-map>
 
 ;;;***
 
-;;;### (autoloads (egg-grep egg-grep-mode egg-grep-process-setup)
-;;;;;;  "egg-grep" "egg-grep.el" (22165 42818 129255 0))
+;;;### (autoloads nil "egg-grep" "egg-grep.el" (22269 52431 41326
+;;;;;;  543000))
 ;;; Generated autoloads from egg-grep.el
 
 (autoload 'egg-grep-process-setup "egg-grep" "\
@@ -60,15 +59,13 @@ Sets `compilation-last-buffer' and `compilation-window-height'.
 
 ;;;### (autoloads nil nil ("egg-base.el" "egg-const.el" "egg-custom.el"
 ;;;;;;  "egg-diff.el" "egg-git.el" "egg-key.el" "egg-pkg.el" "egg-svn.el")
-;;;;;;  (22165 42818 161066 365000))
+;;;;;;  (22269 52431 68358 476000))
 
 ;;;***
 
-(provide 'egg-autoloads)
 ;; Local Variables:
 ;; version-control: never
 ;; no-byte-compile: t
 ;; no-update-autoloads: t
-;; coding: utf-8
 ;; End:
 ;;; egg-autoloads.el ends here

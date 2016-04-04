@@ -96,7 +96,6 @@
     savekill
     crontab-mode
     smartparens
-    rainbow-delimiters
     volatile-highlights
     popwin
     ))

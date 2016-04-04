@@ -168,7 +168,6 @@
   (add-hook hook (lambda () (flyspell-mode 1))))
 
 (smartparens-global-mode t)
-(global-rainbow-delimiters-mode)
 
 (require 'volatile-highlights)
 (volatile-highlights-mode t)

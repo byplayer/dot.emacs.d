@@ -4,6 +4,7 @@
      (require 'go-autocomplete)
 
      ;; company-mode
+     (require 'company)
      (add-to-list 'company-backends 'company-go)
 
      ;; eldoc

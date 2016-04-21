@@ -5,11 +5,11 @@
 
 ;;;### (autoloads (flycheck-def-option-var flycheck-def-config-file-var
 ;;;;;;  flycheck-define-command-checker flycheck-define-error-level
-;;;;;;  global-flycheck-mode flycheck-mode flycheck-info) "flycheck"
-;;;;;;  "flycheck.el" (22010 19138 159007 656000))
+;;;;;;  global-flycheck-mode flycheck-mode flycheck-manual) "flycheck"
+;;;;;;  "flycheck.el" (22285 60249 651351 427000))
 ;;; Generated autoloads from flycheck.el
 
-(autoload 'flycheck-info "flycheck" "\
+(autoload 'flycheck-manual "flycheck" "\
 Open the Flycheck manual.
 
 \(fn)" t nil)
@@ -108,7 +108,7 @@ The following PROPERTIES constitute an error level:
 (put 'flycheck-define-error-level 'lisp-indent-function '1)
 
 (autoload 'flycheck-define-command-checker "flycheck" "\
-Define SYMBOL as syntax checker which runs a command.
+Define SYMBOL as syntax checker to run a command.
 
 Define SYMBOL as generic syntax checker via
 `flycheck-define-generic-checker', which uses an external command
@@ -171,6 +171,14 @@ of command checkers is `flycheck-sanitize-errors'.
      `flycheck-parse-with-patterns'.  In this case,
      `:error-patterns' is mandatory.
 
+`:standard-input t'
+     Whether to send the buffer contents on standard input.
+
+     If this property is given and has a non-nil value, send the
+     contents of the buffer on standard input.
+
+     Defaults to nil.
+
 Note that you may not give `:start', `:interrupt', and
 `:print-doc' for a command checker.  You can give a custom
 `:verify' function, though, whose results will be appended to the
@@ -203,15 +211,16 @@ argument to `flycheck-define-checker'.
 Define SYMBOL as option variable with INIT-VALUE for CHECKER.
 
 SYMBOL is declared as customizable variable using `defcustom', to
-provide an option for the given syntax CHECKER.  INIT-VALUE is
-the initial value of the variable, and DOCSTRING is its
-docstring.  CUSTOM-ARGS are forwarded to `defcustom'.
+provide an option for the given syntax CHECKERS (a checker or a
+list of checkers).  INIT-VALUE is the initial value of the
+variable, and DOCSTRING is its docstring.  CUSTOM-ARGS are
+forwarded to `defcustom'.
 
 Use this together with the `option', `option-list' and
 `option-flag' forms in the `:command' argument to
 `flycheck-define-checker'.
 
-\(fn SYMBOL INIT-VALUE CHECKER DOCSTRING &rest CUSTOM-ARGS)" nil t)
+\(fn SYMBOL INIT-VALUE CHECKERS DOCSTRING &rest CUSTOM-ARGS)" nil t)
 
 (put 'flycheck-def-option-var 'lisp-indent-function '3)
 
@@ -219,8 +228,8 @@ Use this together with the `option', `option-list' and
 
 ;;;***
 
-;;;### (autoloads nil nil ("flycheck-ert.el" "flycheck-pkg.el") (22010
-;;;;;;  19138 163654 205000))
+;;;### (autoloads nil nil ("flycheck-buttercup.el" "flycheck-ert.el"
+;;;;;;  "flycheck-pkg.el") (22285 60249 656088 15000))
 
 ;;;***
 

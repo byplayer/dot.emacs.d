@@ -46,6 +46,7 @@
 
     projectile
     migemo
+    company
 
     ;; helm
     helm
@@ -83,6 +84,12 @@
 
     ;; docker
     dockerfile-mode
+
+    ;; go
+    go-mode
+    go-eldoc
+    go-autocomplete
+    company-go
 
     ;; other
     undo-tree

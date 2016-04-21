@@ -75,3 +75,7 @@ C-c <-/->
 
 * rst
 C-= rst-adjust
+
+* go
+% go get -u github.com/nsf/gocode
+% go get -u github.com/rogpeppe/godef

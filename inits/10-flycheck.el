@@ -8,8 +8,7 @@
 
 (eval-after-load 'flycheck
   '(progn
-     (custom-set-variables
-      '(flycheck-display-errors-function #'flycheck-pos-tip-error-messages))
+     (flycheck-pos-tip-mode)
      (setq flycheck-display-errors-delay 0.3)
      (defun flycheck-print-current-checker (args)
        "Print checker for current buffer.

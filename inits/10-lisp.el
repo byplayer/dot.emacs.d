@@ -5,14 +5,12 @@
           '(lambda()
              (progn
                (setq indent-tabs-mode nil)
-               (flyspell-prog-mode)
-               (rainbow-mode))))
+               (flyspell-prog-mode))))
 
 (add-hook 'lisp-mode-hook
           '(lambda()
              (progn
                (setq indent-tabs-mode nil)
-               (flyspell-prog-mode)
-               (rainbow-mode))))
+               (flyspell-prog-mode))))
 
 ;;; 10-lisp.el ends here

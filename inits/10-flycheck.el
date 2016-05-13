@@ -3,6 +3,7 @@
 ;;; Code:
 ;; flycheck
 (require 'flycheck)
+(require 'f)
 
 (add-hook 'after-init-hook #'global-flycheck-mode)
 
@@ -10,6 +11,7 @@
   '(progn
      (flycheck-pos-tip-mode)
      (setq flycheck-display-errors-delay 0.3)
+     (setq flycheck-pos-tip-timeout 60)
      (defun flycheck-print-current-checker (args)
        "Print checker for current buffer.
 ARGS is dummy"

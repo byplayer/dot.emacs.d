@@ -7,6 +7,8 @@
 
 (add-hook 'after-init-hook #'global-flycheck-mode)
 
+(defvar flycheck-pos-tip-timeout)
+
 (eval-after-load 'flycheck
   '(progn
      (flycheck-pos-tip-mode)

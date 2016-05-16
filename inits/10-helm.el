@@ -4,7 +4,7 @@
 (require 'helm-config)
 (helm-mode t)
 
-(require 'helm-git-files)
+(require 'helm-ls-git)
 
 ;; for support lazy initialize
 (setq helm-source-buffers-list
@@ -13,17 +13,21 @@
 (defun my-helm ()
   "`helm' for opening files all resource."
   (interactive)
-  (vc-file-setprop default-directory 'git-root (helm-git-files:root-1))
-  (helm-other-buffer `(helm-source-buffers-list
-                       helm-source-bookmarks
-                       helm-source-recentf
-                       helm-git-files:modified-source
-                       helm-git-files:untracked-source
-                       helm-git-files:all-source
-                       ,@(helm-git-files:submodule-sources
-                          '(modified untracked all))
-                       helm-source-locate)
-                     "*my helm*"))
+  (when (helm-ls-git-not-inside-git-repo)
+    (helm-other-buffer `(helm-source-buffers-list
+                           helm-source-bookmarks
+                           helm-source-recentf
+                           helm-source-locate)
+                         "*my helm*"))
+  (unless
+      (helm-other-buffer `(helm-source-buffers-list
+                           helm-source-bookmarks
+                           helm-source-ls-git-status
+                           helm-source-ls-git-buffers
+                           helm-source-ls-git
+                           helm-source-recentf
+                           helm-source-locate)
+                         "*my helm*")))
 
 (setq helm-ff-auto-update-initial-value nil)
 (setq helm-ff-transformer-show-only-basename nil)

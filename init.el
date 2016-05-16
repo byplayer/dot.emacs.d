@@ -53,7 +53,7 @@
     ac-helm
     helm-c-yasnippet
     helm-flycheck
-    helm-git-files
+    helm-ls-git
     helm-projectile
     helm-ag
     helm-gtags

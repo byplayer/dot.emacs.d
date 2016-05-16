@@ -13,21 +13,20 @@
 (defun my-helm ()
   "`helm' for opening files all resource."
   (interactive)
-  (when (helm-ls-git-not-inside-git-repo)
+  (if (helm-ls-git-not-inside-git-repo)
     (helm-other-buffer `(helm-source-buffers-list
                            helm-source-bookmarks
                            helm-source-recentf
                            helm-source-locate)
-                         "*my helm*"))
-  (unless
-      (helm-other-buffer `(helm-source-buffers-list
-                           helm-source-bookmarks
-                           helm-source-ls-git-status
-                           helm-source-ls-git-buffers
-                           helm-source-ls-git
-                           helm-source-recentf
-                           helm-source-locate)
-                         "*my helm*")))
+                         "*my helm*")
+  (helm-other-buffer `(helm-source-buffers-list
+                       helm-source-bookmarks
+                       helm-source-ls-git-status
+                       helm-source-ls-git-buffers
+                       helm-source-ls-git
+                       helm-source-recentf
+                       helm-source-locate)
+                     "*my helm*")))
 
 (setq helm-ff-auto-update-initial-value nil)
 (setq helm-ff-transformer-show-only-basename nil)

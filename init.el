@@ -105,6 +105,7 @@
     smartparens
     volatile-highlights
     popwin
+    neotree
     ))
 
 (let ((not-installed (loop for x in my-installing-package-list

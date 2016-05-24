@@ -159,7 +159,8 @@
 
 (setq-default ispell-program-name "aspell")
 (eval-after-load "ispell"
- '(add-to-list 'ispell-skip-region-alist '("[^\000-\377]+")))
+  '(add-to-list 'ispell-skip-region-alist '("[^\000-\377]+")))
+
 (setq flyspell-default-dictionary "english")
 (setq ispell-dictionary "english")
 (setq ispell-personal-dictionary "~/.emacs.d/.aspell.en.pws")
@@ -177,6 +178,36 @@
 (setq dired-dwim-target t)
 (setq dired-recursive-copies 'always)
 (setq dired-isearch-filenames t)
+
+;; neo tree
+;; show hidden file default
+(require 'neotree)
+(setq neo-show-hidden-files t)
+
+;; open new file when create new file on new tree
+(setq neo-create-file-auto-open t)
+
+;; don't delete neotree on delete-other-window
+(setq neo-persist-show t)
+
+;; simple key bind for neo tree
+(setq neo-keymap-style 'concise)
+
+;; show current file directory when I show neo tree
+(setq neo-smart-open t)
+
+;; maybe it doesn't work
+;; https://github.com/jaypei/emacs-neotree/issues/105
+(setq neo-vc-integration '(face char))
+
+;; work with popwin
+(when neo-persist-show
+  (add-hook 'popwin:before-popup-hook
+            (lambda () (setq neo-persist-show nil)))
+  (add-hook 'popwin:after-popup-hook
+            (lambda () (setq neo-persist-show t))))
+
+(global-set-key [f8] 'neotree-toggle)
 
 (provide '10-misc)
 ;;; 10-misc.el ends here

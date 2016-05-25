@@ -180,9 +180,10 @@
 (setq dired-isearch-filenames t)
 
 ;; neo tree
-;; show hidden file default
 (require 'neotree)
-(setq neo-show-hidden-files t)
+
+;; show hidden file default
+;; (setq neo-show-hidden-files t)
 
 ;; open new file when create new file on new tree
 (setq neo-create-file-auto-open t)

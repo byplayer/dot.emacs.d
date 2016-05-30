@@ -79,3 +79,13 @@ C-= rst-adjust
 * go
 % go get -u github.com/nsf/gocode
 % go get -u github.com/rogpeppe/godef
+
+
+* neotree
+H       toggle hide file
+U       up dir
+F8      neotree-toggle
+C-c C-n neotree-create-node
+C-c C-d neotree-delete-node
+C-c C-r neotree-rename-node
+C-c C-p neotree-copy-node)

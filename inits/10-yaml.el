@@ -5,6 +5,7 @@
 ;; yaml-modeの設定
 (require 'yaml-mode)
 (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
+(add-to-list 'auto-mode-alist '("\\.dag$" . yaml-mode))
 (add-to-list 'auto-mode-alist '("\\.yml-[a-zA-Z]+$" . yaml-mode))
 
 (add-hook 'yaml-mode-hook

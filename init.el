@@ -59,7 +59,7 @@
     helm-gtags
     helm-projectile
     helm-descbinds
-    ; helm-migemo
+    helm-migemo
     helm-swoop
     ; helm-package
     ; helm-rails

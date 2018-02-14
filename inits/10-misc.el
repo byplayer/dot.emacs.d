@@ -58,6 +58,9 @@
 ;; use space insted of tab
 (setq-default indent-tabs-mode nil)
 
+;; hungry delete
+(setq c-hungry-delete-key t)
+
 ;; show column
 (column-number-mode 1)
 

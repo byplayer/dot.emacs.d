@@ -39,6 +39,7 @@
 
     ;; php
     php-mode
+    phpunit
 
     ;; html
     web-mode

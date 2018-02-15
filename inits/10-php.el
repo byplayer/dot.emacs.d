@@ -7,7 +7,7 @@
 (setq auto-mode-alist
       (append '(
                 ("\\.php$" . php-mode)
-                ("\\.inc" . php-mode)
+                ("\\.inc$" . php-mode)
                 ) auto-mode-alist))
 
 (add-hook 'php-mode-hook

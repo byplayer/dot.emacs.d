@@ -4,6 +4,12 @@
 
 (autoload 'php-mode "php-mode" "PHP mode" t)
 
+(setq auto-mode-alist
+      (append '(
+                ("\\.php$" . php-mode)
+                ("\\.inc" . php-mode)
+                ) auto-mode-alist))
+
 (add-hook 'php-mode-hook
           '(lambda()
              (php-set-style "php")

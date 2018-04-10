@@ -89,3 +89,7 @@ C-c C-n neotree-create-node
 C-c C-d neotree-delete-node
 C-c C-r neotree-rename-node
 C-c C-p neotree-copy-node)
+
+* expand-region
+C-<   expand-region
+C-M-, contract-region

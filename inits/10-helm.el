@@ -39,10 +39,10 @@
 (global-set-key (kbd "C-:") 'helm-resume)
 
 ;; open helm list top of new split window in current buffer
-(setq helm-display-function (lambda (buf)
-                             (split-window-vertically)
-                             (switch-to-buffer buf)
-                             ))
+(setq helm-display-function (lambda (buf &optional _resume)
+                              (split-window-vertically)
+                              (switch-to-buffer buf)
+                              ))
 
 (setq projectile-project-root-files
   '(".projectile"        ; projectile project marker

@@ -69,11 +69,31 @@ I    search index
 s    search in info regex
 
 
-
+** undo/redo window
 undo/redo window
 C-c <-/->
 
+** cursor
+C-f  Move forward a character
+C-b  Move backward a character
+
+M-f  Move forward a word
+M-b  Move backward a word
+
+C-n  Move to next line
+C-p  Move to previous line
+
+C-a  Move to beginning of line
+C-e  Move to end of line
+
+M-a  Move back to beginning of sentence
+M-e  Move forward to end of sentence
+
+C-v  Page down
+M-v  Page up
+  
 * rst
+
 C-= rst-adjust
 
 * go

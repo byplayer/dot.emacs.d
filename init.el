@@ -153,7 +153,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (yaml-mode web-mode volatile-highlights undo-tree smartrep smartparens savekill rvm ruby-block rspec-mode rinari rhtml-mode revive recentf-ext rainbow-mode popwin point-undo phpunit php-mode neotree multiple-cursors markdown-mode js2-mode init-loader helm-swoop helm-projectile helm-migemo helm-ls-git helm-gtags helm-flycheck helm-descbinds helm-c-yasnippet helm-ag go-eldoc go-autocomplete gitignore-mode git-gutter git-commit-mode fuzzy flycheck-pos-tip feature-mode expand-region egg dockerfile-mode crontab-mode company-go color-theme anzu ac-ispell ac-helm)))
+    (open-junk-file yaml-mode web-mode volatile-highlights undo-tree smartrep smartparens savekill rvm ruby-block rspec-mode rinari rhtml-mode revive recentf-ext rainbow-mode popwin point-undo phpunit php-mode neotree multiple-cursors markdown-mode js2-mode init-loader helm-swoop helm-projectile helm-migemo helm-ls-git helm-gtags helm-flycheck helm-descbinds helm-c-yasnippet helm-ag go-eldoc go-autocomplete gitignore-mode git-gutter git-commit-mode fuzzy flycheck-pos-tip feature-mode expand-region egg dockerfile-mode crontab-mode company-go color-theme anzu ac-ispell ac-helm)))
  '(term-default-bg-color "#000000")
  '(term-default-fg-color "light gray")
  '(truncate-lines nil)

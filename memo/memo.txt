@@ -91,6 +91,14 @@ M-e  Move forward to end of sentence
 
 C-v  Page down
 M-v  Page up
+
+M-< the beginning of buffer
+M-> the end of buffer
+
+C-u 8 C-f moves forward eight characters.
+
+C-x C-s   Save buffer
+C-x s     Save some buffers
   
 * rst
 

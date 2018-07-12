@@ -12,3 +12,8 @@
 
      ;; key bindings
      (define-key go-mode-map (kbd "M-.") 'godef-jump)))
+
+(defun my/go-mode-hook ()
+  (setq indent-level 4)
+  (setq tab-width 4))
+(add-hook 'go-mode-hook 'my/go-mode-hook)

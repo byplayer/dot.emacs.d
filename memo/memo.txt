@@ -121,3 +121,8 @@ C-c C-p neotree-copy-node)
 * expand-region
 C-<   expand-region
 C-M-, contract-region
+
+* bookmark
+C-x r m add bookmark
+C-x r b show bookmark
+C-x r l show bookmark list

@@ -126,3 +126,11 @@ C-M-, contract-region
 C-x r m add bookmark
 C-x r b show bookmark
 C-x r l show bookmark list
+
+* keyboard macro
+
+C-x (        Start to record
+C-x )        Finish to record
+C-x e        Run macro
+C-u 10 C-x e Run this macro 10 times
+C-x C-k e    Edit macro

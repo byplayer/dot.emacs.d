@@ -1,9 +1,9 @@
 ;;; egg-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-(add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
+(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
-;;;### (autoloads nil "egg" "egg.el" (22269 52431 33330 782000))
+;;;### (autoloads nil "egg" "egg.el" (23368 10041 241629 895000))
 ;;; Generated autoloads from egg.el
 
 (autoload 'egg-minor-mode "egg" "\
@@ -35,8 +35,8 @@ egg in current buffer.\\<egg-minor-mode-map>
 
 ;;;***
 
-;;;### (autoloads nil "egg-grep" "egg-grep.el" (22269 52431 41326
-;;;;;;  543000))
+;;;### (autoloads nil "egg-grep" "egg-grep.el" (23368 10041 257637
+;;;;;;  894000))
 ;;; Generated autoloads from egg-grep.el
 
 (autoload 'egg-grep-process-setup "egg-grep" "\
@@ -59,7 +59,7 @@ Sets `compilation-last-buffer' and `compilation-window-height'.
 
 ;;;### (autoloads nil nil ("egg-base.el" "egg-const.el" "egg-custom.el"
 ;;;;;;  "egg-diff.el" "egg-git.el" "egg-key.el" "egg-pkg.el" "egg-svn.el")
-;;;;;;  (22269 52431 68358 476000))
+;;;;;;  (23368 10041 277647 893000))
 
 ;;;***
 

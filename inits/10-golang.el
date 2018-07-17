@@ -5,11 +5,6 @@
 (require 'company)
 (add-to-list 'company-backends 'company-go)
 
-(eval-after-load "go-mode"
-  '(progn
-     ;; key bindings
-     (define-key go-mode-map (kbd "M-.") 'godef-jump)))
-
 (defun my/go-mode-hook ()
   (setq indent-level 4)
   (setq c-basic-offset 4)

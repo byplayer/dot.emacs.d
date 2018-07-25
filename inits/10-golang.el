@@ -16,3 +16,11 @@
 (add-hook 'go-mode-hook 'company-mode)
 (add-hook 'go-mode-hook 'flycheck-mode)
 (add-hook 'go-mode-hook 'my/go-mode-hook)
+
+(autoload 'helm-go-package "helm-go-package") ;; Not necessary if using ELPA package
+(eval-after-load 'go-mode
+  '(substitute-key-definition 'go-import-add 'helm-go-package go-mode-map))
+
+(add-to-list 'load-path "~/.emacs.d/elisp/emacs-helm-godoc/")
+(autoload 'helm-godoc "helm-godoc" nil t)
+(define-key go-mode-map (kbd "C-c C-d") 'helm-godoc)

@@ -42,7 +42,7 @@ Have no effect when `helm-dabbrev-always-search-all' is non--nil."
   :group 'helm-dabbrev
   :type 'integer)
 
-(defcustom helm-dabbrev-candidates-number-limit 600
+(defcustom helm-dabbrev-candidates-number-limit 1000
   "Maximum number of candidates to collect before stopping.
 Higher this number is slower the computation of candidates will be."
   :group 'helm-dabbrev
@@ -120,6 +120,8 @@ but the initial search for all candidates in buffer(s)."
 (defvar helm-dabbrev--cache nil)
 (defvar helm-dabbrev--data nil)
 (cl-defstruct helm-dabbrev-info dabbrev limits iterator)
+(defvar helm-dabbrev--already-tried nil)
+(defvar helm-dabbrev--current-thread nil)
 
 
 (defun helm-dabbrev--buffer-list ()
@@ -221,12 +223,12 @@ removed."
          sep-regexp ""
          (match-string-no-properties 99))))))
 
-(defun helm-dabbrev--get-candidates (abbrev)
+(defun helm-dabbrev--get-candidates (abbrev &optional limit)
   (cl-assert abbrev nil "[No Match]")
   (with-current-buffer (current-buffer)
     (let* ((dabbrev-get (lambda (str all-bufs)
                             (helm-dabbrev--collect
-                             str helm-dabbrev-candidates-number-limit
+                             str (or limit helm-dabbrev-candidates-number-limit)
                              (cl-case helm-dabbrev-case-fold-search
                                (smart (helm-set-case-fold-search-1 abbrev))
                                (t helm-dabbrev-case-fold-search))
@@ -272,32 +274,36 @@ removed."
            ;; in the meaning time.
            (not (eq last-command 'helm-dabbrev)))
       (setq helm-dabbrev--data nil))
+    ;; When candidates are requested in helm directly without cycling,
+    ;; we need them right now before running helm, so no need to use a
+    ;; thread here.
     (when cycling-disabled-p
       (setq helm-dabbrev--cache (helm-dabbrev--get-candidates dabbrev)))
+    ;; The idea here is to compute only the candidates needed to cycle
+    ;; and while cycling, compute the whole list in background with a
+    ;; thread so that user doesn't have to wait candidates are ready
+    ;; at startup.
     (unless (or cycling-disabled-p
                 (helm-dabbrev-info-p helm-dabbrev--data))
-      (setq helm-dabbrev--cache (helm-dabbrev--get-candidates dabbrev))
+      (if (fboundp 'make-thread)
+          (setq helm-dabbrev--current-thread
+                (make-thread
+                 (lambda ()
+                   (setq helm-dabbrev--cache
+                         (helm-dabbrev--get-candidates dabbrev)))))
+        (setq helm-dabbrev--cache
+                   (helm-dabbrev--get-candidates dabbrev)))
       (setq helm-dabbrev--data
             (make-helm-dabbrev-info
              :dabbrev dabbrev
              :limits limits
              :iterator
              (helm-iter-list
-              (cl-loop for i in helm-dabbrev--cache
+              (cl-loop for i in (helm-dabbrev--get-candidates
+                                 dabbrev helm-dabbrev-cycle-threshold)
                        when (and i (string-match
                                     (concat "^" (regexp-quote dabbrev)) i))
-                       collect i into selection
-                       when (and selection
-                                 (= (length selection)
-                                    helm-dabbrev-cycle-threshold))
-                       ;; When selection len reach
-                       ;; `helm-dabbrev-cycle-threshold'
-                       ;; return selection.
-                       return selection
-                       ;; selection len never reach
-                       ;; `helm-dabbrev-cycle-threshold'
-                       ;; return selection.
-                       finally return selection)))))
+                       collect i)))))
     (let ((iter (and (helm-dabbrev-info-p helm-dabbrev--data)
                      (helm-dabbrev-info-iterator helm-dabbrev--data)))
           deactivate-mark)
@@ -308,8 +314,7 @@ removed."
              (car (helm-dabbrev-info-limits helm-dabbrev--data))
              (cdr limits) it)
             ;; Move already tried candidates to end of list.
-            (setq helm-dabbrev--cache (append (remove it helm-dabbrev--cache)
-                                              (list it))))
+            (push it helm-dabbrev--already-tried))
         ;; If the length of candidates is only one when computed
         ;; that's mean the unique matched item have already been
         ;; inserted by the iterator, so no need to reinsert the old dabbrev,
@@ -317,7 +322,7 @@ removed."
         (let ((old-dabbrev (if (helm-dabbrev-info-p helm-dabbrev--data)
                                (helm-dabbrev-info-dabbrev helm-dabbrev--data)
                                dabbrev)))
-          (unless (cdr (all-completions old-dabbrev helm-dabbrev--cache))
+          (unless (cdr (all-completions old-dabbrev helm-dabbrev--already-tried))
             (setq cycling-disabled-p t))
           ;; Iterator is now empty, reset dabbrev to initial value
           ;; and start helm completion.
@@ -327,18 +332,28 @@ removed."
             (setq helm-dabbrev--data nil)
             (delete-region (car limits) (point))
             (insert dabbrev))
+          ;; Cycling is finished, ensure helm-dabbrev--cache have
+          ;; finished to complete before continuing by blocking thread.
+          (when (and (fboundp 'thread-join)
+                     (thread-alive-p helm-dabbrev--current-thread))
+            (thread-join helm-dabbrev--current-thread))
           (with-helm-show-completion (car limits) (cdr limits)
-            (helm :sources (helm-build-in-buffer-source "Dabbrev Expand"
-                             :data helm-dabbrev--cache
-                             :persistent-action 'ignore
-                             :persistent-help "DoNothing"
-                             :keymap helm-dabbrev-map
-                             :action 'helm-dabbrev-default-action
-                             :group 'helm-dabbrev)
-                  :buffer "*helm dabbrev*"
-                  :input (concat "^" dabbrev " ")
-                  :resume 'noresume
-                  :allow-nest t)))))))
+            (unwind-protect
+                 (helm :sources (helm-build-in-buffer-source "Dabbrev Expand"
+                                  :data (cl-loop for cand in helm-dabbrev--cache
+                                                 unless (member cand helm-dabbrev--already-tried)
+                                                 collect cand into lst
+                                                 finally return (append lst helm-dabbrev--already-tried))
+                                  :persistent-action 'ignore
+                                  :persistent-help "DoNothing"
+                                  :keymap helm-dabbrev-map
+                                  :action 'helm-dabbrev-default-action
+                                  :group 'helm-dabbrev)
+                       :buffer "*helm dabbrev*"
+                       :input (concat "^" dabbrev " ")
+                       :resume 'noresume
+                       :allow-nest t)
+              (setq helm-dabbrev--already-tried nil))))))))
 
 (provide 'helm-dabbrev)
 

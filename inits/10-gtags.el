@@ -26,6 +26,7 @@
 (add-hook 'lisp-mode-hook 'my-tag-mode-insert-hook)
 (add-hook 'nxml-mode-hook 'my-tag-mode-insert-hook)
 (add-hook 'go-mode-hook 'my-tag-mode-insert-hook)
+(add-hook 'python-mode-hook 'my-tag-mode-insert-hook)
 
 (add-hook 'gtags-mode-hook
       '(lambda()

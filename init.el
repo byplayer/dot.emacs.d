@@ -92,6 +92,10 @@
     go-autocomplete
     company-go
 
+    ;; kotlin
+    kotlin-mode
+    flycheck-kotlin
+
     ;; other
     undo-tree
     point-undo

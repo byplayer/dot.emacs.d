@@ -1,9 +1,8 @@
 ;;; package --- Summary
 ;;; Commentary:
 ;;; Code:
-(setq auto-mode-alist (cons
-                       '("\\.html$" . web-mode)
-                       auto-mode-alist))
+(add-to-list 'auto-mode-alist '("\\.html$"     . web-mode))
+(add-to-list 'auto-mode-alist '("\\.tpl$"     . web-mode))
 
 (require 'rainbow-mode)
 

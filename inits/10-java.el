@@ -29,5 +29,7 @@
             (setq c-basic-offset 4)
             (define-key java-mode-map (kbd "C-c c") 'java-compile)))
 
+(add-to-list 'auto-mode-alist '("\\.gradle$"     . groovy-mode))
+
 (provide '10-java)
 ;;; 10-java.el ends here

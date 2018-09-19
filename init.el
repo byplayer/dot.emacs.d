@@ -96,6 +96,9 @@
     kotlin-mode
     flycheck-kotlin
 
+    ;; groovy
+    groovy-mode
+
     ;; other
     undo-tree
     point-undo

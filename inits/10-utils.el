@@ -5,7 +5,7 @@
   (interactive)
   (when buffer-file-name
     (let
-        ((msg  (format "%s L:%d" (file-truename buffer-file-name) (line-number-at-pos))))
+        ((msg  (format "%s:%d" (file-truename buffer-file-name) (line-number-at-pos))))
 
       (kill-new msg)
       (message "copied: %s" msg))))

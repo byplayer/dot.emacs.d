@@ -19,3 +19,6 @@
 [submodule "elisp/emacs-helm-godoc"]
 	path = elisp/emacs-helm-godoc
 	url = https://github.com/syohex/emacs-helm-godoc.git
+[submodule "snippets/go-mode"]
+	path = snippets/go-mode
+	url = https://github.com/byplayer/yasnippet-go.git

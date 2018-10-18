@@ -9,11 +9,9 @@
 
 (setq org-capture-templates
       '(("t" "Todo" entry (file+headline "~/docs/org/agenda/gtd.org" "Tasks")
-             "* TODO %?\n")
+             "* TODO %?")
         ("m" "Memo" entry (file+datetree "~/docs/org/memo.org")
              "* %?\nEntered on %T\n")))
-
-(advice-add 'org-capture :around #'my-org-capture-advice)
 
 (global-set-key "\C-ca" 'org-agenda)
 

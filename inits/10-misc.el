@@ -15,6 +15,9 @@
 (global-set-key (kbd "C-<") 'er/expand-region)
 (global-set-key (kbd "C-M-,") 'er/contract-region)
 
+;; avy
+(global-set-key (kbd "C-c j") 'avy-goto-word-1)
+
 ;; select
 (require 'multiple-cursors)
 (require 'smartrep)

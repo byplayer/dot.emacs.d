@@ -134,3 +134,13 @@ C-x )        Finish to record
 C-x e        Run macro
 C-u 10 C-x e Run this macro 10 times
 C-x C-k e    Edit macro
+
+* org-mode 
+
+S-Left, S-Right で TODO と DONE の切り替え
+M-S-Enter で次の TODO を作成
+M-Up, M-Down で TODO の並び換え
+Shift-up Shift-down change priority
+C-c C-d add deadline
+C-c C-s set execution date
+C-c C-c set tag

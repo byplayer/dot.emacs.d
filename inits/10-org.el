@@ -42,5 +42,8 @@
             (define-key org-mode-map (kbd "C-a") 'vc-like-home)
             (define-key org-mode-map (kbd "C-c t") 'org-todo)))
 
+;; show content as default view
+(setq org-startup-folded 'content)
+
 (provide '10-org)
 ;;; 10-org.el ends here

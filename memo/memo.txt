@@ -146,3 +146,7 @@ C-c C-s set execution date
 C-c C-c set tag
 C-u <TAB> change visibility
 C-c C-t / C-c t switch status
+
+TAB              (org-cycle)
+C-u TAB / S-TAB  (org-global-cycle)
+C-u C-u TAB      (org-set-startup-visibility)

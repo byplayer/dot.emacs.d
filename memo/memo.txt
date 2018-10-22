@@ -145,3 +145,4 @@ C-c C-d add deadline
 C-c C-s set execution date
 C-c C-c set tag
 C-u <TAB> change visibility
+C-c C-t switch status

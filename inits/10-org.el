@@ -2,6 +2,8 @@
 ;;; Commentary:
 ;;; Code:
 
+(require 'org-habit)
+
 ;; TODO status
 (setq org-todo-keywords '((sequence "TODO(t)" "WAIT(w)" "|" "DONE(d)" "SOMEDAY(s)")))
 ;; log date when down

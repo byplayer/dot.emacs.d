@@ -45,5 +45,27 @@
 ;; show content as default view
 (setq org-startup-folded 'content)
 
+(require 'org-agenda)
+(add-to-list 'org-agenda-custom-commands
+             '("w" "Weekly review"
+               agenda ""
+               ((org-agenda-span 'week)
+                (org-agenda-start-on-weekday 0)
+                (org-agenda-start-with-log-mode t)
+                (org-agenda-skip-function
+                 '(org-agenda-skip-entry-if 'nottodo 'done))
+                )))
+(add-to-list 'org-agenda-custom-commands
+             '("r" "Review monthly tasks"
+               agenda ""
+               ((org-agenda-start-day "-31d")
+                (org-agenda-span 33)
+                (org-agenda-start-on-weekday 0)
+                (org-agenda-start-with-log-mode t)
+                (org-agenda-skip-function
+                 '(org-agenda-skip-entry-if 'nottodo 'done))
+                )))
+
+
 (provide '10-org)
 ;;; 10-org.el ends here

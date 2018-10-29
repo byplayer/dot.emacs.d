@@ -9,10 +9,17 @@
 ;; log date when down
 (setq org-log-done 'time)
 
-
 (setq org-directory "~/docs/org")
 (setq my-org-agenda-directory (concatenate 'string org-directory "/agenda"))
+
 (setq org-agenda-files (directory-files-recursively org-directory "\.org$"))
+
+(defun my/org-agenda (&optional arg org-keys restriction)
+  (interactive "P")
+  (let ()
+    (setq org-agenda-files (directory-files-recursively org-directory "\.org$"))
+    (org-agenda)))
+
 
 (defun my/generate-org-memo-name ()
   (let* ((name (read-string "Name: "))
@@ -37,7 +44,7 @@
          "* %?\nEntered on %T\n")
         ))
 
-(global-set-key "\C-ca" 'org-agenda)
+(global-set-key "\C-ca" 'my/org-agenda)
 
 (add-hook 'org-mode-hook
           (lambda ()

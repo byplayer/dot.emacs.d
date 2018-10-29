@@ -148,6 +148,13 @@
 (setq backup-directory-alist
   (cons (cons ".*" (expand-file-name "~/.emacs.d/backup"))
         backup-directory-alist))
+
+(setq version-control t)     ; version control for backup
+(setq kept-new-versions 5)   ; keep 5 new files
+(setq kept-old-versions 5)   ; keep 5 old files
+(setq delete-old-versions t) ; delete old files without confirmation
+(setq vc-make-backup-files t) ; backup under version control
+
 ;; disable lock file
 (setq create-lockfiles nil)
 
@@ -187,6 +194,10 @@
 (setq dired-dwim-target t)
 (setq dired-recursive-copies 'always)
 (setq dired-isearch-filenames t)
+
+;; add exec option for shell
+(add-hook 'after-save-hook
+          'executable-make-buffer-file-executable-if-script-p)
 
 ;; neo tree
 (require 'neotree)

@@ -12,12 +12,12 @@
 (setq org-directory "~/docs/org")
 (setq my-org-agenda-directory (concatenate 'string org-directory "/agenda"))
 
-(setq org-agenda-files (directory-files-recursively org-directory "\.org$"))
+(setq org-agenda-files (cl-delete-if (lambda (k) (string-match-p "/report/" k)) (directory-files-recursively org-directory "\.org$")))
 
 (defun my/org-agenda (&optional arg org-keys restriction)
   (interactive "P")
   (let ()
-    (setq org-agenda-files (directory-files-recursively org-directory "\.org$"))
+    (setq org-agenda-files (cl-delete-if (lambda (k) (string-match-p "/report/" k)) (directory-files-recursively org-directory "\.org$")))
     (org-agenda)))
 
 

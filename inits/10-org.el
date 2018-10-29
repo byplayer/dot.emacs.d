@@ -45,7 +45,11 @@
             (define-key org-mode-map (kbd "C-c t") 'org-todo)))
 
 ;; show content as default view
-(setq org-startup-folded 'content)
+;; #+STARTUP: fold              (or ‘overview’, this is equivalent)
+;; #+STARTUP: nofold            (or ‘showall’, this is equivalent)
+;; #+STARTUP: content
+;; #+STARTUP: showeverything
+(setq org-startup-folded t)
 
 (require 'org-agenda)
 (add-to-list 'org-agenda-custom-commands

@@ -12,7 +12,7 @@
 
 (setq org-directory "~/docs/org")
 (setq my-org-agenda-directory (concatenate 'string org-directory "/agenda"))
-(setq org-agenda-files (list my-org-agenda-directory))
+(setq org-agenda-files (directory-files-recursively org-directory "\.org$"))
 
 (defun my/generate-org-memo-name ()
   (let* ((name (read-string "Name: "))

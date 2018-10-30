@@ -27,9 +27,9 @@
                          helm-source-recentf
                          helm-source-locate)
                        "*my helm*")
-    (helm-other-buffer `(helm-source-buffers-list
+    (helm-other-buffer `(helm-source-ls-git-status
+                         helm-source-buffers-list
                          helm-source-bookmarks
-                         helm-source-ls-git-status
                          helm-source-ls-git-buffers
                          helm-source-ls-git
                          helm-source-recentf

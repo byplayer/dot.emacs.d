@@ -154,3 +154,4 @@ C-u C-u TAB      (org-set-startup-visibility)
 * git
 
 C-x v P vc-push (git push)
+C-x v + vc-pull (git pull)

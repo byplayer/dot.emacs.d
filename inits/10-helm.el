@@ -11,6 +11,13 @@
 (setq helm-source-buffers-list
       (helm-make-source "Buffers" 'helm-source-buffers))
 
+(setq helm-source-ls-git-status
+      (helm-ls-git-build-git-status-source)
+      helm-source-ls-git
+      (helm-ls-git-build-ls-git-source)
+      helm-source-ls-git-buffers
+      (helm-ls-git-build-buffers-source))
+
 (defun my-helm ()
   "`helm' for opening files all resource."
   (interactive)

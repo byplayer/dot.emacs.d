@@ -159,7 +159,7 @@
 (setq create-lockfiles nil)
 
 (setq auto-save-file-name-transforms
-  `((".*", (expand-file-name "~/.emacs.d/backup/") t)))
+  `((".*", (expand-file-name "~/.emacs.d/auto-save-list/") t)))
 
 (global-anzu-mode +1)
 

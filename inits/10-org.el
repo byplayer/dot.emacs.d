@@ -8,6 +8,7 @@
 (setq org-todo-keywords '((sequence "TODO(t)" "WAIT(w)" "|" "DONE(d)" "SOMEDAY(s)")))
 ;; log date when down
 (setq org-log-done 'time)
+(setq org-log-done-with-time t)
 
 (setq org-directory "~/docs/org")
 (setq my-org-agenda-directory (concatenate 'string org-directory "/agenda"))

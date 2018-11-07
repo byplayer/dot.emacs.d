@@ -164,3 +164,4 @@ C-x g
 
 f u   pull from current upstream
 P u   push to current upstream
+l l   show history graph

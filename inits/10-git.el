@@ -1,7 +1,7 @@
 ;;; package --- Summary
 ;;; Commentary:
 ;;; Code:
-(require 'egg)
+(require 'magit)
 (require 'git-commit-mode)
 
 ; no change

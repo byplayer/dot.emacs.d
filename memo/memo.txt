@@ -159,3 +159,8 @@ C-x v + vc-pull (git pull)
 * magit
 
 C-x g
+
+** on magit status
+
+f u   pull from current upstream
+P u   push to current upstream

@@ -150,8 +150,8 @@
         backup-directory-alist))
 
 (setq version-control t)     ; version control for backup
-(setq kept-new-versions 5)   ; keep 5 new files
-(setq kept-old-versions 5)   ; keep 5 old files
+(setq kept-new-versions 10)   ; keep 10 new files
+(setq kept-old-versions 10)   ; keep 10 old files
 (setq delete-old-versions t) ; delete old files without confirmation
 (setq vc-make-backup-files t) ; backup under version control
 

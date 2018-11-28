@@ -3,7 +3,7 @@
 ;;; Code:
 (add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
-;;;### (autoloads nil "egg" "egg.el" (23456 25106 197596 348000))
+;;;### (autoloads nil "egg" "egg.el" (23549 59770 470003 839000))
 ;;; Generated autoloads from egg.el
 
 (autoload 'egg-minor-mode "egg" "\
@@ -35,8 +35,8 @@ egg in current buffer.\\<egg-minor-mode-map>
 
 ;;;***
 
-;;;### (autoloads nil "egg-grep" "egg-grep.el" (23456 25106 161578
-;;;;;;  345000))
+;;;### (autoloads nil "egg-grep" "egg-grep.el" (23549 59770 418003
+;;;;;;  833000))
 ;;; Generated autoloads from egg-grep.el
 
 (autoload 'egg-grep-process-setup "egg-grep" "\
@@ -59,7 +59,7 @@ Sets `compilation-last-buffer' and `compilation-window-height'.
 
 ;;;### (autoloads nil nil ("egg-base.el" "egg-const.el" "egg-custom.el"
 ;;;;;;  "egg-diff.el" "egg-git.el" "egg-key.el" "egg-pkg.el" "egg-svn.el")
-;;;;;;  (23456 25106 221608 350000))
+;;;;;;  (23549 59770 486003 841000))
 
 ;;;***
 

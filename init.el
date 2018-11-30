@@ -17,12 +17,6 @@
     ;; init-loader
     init-loader
 
-    ;; for auto-complete
-    popup
-    fuzzy
-    pos-tip
-    auto-complete
-
     ;; color theme
     color-theme
 
@@ -50,6 +44,7 @@
     company
 
     ;; helm
+    popup
     helm
     ac-helm
     helm-c-yasnippet
@@ -64,9 +59,6 @@
     helm-swoop
     ; helm-package
     ; helm-rails
-
-    ;; auto complete
-    ac-ispell
 
     ;; region and cursor
     expand-region

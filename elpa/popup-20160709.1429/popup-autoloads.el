@@ -1,10 +1,9 @@
-;;; go-autocomplete-autoloads.el --- automatically extracted autoloads
+;;; popup-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
 (add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
-;;;### (autoloads nil nil ("go-autocomplete.el") (23456 25069 666331
-;;;;;;  588000))
+;;;### (autoloads nil nil ("popup.el") (23552 55857 981008 332000))
 
 ;;;***
 
@@ -13,4 +12,4 @@
 ;; no-byte-compile: t
 ;; no-update-autoloads: t
 ;; End:
-;;; go-autocomplete-autoloads.el ends here
+;;; popup-autoloads.el ends here

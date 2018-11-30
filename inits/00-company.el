@@ -36,6 +36,7 @@
 (define-key company-active-map (kbd "C-s") 'company-filter-candidates)
 
 ;; TAB
+(define-key company-active-map (kbd "<tab>") 'company-complete-selection)
 (define-key company-active-map (kbd "C-i") 'company-complete-selection)
 
 ;; company-mode for all mode C-M-i

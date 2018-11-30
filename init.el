@@ -93,6 +93,11 @@
     ;; groovy
     groovy-mode
 
+    ;; irony
+    irony
+    company-irony
+    flycheck-irony
+
     ;; other
     undo-tree
     point-undo

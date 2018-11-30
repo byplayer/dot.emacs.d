@@ -20,6 +20,9 @@
     ;; color theme
     color-theme
 
+    ;; company
+    company
+
     ;; ruby
     rvm
     rhtml-mode

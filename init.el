@@ -25,12 +25,12 @@
     company-quickhelp
 
     ;; ruby
-    rvm
     rhtml-mode
     rinari
     ruby-block
     rspec-mode
     feature-mode
+    robe
 
     ;; javascript
     js2-mode

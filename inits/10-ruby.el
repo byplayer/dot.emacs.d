@@ -7,6 +7,11 @@
 (autoload 'ruby-mode "ruby-mode" "Mode for editing ruby source files" t)
 (autoload 'inf-ruby-keys "inf-ruby" "Set local key defs for inf-ruby in ruby-mode")
 
+(add-hook 'ruby-mode-hook 'robe-mode)
+(autoload 'robe-mode "robe" "Code navigation, documentation lookup and completion for Ruby" t nil)
+(eval-after-load 'company
+  '(push 'company-robe company-backends))
+
 (setq auto-mode-alist
       (append '(
                 ("\\.rb$" . ruby-mode)
@@ -147,6 +152,8 @@
 (add-to-list 'load-path "~/.emacs.d/elisp/rabbit/")
 (autoload 'rabbit-mode "rabbit-mode" "major mode for Rabbit" t)
 (add-to-list 'auto-mode-alist '("\\.\\(rbt\\|rab\\)$" . rabbit-mode))
+
+
 
 (provide '10-ruby)
 ;;; 10-ruby.el ends here

@@ -63,7 +63,7 @@
 ;; #+STARTUP: nofold            (or ‘showall’, this is equivalent)
 ;; #+STARTUP: content
 ;; #+STARTUP: showeverything
-(setq org-startup-folded t)
+(setq org-startup-folded "nofold")
 
 (require 'org-agenda)
 (add-to-list 'org-agenda-custom-commands

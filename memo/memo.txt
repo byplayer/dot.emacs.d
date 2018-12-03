@@ -151,6 +151,14 @@ TAB              (org-cycle)
 C-u TAB / S-TAB  (org-global-cycle)
 C-u C-u TAB      (org-set-startup-visibility)
 
+start up status
+#+STARTUP: overview
+#+STARTUP: content
+#+STARTUP: showall
+#+STARTUP: showeverything
+
+#+TITLE: 
+
 * git
 
 C-x v P vc-push (git push)

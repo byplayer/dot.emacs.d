@@ -86,6 +86,11 @@
                  '(org-agenda-skip-entry-if 'nottodo 'done))
                 )))
 
+(org-babel-do-load-languages 'org-babel-load-languages
+    '(
+        (shell . t)
+    )
+)
 
 (provide '10-org)
 ;;; 10-org.el ends here

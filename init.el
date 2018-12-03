@@ -4,6 +4,8 @@
 (require 'package)
 (add-to-list 'package-archives
              '("melpa" . "http://melpa.milkbox.net/packages/") t)
+(add-to-list 'package-archives
+             '("org" . "https://orgmode.org/elpa/") t)
 (package-initialize)
 
 (add-to-list 'load-path "/opt/global/share/gtags/")
@@ -114,6 +116,10 @@
     popwin
     neotree
     avy
+
+    ;; org
+    org
+    org-plus-contrib
     ))
 
 (let ((not-installed (loop for x in my-installing-package-list

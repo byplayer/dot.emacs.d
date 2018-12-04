@@ -238,6 +238,7 @@
 ;; imenu-list
 (global-set-key (kbd "C-]") #'imenu-list-smart-toggle)
 (setq imenu-list-focus-after-activation t)
+(setq imenu-list-size 0.15)
 
 (provide '10-misc)
 ;;; 10-misc.el ends here

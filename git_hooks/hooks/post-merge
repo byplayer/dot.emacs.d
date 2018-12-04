@@ -2,7 +2,7 @@
 
 GIT_ROOT=`dirname ${0}`/../../
 
-rsync -av --delete ${GIT_ROOT}/git_hooks/ ${GIT_ROOT}/.git/hooks/
+rsync -av --delete ${GIT_ROOT}/git_hooks/hooks/ ${GIT_ROOT}/.git/hooks/
 
 echo cleanup elc cache
 ${GIT_ROOT}/cleanup_cache.sh

@@ -114,8 +114,11 @@
     smartparens
     volatile-highlights
     popwin
-    neotree
     avy
+
+    ;; neotree
+    all-the-icons
+    neotree
 
     ;; org
     org

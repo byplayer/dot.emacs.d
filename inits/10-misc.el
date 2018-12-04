@@ -200,19 +200,24 @@
           'executable-make-buffer-file-executable-if-script-p)
 
 ;; neo tree
+
+;; download fonts if necessary
+(unless (file-exists-p (concat (getenv "HOME") "/.local/share/fonts/all-the-icons.ttf"))
+        (all-the-icons-install-fonts "yes")
+        )
+
+(require 'all-the-icons)
 (require 'neotree)
+(setq neo-theme (if (display-graphic-p) 'icons 'arrow))
 
 ;; show hidden file default
-;; (setq neo-show-hidden-files t)
+(setq neo-show-hidden-files t)
 
 ;; open new file when create new file on new tree
 (setq neo-create-file-auto-open t)
 
 ;; don't delete neotree on delete-other-window
 (setq neo-persist-show t)
-
-;; simple key bind for neo tree
-(setq neo-keymap-style 'concise)
 
 ;; show current file directory when I show neo tree
 (setq neo-smart-open t)

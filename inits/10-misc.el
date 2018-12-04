@@ -211,7 +211,7 @@
 (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
 
 ;; show hidden file default
-(setq neo-show-hidden-files t)
+; (setq neo-show-hidden-files t)
 
 ;; open new file when create new file on new tree
 (setq neo-create-file-auto-open t)
@@ -236,7 +236,7 @@
 (global-set-key [f8] 'neotree-toggle)
 
 ;; imenu-list
-(global-set-key (kbd "C-'") #'imenu-list-smart-toggle)
+(global-set-key (kbd "C-]") #'imenu-list-smart-toggle)
 (setq imenu-list-focus-after-activation t)
 
 (provide '10-misc)

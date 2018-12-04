@@ -235,5 +235,9 @@
 
 (global-set-key [f8] 'neotree-toggle)
 
+;; imenu-list
+(global-set-key (kbd "C-'") #'imenu-list-smart-toggle)
+(setq imenu-list-focus-after-activation t)
+
 (provide '10-misc)
 ;;; 10-misc.el ends here

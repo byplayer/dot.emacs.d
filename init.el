@@ -120,6 +120,8 @@
     all-the-icons
     neotree
 
+    imenu-list
+
     ;; org
     org
     org-plus-contrib

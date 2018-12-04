@@ -138,11 +138,7 @@
   ;; add following characters into syntax
   (modify-syntax-entry ?@ "_" ruby-mode-syntax-table)
   (modify-syntax-entry ?! "_" ruby-mode-syntax-table)
-  (flyspell-prog-mode)
-  (setq ac-sources (append ac-sources
-                           '(ac-source-words-in-same-mode-buffers
-                             ac-source-gtags
-                             ac-source-yasnippet))))
+  (flyspell-prog-mode))
 (add-hook 'ruby-mode-hook 'my-ruby-mode-hook)
 
 (define-key ruby-mode-map [return] 'newline-and-indent)

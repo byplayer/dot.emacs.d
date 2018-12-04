@@ -1,14 +1,24 @@
-;; auto-complete
-(require 'go-autocomplete)
-
 ;; company-mode
 (require 'company)
 (add-to-list 'company-backends 'company-go)
 
+(defun go-compile ()
+  "Traveling up the path, find build.xml file and run compile."
+  (interactive)
+  (save-buffer)
+  (with-temp-buffer
+    (while (and (not (or (file-exists-p "go.mod")
+                         (file-directory-p ".git")))
+        (not (equal "/" default-directory)))
+      (cd ".."))
+    (call-interactively 'compile)))
+
 (defun my/go-mode-hook ()
   (setq indent-level 4)
   (setq c-basic-offset 4)
-  (setq tab-width 4))
+  (setq tab-width 4)
+  (define-key go-mode-map (kbd "C-c c") 'go-compile)
+  )
 
 (add-hook 'before-save-hook #'gofmt-before-save)
 

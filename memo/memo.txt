@@ -163,3 +163,7 @@ start up status
 
 C-x v P vc-push (git push)
 C-x v + vc-pull (git pull)
+
+* dired
+
+C-x M-o toggle dired-ommit-files

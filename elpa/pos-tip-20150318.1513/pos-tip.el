@@ -5,7 +5,7 @@
 ;; Author: S. Irie
 ;; Maintainer: S. Irie
 ;; Keywords: Tooltip
-;; Package-Version: 20150318.813
+;; Package-Version: 20150318.1513
 
 (defconst pos-tip-version "0.4.6")
 

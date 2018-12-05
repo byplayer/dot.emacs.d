@@ -1,10 +1,10 @@
 ;;; rhtml-mode-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-
+(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
-;;;### (autoloads (rhtml-mode) "rhtml-mode" "rhtml-mode.el" (21288
-;;;;;;  5443 149365 418000))
+;;;### (autoloads nil "rhtml-mode" "rhtml-mode.el" (23559 18459 320515
+;;;;;;  203000))
 ;;; Generated autoloads from rhtml-mode.el
 
 (autoload 'rhtml-mode "rhtml-mode" "\
@@ -18,15 +18,13 @@ Embedded Ruby Mode (RHTML)
 
 ;;;### (autoloads nil nil ("rhtml-erb.el" "rhtml-fonts.el" "rhtml-mode-pkg.el"
 ;;;;;;  "rhtml-navigation.el" "rhtml-ruby-hook.el" "rhtml-sgml-hacks.el")
-;;;;;;  (21288 5443 181276 601000))
+;;;;;;  (23559 18459 308512 981000))
 
 ;;;***
 
-(provide 'rhtml-mode-autoloads)
 ;; Local Variables:
 ;; version-control: never
 ;; no-byte-compile: t
 ;; no-update-autoloads: t
-;; coding: utf-8
 ;; End:
 ;;; rhtml-mode-autoloads.el ends here

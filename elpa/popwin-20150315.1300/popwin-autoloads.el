@@ -1,12 +1,9 @@
 ;;; popwin-autoloads.el --- automatically extracted autoloads
 ;;
 ;;; Code:
-
+(add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
-;;;### (autoloads (popwin:messages popwin:find-file-tail popwin:find-file
-;;;;;;  popwin:popup-buffer-tail popwin:one-window popwin:universal-display
-;;;;;;  popwin:pop-to-buffer popwin:display-buffer popwin:popup-buffer)
-;;;;;;  "popwin" "popwin.el" (21797 53782 159069 267000))
+;;;### (autoloads nil "popwin" "popwin.el" (23559 18462 717143 929000))
 ;;; Generated autoloads from popwin.el
 
 (autoload 'popwin:popup-buffer "popwin" "\
@@ -71,15 +68,9 @@ Display *Messages* buffer in a popup window.
 
 ;;;***
 
-;;;### (autoloads nil nil ("popwin-pkg.el") (21797 53782 163839 118000))
-
-;;;***
-
-(provide 'popwin-autoloads)
 ;; Local Variables:
 ;; version-control: never
 ;; no-byte-compile: t
 ;; no-update-autoloads: t
-;; coding: utf-8
 ;; End:
 ;;; popwin-autoloads.el ends here

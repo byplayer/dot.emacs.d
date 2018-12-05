@@ -3,7 +3,7 @@
 ;;; Code:
 (add-to-list 'load-path (directory-file-name (or (file-name-directory #$) (car load-path))))
 
-;;;### (autoloads nil "helm" "helm.el" (23547 32542 842000 914000))
+;;;### (autoloads nil "helm" "helm.el" (23559 18467 530034 809000))
 ;;; Generated autoloads from helm.el
 
 (autoload 'helm-define-multi-key "helm" "\
@@ -222,7 +222,7 @@ Call `helm' only with ANY-SOURCES and ANY-BUFFER as args.
 ;;;***
 
 ;;;### (autoloads nil nil ("helm-core-pkg.el" "helm-lib.el" "helm-multi-match.el"
-;;;;;;  "helm-source.el") (23547 32542 858000 916000))
+;;;;;;  "helm-source.el") (23559 18467 542037 31000))
 
 ;;;***
 

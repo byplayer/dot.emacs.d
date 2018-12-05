@@ -239,5 +239,10 @@
 (setq imenu-list-focus-after-activation t)
 (setq imenu-list-size 0.15)
 
+;; for dired with the all icons
+(add-to-list 'load-path "~/.emacs.d/elisp/font-lock-plus/")
+(require 'font-lock+)
+(add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
+
 (provide '10-misc)
 ;;; 10-misc.el ends here

@@ -119,6 +119,7 @@
     ;; neotree
     all-the-icons
     neotree
+    all-the-icons-dired
 
     imenu-list
 

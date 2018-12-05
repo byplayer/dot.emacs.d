@@ -200,7 +200,6 @@
           'executable-make-buffer-file-executable-if-script-p)
 
 ;; neo tree
-
 ;; download fonts if necessary
 (unless (file-exists-p (concat (getenv "HOME") "/.local/share/fonts/all-the-icons.ttf"))
         (all-the-icons-install-fonts "yes")

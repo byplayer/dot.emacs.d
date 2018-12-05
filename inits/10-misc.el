@@ -242,7 +242,12 @@
 ;; for dired with the all icons
 (add-to-list 'load-path "~/.emacs.d/elisp/font-lock-plus/")
 (require 'font-lock+)
-(add-hook 'dired-mode-hook 'all-the-icons-dired-mode)
+(require 'dired-x)
+(add-hook 'dired-mode-hook
+          '(lambda()
+             (all-the-icons-dired-mode)
+             (dired-omit-mode t)))
+(setq dired-omit-files "^\\.?#\\|^\\.$\\|^\\.\\.$\\|^\\..*$")
 
 (provide '10-misc)
 ;;; 10-misc.el ends here

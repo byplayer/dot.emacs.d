@@ -42,5 +42,7 @@
 ;; company-mode for all mode C-M-i
 (define-key emacs-lisp-mode-map (kbd "C-M-i") 'company-complete)
 
+(add-to-list 'company-backends 'company-yasnippet)
+
 (provide '00-company)
 ;;; 00-company.el ends here

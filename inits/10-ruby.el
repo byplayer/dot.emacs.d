@@ -6,10 +6,12 @@
 (autoload 'ruby-mode "ruby-mode" "Mode for editing ruby source files" t)
 (autoload 'inf-ruby-keys "inf-ruby" "Set local key defs for inf-ruby in ruby-mode")
 
-(add-hook 'ruby-mode-hook 'robe-mode)
+(add-hook 'ruby-mode-hook
+          '(lambda()
+             (robe-mode)
+             (add-to-list 'company-backends 'company-robe)
+             ))
 (autoload 'robe-mode "robe" "Code navigation, documentation lookup and completion for Ruby" t nil)
-(eval-after-load 'company
-  '(push 'company-robe company-backends))
 
 (setq auto-mode-alist
       (append '(

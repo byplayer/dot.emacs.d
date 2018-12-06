@@ -24,7 +24,7 @@
   (let ()
     (setq org-agenda-files
           (cl-delete-if (lambda (k)
-                          (string-match-p "\\/\\(report\\|archive\\)\\/" k))
+                          (string-match-p my-org-agenda-exludes k))
                         (directory-files-recursively org-directory "\.org$")))
     (org-agenda)))
 

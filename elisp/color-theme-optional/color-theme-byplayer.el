@@ -75,6 +75,10 @@ Created by byplayer <byplayer100@gmail.com> Dec 27 2010"
 
      ;; highlight line
      (hl-line ((t (:background "dark blue"))))
+
+     ;; helm
+     (helm-selection ((t (:background "dark green"))))
+     (helm-visible-mark ((t (:foreground "light gray" :background "dark olive green"))))
      )))
 
 

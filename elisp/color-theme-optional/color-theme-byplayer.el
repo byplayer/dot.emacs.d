@@ -59,6 +59,16 @@ Created by byplayer <byplayer100@gmail.com> Dec 27 2010"
      ;; ecb
      (ecb-default-highlight-face ((t (:background "steelblue"))))
      (ecb-tag-header-face ((t (:foreground "black" :background "DarkSeaGreen3"))))
+
+     ;; company
+     (company-tooltip ((t (:foreground "black" :background "lightgrey"))))
+     (company-tooltip-common ((t (:foreground "black" :background "lightgrey"))))
+     (company-tooltip-common-selection ((t (:foreground "white" :background "steelblue"))))
+     (company-tooltip-selection ((t (:foreground "black" :background "steelblue"))))
+     (company-preview-common ((t (:background nil :foreground "lightgrey" :underline t))))
+     (company-scrollbar-fg ((t (:background "orange"))))
+     (company-scrollbar-bg ((t (:background "gray40"))))
+     (company-template-field ((t (:foreground "black" :background "lightgrey"))))
      )))
 
 

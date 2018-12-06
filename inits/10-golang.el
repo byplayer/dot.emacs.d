@@ -36,3 +36,6 @@
 (add-to-list 'load-path "~/.emacs.d/elisp/emacs-helm-godoc/")
 (autoload 'helm-godoc "helm-godoc" nil t)
 (define-key go-mode-map (kbd "C-c C-d") 'helm-godoc)
+
+(provide '10-golang)
+;;; 10-golang.el ends here

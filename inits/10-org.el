@@ -12,10 +12,11 @@
 
 (setq org-directory "~/docs/org")
 (setq my-org-agenda-directory (concatenate 'string org-directory "/agenda"))
+(setq my-org-agenda-exludes "\\/\\(report\\|archive\\|goal_1on1\\|interview\\)\\/")
 
 (setq org-agenda-files
           (cl-delete-if (lambda (k)
-                          (string-match-p "\\/\\(report\\|archive\\)\\/" k))
+                          (string-match-p my-org-agenda-exludes k))
                         (directory-files-recursively org-directory "\.org$")))
 
 (defun my/org-agenda (&optional arg org-keys restriction)

@@ -69,6 +69,12 @@ Created by byplayer <byplayer100@gmail.com> Dec 27 2010"
      (company-scrollbar-fg ((t (:background "orange"))))
      (company-scrollbar-bg ((t (:background "gray40"))))
      (company-template-field ((t (:foreground "black" :background "lightgrey"))))
+
+     ;; imenu-list
+     (imenu-list-entry-face-0 ((t (:foreground "NavajoWhite2"))))
+
+     ;; highlight line
+     (hl-line ((t (:background "dark blue"))))
      )))
 
 

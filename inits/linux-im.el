@@ -2,9 +2,11 @@
 ;;; Commentary:
 ;;; Code:
 
+(require 'mozc-popup)
+(setq mozc-candidate-style 'popup)
+
 (setq mozc-leim-title "[あ]")
-(when (require 'mozc nil t)
-  (setq default-input-method "japanese-mozc")
-  (setq mozc-candidate-style 'overlay))
+(setq default-input-method "japanese-mozc")
+
 
 ;;; linux-im.el ends here

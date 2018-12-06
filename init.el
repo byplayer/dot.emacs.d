@@ -126,6 +126,8 @@
     ;; org
     org
     org-plus-contrib
+
+    mozc-popup
     ))
 
 (let ((not-installed (loop for x in my-installing-package-list

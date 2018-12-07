@@ -9,7 +9,7 @@
 (add-hook 'ruby-mode-hook
           '(lambda()
              (robe-mode)
-             (add-to-list 'company-backends 'company-robe)
+             (add-to-list (make-local-variable 'company-backends) '(company-robe))
              ))
 (autoload 'robe-mode "robe" "Code navigation, documentation lookup and completion for Ruby" t nil)
 

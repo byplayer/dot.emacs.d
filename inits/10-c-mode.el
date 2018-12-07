@@ -19,7 +19,7 @@
 (add-hook 'irony-mode-hook
           '(lambda()
              (irony-cdb-autosetup-compile-options)
-             (add-to-list 'company-backends 'company-irony)))
+             (add-to-list (make-local-variable 'company-backends) 'company-irony)))
 
 (provide '10-c-mode)
 ;;; 10-c-mode ends here

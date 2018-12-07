@@ -26,7 +26,7 @@
              (setq c-basic-offset 4)
              (setq tab-width 4)
              (define-key go-mode-map (kbd "C-c c") 'go-compile)
-             (add-to-list (make-local-variable 'company-backends) 'company-go)
+             (add-to-list (make-local-variable 'company-backends) '(company-go :with company-yasnippet))
              ))
 
 (autoload 'helm-go-package "helm-go-package") ;; Not necessary if using ELPA package

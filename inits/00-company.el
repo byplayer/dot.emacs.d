@@ -27,7 +27,14 @@
 ;; company-mode for all mode C-M-i
 (define-key emacs-lisp-mode-map (kbd "C-M-i") 'company-complete)
 
-(push '(:with company-yasnippet) company-backends)
+(defun company-mode/backend-with-yas (backend)
+  (if (and (listp backend) (member 'company-yasnippet backend))
+      backend
+    (append (if (consp backend) backend (list backend))
+            '(:with company-yasnippet))))
+(setq company-backends (mapcar #'company-mode/backend-with-yas company-backends))
+(message "%s" company-backends)
+
 
 (provide '00-company)
 ;;; 00-company.el ends here

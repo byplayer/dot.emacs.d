@@ -10,6 +10,7 @@
 
 (add-to-list 'load-path "/opt/global/share/gtags/")
 (add-to-list 'load-path "~/.emacs.d/elisp/bat-mode/")
+(add-to-list 'load-path "~/.emacs.d/elisp/font-lock-plus/")
 
 (require 'cl)
 

@@ -195,10 +195,6 @@
 (setq dired-recursive-copies 'always)
 (setq dired-isearch-filenames t)
 
-;; add exec option for shell
-(add-hook 'after-save-hook
-          'executable-make-buffer-file-executable-if-script-p)
-
 ;; neo tree
 ;; download fonts if necessary
 (unless (file-exists-p (concat (getenv "HOME") "/.local/share/fonts/all-the-icons.ttf"))

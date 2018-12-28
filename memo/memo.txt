@@ -167,3 +167,12 @@ C-x v + vc-pull (git pull)
 * dired
 
 C-x M-o toggle dired-ommit-files
+
+* zoom in/out
+
+(text-scale-increase 1)
+(text-scale-decrease 1)
+
+** reset zoom
+text-scale-adjust
+and 0

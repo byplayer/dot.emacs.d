@@ -170,9 +170,17 @@ C-x M-o toggle dired-ommit-files
 
 * zoom in/out
 
+. To restore the default (global) face height, type 
+
+** to increase
+C-x C-+ or C-x C-=
 (text-scale-increase 1)
+
+** to decrease
+C-x C--
 (text-scale-decrease 1)
 
-** reset zoom
+** to reset zoom
+C-x C-0
+
 text-scale-adjust
-and 0

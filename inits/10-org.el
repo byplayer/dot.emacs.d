@@ -38,17 +38,18 @@
     (format "%s/%s-%s.org" target_dir (format-time-string "%Y%m%d-%H%M%S") name )))
 
 (setq org-capture-templates
-      '(("t" "Todo" entry (file+headline (concatenate 'string my-org-agenda-directory "/todo.org") "Tasks")
+      '(("t" "Todo" entry (file+headline (lambda()(concatenate 'string my-org-agenda-directory "/todo.org")) "Tasks")
              "* TODO %?")
-        ("m" "Memo" entry (file (my/generate-org-memo-name))
+        ("m" "Memo" entry (file my/generate-org-memo-name)
          "* %?\nEntered on %T\n")
         ("l" "Log" entry (file
-                           (format-time-string
-                            (let (target_dir)
-                              (setq target_dir (format-time-string (concatenate 'string org-directory "/log/%Y/%Y%m")))
-                              (unless (file-directory-p target_dir)
-                                (make-directory target_dir t))
-                              (concatenate 'string target_dir "/%Y%m%d.org"))))
+                          (lambda()
+                            (format-time-string
+                             (let (target_dir)
+                               (setq target_dir (format-time-string (concatenate 'string org-directory "/log/%Y/%Y%m")))
+                               (unless (file-directory-p target_dir)
+                                 (make-directory target_dir t))
+                               (concatenate 'string target_dir "/%Y%m%d.org")))))
          "* %?\nEntered on %T\n")
         ))
 

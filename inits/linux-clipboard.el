@@ -1,3 +1,3 @@
 (cond (window-system
-  (setq x-select-enable-clipboard t)
+  (setq select-enable-clipboard t)
     ))

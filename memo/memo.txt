@@ -159,6 +159,14 @@ start up status
 
 #+TITLE: 
 
+** org agenda
+
+C-a n
+
+** org capture
+
+(org-capture)
+
 * git
 
 C-x v P vc-push (git push)

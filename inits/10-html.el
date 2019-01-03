@@ -59,6 +59,7 @@
              (flyspell-prog-mode)
              (define-key js2-mode-map "\C-m" 'newline-and-indent)
              (define-key js2-mode-map "\C-i" 'indent-and-back-to-indentation)))
+(add-hook 'js2-mode-hook #'js2-imenu-extras-mode)
 
 (defun indent-and-back-to-indentation ()
   (interactive)

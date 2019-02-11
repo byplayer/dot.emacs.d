@@ -159,7 +159,8 @@
 (autoload 'rabbit-mode "rabbit-mode" "major mode for Rabbit" t)
 (add-to-list 'auto-mode-alist '("\\.\\(rbt\\|rab\\)$" . rabbit-mode))
 
-
+;; disable to insert magic comment
+(setq ruby-insert-encoding-magic-comment nil)
 
 (provide '10-ruby)
 ;;; 10-ruby.el ends here

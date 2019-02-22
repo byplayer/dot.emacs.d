@@ -58,7 +58,8 @@
 (add-hook 'org-mode-hook
           (lambda ()
             (define-key org-mode-map (kbd "C-a") 'vc-like-home)
-            (define-key org-mode-map (kbd "C-c t") 'org-todo)))
+            (define-key org-mode-map (kbd "C-c t") 'org-todo)
+            (define-key org-mode-map (kbd "M-*") 'org-mark-ring-goto)))
 
 ;; show content as default view
 ;; #+STARTUP: fold              (or ‘overview’, this is equivalent)

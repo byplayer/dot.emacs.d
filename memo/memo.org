@@ -147,6 +147,8 @@ C-c C-c set tag
 C-u <TAB> change visibility
 C-c C-t / C-c t switch status
 
+C-c C-o open link
+
 TAB              (org-cycle)
 C-u TAB / S-TAB  (org-global-cycle)
 C-u C-u TAB      (org-set-startup-visibility)
@@ -157,7 +159,7 @@ start up status
 #+STARTUP: showall
 #+STARTUP: showeverything
 
-#+TITLE: 
+#+TITLE:
 
 ** org agenda
 

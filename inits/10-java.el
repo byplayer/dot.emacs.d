@@ -23,9 +23,11 @@
 
 (add-hook 'java-mode-hook
           (lambda ()
+            (google-set-c-style)
+            (google-make-newline-indent)
+            (setq c-basic-offset 4)
             (setq tab-width 4)
             (setq indent-tabs-mode nil)
-            (setq c-basic-offset 4)
             (define-key java-mode-map (kbd "C-c c") 'java-compile)))
 
 (add-to-list 'auto-mode-alist '("\\.gradle$"     . groovy-mode))

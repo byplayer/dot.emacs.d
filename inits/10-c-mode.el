@@ -2,11 +2,13 @@
 ;; configuration for c-mode
 ;;; Commentary:
 ;;; Code:
- (setq c-default-style "linux")
+(require 'google-c-style)
 
 (defun my-c-mode-hook ()
   (c-set-offset 'statement-block-intro 2)
-  (setq c-basic-offset 2)
+  (google-set-c-style)
+  (google-make-newline-indent)
+  (setq c-basic-offset 4)
   (turn-on-font-lock)
   (local-set-key "\C-cc" 'compile)
   (local-set-key  "\C-co" 'ff-find-other-file))

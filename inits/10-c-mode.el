@@ -2,8 +2,9 @@
 ;; configuration for c-mode
 ;;; Commentary:
 ;;; Code:
+ (setq c-default-style "linux")
+
 (defun my-c-mode-hook ()
-  (c-set-style "gnu")
   (c-set-offset 'statement-block-intro 2)
   (setq c-basic-offset 2)
   (turn-on-font-lock)

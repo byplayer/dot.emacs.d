@@ -244,5 +244,11 @@
              (dired-omit-mode t)))
 (setq dired-omit-files "^\\.?#\\|^\\.$\\|^\\.\\.$\\|^\\..*$")
 
+(defun insert-ymd ()
+  "Insert string for today's date(YYYYMMDD).
+e.g. 20190401."
+  (interactive)                 ; permit invocation in minibuffer
+  (insert (format-time-string "%Y%m%d")))
+
 (provide '10-misc)
 ;;; 10-misc.el ends here

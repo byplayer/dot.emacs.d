@@ -11,7 +11,7 @@
 (setq org-log-done 'time)
 (setq org-log-done-with-time t)
 
-(setq org-directory "~/docs/org")
+(setq org-directory "~/docs/org_doc")
 (setq my-org-agenda-directory (concatenate 'string org-directory "/agenda"))
 (setq my-org-agenda-exludes "\\/\\(report\\|archive\\|goal_1on1\\|interview\\)\\/")
 

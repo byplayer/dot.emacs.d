@@ -44,10 +44,7 @@
              (irony-cdb-autosetup-compile-options)
              (add-to-list (make-local-variable 'company-backends) '(company-irony :with company-yasnippet))))
 
-(defun my-flycheck-c++-setup ()
-  (setq flycheck-gcc-language-standard "c++14"))
-
-(add-hook 'c++-mode-hook #'my-flycheck-c++-setup)
+(setq flycheck-clang-language-standard "c++14")
 
 (provide '10-c-mode)
 ;;; 10-c-mode ends here

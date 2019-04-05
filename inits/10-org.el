@@ -2,6 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 
+(require 'org)
 (require 'org-habit)
 
 ;; TODO status

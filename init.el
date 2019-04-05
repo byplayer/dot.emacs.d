@@ -131,7 +131,9 @@
     mozc
     mozc-popup
 
+    ; c/c++
     google-c-style
+    clang-format
     ))
 
 (let ((not-installed (loop for x in my-installing-package-list

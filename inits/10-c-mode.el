@@ -3,6 +3,19 @@
 ;;; Commentary:
 ;;; Code:
 (require 'google-c-style)
+(require 'clang-format)
+
+(setq clang-format-style "google")
+
+;; clang-format-on-save
+(defun my-clang-format-before-save ()
+  "Usage: (add-hook 'before-save-hook 'my-clang-format-before-save)"
+
+  (interactive)
+  (if (or (eq major-mode 'c++-mode)
+          (eq major-mode 'c-mode))
+      (clang-format-buffer))
+  )
 
 (defun my-c-mode-hook ()
   (c-set-offset 'statement-block-intro 2)
@@ -11,7 +24,9 @@
   (setq c-basic-offset 2)
   (turn-on-font-lock)
   (local-set-key "\C-cc" 'compile)
-  (local-set-key  "\C-co" 'ff-find-other-file))
+  (local-set-key  "\C-co" 'ff-find-other-file)
+  (add-hook 'before-save-hook 'my-clang-format-before-save)
+  )
 
 (add-hook 'c-mode-common-hook 'my-c-mode-hook)
 
@@ -28,6 +43,11 @@
           '(lambda()
              (irony-cdb-autosetup-compile-options)
              (add-to-list (make-local-variable 'company-backends) '(company-irony :with company-yasnippet))))
+
+(defun my-flycheck-c++-setup ()
+  (setq flycheck-gcc-language-standard "c++14"))
+
+(add-hook 'c++-mode-hook #'my-flycheck-c++-setup)
 
 (provide '10-c-mode)
 ;;; 10-c-mode ends here

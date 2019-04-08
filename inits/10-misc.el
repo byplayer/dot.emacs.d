@@ -249,6 +249,10 @@
 e.g. 20190401."
   (interactive)                 ; permit invocation in minibuffer
   (insert (format-time-string "%Y%m%d")))
+;; keyfreq
+(require 'keyfreq)
+(keyfreq-mode 1)
+(keyfreq-autosave-mode 1)
 
 (provide '10-misc)
 ;;; 10-misc.el ends here

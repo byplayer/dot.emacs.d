@@ -116,6 +116,7 @@
     volatile-highlights
     popwin
     avy
+    keyfreq
 
     ;; neotree
     all-the-icons

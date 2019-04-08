@@ -12,6 +12,29 @@
 (add-to-list 'load-path "~/.emacs.d/elisp/bat-mode/")
 (add-to-list 'load-path "~/.emacs.d/elisp/font-lock-plus/")
 
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(safe-local-variable-values
+   (quote
+    ((eval setq-local default-directory
+           (expand-file-name
+            (concat
+             (file-name-directory
+              (buffer-file-name))
+             "..")))
+     (ruby-compilation-executable . "ruby")
+     (ruby-compilation-executable . "ruby1.8")
+     (ruby-compilation-executable . "ruby1.9")
+     (ruby-compilation-executable . "rbx")
+     (ruby-compilation-executable . "jruby"))))
+ '(term-default-bg-color "#000000")
+ '(term-default-fg-color "light gray")
+ '(truncate-lines nil)
+ '(truncate-partial-width-windows nil))
+
 (require 'cl)
 
 ;; install packages
@@ -174,42 +197,3 @@
 
 (provide 'init)
 ;;; init.el ends here
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   (quote
-    (mozc company-quickhelp yaml-mode web-mode volatile-highlights undo-tree smartrep smartparens savekill ruby-block rspec-mode rinari rhtml-mode revive recentf-ext rainbow-mode popwin point-undo phpunit php-mode neotree multiple-cursors markdown-mode kotlin-mode js2-mode init-loader helm-swoop helm-projectile helm-migemo helm-ls-git helm-gtags helm-go-package helm-flycheck helm-descbinds helm-c-yasnippet helm-ag groovy-mode go-eldoc gitignore-mode git-gutter git-commit-mode flycheck-pos-tip flycheck-kotlin feature-mode expand-region egg dockerfile-mode crontab-mode company-go color-theme avy anzu)))
- '(safe-local-variable-values
-   (quote
-    ((eval setq-local default-directory
-           (expand-file-name
-            (concat
-             (file-name-directory
-              (buffer-file-name))
-             "..")))
-     (ruby-compilation-executable . "ruby")
-     (ruby-compilation-executable . "ruby1.8")
-     (ruby-compilation-executable . "ruby1.9")
-     (ruby-compilation-executable . "rbx")
-     (ruby-compilation-executable . "jruby"))))
- '(term-default-bg-color "#000000")
- '(term-default-fg-color "light gray")
- '(truncate-lines nil)
- '(truncate-partial-width-windows nil))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(web-mode-comment-face ((t (:foreground "#D9333F"))))
- '(web-mode-css-at-rule-face ((t (:foreground "#FF7F00"))))
- '(web-mode-css-pseudo-class-face ((t (:foreground "#FF7F00"))))
- '(web-mode-css-rule-face ((t (:foreground "#A0D8EF"))))
- '(web-mode-doctype-face ((t (:foreground "#82AE46"))))
- '(web-mode-html-attr-name-face ((t (:foreground "#C97586"))))
- '(web-mode-html-attr-value-face ((t (:foreground "#82AE46"))))
- '(web-mode-html-tag-face ((t (:foreground "#E6B422" :weight bold))))
- '(web-mode-server-comment-face ((t (:foreground "#D9333F")))))

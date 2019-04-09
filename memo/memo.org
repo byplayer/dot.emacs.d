@@ -198,3 +198,8 @@ text-scale-adjust
 * popwin compilation
 
 C-x p popwin:display-last-buffer
+
+* keyfreq
+
+Show key frequency
+(keyfreq-show)

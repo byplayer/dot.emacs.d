@@ -11,10 +11,10 @@
 (global-font-lock-mode t)
 
 ;; font-lockでの装飾レベル
-(setq font-lock-maximum-decoration t)
-(setq fast-lock nil)
-(setq lazy-lock nil)
-(setq jit-lock t)
+;; (setq font-lock-maximum-decoration t)
+;; (setq fast-lock nil)
+;; (setq lazy-lock nil)
+;; (setq jit-lock t)
 
 (if (boundp 'window-system)
     (setq initial-frame-alist
@@ -45,15 +45,8 @@
 (setq visual-line-mode nil)
 (setq line-move-visual nil)
 
-(when (require 'color-theme nil t)
-  (color-theme-initialize)
-
-  ;; load additional color-theme
-  (setq old-init-loader-default-regexp init-loader-default-regexp)
-  (setq init-loader-default-regexp "\\(?:^color-theme-\\)")
-  (init-loader-load "~/.emacs.d/elisp/color-theme-optional/")
-  (setq init-loader-default-regexp old-init-loader-default-regexp)
-  (color-theme-byplayer))
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
+(load-theme 'molokai t)
 
 ;; text-scale
 (global-set-key (kbd "<C-mouse-4>") 'text-scale-decrease)

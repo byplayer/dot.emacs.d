@@ -36,7 +36,7 @@
  '(button ((t (:underline t :foreground "cyan1"))))
  '(default ((t (:background "black" :foreground "white"))))
  '(cursor ((t (:foreground "white"))))
- '(region ((t (:background "blue3"))))
+ '(region ((t (:background "DarkGreen"))))
  '(font-lock-builtin-face ((t (:foreground "LightSteelBlue"))))
  '(font-lock-comment-delimiter-face ((t (:foreground "chocolate1"))))
  '(font-lock-comment-face ((t (:foreground "chocolate1"))))

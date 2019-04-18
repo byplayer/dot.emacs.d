@@ -169,6 +169,10 @@ C-a n
 
 (org-capture)
 
+** insert date
+
+C-c <
+
 * git
 
 C-x v P vc-push (git push)

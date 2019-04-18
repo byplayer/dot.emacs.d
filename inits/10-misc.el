@@ -249,6 +249,13 @@
 e.g. 20190401."
   (interactive)                 ; permit invocation in minibuffer
   (insert (format-time-string "%Y%m%d")))
+
+(defun insert-ymdhms ()
+  "Insert string for today's date(YYYY-mm-dd HH:MM:SS).
+e.g. 20190-4-01 15:02:33"
+  (interactive)                 ; permit invocation in minibuffer
+  (insert (format-time-string "%Y-%m-%d %H:%M:%S")))
+
 ;; keyfreq
 (require 'keyfreq)
 (keyfreq-mode 1)

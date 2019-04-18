@@ -126,8 +126,8 @@
  '(org-tag ((t (:foreground "green yellow"))))
  '(org-checkbox ((t (:foreground "LawnGreen"))))
  '(org-warning ((t ( :foreground "hotpink"))))
- '(org-level-1 ((t ( :foreground "hotpink" :weight bold))))
- '(org-level-2 ((t ( :foreground "yellow" :weight semi-bold))))
+ '(org-level-1 ((t ( :foreground "hotpink"))))
+ '(org-level-2 ((t ( :foreground "gold"))))
  '(org-level-4 ((t ( :foreground "grey80"))))
 
  '(guide-key/highlight-command-face ((t (:foreground "green"))))

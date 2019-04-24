@@ -2,9 +2,6 @@
 
 GIT_ROOT=`dirname ${0}`/../
 
-echo sync git hooks
-rsync -av --delete ${GIT_ROOT}/git_hooks/hooks/ ${GIT_ROOT}/.git/hooks/
-
 git diff --stat HEAD~ | grep "\.el" > /dev/null 2>&1
 RET_VAL=$?
 if [ $RET_VAL -eq 0 ]; then

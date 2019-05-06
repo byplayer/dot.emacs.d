@@ -5,10 +5,10 @@
 ;; start server
 (server-start)
 
-(require 'desktop)
-(setq desktop-globals-to-save '(extended-command-history))
-(setq desktop-files-not-to-save "")
-(desktop-save-mode t)
+;; revive
+(autoload 'save-current-configuration "revive" "Save status" t)
+(autoload 'resume "revive" "Resume Emacs" t)
+(autoload 'wipe "revive" "Wipe emacs" t)
 
 ;; regin
 (require 'expand-region)

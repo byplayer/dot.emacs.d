@@ -261,5 +261,13 @@ e.g. 20190-4-01 15:02:33"
 (keyfreq-mode 1)
 (keyfreq-autosave-mode 1)
 
+(defun delete-trailing-whitespace-before-vave()
+  (if (or (eq major-mode 'text-mode)
+          (eq major-mode 'org-mode)
+          (eq major-mode 'markdown-mode))
+      (delete-trailing-whitespace)))
+
+(add-hook 'before-save-hook 'delete-trailing-whitespace-before-vave)
+
 (provide '10-misc)
 ;;; 10-misc.el ends here

@@ -165,7 +165,7 @@
 (setq ruby-insert-encoding-magic-comment nil)
 
 ;; rubocop
-
+(setq rubocopfmt-use-bundler-when-possible nil)
 
 (provide '10-ruby)
 ;;; 10-ruby.el ends here

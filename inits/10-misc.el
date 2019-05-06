@@ -132,8 +132,6 @@
         ))
 (global-whitespace-mode 1)
 
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
-
 ;; undo-tree
 (eval-after-load "undo-tree"
   '(progn

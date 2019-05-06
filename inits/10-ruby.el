@@ -162,5 +162,10 @@
 ;; disable to insert magic comment
 (setq ruby-insert-encoding-magic-comment nil)
 
+;; rufo
+(add-to-list 'load-path "~/.emacs.d/elisp/emacs-rufo/")
+(require 'rufo)
+(setq rufo-enable-format-on-save t)
+
 (provide '10-ruby)
 ;;; 10-ruby.el ends here

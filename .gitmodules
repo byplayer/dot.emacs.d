@@ -22,6 +22,3 @@
 [submodule "snippets/go-mode"]
 	path = snippets/go-mode
 	url = https://github.com/byplayer/yasnippet-go.git
-[submodule "elisp/emacs-rufo"]
-	path = elisp/emacs-rufo
-	url = https://github.com/byplayer/emacs-rufo.git

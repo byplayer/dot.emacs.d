@@ -16,6 +16,7 @@
           (eq major-mode 'c-mode))
       (clang-format-buffer))
   )
+(add-hook 'before-save-hook #'my-clang-format-before-save)
 
 (defun my-c-mode-hook ()
   (c-set-offset 'statement-block-intro 2)
@@ -25,7 +26,6 @@
   (turn-on-font-lock)
   (local-set-key "\C-cc" 'compile)
   (local-set-key  "\C-co" 'ff-find-other-file)
-  (add-hook 'before-save-hook 'my-clang-format-before-save)
   )
 
 (add-hook 'c-mode-common-hook 'my-c-mode-hook)

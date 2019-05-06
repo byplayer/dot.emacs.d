@@ -2,6 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 (require 'ruby-mode)
+(require 'rubocopfmt)
 
 (autoload 'ruby-mode "ruby-mode" "Mode for editing ruby source files" t)
 (autoload 'inf-ruby-keys "inf-ruby" "Set local key defs for inf-ruby in ruby-mode")
@@ -149,7 +150,8 @@
   ;; add following characters into syntax
   (modify-syntax-entry ?@ "_" ruby-mode-syntax-table)
   (modify-syntax-entry ?! "_" ruby-mode-syntax-table)
-  (flyspell-prog-mode))
+  (flyspell-prog-mode)
+  (rubocopfmt-mode))
 (add-hook 'ruby-mode-hook 'my-ruby-mode-hook)
 
 (define-key ruby-mode-map [return] 'newline-and-indent)
@@ -162,10 +164,8 @@
 ;; disable to insert magic comment
 (setq ruby-insert-encoding-magic-comment nil)
 
-;; rufo
-(add-to-list 'load-path "~/.emacs.d/elisp/emacs-rufo/")
-(require 'rufo)
-(setq rufo-enable-format-on-save t)
+;; rubocop
+
 
 (provide '10-ruby)
 ;;; 10-ruby.el ends here

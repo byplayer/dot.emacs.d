@@ -57,6 +57,7 @@
     rspec-mode
     feature-mode
     robe
+    rubocopfmt
 
     ;; javascript
     js2-mode

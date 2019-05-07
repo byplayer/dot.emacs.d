@@ -33,6 +33,7 @@
 ;; You may also want to bind `google-java-format-region' to a key:
 ;;
 ;;   (global-set-key [C-M-tab] #'google-java-format-region)
+;; Version: 20190507.0001
 
 ;;; Code:
 

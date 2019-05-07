@@ -1,1 +1,0 @@
-copy from https://github.com/google/google-java-format/blob/master/core/src/main/scripts/google-java-format.el

@@ -25,17 +25,14 @@
           (lambda ()
             (google-set-c-style)
             (google-make-newline-indent)
-            (setq c-basic-offset 4)
-            (setq tab-width 4)
+            (setq c-basic-offset 2)
+            (setq tab-width 2)
             (setq indent-tabs-mode nil)
-            (define-key java-mode-map (kbd "C-c c") 'java-compile))
-          )
+            (define-key java-mode-map (kbd "C-c c") 'java-compile)))
 
 (add-to-list 'auto-mode-alist '("\\.gradle$"     . groovy-mode))
 
 ;; google-java-format
-(add-to-list 'load-path "~/.emacs.d/elisp/google-java-format/")
-(require 'google-java-format)
 (setq google-java-format-executable "/opt/google-java-format/bin/google-java-format")
 
 ;; google-java-format-buffer
@@ -43,8 +40,7 @@
   "Usage: (add-hook 'before-save-hook #'my-java-before-save)"
 
   (interactive)
-  (if (eq major-mode 'java-mode))
-      (google-java-format-buffer))
+  (if (eq major-mode 'java-mode) (google-java-format-buffer)))
 (add-hook 'before-save-hook #'my-java-before-save)
 
 

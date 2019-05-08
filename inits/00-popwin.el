@@ -4,7 +4,6 @@
 
 (require 'popwin)
 (popwin-mode 1)
-(setq display-buffer-function 'popwin:display-buffer)
 (setq popwin:special-display-config '(; ("*compilation*" :noselect t)
                                       ("*compilation*")
                                       ("*rspec-compilation*" :regexp t)

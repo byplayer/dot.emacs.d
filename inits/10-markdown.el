@@ -7,5 +7,7 @@
                 ("\\.md$" . markdown-mode)
                 ) auto-mode-alist))
 
+(add-hook 'markdown-mode-hook 'prettier-js-mode)
+
 (provide '10-markdown)
 ;;; 10-markdown.el ends here

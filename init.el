@@ -158,6 +158,8 @@
     ; c/c++
     google-c-style
     clang-format
+
+    prettier-js
     ))
 
 (let ((not-installed (loop for x in my-installing-package-list

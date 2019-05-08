@@ -261,13 +261,28 @@ e.g. 20190-4-01 15:02:33"
 (keyfreq-mode 1)
 (keyfreq-autosave-mode 1)
 
+;; delete-trailing-whitespace
+(setq delete-trailing-whitespace-modes '(text-mode org-mode))
 (defun delete-trailing-whitespace-before-save()
-  (if (or (eq major-mode 'text-mode)
-          (eq major-mode 'org-mode)
-          (eq major-mode 'markdown-mode))
-      (delete-trailing-whitespace)))
+  (when (member major-mode delete-trailing-whitespace-modes) (delete-trailing-whitespace)))
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace-before-save)
+
+;; prettier
+(setq prettier-modes '(js2-mode markdown-mode css-mode))
+
+(defun my/prettier ()
+  (interactive)
+  (shell-command
+    (format "%s --write %s"
+      (shell-quote-argument (executable-find "prettier"))
+      (shell-quote-argument (expand-file-name buffer-file-name))))
+  (revert-buffer t t t))
+
+(defun my/prettier-before-save ()
+  (when (member major-mode prettier-modes) (my/prettier)))
+
+(add-hook 'before-save-hook 'my/prettier-before-save)
 
 (provide '10-misc)
 ;;; 10-misc.el ends here

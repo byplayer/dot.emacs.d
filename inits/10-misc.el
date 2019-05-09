@@ -108,18 +108,7 @@
 (setq scroll-step 1)
 
 ;; show white space of end of line
-(defface my-face-u-1 '((t (:foreground "SteelBlue" :underline t))) nil
-  :group 'font-lock-highlighting-faces)
-(defvar my-face-u-1 'my-face-u-1)
-
-(defadvice font-lock-mode (before my-font-lock-mode ())
-  "Set font lock mode."
-  (font-lock-add-keywords
-   major-mode
-     '(("[ \t]+$" 0 my-face-u-1 append)
-     )))
-(ad-enable-advice 'font-lock-mode 'before 'my-font-lock-mode)
-(ad-activate 'font-lock-mode)
+(setq-default show-trailing-whitespace t)
 
 ;; show white space
 (require 'whitespace)

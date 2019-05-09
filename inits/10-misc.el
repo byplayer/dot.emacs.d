@@ -267,6 +267,15 @@ e.g. 20190-4-01 15:02:33"
   (if (member major-mode delete-trailing-whitespace-modes) (delete-trailing-whitespace)))
 (add-hook 'before-save-hook 'delete-trailing-whitespace-before-save)
 
+;; prettier
+(setq prettier-js-mode-hooks
+      '(css-mode-hook
+        yaml-mode-hook
+        markdown-mode-hook
+        js2-mode-hook
+        php-mode-hook))
+(loop for hook in prettier-js-mode-hooks
+       do (add-hook hook 'prettier-js-mode))
 
 (provide '10-misc)
 ;;; 10-misc.el ends here

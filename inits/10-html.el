@@ -36,7 +36,6 @@
 )
 
 (add-hook 'css-mode-hook 'rainbow-mode)
-(add-hook 'css-mode-hook 'prettier-js-mode)
 (add-hook 'scss-mode-hook 'rainbow-mode)
 
 (autoload 'css-mode "css-mode")
@@ -58,7 +57,6 @@
                    js2-cleanup-whitespace nil
                    js2-bounce-indent-flag nil)
              (flyspell-prog-mode)
-             (prettier-js-mode)
              (define-key js2-mode-map "\C-m" 'newline-and-indent)
              (define-key js2-mode-map "\C-i" 'indent-and-back-to-indentation)))
 (add-hook 'js2-mode-hook #'js2-imenu-extras-mode)

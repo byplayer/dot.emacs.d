@@ -261,8 +261,11 @@ e.g. 20190-4-01 15:02:33"
 (keyfreq-mode 1)
 (keyfreq-autosave-mode 1)
 
+(setq auto-mode-alist
+      (cons ' ( "\\.txt\\'" . outline-mode) auto-mode-alist))
+
 ;; delete-trailing-whitespace
-(setq delete-trailing-whitespace-modes '(text-mode org-mode))
+(setq delete-trailing-whitespace-modes '(text-mode org-mode outline-mode))
 (defun delete-trailing-whitespace-before-save()
   (if (member major-mode delete-trailing-whitespace-modes) (delete-trailing-whitespace)))
 (add-hook 'before-save-hook 'delete-trailing-whitespace-before-save)

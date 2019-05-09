@@ -13,6 +13,9 @@
 (add-hook 'php-mode-hook
           '(lambda()
              (php-set-style "php")
+             (setq c-basic-offset 4)
+             (setq tab-width 4)
+             (setq indent-tabs-mode nil)
              (define-key php-mode-map (kbd "C-c , s") 'phpunit-current-test)
              (define-key php-mode-map (kbd "C-c , v") 'phpunit-current-class)
              (define-key php-mode-map (kbd "C-c , a") 'phpunit-current-project)

@@ -267,7 +267,20 @@ e.g. 20190-4-01 15:02:33"
         js2-mode-hook
         php-mode-hook))
 (loop for hook in prettier-js-mode-hooks
-       do (add-hook hook 'prettier-js-mode))
+      do (add-hook hook 'prettier-js-mode))
+
+;; clang-format
+(setq clang-format-modes '(c++-mode c-mode java-mode))
+(setq clang-format-style "google")
+
+(defun my-clang-format-before-save ()
+  "Usage: (add-hook 'before-save-hook 'my-clang-format-before-save)"
+  (interactive)
+  (if (member major-mode clang-format-modes)
+      (clang-format-buffer)))
+
+(add-hook 'before-save-hook #'my-clang-format-before-save)
+
 
 (provide '10-misc)
 ;;; 10-misc.el ends here

@@ -3,20 +3,6 @@
 ;;; Commentary:
 ;;; Code:
 (require 'google-c-style)
-(require 'clang-format)
-
-(setq clang-format-style "google")
-
-;; clang-format-on-save
-(defun my-clang-format-before-save ()
-  "Usage: (add-hook 'before-save-hook 'my-clang-format-before-save)"
-
-  (interactive)
-  (if (or (eq major-mode 'c++-mode)
-          (eq major-mode 'c-mode))
-      (clang-format-buffer))
-  )
-(add-hook 'before-save-hook #'my-clang-format-before-save)
 
 (defun my-c-mode-hook ()
   (c-set-offset 'statement-block-intro 2)

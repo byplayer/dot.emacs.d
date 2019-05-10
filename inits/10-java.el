@@ -32,17 +32,5 @@
 
 (add-to-list 'auto-mode-alist '("\\.gradle$"     . groovy-mode))
 
-;; google-java-format
-(setq google-java-format-executable "/opt/google-java-format/bin/google-java-format")
-
-;; google-java-format-buffer
-(defun my-java-before-save ()
-  "Usage: (add-hook 'before-save-hook #'my-java-before-save)"
-
-  (interactive)
-  (if (eq major-mode 'java-mode) (google-java-format-buffer)))
-(add-hook 'before-save-hook #'my-java-before-save)
-
-
 (provide '10-java)
 ;;; 10-java.el ends here

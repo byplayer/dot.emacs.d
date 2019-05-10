@@ -270,7 +270,7 @@ e.g. 20190-4-01 15:02:33"
 
 ;; clang-format
 (setq clang-format-modes
-      '(c++-mode c-mode java-mode js2-mode-hook))
+      '(c++-mode c-mode java-mode js2-mode))
 (setq clang-format-style "google")
 
 (defun my-clang-format-before-save ()

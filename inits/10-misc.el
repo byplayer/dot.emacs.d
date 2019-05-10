@@ -264,13 +264,13 @@ e.g. 20190-4-01 15:02:33"
       '(css-mode-hook
         yaml-mode-hook
         markdown-mode-hook
-        js2-mode-hook
         php-mode-hook))
 (loop for hook in prettier-js-mode-hooks
       do (add-hook hook 'prettier-js-mode))
 
 ;; clang-format
-(setq clang-format-modes '(c++-mode c-mode java-mode))
+(setq clang-format-modes
+      '(c++-mode c-mode java-mode js2-mode-hook))
 (setq clang-format-style "google")
 
 (defun my-clang-format-before-save ()

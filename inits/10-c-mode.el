@@ -2,8 +2,6 @@
 ;; configuration for c-mode
 ;;; Commentary:
 ;;; Code:
-(require 'google-c-style)
-
 (defun my-c-mode-hook ()
   (c-set-offset 'statement-block-intro 2)
   (google-set-c-style)

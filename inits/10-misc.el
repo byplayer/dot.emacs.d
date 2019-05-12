@@ -269,18 +269,22 @@ e.g. 20190-4-01 15:02:33"
       do (add-hook hook 'prettier-js-mode))
 
 ;; clang-format
-(setq clang-format-modes
-      '(c++-mode c-mode java-mode js2-mode))
-(setq clang-format-style "google")
+(use-package clang-format
+  :ensure t
+  :commands (clang-format-buffer)
+  :init
+  (defun my-clang-format-before-save ()
+    "Usage: (add-hook 'before-save-hook 'my-clang-format-before-save)"
+    (interactive)
+    (if (member major-mode clang-format-modes)
+        (clang-format-buffer)))
 
-(defun my-clang-format-before-save ()
-  "Usage: (add-hook 'before-save-hook 'my-clang-format-before-save)"
-  (interactive)
-  (if (member major-mode clang-format-modes)
-      (clang-format-buffer)))
+  (add-hook 'before-save-hook #'my-clang-format-before-save)
 
-(add-hook 'before-save-hook #'my-clang-format-before-save)
-
+  :config
+  (setq clang-format-modes
+        '(c++-mode c-mode java-mode js2-mode))
+  (setq clang-format-style "google"))
 
 (provide '10-misc)
 ;;; 10-misc.el ends here

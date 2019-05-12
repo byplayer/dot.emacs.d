@@ -42,7 +42,8 @@
 ;; install packages
 (defvar my-installing-package-list
   '(
-    ;; init-loader
+    ;; init
+    use-package
     init-loader
 
     ;; company

@@ -281,10 +281,6 @@ e.g. 20190-4-01 15:02:33"
 
 (add-hook 'before-save-hook #'my-clang-format-before-save)
 
-(use-package doom-modeline
-             :ensure t
-             :hook (after-init . doom-modeline-mode))
-
 
 (provide '10-misc)
 ;;; 10-misc.el ends here

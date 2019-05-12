@@ -42,7 +42,8 @@
 ;; install packages
 (defvar my-installing-package-list
   '(
-    ;; init-loader
+    ;; initialize
+    use-package
     init-loader
 
     ;; company
@@ -140,6 +141,7 @@
     popwin
     avy
     keyfreq
+    doom-modeline
 
     ;; neotree
     all-the-icons

@@ -2,6 +2,10 @@
 ;;; Commentary:
 ;;; Code:
 
+
+(use-package arduino-mode
+  :ensure t)
+
 (require 'org)
 (require 'org-habit)
 

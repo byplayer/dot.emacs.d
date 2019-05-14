@@ -6,6 +6,9 @@
 (use-package arduino-mode
   :ensure t)
 
+(use-package cider
+  :ensure t)
+
 (require 'org)
 (require 'org-habit)
 

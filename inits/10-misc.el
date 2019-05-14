@@ -273,6 +273,9 @@ e.g. 20190-4-01 15:02:33"
   :ensure t
   :commands (clang-format-buffer)
   :init
+  (setq clang-format-modes
+        '(c++-mode c-mode java-mode js2-mode))
+  (setq clang-format-style "google")
   (defun my-clang-format-before-save ()
     "Usage: (add-hook 'before-save-hook 'my-clang-format-before-save)"
     (interactive)
@@ -282,9 +285,7 @@ e.g. 20190-4-01 15:02:33"
   (add-hook 'before-save-hook #'my-clang-format-before-save)
 
   :config
-  (setq clang-format-modes
-        '(c++-mode c-mode java-mode js2-mode))
-  (setq clang-format-style "google"))
+  )
 
 (provide '10-misc)
 ;;; 10-misc.el ends here

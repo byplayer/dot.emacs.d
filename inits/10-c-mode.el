@@ -4,8 +4,6 @@
 ;;; Code:
 (defun my-c-mode-hook ()
   (c-set-offset 'statement-block-intro 2)
-  (google-set-c-style)
-  (google-make-newline-indent)
   (setq c-basic-offset 2)
   (turn-on-font-lock)
   (local-set-key "\C-cc" 'compile)

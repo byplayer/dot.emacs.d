@@ -1,9 +1,6 @@
 [submodule "elisp/anything-etags"]
 	path = elisp/anything-etags
 	url = https://github.com/byplayer/anything-etags.git
-[submodule "elisp/gist.el"]
-	path = elisp/gist.el
-	url = https://github.com/byplayer/gist.el.git
 [submodule "snippets/rabbit-mode"]
 	path = snippets/rabbit-mode
 	url = https://github.com/byplayer/yasnippet-rabbit-mode.git

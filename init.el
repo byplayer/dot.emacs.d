@@ -40,6 +40,7 @@
 (require 'cl)
 
 ;; install packages
+;; This value isn't used already but keep it to migrate use-package
 (defvar my-installing-package-list
   '(
     ;; init
@@ -161,14 +162,6 @@
 
     prettier-js
     ))
-
-(let ((not-installed (loop for x in my-installing-package-list
-                           when (not (package-installed-p x))
-                           collect x)))
-  (when not-installed
-    (package-refresh-contents)
-    (dolist (pkg not-installed)
-      (package-install pkg))))
 
 (require 'dash)
 (require 'f)

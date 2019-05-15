@@ -110,6 +110,26 @@
 ;; show white space of end of line
 (setq-default show-trailing-whitespace t)
 
+(defun my/disable-trailing-mode-hook ()
+  "Disable show tail whitespace."
+  (setq show-trailing-whitespace nil))
+
+(defvar my/disable-trailing-modes
+  '(comint-mode
+    eshell-mode
+    eww-mode
+    term-mode
+    egg-status-buffer-mode
+    egg-log-msg-mode
+    egg-log-buffer-mode
+    ))
+
+(mapc
+ (lambda (mode)
+   (add-hook (intern (concat (symbol-name mode) "-hook"))
+             'my/disable-trailing-mode-hook))
+ my/disable-trailing-modes)
+
 ;; show white space
 (require 'whitespace)
 (setq whitespace-style

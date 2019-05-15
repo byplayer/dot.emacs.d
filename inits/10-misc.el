@@ -123,6 +123,7 @@
     egg-log-msg-mode
     egg-log-buffer-mode
     compilation-mode
+    fundamental-mode
     ))
 
 (mapc

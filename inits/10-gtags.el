@@ -19,7 +19,6 @@
 (add-hook 'perl-mode-hook 'my-tag-mode-insert-hook)
 (add-hook 'php-mode-hook 'my-tag-mode-insert-hook)
 (add-hook 'c-mode-common-hook 'my-tag-mode-insert-hook)
-(add-hook 'rhtml-mode-hook 'my-tag-mode-insert-hook)
 (add-hook 'feature-mode-hook 'my-tag-mode-insert-hook)
 (add-hook 'ruby-mode-hook 'my-tag-mode-insert-hook)
 (add-hook 'emacs-lisp-mode-hook 'my-tag-mode-insert-hook)

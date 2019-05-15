@@ -53,17 +53,11 @@
 ;; https://github.com/eschulte/rinari
 (require 'rinari)
 
-;; rhtml-mode
-;; https://github.com/eschulte/rhtml
-(require 'rhtml-mode)
-(add-hook 'rhtml-mode-hook
-    (lambda ()
-      (rinari-launch)))
 (setq auto-mode-alist
       (append '(
-                ("\\.rxml$" . rhtml-mode)
-                ("\\.erb$". rhtml-mode)
-                ("\\.rhtml$". rhtml-mode)
+                ("\\.rxml$" . web-mode)
+                ("\\.erb$". web-mode)
+                ("\\.rhtml$". web-mode)
                 ) auto-mode-alist))
 
 

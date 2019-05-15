@@ -122,6 +122,7 @@
     egg-status-buffer-mode
     egg-log-msg-mode
     egg-log-buffer-mode
+    compilation-mode
     ))
 
 (mapc

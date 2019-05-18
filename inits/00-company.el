@@ -1,6 +1,8 @@
 ;;; package --- Summary
 ;;; Commentary:
 ;;; Code:
+(use-package company-quickhelp
+  :ensure t)
 
 (require 'company)
 (global-company-mode)

@@ -49,7 +49,6 @@
 
     ;; company
     company
-    company-quickhelp
 
     ;; ruby
     rinari

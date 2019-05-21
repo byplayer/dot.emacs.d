@@ -22,7 +22,8 @@
 
 (use-package magit
   :ensure t
-  :defer t)
+  :defer t
+  :bind (("C-x g" . magit-status)))
 
 (provide '10-git)
 ;;; 10-git.el ends here

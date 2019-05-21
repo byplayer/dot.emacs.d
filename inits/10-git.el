@@ -21,7 +21,8 @@
   (global-git-gutter-mode t))
 
 (use-package magit
-  :ensure t)
+  :ensure t
+  :defer t)
 
 (provide '10-git)
 ;;; 10-git.el ends here

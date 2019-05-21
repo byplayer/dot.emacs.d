@@ -1,9 +1,9 @@
-personal_ws-1.1 en 67 
+personal_ws-1.1 en 68 
 Taizan
 DevOps
 http
-ubuntu
 byplayer
+ubuntu
 json
 Mifas
 url
@@ -18,8 +18,8 @@ greasemonkey
 bundler
 Murugesan
 Rajesh
-el
 Abhilash
+el
 SessionM
 GPG
 TODO
@@ -30,6 +30,7 @@ JST
 APIs
 Goto
 nullptr
+magit
 rst
 BBT
 Garuda

@@ -91,10 +91,8 @@
 ;; show buffer name to title
 (setq frame-title-format "%b")
 
-; auto scroll on compile buffer
-(eval-after-load "compilation-mode"
-  '(progn
-     (setq compilation-scroll-output t)))
+;; auto scroll on compile buffer
+(setq compilation-scroll-output 'first-error)
 
 ;; show EOF
 (setq-default indicate-empty-lines t)

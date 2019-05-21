@@ -155,6 +155,7 @@
     prettier-js
     ))
 
+(require 'use-package)
 (require 'dash)
 (require 'f)
 

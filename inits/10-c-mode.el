@@ -9,7 +9,6 @@
   (setq c-basic-offset 2)
   (turn-on-font-lock)
   (local-set-key "\C-cc" 'compile)
-  (hs-minor-mode 1)
   (when (member major-mode irony-supported-major-modes)
     (irony-mode 1)))
 

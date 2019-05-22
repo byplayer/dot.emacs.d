@@ -216,4 +216,4 @@ hide/show block
 
 C-# hs-toggle-hiding
 C-+ hs-show-all
-C-_ hs-hide-all
+C-= hs-hide-all

@@ -310,7 +310,9 @@ e.g. 20190-4-01 15:02:33"
 (use-package switch-window
   :ensure t
   :commands (switch-window)
-  :bind (("C-x o" . switch-window)))
+  :bind (("C-x o" . switch-window))
+  :init
+  (setq switch-window-shortcut-style 'qwerty))
 
 (provide '10-misc)
 ;;; 10-misc.el ends here

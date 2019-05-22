@@ -111,6 +111,7 @@
                              )
 
 (add-to-list 'org-speed-commands-user '("d" org-todo "DONE"))
+(add-to-list 'org-speed-commands-user '("D" org-deadline ""))
 
 (provide '10-org)
 ;;; 10-org.el ends here

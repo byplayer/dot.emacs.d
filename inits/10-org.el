@@ -115,6 +115,8 @@
 (add-to-list 'org-speed-commands-user '("A" org-archive-this-file))
 (add-to-list 'org-speed-commands-user '("s" org-schedule ""))
 
+(setq org-clock-clocktable-default-properties '(:maxlevel 4 :scope file))
+
 (defun org-archive-this-file ()
   "Archive current file.
 The file-path is archive target file path.  If no file-path is given uses the function `buffer-file-name'."
@@ -127,6 +129,22 @@ The file-path is archive target file path.  If no file-path is given uses the fu
     (kill-buffer)
     (message "Archived %s to %s" file-path archive-path)
     )))
+
+(defun org-update-clocktable-in-file ()
+  "Update org clocktable in the file."
+  (interactive)
+  (let* ((old-cursor-pos (point)))
+    (goto-char (point-min))
+    (if (search-forward "#+BEGIN: clocktable" nil t nil)
+        (progn
+          (org-clock-report)
+          (goto-char old-cursor-pos))
+      (progn
+        (goto-char old-cursor-pos)
+        (org-clock-report)
+        )
+      )
+    ))
 
 (provide '10-org)
 ;;; 10-org.el ends here

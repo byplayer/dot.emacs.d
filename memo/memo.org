@@ -173,6 +173,8 @@ C-a n
 
 https://qiita.com/takaxp/items/a5a3383d7358c58240d0
 
+t org-todo done
+
 ** insert date
 
 C-c <

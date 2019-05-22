@@ -65,6 +65,11 @@
 
 (global-set-key "\C-ca" 'my/org-agenda)
 
+(setq org-archive-location
+      (concatenate 'string org-directory "/archive/"
+                   (format-time-string "%Y" (current-time))
+                   (format-time-string "/%Y%m_archive.org::" (current-time))))
+
 (add-hook 'org-mode-hook
           (lambda ()
             (define-key org-mode-map (kbd "C-a") 'vc-like-home)

@@ -307,5 +307,10 @@ e.g. 20190-4-01 15:02:33"
   :config
   )
 
+(use-package switch-window
+  :ensure t
+  :commands (switch-window)
+  :bind (("C-x o" . switch-window)))
+
 (provide '10-misc)
 ;;; 10-misc.el ends here

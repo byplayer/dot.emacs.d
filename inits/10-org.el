@@ -112,12 +112,12 @@
 
 (add-to-list 'org-speed-commands-user '("d" org-todo "DONE"))
 (add-to-list 'org-speed-commands-user '("D" org-deadline ""))
-(add-to-list 'org-speed-commands-user '("A" org-archive-this-file))
+(add-to-list 'org-speed-commands-user '("A" my/org-archive-this-file))
 (add-to-list 'org-speed-commands-user '("s" org-schedule ""))
 
 (setq org-clock-clocktable-default-properties '(:maxlevel 4 :scope file))
 
-(defun org-archive-this-file ()
+(defun my/org-archive-this-file ()
   "Archive current file.
 The file-path is archive target file path.  If no file-path is given uses the function `buffer-file-name'."
   (interactive)
@@ -130,7 +130,7 @@ The file-path is archive target file path.  If no file-path is given uses the fu
     (message "Archived %s to %s" file-path archive-path)
     )))
 
-(defun org-update-clocktable-in-file ()
+(defun my/org-update-clocktable-in-file ()
   "Update org clocktable in the file."
   (interactive)
   (let* ((old-cursor-pos (point)))
@@ -142,9 +142,20 @@ The file-path is archive target file path.  If no file-path is given uses the fu
       (progn
         (goto-char old-cursor-pos)
         (org-clock-report)
-        )
-      )
-    ))
+        ))))
+
+(add-hook 'org-clock-in-prepare-hook
+          'my/org-mode-ask-effort)
+
+(defun my/org-mode-ask-effort ()
+  "Ask for an effort estimate when clocking in."
+  (unless (org-entry-get (point) "Effort")
+    (let ((effort
+           (completing-read
+            "Effort: "
+            (org-entry-get-multivalued-property (point) "Effort"))))
+      (unless (equal effort "")
+        (org-set-property "Effort" effort)))))
 
 (provide '10-org)
 ;;; 10-org.el ends here

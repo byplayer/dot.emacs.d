@@ -100,10 +100,12 @@
                 )))
 
 (org-babel-do-load-languages 'org-babel-load-languages
-    '(
-        (shell . t)
-    )
-)
+                             '(
+                               (shell . t)
+                               )
+                             )
+
+(add-to-list 'org-speed-commands-user '("d" org-todo "DONE"))
 
 (provide '10-org)
 ;;; 10-org.el ends here

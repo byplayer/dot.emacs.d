@@ -169,6 +169,10 @@ C-a n
 
 (org-capture)
 
+** org-use-speed-commands
+
+https://qiita.com/takaxp/items/a5a3383d7358c58240d0
+
 ** insert date
 
 C-c <

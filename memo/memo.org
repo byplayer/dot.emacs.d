@@ -99,7 +99,7 @@ C-u 8 C-f moves forward eight characters.
 
 C-x C-s   Save buffer
 C-x s     Save some buffers
-  
+
 * rst
 
 C-= rst-adjust
@@ -135,7 +135,7 @@ C-x e        Run macro
 C-u 10 C-x e Run this macro 10 times
 C-x C-k e    Edit macro
 
-* org-mode 
+* org-mode
 
 S-Left, S-Right で TODO と DONE の切り替え
 M-S-Enter で次の TODO を作成
@@ -184,7 +184,7 @@ C-x M-o toggle dired-ommit-files
 
 * zoom in/out
 
-. To restore the default (global) face height, type 
+. To restore the default (global) face height, type
 
 ** to increase
 C-x C-+ or C-x C-=
@@ -207,3 +207,13 @@ C-x p popwin:display-last-buffer
 
 Show key frequency
 (keyfreq-show)
+
+* hs-hide-minor-mode
+
+hide/show block
+
+** define additional key
+
+C-# hs-toggle-hiding
+C-+ hs-show-all
+C-_ hs-hide-all

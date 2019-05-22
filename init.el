@@ -182,6 +182,28 @@
 (setq init-loader-show-log-after-init nil)
 (init-loader-load)
 
+(add-hook 'hs-minor-mode-hook
+          '(lambda()
+             (define-key hs-minor-mode-map (kbd "C-#") 'hs-toggle-hiding)
+             (define-key hs-minor-mode-map (kbd "C-+") 'hs-show-all) ;; ctrl+shift+=
+             (define-key hs-minor-mode-map (kbd "C-_") 'hs-hide-all)   ;; ctrl+shift+-
+             ))
+
+;; lisp
+(add-hook 'emacs-lisp-mode-hook
+          '(lambda()
+             (progn
+               (setq indent-tabs-mode nil)
+               (flyspell-prog-mode)
+               (hs-minor-mode 1))))
+
+(add-hook 'lisp-mode-hook
+          '(lambda()
+             (progn
+               (setq indent-tabs-mode nil)
+               (flyspell-prog-mode)
+               (hs-minor-mode 1))))
+
 (provide 'init)
 ;;; init.el ends here
 (custom-set-faces

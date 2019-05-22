@@ -12,6 +12,8 @@
 (require 'org)
 (require 'org-habit)
 
+(setq org-use-speed-commands t)
+
 ;; TODO status
 (setq org-todo-keywords '((sequence "TODO(t)" "WAIT(w)" "|" "DONE(d)" "SOMEDAY(s)")))
 ;; log date when down

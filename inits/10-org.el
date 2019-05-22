@@ -112,6 +112,7 @@
 
 (add-to-list 'org-speed-commands-user '("d" org-todo "DONE"))
 (add-to-list 'org-speed-commands-user '("D" org-deadline ""))
+(add-to-list 'org-speed-commands-user '("A" org-archive-this-file))
 
 (defun org-archive-this-file ()
   "Archive current file.

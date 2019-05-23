@@ -235,3 +235,7 @@ hide/show block
 C-# hs-toggle-hiding
 C-+ hs-show-all
 C-= hs-hide-all
+
+* toggle truncate lines
+
+toggle-truncate-lines

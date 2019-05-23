@@ -2,7 +2,7 @@
 
 GIT_ROOT=`dirname ${0}`/../
 
-git diff --stat HEAD~ | grep "\.el" > /dev/null 2>&1
+git diff-tree -r --name-only --no-commit-id ORIG_HEAD HEAD | grep "\.el" > /dev/null 2>&1
 RET_VAL=$?
 if [ $RET_VAL -eq 0 ]; then
   echo cleanup elc cache

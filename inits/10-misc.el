@@ -314,5 +314,79 @@ e.g. 20190-4-01 15:02:33"
   :init
   (setq switch-window-shortcut-style 'qwerty))
 
+;; mode-line
+(defvar mode-line-cleaner-alist
+  '( ;; For minor-mode, first char is 'space'
+    (yas-minor-mode . " Ys")
+    (auto-revert-mode . "")
+    (paredit-mode . " Pe")
+    (eldoc-mode . "")
+    (abbrev-mode . "")
+    (undo-tree-mode . " Ut")
+    (elisp-slime-nav-mode . " EN")
+    (helm-gtags-mode . " HG")
+    (flymake-mode . " Fm")
+    (flycheck-mode . " Fc")
+    (flyspell-mode . " Fs")
+    (anzu-mode . " Az")
+    (git-gutter-mode . "")
+    (helm-mode . " He")
+    (company-mode . " Cp")
+    (gtags-mode . " Gt")
+    (volatile-highlights-mode . "")
+    (ruby-block-mode . " Rb")
+    ;; Major modes
+    (lisp-interaction-mode . "Li")
+    (python-mode . "Py")
+    (ruby-mode   . "Rb")
+    (emacs-lisp-mode . "El")
+    (markdown-mode . "Md")
+    (org-mode . "Or")
+    (help-mode . "He")
+    (magit-status-mode . "Ms")
+    (compilation-mode . "Cp")
+    (fundamental-mode . "Fm")
+    ))
+
+(defun clean-mode-line ()
+  (interactive)
+  (loop for (mode . mode-str) in mode-line-cleaner-alist
+        do
+        (let ((old-mode-str (cdr (assq mode minor-mode-alist))))
+          (when old-mode-str
+            (setcar old-mode-str mode-str))
+          ;; major mode
+          (when (eq mode major-mode)
+            (setq mode-name mode-str)))))
+
+(add-hook 'after-change-major-mode-hook 'clean-mode-line)
+
+(defvar my/vc-mode-line
+  '(:propertize
+    (:eval (let* ((backend (symbol-name (vc-backend (buffer-file-name))))
+                  (branch (substring-no-properties vc-mode (+ (length backend) 2)))
+                  (state (if (bound-and-true-p git-gutter-mode)
+                             (cl-case (vc-state (buffer-file-name))
+                               (edited
+                                (format ":%d" (git-gutter:buffer-hunks)))
+                               (otherwise ""))
+                           "")))
+             (concat "(" branch state ")"))))
+  "Mode line format for VC Mode.")
+(put 'my/vc-mode-line 'risky-local-variable t)
+
+(setq-default mode-line-format
+                '("%e"
+                  mode-line-front-space
+                  mode-line-mule-info
+                  mode-line-client
+                  mode-line-modified
+                  mode-line-remote
+                  mode-line-frame-identification
+                  mode-line-buffer-identification " " mode-line-position
+                  (vc-mode my/vc-mode-line)
+                  " "
+                  mode-line-modes mode-line-misc-info mode-line-end-spaces))
+
 (provide '10-misc)
 ;;; 10-misc.el ends here

@@ -153,6 +153,11 @@ TAB              (org-cycle)
 C-u TAB / S-TAB  (org-global-cycle)
 C-u C-u TAB      (org-set-startup-visibility)
 
+** modify clock by manual and update duration
+
+On the clock line
+C-c C-y   org-evaluate-time-range
+
 start up status
 #+STARTUP: overview
 #+STARTUP: content

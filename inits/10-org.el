@@ -157,5 +157,7 @@ The file-path is archive target file path.  If no file-path is given uses the fu
       (unless (equal effort "")
         (org-set-property "Effort" effort)))))
 
+(setq org-columns-default-format "%40ITEM(Task) %17Effort(Estimated Effort){:} %CLOCKSUM")
+
 (provide '10-org)
 ;;; 10-org.el ends here

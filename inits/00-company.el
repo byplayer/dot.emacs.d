@@ -36,5 +36,18 @@
             '(:with company-yasnippet))))
 (setq company-backends (mapcar #'company-mode/backend-with-yas company-backends))
 
+;; use ascii only for abbrev
+(defun edit-category-table-for-company-dabbrev (&optional table)
+  (define-category ?s "word constituents for company-dabbrev" table)
+  (let ((i 0))
+    (while (< i 128)
+      (if (equal ?w (char-syntax i))
+      (modify-category-entry i ?s table)
+    (modify-category-entry i ?s table t))
+      (setq i (1+ i)))))
+(edit-category-table-for-company-dabbrev)
+;; (add-hook 'TeX-mode-hook 'edit-category-table-for-company-dabbrev) ; 下の追記参照
+(setq company-dabbrev-char-regexp "\\cs")
+
 (provide '00-company)
 ;;; 00-company.el ends here

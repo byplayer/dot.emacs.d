@@ -147,6 +147,10 @@ C-c C-c set tag
 C-u <TAB> change visibility
 C-c C-t / C-c t switch status
 
+C-c C-n         outline-next-visible-heading
+C-c C-p         outline-previous-visible-heading
+C-c C-u         outline-up-heading
+
 C-c C-o open link
 
 TAB              (org-cycle)

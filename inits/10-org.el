@@ -114,6 +114,7 @@
 (add-to-list 'org-speed-commands-user '("D" org-deadline ""))
 (add-to-list 'org-speed-commands-user '("A" my/org-archive-this-file))
 (add-to-list 'org-speed-commands-user '("s" org-schedule ""))
+(add-to-list 'org-speed-commands-user '("/" helm-org-in-buffer-headings))
 
 (setq org-clock-clocktable-default-properties '(:maxlevel 4 :scope file))
 (setq org-global-properties (quote ((

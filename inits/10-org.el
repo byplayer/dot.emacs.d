@@ -116,6 +116,8 @@
 (add-to-list 'org-speed-commands-user '("s" org-schedule ""))
 
 (setq org-clock-clocktable-default-properties '(:maxlevel 4 :scope file))
+(setq org-global-properties (quote ((
+      "Effort_ALL" . "00:05 00:10 00:15 00:30 01:00 01:30 02:00 02:30 03:00 04:00"))))
 
 (defun my/org-archive-this-file ()
   "Archive current file.

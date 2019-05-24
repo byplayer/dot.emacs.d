@@ -184,6 +184,8 @@ Clock Commands
 I   org-clock-in
 O   org-clock-out
 
+=   org-columns
+
 C-c C-x C-r  org-clock-report
 R org time report on org agenda
 

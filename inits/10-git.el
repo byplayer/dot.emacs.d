@@ -12,7 +12,10 @@
 
 (use-package magit
   :ensure t
-  :bind (("C-x g" . magit-status)))
+  :bind (("C-x g" . magit-status)
+         :map magit-mode-map
+         ("M-c" . magit-commit-create))
+  )
 
 (provide '10-git)
 ;;; 10-git.el ends here

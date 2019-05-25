@@ -152,6 +152,8 @@ C-c C-p         outline-previous-visible-heading
 C-c C-u         outline-up-heading
 
 C-u C-c .       insert current timestamp
+C-c >           open calendar
+C-c <           pickup date from calendar
 
 C-c C-o open link
 

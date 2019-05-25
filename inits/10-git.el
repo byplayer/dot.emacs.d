@@ -14,9 +14,12 @@
   :ensure t
   :bind (("C-x g" . magit-status)
          :map magit-mode-map
-         ("M-c" . magit-commit-create)
-         ("M-P" . magit-push-current-to-upstream)
-         ("M-F" . magit-pull-from-upstream)))
+         ("c" . magit-commit-create)
+         ("M-c" . magit-commit)
+         ("P" . magit-push-current-to-upstream)
+         ("M-P" . magit-push)
+         ("F" . magit-pull-from-upstream)
+         ("M-F" . magit-pull)))
 
 (provide '10-git)
 ;;; 10-git.el ends here

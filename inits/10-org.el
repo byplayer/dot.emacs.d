@@ -68,7 +68,7 @@
 (setq org-archive-location
       (concatenate 'string org-directory "/archive/"
                    (format-time-string "%Y" (current-time))
-                   (format-time-string "/%Y%m_archive.org::" (current-time))))
+                   (format-time-string "/%Y%m_todo_archive.org::" (current-time))))
 
 (add-hook 'org-mode-hook
           (lambda ()

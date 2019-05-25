@@ -137,15 +137,15 @@ C-x C-k e    Edit macro
 
 * org-mode
 
-S-Left, S-Right で TODO と DONE の切り替え
-M-S-Enter で次の TODO を作成
-M-Up, M-Down で TODO の並び換え
-Shift-up Shift-down change priority
-C-c C-d add deadline
-C-c C-s set execution date
-C-c C-c set tag
-C-u <TAB> change visibility
-C-c C-t / C-c t switch status
+S-Left, S-Right       switch TODO DONE
+M-S-Enter             insert next TODO
+M-Up, M-Down          move  todo section
+Shift-up Shift-down   change priority
+C-c C-d               add deadline
+C-c C-s               set execution date
+C-c C-c               set tag
+C-u <TAB>             change visibility
+C-c C-t / C-c t       switch status
 
 C-c C-n         outline-next-visible-heading
 C-c C-p         outline-previous-visible-heading
@@ -204,8 +204,11 @@ C-c <
 
 * git
 
-C-x v P vc-push (git push)
-C-x v + vc-pull (git pull)
+on magit-mode
+
+M-c  magit-commit-create
+M-P  magit-push-current-to-upstream
+M-F  magit-pull-from-upstream
 
 * dired
 

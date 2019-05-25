@@ -151,6 +151,8 @@ C-c C-n         outline-next-visible-heading
 C-c C-p         outline-previous-visible-heading
 C-c C-u         outline-up-heading
 
+C-u C-c .       insert current timestamp
+
 C-c C-o open link
 
 TAB              (org-cycle)

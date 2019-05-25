@@ -27,7 +27,7 @@
 (setq org-agenda-files
           (cl-delete-if (lambda (k)
                           (string-match-p my-org-agenda-exludes k))
-                        (directory-files-recursively org-directory "\.org$")))
+                        (directory-files-recursively my-org-agenda-directory "\.org$")))
 
 (defun my/org-agenda (&optional arg org-keys restriction)
   (interactive "P")
@@ -35,7 +35,7 @@
     (setq org-agenda-files
           (cl-delete-if (lambda (k)
                           (string-match-p my-org-agenda-exludes k))
-                        (directory-files-recursively org-directory "\.org$")))
+                        (directory-files-recursively my-org-agenda-directory "\.org$")))
     (org-agenda)))
 
 

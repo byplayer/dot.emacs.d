@@ -117,9 +117,6 @@
     eshell-mode
     eww-mode
     term-mode
-    egg-status-buffer-mode
-    egg-log-msg-mode
-    egg-log-buffer-mode
     compilation-mode
     fundamental-mode
     ))

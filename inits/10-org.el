@@ -85,7 +85,7 @@
 
 (require 'org-agenda)
 (add-to-list 'org-agenda-custom-commands
-             '("w" "Weekly review"
+             '("w" "Weekly review tasks"
                agenda ""
                ((org-agenda-span 'week)
                 (org-agenda-start-on-weekday 0)

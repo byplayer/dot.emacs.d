@@ -182,39 +182,6 @@
 (setq init-loader-show-log-after-init nil)
 (init-loader-load)
 
-;; hs-minor-mode
-(use-package hideshow
-  :ensure t
-  :commands (hs-minor-mode)
-  :bind (("C-#" . hs-toggle-hiding)
-         ("C-+" . hs-show-all)
-         ("C-=" . hs-hide-all))
-  :init
-  ;; Set up hs-mode (HideShow) for Ruby
-  (add-to-list 'hs-special-modes-alist
-               `(ruby-mode
-                 ,(rx (or "def" "class" "module" "do")) ; Block start
-                 ,(rx (or "end"))                       ; Block end
-                 ,(rx (or "#" "=begin"))                ; Comment start
-                 ruby-forward-sexp nil)))
-(defun my/add-hs-minor-mode()
-  (hs-minor-mode 1))
-
-(add-hook 'prog-mode-hook 'my/add-hs-minor-mode)
-
-;; lisp
-(add-hook 'emacs-lisp-mode-hook
-          '(lambda()
-             (progn
-               (setq indent-tabs-mode nil)
-               (flyspell-prog-mode))))
-
-(add-hook 'lisp-mode-hook
-          '(lambda()
-             (progn
-               (setq indent-tabs-mode nil)
-               (flyspell-prog-mode))))
-
 (provide 'init)
 ;;; init.el ends here
 (custom-set-faces

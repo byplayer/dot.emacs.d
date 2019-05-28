@@ -197,8 +197,10 @@
                  ,(rx (or "end"))                       ; Block end
                  ,(rx (or "#" "=begin"))                ; Comment start
                  ruby-forward-sexp nil)))
+(defun my/add-hs-minor-mode()
+  (hs-minor-mode 1))
 
-(add-hook 'prog-mode-hook #'hs-minor-mode)
+(add-hook 'prog-mode-hook 'my/add-hs-minor-mode)
 
 ;; lisp
 (add-hook 'emacs-lisp-mode-hook

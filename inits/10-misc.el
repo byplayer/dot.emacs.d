@@ -339,6 +339,7 @@ e.g. 20190-4-01 15:02:33"
     (emacs-lisp-mode . "El")
     (markdown-mode . "Md")
     (org-mode . "Or")
+    (org-agenda-mode . "Oa")
     (help-mode . "He")
     (magit-status-mode . "Ms")
     (compilation-mode . "Cp")

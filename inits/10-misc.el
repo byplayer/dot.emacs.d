@@ -344,6 +344,7 @@ e.g. 20190-4-01 15:02:33"
     (magit-status-mode . "Ms")
     (compilation-mode . "Cp")
     (fundamental-mode . "Fm")
+    (text-mode . "Tx")
     ))
 
 (defun clean-mode-line ()

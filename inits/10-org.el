@@ -21,6 +21,7 @@
   ;; log date when down
   (setq org-log-done 'time)
   (setq org-log-done-with-time t)
+  (setq org-log-reschedule 'time)
 
   (setq org-directory "~/docs/org_doc")
   (setq my-org-agenda-directory (concatenate 'string org-directory "/agenda"))

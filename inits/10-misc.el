@@ -120,6 +120,7 @@
     compilation-mode
     fundamental-mode
     undo-tree-visualizer-mode
+    lookup-content-mode
     ))
 
 (mapc

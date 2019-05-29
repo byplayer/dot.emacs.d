@@ -121,6 +121,7 @@
     fundamental-mode
     undo-tree-visualizer-mode
     lookup-content-mode
+    calendar-mode
     ))
 
 (mapc

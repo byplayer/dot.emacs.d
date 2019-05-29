@@ -119,6 +119,7 @@
     term-mode
     compilation-mode
     fundamental-mode
+    undo-tree-visualizer-mode
     ))
 
 (mapc

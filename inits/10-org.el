@@ -19,9 +19,15 @@
   ;; TODO status
   (setq org-todo-keywords '((sequence "TODO(t)" "WAIT(w)" "|" "DONE(d)" "CANCEL(c)" "SOMEDAY(s)")))
   ;; log date when down
-  (setq org-log-done 'time)
-  (setq org-log-done-with-time t)
-  (setq org-log-reschedule 'time)
+  (setq
+   org-log-done 'time
+   org-log-done-with-time t
+   org-log-reschedule 'time
+   org-agenda-restore-windows-after-quit t
+   org-agenda-show-all-dates t)
+
+  (add-hook 'org-mode-hook
+            (lambda () (add-to-list 'helm-completing-read-handlers-alist '(org-set-tags))))
 
   (setq org-directory "~/docs/org_doc")
   (setq my-org-agenda-directory (concatenate 'string org-directory "/agenda"))
@@ -112,6 +118,7 @@
                                )
 
   (add-to-list 'org-speed-commands-user '("d" org-todo "DONE"))
+  (add-to-list 'org-speed-commands-user '("c" org-todo "CANCEL"))
   (add-to-list 'org-speed-commands-user '("D" org-deadline ""))
   (add-to-list 'org-speed-commands-user '("A" my/org-archive-this-file))
   (add-to-list 'org-speed-commands-user '("s" org-schedule ""))

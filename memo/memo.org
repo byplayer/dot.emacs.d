@@ -188,9 +188,12 @@ https://qiita.com/takaxp/items/a5a3383d7358c58240d0
 
 Tasks
 --------------
+c   org-todo cancel
 d   org-todo done
 D   org-deadline
 s   org-schedule
+A   my/org-archive-this-file
+C   org-clone-subtree-with-time-shift
 
 Clock Commands
 --------------

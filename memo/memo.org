@@ -161,6 +161,15 @@ TAB              (org-cycle)
 C-u TAB / S-TAB  (org-global-cycle)
 C-u C-u TAB      (org-set-startup-visibility)
 
+** org-agenda
+
+n next line
+p previous line
+N next item
+P previous item
+f agenda later
+b agenda earlier
+
 ** modify clock by manual and update duration
 
 On the clock line

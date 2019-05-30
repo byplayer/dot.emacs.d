@@ -97,8 +97,8 @@
                  ((org-agenda-span 'week)
                   (org-agenda-start-on-weekday 0)
                   (org-agenda-start-with-log-mode t)
-                  (org-agenda-skip-function
-                   '(org-agenda-skip-entry-if 'nottodo 'done))
+                  ;; (org-agenda-skip-function
+                  ;;  '(org-agenda-skip-entry-if 'nottodo 'done))
                   )))
   (add-to-list 'org-agenda-custom-commands
                '("r" "Review monthly tasks"
@@ -107,8 +107,8 @@
                   (org-agenda-span 33)
                   (org-agenda-start-on-weekday 0)
                   (org-agenda-start-with-log-mode t)
-                  (org-agenda-skip-function
-                   '(org-agenda-skip-entry-if 'nottodo 'done))
+                  ;; (org-agenda-skip-function
+                  ;;  '(org-agenda-skip-entry-if 'nottodo 'done))
                   )))
 
   (org-babel-do-load-languages 'org-babel-load-languages
@@ -127,8 +127,9 @@
   (setq org-imenu-depth 3)
 
   (setq org-clock-clocktable-default-properties '(:maxlevel 4 :scope file))
-  (setq org-global-properties (quote ((
-                                       "Effort_ALL" . "00:05 00:10 00:15 00:30 01:00 01:30 02:00 02:30 03:00 04:00"))))
+  (setq org-global-properties
+        (quote (("Effort_ALL" .
+                 "00:05 00:10 00:15 00:30 01:00 01:30 02:00 02:30 03:00 04:00 05:00 06:00 07:00 08:00"))))
 
   (defun my/org-archive-this-file ()
     "Archive current file.

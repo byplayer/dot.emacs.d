@@ -115,6 +115,7 @@
 
   (add-to-list 'org-speed-commands-user '("d" org-todo "DONE"))
   (add-to-list 'org-speed-commands-user '("c" org-todo "CANCEL"))
+  (add-to-list 'org-speed-commands-user '("C" org-clone-subtree-with-time-shift))
   (add-to-list 'org-speed-commands-user '("D" org-deadline ""))
   (add-to-list 'org-speed-commands-user '("A" my/org-archive-this-file))
   (add-to-list 'org-speed-commands-user '("s" org-schedule ""))

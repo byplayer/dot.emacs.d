@@ -88,6 +88,13 @@
 
   (require 'org-agenda)
   (add-to-list 'org-agenda-custom-commands
+               '("d" "Daily todo tasks"
+                 ((agenda "") (alltodo ""))
+                 ((org-agenda-span 'day)
+                  (org-agenda-start-on-weekday 0)
+                  (org-agenda-start-with-log-mode nil)
+                  )))
+  (add-to-list 'org-agenda-custom-commands
                '("w" "Weekly review tasks"
                  agenda ""
                  ((org-agenda-span 'week)

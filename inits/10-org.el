@@ -31,22 +31,18 @@
 
   (setq org-directory "~/docs/org_doc")
   (setq my-org-agenda-directory (concatenate 'string org-directory "/agenda"))
-  (setq my-org-agenda-exludes "\\/\\(report\\|archive\\|goal_1on1\\|interview\\)\\/")
+  (defun my-org-agenda-files ()
+    (directory-files-recursively my-org-agenda-directory "\.org$"))
 
   (setq org-agenda-files
-        (cl-delete-if (lambda (k)
-                        (string-match-p my-org-agenda-exludes k))
-                      (directory-files-recursively my-org-agenda-directory "\.org$")))
+        (my-org-agenda-files))
 
   (defun my/org-agenda (&optional arg org-keys restriction)
     (interactive "P")
     (let ()
       (setq org-agenda-files
-            (cl-delete-if (lambda (k)
-                            (string-match-p my-org-agenda-exludes k))
-                          (directory-files-recursively my-org-agenda-directory "\.org$")))
+            (my-org-agenda-files))
       (org-agenda)))
-
 
   (defun my/generate-org-memo-name ()
     (let* ((name (read-string "Name: "))
@@ -73,7 +69,7 @@
           ))
 
   (setq org-archive-location
-        (concatenate 'string org-directory "/archive/"
+        (concatenate 'string my-org-agenda-directory "/archive/"
                      (format-time-string "%Y" (current-time))
                      (format-time-string "/%Y%m_todo_archive.org::" (current-time))))
 

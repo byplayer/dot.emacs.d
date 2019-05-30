@@ -17,7 +17,7 @@
   (setq org-use-speed-commands t)
 
   ;; TODO status
-  (setq org-todo-keywords '((sequence "TODO(t)" "WAIT(w)" "|" "DONE(d)" "CANCEL(c)" "SOMEDAY(s)")))
+  (setq org-todo-keywords '((sequence "TODO(t)" "WAIT(w)" "SOMEDAY(s)" "|" "DONE(d)" "CANCEL(c)")))
   ;; log date when down
   (setq
    org-log-done 'time

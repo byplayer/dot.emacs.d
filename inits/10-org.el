@@ -94,6 +94,14 @@
                   (org-agenda-start-on-weekday 0)
                   (org-agenda-start-with-log-mode nil)
                   )))
+    (add-to-list 'org-agenda-custom-commands
+               '("l" "7 days todo tasks"
+                 ((agenda "") (alltodo ""))
+                 ((org-agenda-start-day "-2d")
+                 (org-agenda-span 8)
+                 (org-agenda-start-on-weekday nil)
+                  (org-agenda-start-with-log-mode nil)
+                  )))
   (add-to-list 'org-agenda-custom-commands
                '("w" "Weekly review tasks"
                  agenda ""

@@ -96,7 +96,7 @@
                   )))
     (add-to-list 'org-agenda-custom-commands
                '("l" "upcoming tasks"
-                 ((agenda "") (alltodo ""))
+                 agenda ""
                  ((org-agenda-start-day "-2d")
                  (org-agenda-span 8)
                  (org-agenda-start-on-weekday nil)

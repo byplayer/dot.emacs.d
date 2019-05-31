@@ -95,7 +95,7 @@
                   (org-agenda-start-with-log-mode nil)
                   )))
     (add-to-list 'org-agenda-custom-commands
-               '("l" "7 days todo tasks"
+               '("l" "upcoming tasks"
                  ((agenda "") (alltodo ""))
                  ((org-agenda-start-day "-2d")
                  (org-agenda-span 8)

@@ -97,8 +97,8 @@
     (add-to-list 'org-agenda-custom-commands
                '("l" "upcoming tasks"
                  agenda ""
-                 ((org-agenda-start-day "-2d")
-                 (org-agenda-span 8)
+                 ((org-agenda-start-day "-3d")
+                 (org-agenda-span 9)
                  (org-agenda-start-on-weekday nil)
                   (org-agenda-start-with-log-mode nil)
                   )))

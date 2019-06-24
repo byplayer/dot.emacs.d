@@ -6,5 +6,5 @@
                           (file-name-sans-extension
          (or (buffer-file-name)
              (buffer-name (current-buffer)))))))
-             (replace-regexp-in-string "_" " " fn))`}
+             (replace-regexp-in-string "[_-]" " " fn))`}
 $0

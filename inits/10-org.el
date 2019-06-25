@@ -52,10 +52,20 @@
         (make-directory target_dir t))
       (format "%s/%s-%s.org" target_dir (format-time-string "%Y%m%d-%H%M%S") name )))
 
+  (defun my/generate-org-doc-name ()
+    (let* ((name (read-string "Name: "))
+           (target_dir))
+      (setq target_dir (format-time-string (concatenate 'string org-directory "/docs/%Y")))
+      (unless (file-directory-p target_dir)
+        (make-directory target_dir t))
+      (format "%s/%s_%s.org" target_dir (format-time-string "%Y%m%d") name )))
+
   (setq org-capture-templates
         '(("t" "Todo" entry (file+headline (lambda()(concatenate 'string my-org-agenda-directory "/todo.org")) "Tasks")
            "* TODO %?")
           ("m" "Memo" entry (file my/generate-org-memo-name)
+           "* %?\nEntered on %T\n")
+          ("d" "Doc" entry (file my/generate-org-doc-name)
            "* %?\nEntered on %T\n")
           ("l" "Log" entry (file
                             (lambda()

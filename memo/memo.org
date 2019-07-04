@@ -42,9 +42,10 @@ C-c ! c check buffer
 
 * window
 move window
-Meta + cursor key
+Meta and cursor key
 or
-C-x + cursor key
+C-x and cursor key
+C-x + balance-window
 
 * info
 ** move cursor

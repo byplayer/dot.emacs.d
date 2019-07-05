@@ -284,7 +284,8 @@ e.g. 20190-4-01 15:02:33"
       '(css-mode-hook
         yaml-mode-hook
         markdown-mode-hook
-        php-mode-hook))
+        php-mode-hook
+        js2-mode-hook))
 (loop for hook in prettier-js-mode-hooks
       do (add-hook hook 'prettier-js-mode))
 
@@ -294,7 +295,7 @@ e.g. 20190-4-01 15:02:33"
   :commands (clang-format-buffer)
   :init
   (setq clang-format-modes
-        '(c++-mode c-mode java-mode js2-mode))
+        '(c++-mode c-mode java-mode))
   (setq clang-format-style "google")
   (defun my-clang-format-before-save ()
     "Usage: (add-hook 'before-save-hook 'my-clang-format-before-save)"

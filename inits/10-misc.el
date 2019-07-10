@@ -147,10 +147,7 @@
      (global-undo-tree-mode)
      (setq undo-tree-auto-save-history t
            undo-tree-history-directory-alist `(("." .,
-                                                (expand-file-name "~/.emacs.d/undo-tree-hist/"))))
-     (defadvice undo-tree-make-history-save-file-name
-       (after undo-tree activate)
-       (setq ad-return-value (concat ad-return-value ".gz")))))
+                                                (expand-file-name "~/.emacs.d/undo-tree-hist/"))))))
 (require 'undo-tree)
 
 ;; backup directory configuration

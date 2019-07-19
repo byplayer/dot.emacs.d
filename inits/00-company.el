@@ -6,7 +6,7 @@
 
 (require 'company)
 (global-company-mode)
-(setq company-idle-delay 0)             ;default is 0.5
+(setq company-idle-delay 0.5)             ;default is 0.5
 (setq company-minimum-prefix-length 2)  ;default is 4
 (setq company-selection-wrap-around t)
 (company-quickhelp-mode +1)

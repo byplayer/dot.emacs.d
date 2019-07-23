@@ -420,5 +420,17 @@ e.g. 20190-4-01 15:02:33"
                (setq indent-tabs-mode nil)
                (flyspell-prog-mode))))
 
+;; plunt-uml
+(use-package flycheck-plantuml
+  :ensure t)
+(use-package plantuml-mode
+  :ensure t
+  :mode (("\\.puml" . plantuml-mode))
+  :init
+  (setq plantuml-jar-path "/usr/share/plantuml/plantuml.jar")
+  (setq plantuml-default-exec-mode 'jar)
+  (setq plantuml-output-type "png")
+  )
+
 (provide '10-misc)
 ;;; 10-misc.el ends here

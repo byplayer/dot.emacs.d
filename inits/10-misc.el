@@ -415,18 +415,21 @@ e.g. 20190-4-01 15:02:33"
 
 ;; plunt-uml
 (use-package flycheck-plantuml
-  :ensure t)
+  :ensure t
+  :config
+  (flycheck-plantuml-setup))
+
 (use-package plantuml-mode
   :ensure t
   :commands plantuml-mode
   :mode (("\\.puml$" . plantuml-mode)
          ("\\.plantuml$" . plantuml-mode))
-  :init
-  (setq plantuml-jar-path "/usr/share/plantuml/plantuml.jar")
-  (setq plantuml-default-exec-mode 'jar)
-  (setq plantuml-output-type "png")
   :config
-  (plantuml-set-exec-mode "jar")
+  (setq plantuml-jar-path "/usr/share/plantuml/plantuml.jar")
+  (setq plantuml-output-type "png")
+  ;; below configuration doesn't work so directory modify plantuml-mode.el source
+  ;; (setq plantuml-default-exec-mode 'jar)
+  ;; (setq plantuml-exec-mode 'jar)
   )
 
 (provide '10-misc)

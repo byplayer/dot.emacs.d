@@ -162,6 +162,10 @@ TAB              (org-cycle)
 C-u TAB / S-TAB  (org-global-cycle)
 C-u C-u TAB      (org-set-startup-visibility)
 
+** org-babel plantuml
+C-c C-c     execute command
+C-c C-x C-v  preview image
+
 ** org-agenda
 
 n next line

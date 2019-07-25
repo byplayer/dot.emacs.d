@@ -305,13 +305,6 @@ e.g. 20190-4-01 15:02:33"
   :config
   )
 
-(use-package switch-window
-  :ensure t
-  :commands (switch-window)
-  :bind (("C-x o" . switch-window))
-  :init
-  (setq switch-window-shortcut-style 'qwerty))
-
 ;; mode-line
 (defvar mode-line-cleaner-alist
   '( ;; For minor-mode, first char is 'space'
@@ -425,11 +418,15 @@ e.g. 20190-4-01 15:02:33"
   :ensure t)
 (use-package plantuml-mode
   :ensure t
-  :mode (("\\.puml" . plantuml-mode))
+  :commands plantuml-mode
+  :mode (("\\.puml$" . plantuml-mode)
+         ("\\.plantuml$" . plantuml-mode))
   :init
   (setq plantuml-jar-path "/usr/share/plantuml/plantuml.jar")
   (setq plantuml-default-exec-mode 'jar)
   (setq plantuml-output-type "png")
+  :config
+  (plantuml-set-exec-mode "jar")
   )
 
 (provide '10-misc)

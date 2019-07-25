@@ -132,9 +132,16 @@
                   ;;  '(org-agenda-skip-entry-if 'nottodo 'done))
                   )))
 
+  (defun my-org-confirm-babel-evaluate (lang body)
+  (not (member lang '("plantuml" "sh"))))
+
+  (setq org-confirm-babel-evaluate 'my-org-confirm-babel-evaluate)
+
+  (setq org-plantuml-jar-path "/usr/share/plantuml/plantuml.jar")
   (org-babel-do-load-languages 'org-babel-load-languages
                                '(
                                  (shell . t)
+                                 (plantuml . t)
                                  )
                                )
 

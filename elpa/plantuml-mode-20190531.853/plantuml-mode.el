@@ -118,7 +118,7 @@
   :type 'string
   :group 'plantuml)
 
-(defcustom plantuml-default-exec-mode 'server
+(defcustom plantuml-default-exec-mode 'jar
   "Default execution mode for PlantUML.  Valid values are:
 - `jar': run PlantUML as a JAR file (requires a local install of the PlantUML JAR file, see `plantuml-jar-path'"
   :type 'symbol

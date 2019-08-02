@@ -16,6 +16,7 @@
      (setq lookup-search-agents
            '(
              (ndeb "~/dic/LDOCE4")
-             (ndeb "~/dic/sperdic200")))))
+             (ndeb "~/dic/sperdic200")
+             (ndeb "~/dic/edict2")))))
 
 ;;; 10-lookup.el ends here

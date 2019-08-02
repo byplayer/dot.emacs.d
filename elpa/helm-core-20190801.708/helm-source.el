@@ -39,6 +39,18 @@
 (declare-function helm-init-candidates-in-buffer "helm.el")
 (declare-function helm-interpret-value "helm.el")
 (declare-function helm-fuzzy-highlight-matches "helm.el")
+
+;;; Advice Emacs fn
+;;  Make Classes's docstrings more readable by removing al the
+;;  unnecessary crap.
+
+(defun helm-source--cl--print-table (_header rows)
+  "Advice for `cl--print-table' to make readable class slots docstrings."
+  (let ((format "%s\n\n  Initform=%s\n\n%s"))
+    (dolist (row rows)
+      (setcar row (propertize (car row) 'face 'italic))
+      (setcdr row (nthcdr 1 (cdr row)))
+      (insert "\n* " (apply #'format format row) "\n"))))
 
 
 (defgeneric helm--setup-source (source)
@@ -562,7 +574,7 @@
     :custom integer
     :documentation
     "  Enable `helm-follow-mode' for this source only.
-With a value of 1 enable, a value of -1 or nil disable the mode.
+  With a value of 1 enable, a value of -1 or nil disable the mode.
   See `helm-follow-mode' for more infos.")
 
    (follow-delay

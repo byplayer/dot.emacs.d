@@ -62,7 +62,7 @@ Preconfigured `helm' to list buffers.
 \(fn)" t nil)
 
 (autoload 'helm-mini "helm-buffers" "\
-Preconfigured `helm' lightweight version (buffer -> recentf).
+Preconfigured `helm' displaying `helm-mini-default-sources'.
 
 \(fn)" t nil)
 

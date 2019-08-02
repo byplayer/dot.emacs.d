@@ -842,13 +842,15 @@ ACTION must be an action supported by `helm-dired-action'."
                          (helm-marked-candidates :with-wildcard t)))
          (cand   (helm-get-selection)) ; Target
          (prefarg helm-current-prefix-arg)
-         (prompt (format "%s %s file(s) to: "
+         (prompt (format "%s %s file(s) %s: "
                          (if (and (and (fboundp 'dired-async-mode)
                                        dired-async-mode)
                                   (null prefarg))
                              (concat "Async " (symbol-name action))
                            (capitalize (symbol-name action)))
-                         (length ifiles)))
+                         (length ifiles)
+                         (if (memq action '(symlink relsymlink hardlink))
+                             "from" "to")))
          helm-ff--move-to-first-real-candidate
          helm-display-source-at-screen-top ; prevent setting window-start.
          helm-ff-auto-update-initial-value
@@ -3783,7 +3785,9 @@ is helm-source-find-files."
 
 (defun helm-find-files-initial-input (&optional input)
   "Return INPUT if present, otherwise try to guess it."
-  (let ((guesser (helm-ffap-guesser)))
+  (let ((guesser (helm-acase (helm-ffap-guesser)
+                   ("" nil)
+                   (t it))))
     (unless (eq major-mode 'image-mode)
       (or (and input (or (and (file-remote-p input) input)
                          (expand-file-name input)))

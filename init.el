@@ -2,10 +2,12 @@
 ;;; Commentary:
 ;;; Code:
 (require 'package)
-(add-to-list 'package-archives
-             '("melpa" . "http://melpa.milkbox.net/packages/") t)
-(add-to-list 'package-archives
-             '("org" . "https://orgmode.org/elpa/") t)
+(setq package-archives
+      '(("org"          . "http://orgmode.org/elpa/")
+        ("melpa"        . "http://melpa.org/packages/")
+        ("melpa-stable" . "http://stable.melpa.org/packages/")
+        ("gnu"          . "http://elpa.gnu.org/packages/")))
+
 (package-initialize)
 
 (add-to-list 'load-path "/opt/global/share/gtags/")
@@ -18,7 +20,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (go-mode magit sclang-mode yaml-mode web-mode volatile-highlights undo-tree smartrep smartparens savekill ruby-block rspec-mode robe rinari revive recentf-ext rainbow-mode popwin point-undo phpunit php-mode org-plus-contrib neotree multiple-cursors mozc-popup markdown-mode kotlin-mode keyfreq js2-mode init-loader imenu-list helm-swoop helm-projectile helm-migemo helm-ls-git helm-gtags helm-go-package helm-flycheck helm-descbinds helm-c-yasnippet helm-ag groovy-mode go-eldoc flycheck-pos-tip flycheck-kotlin flycheck-irony feature-mode expand-region dockerfile-mode crontab-mode company-quickhelp company-irony company-go clang-format avy anzu all-the-icons-dired)))
+    (let-alist go-mode magit sclang-mode yaml-mode web-mode volatile-highlights undo-tree smartrep smartparens savekill ruby-block rspec-mode robe rinari revive recentf-ext rainbow-mode popwin point-undo phpunit php-mode org-plus-contrib neotree multiple-cursors mozc-popup markdown-mode kotlin-mode keyfreq js2-mode init-loader imenu-list helm-swoop helm-projectile helm-migemo helm-ls-git helm-gtags helm-go-package helm-flycheck helm-descbinds helm-c-yasnippet helm-ag groovy-mode go-eldoc flycheck-pos-tip flycheck-kotlin flycheck-irony feature-mode expand-region dockerfile-mode crontab-mode company-quickhelp company-irony company-go clang-format avy anzu all-the-icons-dired)))
  '(safe-local-variable-values
    (quote
     ((eval setq-local default-directory

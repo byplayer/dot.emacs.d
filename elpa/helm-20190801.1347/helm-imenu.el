@@ -103,20 +103,21 @@ Each car is a regexp match pattern of the imenu type string."
            (define-key helm-imenu-map (kbd "<left>")  nil))))
 
 (defun helm-imenu-next-or-previous-section (n)
-  (with-helm-buffer
+  (with-helm-window
     (let* ((fn (lambda ()
-                 (car (split-string (helm-get-selection nil t)
-                                    helm-imenu-delimiter))))
+                 (car (split-string
+                       (buffer-substring
+                        (point-at-bol) (point-at-eol))
+                       helm-imenu-delimiter))))
            (curtype (funcall fn))
-           (move-fn (if (> n 0) #'helm-next-line #'helm-previous-line))
            (stop-fn (if (> n 0)
                         #'helm-end-of-source-p
-                        #'helm-beginning-of-source-p)))
-      (catch 'break
-        (while (not (funcall stop-fn))
-          (funcall move-fn)
-          (unless (string= curtype (funcall fn))
-            (throw 'break nil)))))))
+                      #'helm-beginning-of-source-p)))
+      (while (and (not (funcall stop-fn))
+                  (string= curtype (funcall fn)))
+        (forward-line n))
+      (helm-mark-current-line)
+      (helm-follow-execute-persistent-action-maybe))))
 
 (defun helm-imenu-next-section ()
   (interactive)
@@ -301,7 +302,7 @@ Each car is a regexp match pattern of the imenu type string."
                                     when (string-match p x) return f
                                     finally return 'default)))
                         types helm-imenu-delimiter)
-           for disp = (propertize disp1 'help-echo bufname)
+           for disp = (propertize disp1 'help-echo bufname 'types types)
            collect
            (cons disp (cons k v))))
 

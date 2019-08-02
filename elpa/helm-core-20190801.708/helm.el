@@ -34,9 +34,9 @@
 (require 'helm-lib)
 (require 'helm-multi-match)
 (require 'helm-source)
-(eval-when-compile (require 'cus-edit))
-(declare-function 'helm-comp-read "helm-mode.el")
 
+(declare-function helm-comp-read "helm-mode.el")
+(declare-function custom-unlispify-tag-name "cus-edit.el")
 
 ;;; Multi keys
 ;;
@@ -341,6 +341,11 @@ NOTE: This has no effect when `helm-display-source-at-screen-top'
 id is non-`nil'."
   :group 'helm
   :type  'integer)
+
+(defcustom helm-left-margin-width 0
+  "`left-margin-width' value for the `helm-buffer'."
+  :group 'helm
+  :type 'integer)
 
 (defcustom helm-display-source-at-screen-top t
   "Display candidates at the top of screen.
@@ -907,6 +912,11 @@ You can toggle later `truncate-lines' with \\<helm-map>\\[helm-toggle-truncate-l
   "Face used for the minibuffer/headline prompt (such as Pattern:) in helm."
   :group 'helm-faces)
 
+(defface helm-eob-line
+  '((t (:inherit default)))
+  "Face for empty line at end of sources in the helm buffer.
+Allow specifying the height of this line."
+  :group 'helm-faces)
 
 ;;; Variables.
 ;;
@@ -934,6 +944,9 @@ This hook runs after `helm-buffer' is created but not from
 
 (defvar helm-after-update-hook nil
   "Runs after updating the helm buffer with the new input pattern.")
+
+(defvar helm-before-update-hook nil
+  "Runs before updating the helm buffer with the new input pattern.")
 
 (defvar helm-cleanup-hook nil
   "Runs after exiting the minibuffer and before performing an
@@ -3311,6 +3324,7 @@ Unuseful when used outside helm, don't use it.")
       (helm-log "helm--local-variables = %S" helm--local-variables)
       (helm--set-local-variables-internal)
       (setq truncate-lines helm-truncate-lines) ; already local.
+      (setq left-margin-width helm-left-margin-width)
       (setq cursor-type nil))
     (helm-initialize-overlays helm-buffer)
     (get-buffer helm-buffer)))
@@ -3623,6 +3637,7 @@ WARNING: Do not use this mode yourself, it is internal to helm."
       (setq helm-input helm-pattern))
     (helm-log "helm-pattern = %S" helm-pattern)
     (helm-log "helm-input = %S" helm-input)
+    (helm-log-run-hook 'helm-before-update-hook)
     (setq helm--in-update t)
     (helm-update)))
 
@@ -4323,8 +4338,7 @@ without recomputing them, it should be a list of lists."
                       do (helm-render-source src mtc))
              ;; Move to first line only when there is matches
              ;; to avoid cursor moving upside down (issue #1703).
-             (helm--update-move-first-line)
-             (helm--reset-update-flag)))
+             (helm--update-move-first-line)))
       ;; When there is only one async source, update mode-line and run
       ;; `helm-after-update-hook' in `helm-output-filter--post-process',
       ;; when there is more than one source, update mode-line and run
@@ -4332,14 +4346,15 @@ without recomputing them, it should be a list of lists."
       ;; present and running in BG.
       (let ((src (or source (helm-get-current-source))))
         (unless (assq 'candidates-process src)
-          (and src (helm-display-mode-line src 'force))
+          (helm-display-mode-line src 'force)
           (helm-log-run-hook 'helm-after-update-hook)))
       (when preselect
         (helm-log "Update preselect candidate %s" preselect)
         (if (helm-window)
             (with-helm-window (helm-preselect preselect source))
           (helm-preselect preselect source)))
-      (setq helm--force-updating-p nil))
+      (setq helm--force-updating-p nil)
+      (helm--reset-update-flag))
     (helm-log "end update")))
 
 (defun helm-update-source-p (source)
@@ -4587,7 +4602,7 @@ If DISPLAY-STRING is non-`nil' and a string value then display
 this additional info after the source name by overlay."
   (unless (bobp)
     (let ((start (point)))
-      (insert "\n")
+      (insert (propertize "\n" 'face 'helm-eob-line))
       (put-text-property start (point) 'helm-header-separator t)))
   (let ((start (point)))
     (insert name)
@@ -6947,6 +6962,7 @@ If source doesn't have any `help-message' attribute, a generic message
 explaining this is added instead.
 The global `helm-help-message' is always added after this local help."
   (interactive)
+  (require 'helm-mode) ; for helm-comp-read.
   (with-helm-alive-p
     (let ((source (or (helm-get-current-source)
                       (helm-comp-read

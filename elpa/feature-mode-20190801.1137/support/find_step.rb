@@ -1,7 +1,7 @@
 require 'rubygems'
 gem 'ruby_parser'
 # >= 2.11.8 because of https://github.com/cucumber/gherkin/commit/90121f513000b89fce4d24c4e7dfdae00a5b177f
-gem 'gherkin', '>= 2.11.8'
+gem 'gherkin', '>= 2.11.8', '< 4.0.0'
 
 require 'ruby_parser'
 require 'yaml'
@@ -54,6 +54,7 @@ class Step
       when String
         pieces, regexp = [], value.dup
         regexp.gsub!(/\$\w+/) { |match| pieces << match; "TOKEN" }
+        regexp.gsub!(/(?=\{)(.*?)(\})/, "TOKEN")
         regexp = Regexp.escape(regexp)
         regexp.gsub!(/TOKEN/) { |match| "(.*)" }
         Regexp.new("^#{regexp}$")

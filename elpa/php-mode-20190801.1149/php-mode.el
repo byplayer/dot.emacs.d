@@ -974,31 +974,43 @@ this ^ lineup"
     (goto-char (point-max)))
   (c-put-char-property (1- (point)) 'syntax-table (string-to-syntax "|")))
 
+(defvar-local php-mode--propertize-extend-region-current nil
+  "Prevent undesirable recursion in PHP-SYNTAX-PROPERTIZE-EXTEND-REGION")
+
 (defun php-syntax-propertize-extend-region (start end)
   "Extend the propertize region if START or END falls inside a PHP heredoc."
-  (let ((new-start)
-        (new-end))
-    (goto-char start)
-    (when (re-search-backward php-heredoc-start-re nil t)
-      (let ((maybe (point)))
-        (when (and (re-search-forward
-                    (php-heredoc-end-re (match-string 0)) nil t)
-                   (> (point) start))
-          (setq new-start maybe))))
-    (goto-char end)
-    (when (re-search-backward php-heredoc-start-re nil t)
-      (if (re-search-forward
-           (php-heredoc-end-re (match-string 0)) nil t)
-          (when (> (point) end)
-            (setq new-end (point)))
-        (setq new-end (point-max))))
-    (when (or new-start new-end)
-      (cons (or new-start start) (or new-end end)))))
+  (let ((pair (cons start end)))
+    (when (not (member pair php-mode--propertize-extend-region-current))
+      ;; re-search functions may trigger
+      ;; syntax-propertize-extend-region-functions to be called again, which in
+      ;; turn call this to be called again.
+      (push pair php-mode--propertize-extend-region-current)
+      (unwind-protect
+          (let ((new-start)
+                (new-end))
+            (goto-char start)
+            (when (re-search-backward php-heredoc-start-re nil t)
+              (let ((maybe (point)))
+                (when (and (re-search-forward (php-heredoc-end-re (match-string 0)) nil t)
+                           (> (point) start))
+                  (setq new-start maybe))))
+            (goto-char end)
+            (when (re-search-backward php-heredoc-start-re nil t)
+              (if (re-search-forward (php-heredoc-end-re (match-string 0)) nil t)
+                  (when (> (point) end)
+                    (setq new-end (point)))
+                (setq new-end (point-max))))
+            (when (or new-start new-end)
+              (cons (or new-start start) (or new-end end))))
+        ;; Cleanup
+        (setq php-mode--propertize-extend-region-current
+              (delete pair php-mode--propertize-extend-region-current))))))
 
 (easy-menu-define php-mode-menu php-mode-map "PHP Mode Commands"
   (cons "PHP" (c-lang-const c-mode-menu php)))
 
 (defvar-local php-mode--delayed-set-style nil)
+(defvar-local php-style-delete-trailing-whitespace nil)
 
 (defun php-set-style (stylename &optional dont-override)
   "Set the current `php-mode' buffer to use the style STYLENAME.
@@ -1053,7 +1065,8 @@ After setting the stylevars run hooks according to STYLENAME
   (when php-mode--delayed-set-style
     (let ((coding-style (or (and (boundp 'php-project-coding-style) php-project-coding-style)
                             php-mode-coding-style)))
-      (prog1 (php-set-style (symbol-name coding-style))
+      (prog1 (when coding-style
+               (php-set-style (symbol-name coding-style)))
         (remove-hook 'hack-local-variables-hook #'php-mode-set-style-delay)))))
 
 (defvar php-mode-syntax-table

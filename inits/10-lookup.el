@@ -1,9 +1,10 @@
 ;;; package --- Summary
 ;;; Commentary:
 ;;; Code:
-(autoload 'lookup "lookup" nil t)
-(autoload 'lookup-region "lookup" nil t)
-(autoload 'lookup-pattern "lookup" nil t)
+;; lookup
+(add-to-list 'load-path "~/.emacs.d/elisp/lookup/")
+
+(load "lookup-autoloads")
 
 (eval-after-load 'flycheck
   '(progn

@@ -40,6 +40,8 @@ C-c ! c check buffer
 <left> next source
 <right> previous source
 
+M-i  helm-swoop  search word in buffer
+
 * window
 move window
 Meta and cursor key

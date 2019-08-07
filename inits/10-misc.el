@@ -432,5 +432,15 @@ e.g. 20190-4-01 15:02:33"
   ;; (setq plantuml-exec-mode 'jar)
   )
 
+;; yaml
+(use-package yaml-mode
+  :mode (("\\.yml$" . yaml-mode)
+         ("\\.dig$" . yaml-mode)
+         ("\\.yml-[a-zA-Z]+$" . yaml-mode))
+  :init
+  (add-hook 'yaml-mode-hook
+          '(lambda ()
+             (define-key yaml-mode-map "\C-m" 'newline-and-indent))))
+
 (provide '10-misc)
 ;;; 10-misc.el ends here

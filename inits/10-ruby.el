@@ -2,7 +2,11 @@
 ;;; Commentary:
 ;;; Code:
 (require 'ruby-mode)
-(require 'rubocopfmt)
+
+(use-package rubocopfmt
+  :commands (rubocopfmt-mode)
+  :init
+  (setq rubocopfmt-rubocop-command "rubocop-daemon-wrapper"))
 
 (autoload 'ruby-mode "ruby-mode" "Mode for editing ruby source files" t)
 (autoload 'inf-ruby-keys "inf-ruby" "Set local key defs for inf-ruby in ruby-mode")

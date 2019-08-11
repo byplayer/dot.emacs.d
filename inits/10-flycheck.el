@@ -12,7 +12,7 @@
 (eval-after-load 'flycheck
   '(progn
      (flycheck-pos-tip-mode)
-     (setq flycheck-display-errors-delay 0.3)
+     (setq flycheck-display-errors-delay 0.5)
      (setq flycheck-pos-tip-timeout 60)
      (defun flycheck-print-current-checker (args)
        "Print checker for current buffer.

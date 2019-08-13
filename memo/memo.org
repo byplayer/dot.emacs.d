@@ -19,6 +19,9 @@ q - quit list
 
 https://github.com/quelpa/quelpa-use-package
 
+** quelpa upgrade
+(quelpa-upgrade)
+
 ** install
 package-install
 

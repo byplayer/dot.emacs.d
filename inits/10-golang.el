@@ -33,9 +33,10 @@
 (eval-after-load 'go-mode
   '(substitute-key-definition 'go-import-add 'helm-go-package go-mode-map))
 
-(add-to-list 'load-path "~/.emacs.d/elisp/emacs-helm-godoc/")
-(autoload 'helm-godoc "helm-godoc" nil t)
-(define-key go-mode-map (kbd "C-c C-d") 'helm-godoc)
+(use-package helm-godoc
+  :quelpa (helm-godoc :fetcher github :repo "syohex/emacs-helm-godoc")
+  :bind (:map go-mode-map
+              ("C-c C-d" . helm-godoc)))
 
 (provide '10-golang)
 ;;; 10-golang.el ends here

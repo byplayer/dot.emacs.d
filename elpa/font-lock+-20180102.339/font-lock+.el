@@ -7,6 +7,7 @@
 ;; Copyright (C) 2007-2018, Drew Adams, all rights reserved.
 ;; Created: Sun Mar 25 15:21:07 2007
 ;; Version: 0
+;; Package-Version: 20180102.339
 ;; Package-Requires: ()
 ;; Last-Updated: Mon Jan  1 11:39:08 2018 (-0800)
 ;;           By: dradams

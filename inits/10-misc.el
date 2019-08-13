@@ -243,7 +243,8 @@
 
 ;; for dired with the all icons
 (use-package font-lock+
-  :quelpa (font-lock+ :fetcher github :repo "emacsmirror/font-lock-plus"))
+  :quelpa (font-lock+ :fetcher github :repo "emacsmirror/font-lock-plus")
+  :ensure t)
 
 (require 'dired-x)
 (add-hook 'dired-mode-hook

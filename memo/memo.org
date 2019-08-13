@@ -15,6 +15,9 @@ r - refresh package
 U - Upgrade all
 q - quit list
 
+* quelpa
+
+https://github.com/quelpa/quelpa-use-package
 
 ** install
 package-install

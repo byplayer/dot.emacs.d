@@ -20,7 +20,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (let-alist go-mode magit sclang-mode yaml-mode web-mode volatile-highlights undo-tree smartrep smartparens savekill ruby-block rspec-mode robe rinari revive recentf-ext rainbow-mode popwin point-undo phpunit php-mode org-plus-contrib neotree multiple-cursors mozc-popup markdown-mode kotlin-mode keyfreq js2-mode init-loader imenu-list helm-swoop helm-projectile helm-migemo helm-ls-git helm-gtags helm-go-package helm-flycheck helm-descbinds helm-c-yasnippet helm-ag groovy-mode go-eldoc flycheck-pos-tip flycheck-kotlin flycheck-irony feature-mode expand-region dockerfile-mode crontab-mode company-quickhelp company-irony company-go clang-format avy anzu all-the-icons-dired)))
+    (quelpa-use-package quelpa let-alist go-mode magit sclang-mode yaml-mode web-mode volatile-highlights undo-tree smartrep smartparens savekill ruby-block rspec-mode robe rinari revive recentf-ext rainbow-mode popwin point-undo phpunit php-mode org-plus-contrib neotree multiple-cursors mozc-popup markdown-mode kotlin-mode keyfreq js2-mode init-loader imenu-list helm-swoop helm-projectile helm-migemo helm-ls-git helm-gtags helm-go-package helm-flycheck helm-descbinds helm-c-yasnippet helm-ag groovy-mode go-eldoc flycheck-pos-tip flycheck-kotlin flycheck-irony feature-mode expand-region dockerfile-mode crontab-mode company-quickhelp company-irony company-go clang-format avy anzu all-the-icons-dired)))
  '(safe-local-variable-values
    (quote
     ((eval setq-local default-directory
@@ -148,15 +148,17 @@
     org
     org-plus-contrib
 
-    mozc
-    mozc-popup
-
     ; c/c++
     clang-format
 
     prettier-js
     ))
 
+(quelpa
+ '(quelpa-use-package
+   :fetcher git
+   :url "https://framagit.org/steckerhalter/quelpa-use-package.git"))
+(require 'quelpa-use-package)
 (require 'use-package)
 (require 'dash)
 (require 'f)

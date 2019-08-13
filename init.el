@@ -1,6 +1,8 @@
 ;;; package --- Summary
 ;;; Commentary:
 ;;; Code:
+(setq quelpa-update-melpa-p nil)
+
 (require 'package)
 (setq package-archives
       '(("org"          . "http://orgmode.org/elpa/")

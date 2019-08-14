@@ -155,9 +155,14 @@
 (define-key ruby-mode-map [return] 'newline-and-indent)
 
 ;; rabbit
-(add-to-list 'load-path "~/.emacs.d/elisp/rabbit/")
-(autoload 'rabbit-mode "rabbit-mode" "major mode for Rabbit" t)
-(add-to-list 'auto-mode-alist '("\\.\\(rbt\\|rab\\)$" . rabbit-mode))
+(use-package rd-mode
+  :quelpa (rd-mode :fetcher github :repo "byplayer/rd-mode")
+  :ensure t)
+(use-package rabbit-mode
+  :quelpa (rabbit-mode :fetcher github :repo "byplayer/rabbit-mode")
+  :ensure t
+  :mode (("\\.rbt$" . rabbit-mode)
+         ("\\.rab$" . rabbit-mode)))
 
 ;; disable to insert magic comment
 (setq ruby-insert-encoding-magic-comment nil)

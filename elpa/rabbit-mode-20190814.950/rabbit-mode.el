@@ -1,9 +1,18 @@
+;;; rabbit-mode.el --- major-mode for rabbit
 ;;; -*- mode: Emacs-Lisp; indent-tabs-mode: nil -*-
 ;;; rabbit-mode.el
 ;;  Emacs major mode for Rabbit
-;;; Copyright (c) 2006 - 2008 Atsushi TAKEDA <tkdats@kono.cis.iwate-u.ac.jp>
-;;; Copyright (c) 2009 Kouhei Sutou <kou@cozmixng.org>
-;;; $Id$
+;;; Copyright (c) 2006-2008 Atsushi TAKEDA <tkdats@kono.cis.iwate-u.ac.jp>
+;;; Copyright (c) 2009-2019 Kouhei Sutou <kou@cozmixng.org>
+
+;; Author: Kouhei Sutou <kou@cozmixng.org>
+;; URL: https://github.com/byplayer/rabbit-mode
+;; Package-Version: 20190814.950
+;; Keywords: languages rabbit
+;; Package-Requires: ((emacs "24.3") (cl-lib "0.5"))
+;; Version: 20190814
+;;; Commentary:
+;;; Code:
 
 (require 'cl)
 (require 'rd-mode)
@@ -73,7 +82,12 @@
 
 (defvar rabbit-image-size-unit-history nil)
 
+;;;###autoload
+(add-to-list 'auto-mode-alist '("\\.rab\\'" . rabbit-mode))
+
+;;;###autoload
 (define-derived-mode rabbit-mode rd-mode "Rabbit"
+  "Major mode for editing Rabbit slide in RD."
   (setq comment-start "#")
   (make-local-variable 'font-lock-defaults)
   (setq font-lock-defaults '((rabbit-font-lock-keywords) t nil))
@@ -318,8 +332,8 @@ format if value is specified, otherwise return \"\"."
 (defun rabbit-join-without-empty-string (strings separator)
   (let ((result "")
         (not-empty-strings (rabbit-filter
-                            '(lambda (string)
-                               (not (rabbit-not-empty-string string)))
+                            (lambda (string)
+                              (not (rabbit-not-empty-string string)))
                             strings)))
     (if (null not-empty-strings)
         ""
@@ -345,8 +359,8 @@ format if value is specified, otherwise return \"\"."
   (let ((prefix (if (string-equal unit "pixel")
                     ""
                   (concat unit "_"))))
-    (mapcar '(lambda (key)
-               (rabbit-read-block-property (concat prefix key)))
+    (mapcar (lambda (key)
+              (rabbit-read-block-property (concat prefix key)))
             '("width" "height"))))
 
 (defun rabbit-fancall-with-current-point (func)
@@ -372,3 +386,4 @@ format if value is specified, otherwise return \"\"."
       (beginning-of-buffer)))
 
 (provide 'rabbit-mode)
+;;; rabbit-mode.el ends here

@@ -242,6 +242,7 @@ M-F  magit-pull-from-upstream
 * dired
 
 C-x M-o toggle dired-ommit-files
++       create directory
 
 * zoom in/out
 

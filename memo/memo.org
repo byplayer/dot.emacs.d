@@ -282,4 +282,5 @@ C-= hs-hide-all
 
 * toggle truncate lines
 
+word wrap / line break
 toggle-truncate-lines

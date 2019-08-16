@@ -128,7 +128,7 @@
  '(org-warning ((t ( :foreground "hotpink"))))
  '(org-level-1 ((t ( :foreground "hotpink"))))
  '(org-level-2 ((t ( :foreground "gold"))))
- '(org-level-4 ((t ( :foreground "grey80"))))
+ '(org-level-4 ((t ( :foreground "chocolate1"))))
 
  '(guide-key/highlight-command-face ((t (:foreground "green"))))
  '(guide-key/key-face ((t (:foreground "white"))))

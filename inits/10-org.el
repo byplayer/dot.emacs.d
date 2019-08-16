@@ -11,7 +11,8 @@
 
 (use-package org
   :ensure t
-  :bind (("C-c a" . my/org-agenda))
+  :bind (("C-c a" . my/org-agenda)
+         ("C-c C-9" . org-capture))
   :init
   (require 'org-habit)
   (setq org-use-speed-commands t)
@@ -60,6 +61,15 @@
         (make-directory target_dir t))
       (format "%s/%s_%s.org" target_dir (format-time-string "%Y%m%d") name )))
 
+  (require 'ido)
+  (defun my/pick-members ()
+    "Prompt user to pick a choice from a list."
+    (interactive)
+    (let ((choices (split-string (with-temp-buffer
+                                   (insert-file-contents-literally "~/.members")
+                                   (buffer-substring-no-properties (point-min) (point-max))))))
+      (ido-completing-read "Choose member:" choices )))
+
   (setq org-capture-templates
         '(("t" "Todo" entry (file+headline (lambda()(concatenate 'string my-org-agenda-directory "/todo.org")) "Tasks")
            "* TODO %?")
@@ -67,16 +77,25 @@
            "* %?\nEntered on %T\n")
           ("d" "Doc" entry (file my/generate-org-doc-name)
            "* %?\nEntered on %T\n")
-          ("l" "Log" entry (file
+          ("l" "my log" entry (file+datetree
                             (lambda()
                               (format-time-string
                                (let (target_dir)
-                                 (setq target_dir (format-time-string (concatenate 'string org-directory "/log/%Y/%Y%m")))
+                                 (setq target_dir (format-time-string (concatenate 'string org-directory "/log")))
                                  (unless (file-directory-p target_dir)
                                    (make-directory target_dir t))
-                                 (concatenate 'string target_dir "/%Y%m%d.org")))))
-           "* %?\nEntered on %T\n")
-          ))
+                                 (concatenate 'string target_dir "/work_log_myself_%Y.org")))))
+           "* %^{description} %^g\n- %?")
+          ("j" "members' log" entry (file+datetree
+                            (lambda()
+                              (format-time-string
+                               (let (target_dir)
+                                 (setq target_dir (format-time-string (concatenate 'string org-directory "/log/members")))
+                                 (unless (file-directory-p target_dir)
+                                   (make-directory target_dir t))
+                                 (concatenate 'string target_dir
+                                              "/work_log_" (my/pick-members) ".org")))))
+           "* %^{description}\n- %?")))
 
   (setq org-archive-location
         (concatenate 'string my-org-agenda-directory "/archive/"

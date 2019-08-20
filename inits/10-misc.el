@@ -445,5 +445,10 @@ e.g. 20190-4-01 15:02:33"
           '(lambda ()
              (define-key yaml-mode-map "\C-m" 'newline-and-indent))))
 
+(use-package emojify
+  :ensure t
+  :init
+  (add-hook 'after-init-hook #'global-emojify-mode))
+
 (provide '10-misc)
 ;;; 10-misc.el ends here

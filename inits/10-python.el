@@ -1,5 +1,11 @@
-(require 'python)
-(defun python-shell-parse-command ()
-  "Return the string used to execute the inferior Python process."
-  "python3 -i"
-  )
+;;; package --- Summary
+;;; Commentary:
+;;; Code:
+
+(use-package python
+  :ensure)
+
+;; setup elpy someday
+
+(provide '10-python)
+;;; 10-python.el ends here

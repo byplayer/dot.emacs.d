@@ -23,6 +23,7 @@
 /lookup
 /quelpa
 /emojis
+/elpa/elpy-*/elpy/*.pyc
 
 GPATH
 GRTAGS

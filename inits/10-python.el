@@ -12,5 +12,8 @@
   :init
   (add-hook 'python-mode-hook 'py-autopep8-enable-on-save))
 
+(use-package virtualenvwrapper
+  :ensure t)
+
 (provide '10-python)
 ;;; 10-python.el ends here

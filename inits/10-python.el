@@ -21,8 +21,7 @@
              jedi:reinstall-server
              jedi:install-server-block)
   :init
-  (setq jedi:environment-root "~/.python_tool")
-  (setq python-environment-directory "python_tool"))
+  (setq jedi:environment-root "~/.virtualenvs/jedi"))
 
 (use-package company-jedi
   :ensure t

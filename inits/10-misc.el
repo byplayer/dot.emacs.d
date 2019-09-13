@@ -84,8 +84,7 @@
 (global-set-key (kbd "C-x <up>") 'windmove-up)
 
 ;; save edit place
-(require 'saveplace)
-(setq-default save-place t)
+(save-place-mode 1)
 (setq-default save-place-limit 1000)
 
 ;; show buffer name to title

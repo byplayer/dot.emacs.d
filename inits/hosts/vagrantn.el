@@ -1,3 +1,8 @@
-(create-fontset-from-fontset-spec
- "-shinonome-gothic-medium-r-normal--14-*-*-*-*-*-fontset-shinonome14")
-(set-frame-font "fontset-shinonome14")
+;;; package --- Summary
+;;; Commentary:
+;;; Code:
+
+(set-face-attribute 'default nil :family "Source Han Code JP N" :height 90)
+(set-frame-font "Source Han Code JP N")
+
+;;; vagrantn.el ends here

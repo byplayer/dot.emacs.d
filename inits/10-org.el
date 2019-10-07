@@ -34,6 +34,7 @@
 
   (setq org-directory "~/docs/org_doc")
   (setq my-org-agenda-directory (concatenate 'string org-directory "/agenda"))
+  (setq daily-routine-template (concatenate 'string org-directory "/templates/daily_routine.org"))
   (defun my-org-agenda-files ()
     (directory-files-recursively my-org-agenda-directory "\.org$"))
 
@@ -229,6 +230,17 @@ The file-path is archive target file path.  If no file-path is given uses the fu
     (let (org-log-done org-log-states)   ; turn off logging
       (org-todo (if (= n-not-done 0) "DONE" "TODO"))))
 
-  (add-hook 'org-after-todo-statistics-hook 'org-summary-todo))
+  (add-hook 'org-after-todo-statistics-hook 'org-summary-todo)
+
+  (defun my/get-string-from-file (filePath)
+  "Return filePath's file content."
+  (with-temp-buffer
+    (insert-file-contents filePath)
+    (buffer-string)))
+
+  (defun insert-daily-routine-tasks ()
+     "Insert daily routine tasks"
+     (interactive)
+     (insert (format-time-string (my/get-string-from-file daily-routine-template)))))
 (provide '10-org)
 ;;; 10-org.el ends here

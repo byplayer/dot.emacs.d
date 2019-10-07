@@ -25,7 +25,9 @@
    org-log-done-with-time t
    org-log-reschedule 'time
    org-agenda-restore-windows-after-quit t
-   org-agenda-show-all-dates t)
+   org-agenda-show-all-dates t
+   org-indent-indentation-per-level 2
+   org-startup-indented t)
 
   (add-hook 'org-mode-hook
             (lambda () (add-to-list 'helm-completing-read-handlers-alist '(org-set-tags))))

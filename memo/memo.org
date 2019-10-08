@@ -149,6 +149,7 @@ C-x C-k e    Edit macro
 S-Left, S-Right       switch TODO DONE
 M-S-Enter             insert next TODO
 M-Up, M-Down          move  todo section
+M-left, M-light       demote/promote heading
 Shift-up Shift-down   change priority
 C-c C-d               add deadline
 C-c C-s               set execution date

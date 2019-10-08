@@ -182,6 +182,11 @@ N next item
 P previous item
 f agenda later
 b agenda earlier
+tab agenda goto
+I clock in
+O clock out
+e set effort
+t switch status
 
 ** modify clock by manual and update duration
 

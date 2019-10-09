@@ -153,6 +153,15 @@
                   ;; (org-agenda-skip-function
                   ;;  '(org-agenda-skip-entry-if 'nottodo 'done))
                   )))
+  (add-to-list 'org-agenda-custom-commands
+               '("c" "TaskChute TODO"
+                 tags-todo "+SCHEDULED<\"<tomorrow>\"+TODO=\"TODO\""
+                 ((org-agenda-span 'day)
+                  (org-agenda-start-on-weekday 0)
+                                        ; (org-agenda-overriding-header "TaskChute TODO")
+                  (org-agenda-overriding-columns-format "%50ITEM(Task) %10Effort(Effort){:}")
+                  (org-agenda-view-columns-initially t))
+                 ))
 
   (defun my-org-confirm-babel-evaluate (lang body)
   (not (member lang '("plantuml" "sh"))))

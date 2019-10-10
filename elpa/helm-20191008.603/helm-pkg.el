@@ -1,4 +1,4 @@
-(define-package "helm" "20191006.1608" "Helm is an Emacs incremental and narrowing framework"
+(define-package "helm" "20191008.603" "Helm is an Emacs incremental and narrowing framework"
   '((emacs "24.4")
     (async "1.9.3")
     (popup "0.5.3")

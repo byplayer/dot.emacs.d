@@ -259,6 +259,7 @@ The file-path is archive target file path.  If no file-path is given uses the fu
   (load "~/.org-gcal/org-gcal-conf")
   (setq org-gcal-up-days 7
         org-gcal-down-days 7
+        org-gcal-auto-archive nil
         org-gcal-dir "~/.org-gcal"
         org-gcal-token-file (expand-file-name ".org-gcal-token" org-gcal-dir)))
 (provide '10-org)

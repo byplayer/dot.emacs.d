@@ -256,14 +256,8 @@ The file-path is archive target file path.  If no file-path is given uses the fu
   :ensure t
   :quelpa t
   :init
-  (setq org-gcal-client-id "496317557913-jjf3shthl6418kto69b4vacd7l1bd7nl.apps.googleusercontent.com"
-        org-gcal-client-secret "e8rKZDVKUr4OohwAqklcQlm9"
-        org-gcal-file-alist '(
-                              ("t9c71ivt2gukojph7v9a037b44@group.calendar.google.com" .
-                               "~/docs/org_doc/agenda/calendar.org"
-                               )
-                              )
-        org-gcal-up-days 7
+  (load "~/.org-gcal/org-gcal-conf")
+  (setq org-gcal-up-days 7
         org-gcal-down-days 7
         org-gcal-dir "~/.org-gcal"
         org-gcal-token-file (expand-file-name ".org-gcal-token" org-gcal-dir)))

@@ -256,7 +256,7 @@
   "Insert string for today's date(YYYYMMDD).
 e.g. 20190401."
   (interactive)                 ; permit invocation in minibuffer
-  (insert (format-time-string "%Y%m%d")))
+  (insert (format-time-string "%Y%m%d %A")))
 
 (defun insert-ymdhms ()
   "Insert string for today's date(YYYY-mm-dd HH:MM:SS).

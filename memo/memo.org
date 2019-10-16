@@ -293,3 +293,7 @@ C-= hs-hide-all
 
 word wrap / line break
 toggle-truncate-lines
+
+* toggle debug on error
+Turn on/off debug screen open when error has occur
+(toggle-debug-on-error)

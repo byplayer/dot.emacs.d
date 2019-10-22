@@ -255,6 +255,7 @@ The file-path is archive target file path.  If no file-path is given uses the fu
 (use-package org-gcal
   :ensure t
   :quelpa t
+  :commands (org-gcal-fetch)
   :init
   (load "~/.org-gcal/org-gcal-conf")
   (setq org-gcal-up-days 7

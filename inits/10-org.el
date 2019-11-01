@@ -258,8 +258,8 @@ The file-path is archive target file path.  If no file-path is given uses the fu
   :commands (org-gcal-fetch)
   :config
   (load "~/.org-gcal/org-gcal-conf")
-  (setq org-gcal-up-days 7
-        org-gcal-down-days 7
+  (setq org-gcal-up-days 1
+        org-gcal-down-days 3
         org-gcal-auto-archive nil
         org-gcal-dir "~/.org-gcal"
         org-gcal-token-file (expand-file-name ".org-gcal-token" org-gcal-dir))
@@ -293,7 +293,10 @@ an error will be thrown. Point is not preserved."
            (end   (if etime etime eday))
            (elem))
       (when loc (replace-regexp-in-string "\n" ", " loc))
-      (org-edit-headline (concat " TODO [MTG]" smry))
+      (org-edit-headline (concat "[MTG]" smry))
+      (looking-at org-complex-heading-regexp)
+      (unless (match-string 2)
+        (org-edit-headline (concat "TODO [MTG]" smry)))
       (org-entry-put (point) org-gcal-etag-property etag)
       (when loc (org-entry-put (point) "LOCATION" loc))
       (when meet

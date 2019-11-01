@@ -262,6 +262,99 @@ The file-path is archive target file path.  If no file-path is given uses the fu
         org-gcal-down-days 7
         org-gcal-auto-archive nil
         org-gcal-dir "~/.org-gcal"
-        org-gcal-token-file (expand-file-name ".org-gcal-token" org-gcal-dir)))
+        org-gcal-token-file (expand-file-name ".org-gcal-token" org-gcal-dir))
+
+  ;; monkey patch to treat calendar event as TODO and add prefix [MTG] and set time as scheduled
+  (defun org-gcal--update-entry (calendar-id event)
+    "\
+Update the entry at the current heading with information from EVENT, which is
+parsed from the Calendar API JSON response using
+‘org-gcal--json-read’. Point must be located on an Org-mode heading line or
+an error will be thrown. Point is not preserved."
+    (unless (org-at-heading-p)
+      (user-error "Must be on Org-mode heading."))
+    (let* ((smry  (or (plist-get event :summary)
+                      "busy"))
+           (desc  (plist-get event :description))
+           (loc   (plist-get event :location))
+           (_link  (plist-get event :htmlLink))
+           (meet  (plist-get event :hangoutLink))
+           (etag (plist-get event :etag))
+           (event-id    (plist-get event :id))
+           (stime (plist-get (plist-get event :start)
+                             :dateTime))
+           (etime (plist-get (plist-get event :end)
+                             :dateTime))
+           (sday  (plist-get (plist-get event :start)
+                             :date))
+           (eday  (plist-get (plist-get event :end)
+                             :date))
+           (start (if stime stime sday))
+           (end   (if etime etime eday))
+           (elem))
+      (when loc (replace-regexp-in-string "\n" ", " loc))
+      (org-edit-headline (concat " TODO [MTG]" smry))
+      (org-entry-put (point) org-gcal-etag-property etag)
+      (when loc (org-entry-put (point) "LOCATION" loc))
+      (when meet
+        (org-entry-put
+         (point)
+         "HANGOUTS"
+         (format "[[%s][%s]]"
+                 meet
+                 "Join Hangouts Meet")))
+      (org-entry-put (point) org-gcal-calendar-id-property calendar-id)
+      (org-gcal--put-id (point) calendar-id event-id)
+      ;; Insert event time and description in :ORG-GCAL: drawer, erasing the
+      ;; current contents.
+      (org-gcal--back-to-heading)
+      (setq elem (org-element-at-point))
+      (save-excursion
+        (when (re-search-forward
+               (format
+                "^[ \t]*:%s:[^z-a]*?\n[ \t]*:END:[ \t]*\n?"
+                (regexp-quote org-gcal-drawer-name))
+               (save-excursion (outline-next-heading) (point))
+               'noerror)
+          (replace-match "" 'fixedcase)))
+      (unless (re-search-forward ":PROPERTIES:[^z-a]*?:END:"
+                                 (save-excursion (outline-next-heading) (point))
+                                 'noerror)
+        (message "PROPERTIES not found: %s (%s) %d"
+                 (buffer-name) (buffer-file-name) (point)))
+      (end-of-line)
+      (newline)
+      (insert (format ":%s:" org-gcal-drawer-name))
+      (newline)
+      (let*
+          ((timestamp
+            (if (or (string= start end) (org-gcal--alldayp start end))
+                (org-gcal--format-iso2org start)
+              (if (and
+                   (= (plist-get (org-gcal--parse-date start) :year)
+                      (plist-get (org-gcal--parse-date end)   :year))
+                   (= (plist-get (org-gcal--parse-date start) :mon)
+                      (plist-get (org-gcal--parse-date end)   :mon))
+                   (= (plist-get (org-gcal--parse-date start) :day)
+                      (plist-get (org-gcal--parse-date end)   :day)))
+                  (format "<%s-%s>"
+                          (org-gcal--format-date start "%Y-%m-%d %a %H:%M")
+                          (org-gcal--format-date end "%H:%M"))
+                (format "%s--%s"
+                        (org-gcal--format-iso2org start)
+                        (org-gcal--format-iso2org
+                         (if (< 11 (length end))
+                             end
+                           (org-gcal--iso-previous-day end))))))))
+        (if (org-element-property :scheduled elem)
+            (org-schedule nil timestamp)
+          (org-schedule nil timestamp)
+          (newline)
+          (when desc (newline))))
+      ;; Insert event description if present.
+      (when desc
+        (insert (replace-regexp-in-string "^\*" "✱" desc))
+        (insert (if (string= "\n" (org-gcal--safe-substring desc -1)) "" "\n")))
+      (insert ":END:"))))
 (provide '10-org)
 ;;; 10-org.el ends here

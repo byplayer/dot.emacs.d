@@ -887,7 +887,7 @@ an error will be thrown. Point is not preserved."
          (end   (if etime etime eday))
          (elem))
     (when loc (replace-regexp-in-string "\n" ", " loc))
-    (org-edit-headline smry)
+    (org-edit-headline (concat " TODO " smry))
     (org-entry-put (point) org-gcal-etag-property etag)
     (when loc (org-entry-put (point) "LOCATION" loc))
     (when meet
@@ -942,7 +942,7 @@ an error will be thrown. Point is not preserved."
                          (org-gcal--iso-previous-day end))))))))
       (if (org-element-property :scheduled elem)
           (org-schedule nil timestamp)
-        (insert timestamp)
+        (org-schedule nil timestamp)
         (newline)
         (when desc (newline))))
     ;; Insert event description if present.

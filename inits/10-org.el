@@ -359,5 +359,12 @@ an error will be thrown. Point is not preserved."
         (insert (replace-regexp-in-string "^\*" "✱" desc))
         (insert (if (string= "\n" (org-gcal--safe-substring desc -1)) "" "\n")))
       (insert ":END:"))))
+
+(use-package org-sticky-header
+  :ensure t
+  :quelpa t
+  :hook (org-mode . org-sticky-header-mode)
+  :config (setq org-sticky-header-full-path 'full))
+
 (provide '10-org)
 ;;; 10-org.el ends here

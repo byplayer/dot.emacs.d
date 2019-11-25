@@ -1,2 +1,0 @@
-;;; -*- no-byte-compile: t -*-
-(define-package "auto-virtualenvwrapper" "20181006.937" "Lightweight auto activate python virtualenvs" '((cl-lib "0.6") (s "1.10.0") (virtualenvwrapper "0")) :commit "72cc9168db475e8328019f9592493560dab832a5" :keywords '("python" "virtualenv" "tools") :authors '(("Marcwebbie" . "marcwebbie@gmail.com") ("Robert Zaremba" . "robert-zaremba@scale-it.pl")) :maintainer '("Marcwebbie" . "marcwebbie@gmail.com"))

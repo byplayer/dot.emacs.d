@@ -46,6 +46,7 @@
     (let ()
       (setq org-agenda-files
             (my-org-agenda-files))
+      (require 'org-agenda)
       (org-agenda)))
 
   (defun my/generate-org-memo-name ()
@@ -105,12 +106,6 @@
                      (format-time-string "%Y" (current-time))
                      (format-time-string "/%Y%m_todo_archive.org::" (current-time))))
 
-  (add-hook 'org-mode-hook
-            (lambda ()
-              (define-key org-mode-map (kbd "C-a") 'vc-like-home)
-              (define-key org-mode-map (kbd "C-c t") 'org-todo)
-              (define-key org-mode-map (kbd "M-*") 'org-mark-ring-goto)))
-
   ;; show content as default view
   ;; #+STARTUP: fold              (or ‘overview’, this is equivalent)
   ;; #+STARTUP: nofold            (or ‘showall’, this is equivalent)
@@ -118,7 +113,6 @@
   ;; #+STARTUP: showeverything
   (setq org-startup-folded "nofold")
 
-  (require 'org-agenda)
   (add-to-list 'org-agenda-custom-commands
                '("d" "Daily todo tasks"
                  ((agenda "") (alltodo ""))
@@ -250,7 +244,16 @@ The file-path is archive target file path.  If no file-path is given uses the fu
   (defun insert-daily-routine-tasks ()
      "Insert daily routine tasks"
      (interactive)
-     (insert (format-time-string (my/get-string-from-file daily-routine-template)))))
+     (insert (format-time-string (my/get-string-from-file daily-routine-template))))
+
+  :config
+  (bind-keys :map org-mode-map
+             ("C-a" . vc-like-home)
+             ("C-c t" . org-todo)
+             ("M-*" . org-mark-ring-last-goto))
+  (bind-keys :map org-agenda-mode-map
+             ("d" . org-agenda-todo))
+  )
 
 (use-package org-gcal
   :ensure t

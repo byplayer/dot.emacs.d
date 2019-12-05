@@ -250,7 +250,12 @@ The file-path is archive target file path.  If no file-path is given uses the fu
   (bind-keys :map org-mode-map
              ("C-a" . vc-like-home)
              ("C-c t" . org-todo)
-             ("M-*" . org-mark-ring-last-goto))
+             ("M-*" . org-mark-ring-last-goto)
+             ("C-c n" . outline-next-visible-heading)
+             ("C-c p" . outline-previous-visible-heading)
+             ("C-c u" . outline-up-heading)
+             ("C-c f" . org-forward-heading-same-level)
+             ("C-c b" . org-backward-heading-same-level))
   (bind-keys :map org-agenda-mode-map
              ("d" . org-agenda-todo))
   )

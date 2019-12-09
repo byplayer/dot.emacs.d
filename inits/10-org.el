@@ -270,7 +270,8 @@ The file-path is archive target file path.  If no file-path is given uses the fu
         org-gcal-down-days 3
         org-gcal-auto-archive nil
         org-gcal-dir "~/.org-gcal"
-        org-gcal-token-file (expand-file-name ".org-gcal-token" org-gcal-dir))
+        org-gcal-token-file (expand-file-name ".org-gcal-token" org-gcal-dir)
+        org-gcal-notify-p nil)
 
   ;; monkey patch to treat calendar event as TODO and add prefix [MTG] and set time as scheduled
   (defun org-gcal--update-entry (calendar-id event)

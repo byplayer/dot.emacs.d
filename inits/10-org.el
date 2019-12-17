@@ -375,5 +375,11 @@ an error will be thrown. Point is not preserved."
   :hook (org-mode . org-sticky-header-mode)
   :config (setq org-sticky-header-full-path 'full))
 
+(use-package org-todoist
+  :ensure t
+  :quelpa (org-todoist :fetcher file :path "~/projects/private/org-todoist")
+  :config
+  (setq org-todoist-agenda-file (expand-file-name "todoist.org" my-org-agenda-directory)))
+
 (provide '10-org)
 ;;; 10-org.el ends here

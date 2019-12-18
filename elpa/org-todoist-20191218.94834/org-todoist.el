@@ -2,9 +2,9 @@
 
 ;; Author: byplayer <byplayer100@gmail.com>
 ;; URL: https://github.com/byplayer/org-todoist
-;; Package-Version: 20191218.1037
-;; Package-X-Original-Version: 20191217.1
-;; Version: 0.1
+;; Package-Version: 20191218.94834
+;; Package-X-Original-Version: 20191218.1
+;; Version: 0.2
 ;; Maintainer: byplayer <byplayer100@gmail.com>
 ;; Copyright (C) :2019 byplayer all rights reserved.
 ;; Package-Requires: ((request-deferred "20181129") (emacs "26"))
@@ -88,7 +88,7 @@ Using TOKEN to sync todo from todoist."
       :success (cl-function
                 (lambda (&key data &allow-other-keys)
                   (org-todoist-write-data data)
-                  (message "fetch todoist tasks."))))
+                  (message "fetch todoist tasks was done."))))
     ))
 
 (defun org-todoist-write-data (result_data)

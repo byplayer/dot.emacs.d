@@ -299,3 +299,18 @@ toggle-truncate-lines
 * toggle debug on error
 Turn on/off debug screen open when error has occur
 (toggle-debug-on-error)
+
+* build irony server on mac
+#+BEGIN_SRC bash
+brew install llvm
+
+cd $HOME/.emacs.d/elpa/irony-*/server
+rm -fr CMakeCache.txt CMakeFiles/
+mkdir -p build && cd build
+cmake \
+ -DLIBCLANG_INCLUDE_DIR\=/usr/local/opt/llvm/include/ \
+ -DLIBCLANG_LIBRARY\=/usr/local/opt/llvm/lib/libclang.dylib \
+ -DCMAKE_INSTALL_PREFIX\=$HOME/.emacs.d/irony/ ..
+cmake --build . --use-stderr --config Release --target install
+#+END_SRC
+#+RESULTS:

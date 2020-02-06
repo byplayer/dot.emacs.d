@@ -3,22 +3,22 @@
 ;;; Code:
 
 
-;;;### (autoloads nil "bocu" "bocu.el" (23875 45254 133978 222000))
+;;;### (autoloads nil "bocu" "bocu.el" (24123 36926 123870 530000))
 ;;; Generated autoloads from bocu.el
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "bocu" '("bocu-to-str" "decode-bocu")))
 
 ;;;***
 
-;;;### (autoloads nil "hanzi-py-table" "hanzi-py-table.el" (23875
-;;;;;;  45254 133978 222000))
+;;;### (autoloads nil "hanzi-py-table" "hanzi-py-table.el" (24123
+;;;;;;  36926 124293 418000))
 ;;; Generated autoloads from hanzi-py-table.el
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "hanzi-py-table" '("hanzi-p")))
 
 ;;;***
 
-;;;### (autoloads nil "lookup" "lookup.el" (23875 45254 137978 397000))
+;;;### (autoloads nil "lookup" "lookup.el" (24123 36926 132670 183000))
 ;;; Generated autoloads from lookup.el
 
 (autoload 'lookup "lookup" "\
@@ -126,16 +126,16 @@ See `lookup-secondary' for details.
 
 ;;;***
 
-;;;### (autoloads nil "lookup-cache" "lookup-cache.el" (23875 45254
-;;;;;;  133978 222000))
+;;;### (autoloads nil "lookup-cache" "lookup-cache.el" (24123 36926
+;;;;;;  124733 109000))
 ;;; Generated autoloads from lookup-cache.el
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lookup-cache" '("lookup-")))
 
 ;;;***
 
-;;;### (autoloads nil "lookup-content" "lookup-content.el" (23875
-;;;;;;  45254 133978 222000))
+;;;### (autoloads nil "lookup-content" "lookup-content.el" (24123
+;;;;;;  36926 125613 603000))
 ;;; Generated autoloads from lookup-content.el
 
 (autoload 'lookup-content-mode "lookup-content" "\
@@ -147,24 +147,24 @@ See `lookup-secondary' for details.
 
 ;;;***
 
-;;;### (autoloads nil "lookup-history" "lookup-history.el" (23875
-;;;;;;  45254 133978 222000))
+;;;### (autoloads nil "lookup-history" "lookup-history.el" (24123
+;;;;;;  36926 126159 285000))
 ;;; Generated autoloads from lookup-history.el
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lookup-history" '("lookup-")))
 
 ;;;***
 
-;;;### (autoloads nil "lookup-modules" "lookup-modules.el" (23875
-;;;;;;  45254 133978 222000))
+;;;### (autoloads nil "lookup-modules" "lookup-modules.el" (24123
+;;;;;;  36926 127164 570000))
 ;;; Generated autoloads from lookup-modules.el
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lookup-modules" '("lookup-modules-")))
 
 ;;;***
 
-;;;### (autoloads nil "lookup-select" "lookup-select.el" (23875 45254
-;;;;;;  133978 222000))
+;;;### (autoloads nil "lookup-select" "lookup-select.el" (24123 36926
+;;;;;;  127750 529000))
 ;;; Generated autoloads from lookup-select.el
 
 (autoload 'lookup-select-dictionaries "lookup-select" "\
@@ -176,227 +176,227 @@ See `lookup-secondary' for details.
 
 ;;;***
 
-;;;### (autoloads nil "lookup-summary" "lookup-summary.el" (23875
-;;;;;;  45254 133978 222000))
+;;;### (autoloads nil "lookup-summary" "lookup-summary.el" (24123
+;;;;;;  36926 128553 913000))
 ;;; Generated autoloads from lookup-summary.el
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lookup-summary" '("lookup-")))
 
 ;;;***
 
-;;;### (autoloads nil "lookup-text" "lookup-text.el" (23875 45254
-;;;;;;  133978 222000))
+;;;### (autoloads nil "lookup-text" "lookup-text.el" (24123 36926
+;;;;;;  129230 857000))
 ;;; Generated autoloads from lookup-text.el
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lookup-text" '("lookup-")))
 
 ;;;***
 
-;;;### (autoloads nil "lookup-types" "lookup-types.el" (23875 45254
-;;;;;;  137978 397000))
+;;;### (autoloads nil "lookup-types" "lookup-types.el" (24123 36926
+;;;;;;  130053 564000))
 ;;; Generated autoloads from lookup-types.el
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lookup-types" '("lookup-")))
 
 ;;;***
 
-;;;### (autoloads nil "lookup-utils" "lookup-utils.el" (23875 45254
-;;;;;;  137978 397000))
+;;;### (autoloads nil "lookup-utils" "lookup-utils.el" (24123 36926
+;;;;;;  131020 132000))
 ;;; Generated autoloads from lookup-utils.el
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lookup-utils" '("lookup-")))
 
 ;;;***
 
-;;;### (autoloads nil "lookup-vars" "lookup-vars.el" (23875 45254
-;;;;;;  137978 397000))
+;;;### (autoloads nil "lookup-vars" "lookup-vars.el" (24123 36926
+;;;;;;  131603 169000))
 ;;; Generated autoloads from lookup-vars.el
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "lookup-vars" '("lookup-")))
 
 ;;;***
 
-;;;### (autoloads nil "ndbtonic" "ndbtonic.el" (23875 45254 137978
-;;;;;;  397000))
+;;;### (autoloads nil "ndbtonic" "ndbtonic.el" (24123 36926 133312
+;;;;;;  732000))
 ;;; Generated autoloads from ndbtonic.el
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ndbtonic" '("ndbtonic-")))
 
 ;;;***
 
-;;;### (autoloads nil "ndbuffer" "ndbuffer.el" (23875 45254 137978
-;;;;;;  397000))
+;;;### (autoloads nil "ndbuffer" "ndbuffer.el" (24123 36926 133932
+;;;;;;  248000))
 ;;; Generated autoloads from ndbuffer.el
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ndbuffer" '("ndbuffer-")))
 
 ;;;***
 
-;;;### (autoloads nil "ndcookie" "ndcookie.el" (23875 45254 137978
-;;;;;;  397000))
+;;;### (autoloads nil "ndcookie" "ndcookie.el" (24123 36926 134563
+;;;;;;  123000))
 ;;; Generated autoloads from ndcookie.el
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ndcookie" '("ndcookie-")))
 
 ;;;***
 
-;;;### (autoloads nil "nddsl" "nddsl.el" (23875 45254 137978 397000))
+;;;### (autoloads nil "nddsl" "nddsl.el" (24123 36926 135335 340000))
 ;;; Generated autoloads from nddsl.el
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "nddsl" '("nddsl-")))
 
 ;;;***
 
-;;;### (autoloads nil "ndeb" "ndeb.el" (23875 45254 141978 573000))
+;;;### (autoloads nil "ndeb" "ndeb.el" (24123 36926 137367 298000))
 ;;; Generated autoloads from ndeb.el
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ndeb" '("ndeb-")))
 
 ;;;***
 
-;;;### (autoloads nil "ndeb-binary" "ndeb-binary.el" (23875 45254
-;;;;;;  141978 573000))
+;;;### (autoloads nil "ndeb-binary" "ndeb-binary.el" (24123 36926
+;;;;;;  136228 663000))
 ;;; Generated autoloads from ndeb-binary.el
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ndeb-binary" '("ndeb-" "lookup-entry-play-ndeb-")))
 
 ;;;***
 
-;;;### (autoloads nil "ndest" "ndest.el" (23875 45254 141978 573000))
+;;;### (autoloads nil "ndest" "ndest.el" (24123 36926 138197 432000))
 ;;; Generated autoloads from ndest.el
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ndest" '("ndest-" "lookup-entry-follow-ndest-link")))
 
 ;;;***
 
-;;;### (autoloads nil "ndic" "ndic.el" (23875 45254 141978 573000))
+;;;### (autoloads nil "ndic" "ndic.el" (24123 36926 138789 99000))
 ;;; Generated autoloads from ndic.el
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ndic" '("ndic-")))
 
 ;;;***
 
-;;;### (autoloads nil "ndict" "ndict.el" (23875 45254 141978 573000))
+;;;### (autoloads nil "ndict" "ndict.el" (24123 36926 139316 47000))
 ;;; Generated autoloads from ndict.el
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ndict" '("ndict-")))
 
 ;;;***
 
-;;;### (autoloads nil "ndjitsuu" "ndjitsuu.el" (23875 45254 141978
-;;;;;;  573000))
+;;;### (autoloads nil "ndjitsuu" "ndjitsuu.el" (24123 36926 139975
+;;;;;;  791000))
 ;;; Generated autoloads from ndjitsuu.el
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ndjitsuu" '("ndjitsuu-")))
 
 ;;;***
 
-;;;### (autoloads nil "ndlatin" "ndlatin.el" (23875 45254 141978
-;;;;;;  573000))
+;;;### (autoloads nil "ndlatin" "ndlatin.el" (24123 36926 140662
+;;;;;;  476000))
 ;;; Generated autoloads from ndlatin.el
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ndlatin" '("ndlatin-")))
 
 ;;;***
 
-;;;### (autoloads nil "ndmecab" "ndmecab.el" (23875 45254 141978
-;;;;;;  573000))
+;;;### (autoloads nil "ndmecab" "ndmecab.el" (24123 36926 141114
+;;;;;;  644000))
 ;;; Generated autoloads from ndmecab.el
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ndmecab" '("ndmecab-")))
 
 ;;;***
 
-;;;### (autoloads nil "ndpdic" "ndpdic.el" (23875 45254 141978 573000))
+;;;### (autoloads nil "ndpdic" "ndpdic.el" (24123 36926 141775 467000))
 ;;; Generated autoloads from ndpdic.el
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ndpdic" '("ndpdic")))
 
 ;;;***
 
-;;;### (autoloads nil "ndsary" "ndsary.el" (23875 45254 141978 573000))
+;;;### (autoloads nil "ndsary" "ndsary.el" (24123 36926 142256 218000))
 ;;; Generated autoloads from ndsary.el
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ndsary" '("ndsary-")))
 
 ;;;***
 
-;;;### (autoloads nil "ndspell" "ndspell.el" (23875 45254 141978
-;;;;;;  573000))
+;;;### (autoloads nil "ndspell" "ndspell.el" (24123 36926 142814
+;;;;;;  813000))
 ;;; Generated autoloads from ndspell.el
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ndspell" '("ndspell-")))
 
 ;;;***
 
-;;;### (autoloads nil "ndspotlight" "ndspotlight.el" (23875 45254
-;;;;;;  141978 573000))
+;;;### (autoloads nil "ndspotlight" "ndspotlight.el" (24123 36926
+;;;;;;  143273 835000))
 ;;; Generated autoloads from ndspotlight.el
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ndspotlight" '("ndspotlight-")))
 
 ;;;***
 
-;;;### (autoloads nil "ndsrd" "ndsrd.el" (23875 45254 141978 573000))
+;;;### (autoloads nil "ndsrd" "ndsrd.el" (24123 36926 143856 605000))
 ;;; Generated autoloads from ndsrd.el
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ndsrd" '("ndsrd-")))
 
 ;;;***
 
-;;;### (autoloads nil "ndtext" "ndtext.el" (23875 45254 145978 748000))
+;;;### (autoloads nil "ndtext" "ndtext.el" (24123 36926 144585 748000))
 ;;; Generated autoloads from ndtext.el
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ndtext" '("ndtext-")))
 
 ;;;***
 
-;;;### (autoloads nil "ndtut" "ndtut.el" (23875 45254 145978 748000))
+;;;### (autoloads nil "ndtut" "ndtut.el" (24123 36926 145163 454000))
 ;;; Generated autoloads from ndtut.el
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ndtut" '("ndtut-")))
 
 ;;;***
 
-;;;### (autoloads nil "ndwdsgrep" "ndwdsgrep.el" (23875 45254 145978
-;;;;;;  748000))
+;;;### (autoloads nil "ndwdsgrep" "ndwdsgrep.el" (24123 36926 145709
+;;;;;;  18000))
 ;;; Generated autoloads from ndwdsgrep.el
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ndwdsgrep" '("ndwdsgrep-")))
 
 ;;;***
 
-;;;### (autoloads nil "ndweb" "ndweb.el" (23875 45254 145978 748000))
+;;;### (autoloads nil "ndweb" "ndweb.el" (24123 36926 146907 823000))
 ;;; Generated autoloads from ndweb.el
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ndweb" '("ndweb-")))
 
 ;;;***
 
-;;;### (autoloads nil "ndweb-options" "ndweb-options.el" (23875 45254
-;;;;;;  145978 748000))
+;;;### (autoloads nil "ndweb-options" "ndweb-options.el" (24123 36926
+;;;;;;  146239 437000))
 ;;; Generated autoloads from ndweb-options.el
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ndweb-options" '("ndweb-")))
 
 ;;;***
 
-;;;### (autoloads nil "ndwnj" "ndwnj.el" (23875 45254 145978 748000))
+;;;### (autoloads nil "ndwnj" "ndwnj.el" (24123 36926 147512 605000))
 ;;; Generated autoloads from ndwnj.el
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ndwnj" '("ndwnj-")))
 
 ;;;***
 
-;;;### (autoloads nil "ndzim" "ndzim.el" (23875 45254 145978 748000))
+;;;### (autoloads nil "ndzim" "ndzim.el" (24123 36926 148034 555000))
 ;;; Generated autoloads from ndzim.el
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ndzim" '("ndzim-")))
 
 ;;;***
 
-;;;### (autoloads nil "stem-english" "stem-english.el" (23875 45254
-;;;;;;  145978 748000))
+;;;### (autoloads nil "stem-english" "stem-english.el" (24123 36926
+;;;;;;  148727 297000))
 ;;; Generated autoloads from stem-english.el
 
 (autoload 'stem-english "stem-english" "\
@@ -409,7 +409,7 @@ See `lookup-secondary' for details.
 ;;;***
 
 ;;;### (autoloads nil "support-files/support-chinakan" "support-files/support-chinakan.el"
-;;;;;;  (23875 45254 145978 748000))
+;;;;;;  (24123 36926 150111 628000))
 ;;; Generated autoloads from support-files/support-chinakan.el
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "support-files/support-chinakan" '("support-chinakan-")))
@@ -417,7 +417,7 @@ See `lookup-secondary' for details.
 ;;;***
 
 ;;;### (autoloads nil "support-files/support-dkw-word" "support-files/support-dkw-word.el"
-;;;;;;  (23875 45254 145978 748000))
+;;;;;;  (24123 36926 150686 786000))
 ;;; Generated autoloads from support-files/support-dkw-word.el
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "support-files/support-dkw-word" '("support-dkw-word-arrange-structure")))
@@ -425,7 +425,7 @@ See `lookup-secondary' for details.
 ;;;***
 
 ;;;### (autoloads nil "support-files/support-dkw2ucs" "support-files/support-dkw2ucs.el"
-;;;;;;  (23875 45254 145978 748000))
+;;;;;;  (24123 36926 151653 723000))
 ;;; Generated autoloads from support-files/support-dkw2ucs.el
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "support-files/support-dkw2ucs" '("support-dkw2ucs-")))
@@ -433,7 +433,7 @@ See `lookup-secondary' for details.
 ;;;***
 
 ;;;### (autoloads nil "support-files/support-eijiro" "support-files/support-eijiro.el"
-;;;;;;  (23875 45254 145978 748000))
+;;;;;;  (24123 36926 152764 933000))
 ;;; Generated autoloads from support-files/support-eijiro.el
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "support-files/support-eijiro" '("support-eijiro-option-list")))
@@ -441,7 +441,7 @@ See `lookup-secondary' for details.
 ;;;***
 
 ;;;### (autoloads nil "support-files/support-eijiro-pdic" "support-files/support-eijiro-pdic.el"
-;;;;;;  (23875 45254 145978 748000))
+;;;;;;  (24123 36926 152204 198000))
 ;;; Generated autoloads from support-files/support-eijiro-pdic.el
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "support-files/support-eijiro-pdic" '("support-eijiro-pdic-option")))
@@ -449,7 +449,7 @@ See `lookup-secondary' for details.
 ;;;***
 
 ;;;### (autoloads nil "support-files/support-foldoc-fpw" "support-files/support-foldoc-fpw.el"
-;;;;;;  (23875 45254 145978 748000))
+;;;;;;  (24123 36926 153389 505000))
 ;;; Generated autoloads from support-files/support-foldoc-fpw.el
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "support-files/support-foldoc-fpw" '("foldoc-")))
@@ -457,7 +457,7 @@ See `lookup-secondary' for details.
 ;;;***
 
 ;;;### (autoloads nil "support-files/support-jargon-fpw" "support-files/support-jargon-fpw.el"
-;;;;;;  (23875 45254 145978 748000))
+;;;;;;  (24123 36926 153895 206000))
 ;;; Generated autoloads from support-files/support-jargon-fpw.el
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "support-files/support-jargon-fpw" '("jargon-")))
@@ -465,7 +465,7 @@ See `lookup-secondary' for details.
 ;;;***
 
 ;;;### (autoloads nil "support-files/support-jmdict" "support-files/support-jmdict.el"
-;;;;;;  (23875 45254 145978 748000))
+;;;;;;  (24123 36926 156186 272000))
 ;;; Generated autoloads from support-files/support-jmdict.el
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "support-files/support-jmdict" '("support-jmdict-")))
@@ -473,7 +473,7 @@ See `lookup-secondary' for details.
 ;;;***
 
 ;;;### (autoloads nil "support-files/support-jtfrk" "support-files/support-jtfrk.el"
-;;;;;;  (23875 45254 145978 748000))
+;;;;;;  (24123 36926 156766 772000))
 ;;; Generated autoloads from support-files/support-jtfrk.el
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "support-files/support-jtfrk" '("support-jtfrk-arrange-structure")))
@@ -481,7 +481,7 @@ See `lookup-secondary' for details.
 ;;;***
 
 ;;;### (autoloads nil "support-files/support-muller" "support-files/support-muller.el"
-;;;;;;  (23875 45254 145978 748000))
+;;;;;;  (24123 36926 157330 143000))
 ;;; Generated autoloads from support-files/support-muller.el
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "support-files/support-muller" '("support-muller-")))
@@ -489,7 +489,7 @@ See `lookup-secondary' for details.
 ;;;***
 
 ;;;### (autoloads nil "support-files/support-oxford-eb" "support-files/support-oxford-eb.el"
-;;;;;;  (23875 45254 145978 748000))
+;;;;;;  (24123 36926 159086 939000))
 ;;; Generated autoloads from support-files/support-oxford-eb.el
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "support-files/support-oxford-eb" '("oxford-eb-" "ipaface")))
@@ -497,7 +497,7 @@ See `lookup-secondary' for details.
 ;;;***
 
 ;;;### (autoloads nil "support-files/support-pdic-thai" "support-files/support-pdic-thai.el"
-;;;;;;  (23875 45254 145978 748000))
+;;;;;;  (24123 36926 160250 726000))
 ;;; Generated autoloads from support-files/support-pdic-thai.el
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "support-files/support-pdic-thai" '("support-pdic-thai-title-alist")))
@@ -505,7 +505,7 @@ See `lookup-secondary' for details.
 ;;;***
 
 ;;;### (autoloads nil "support-files/support-rangjung" "support-files/support-rangjung.el"
-;;;;;;  (23875 45254 145978 748000))
+;;;;;;  (24123 36926 160714 347000))
 ;;; Generated autoloads from support-files/support-rangjung.el
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "support-files/support-rangjung" '("support-rangjung-")))
@@ -513,7 +513,7 @@ See `lookup-secondary' for details.
 ;;;***
 
 ;;;### (autoloads nil "support-files/support-rfc1983" "support-files/support-rfc1983.el"
-;;;;;;  (23875 45254 145978 748000))
+;;;;;;  (24123 36926 161134 695000))
 ;;; Generated autoloads from support-files/support-rfc1983.el
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "support-files/support-rfc1983" '("support-rfc1983-arrange-references")))
@@ -521,7 +521,7 @@ See `lookup-secondary' for details.
 ;;;***
 
 ;;;### (autoloads nil "support-files/support-rfc4949" "support-files/support-rfc4949.el"
-;;;;;;  (23875 45254 145978 748000))
+;;;;;;  (24123 36926 161548 44000))
 ;;; Generated autoloads from support-files/support-rfc4949.el
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "support-files/support-rfc4949" '("support-rfc4949-arrange-references")))
@@ -529,7 +529,7 @@ See `lookup-secondary' for details.
 ;;;***
 
 ;;;### (autoloads nil "support-files/support-sbgy" "support-files/support-sbgy.el"
-;;;;;;  (23875 45254 145978 748000))
+;;;;;;  (24123 36926 162071 620000))
 ;;; Generated autoloads from support-files/support-sbgy.el
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "support-files/support-sbgy" '("support-sbgy-")))
@@ -537,7 +537,7 @@ See `lookup-secondary' for details.
 ;;;***
 
 ;;;### (autoloads nil "support-files/support-sdic" "support-files/support-sdic.el"
-;;;;;;  (23875 45254 145978 748000))
+;;;;;;  (24123 36926 162508 682000))
 ;;; Generated autoloads from support-files/support-sdic.el
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "support-files/support-sdic" '("support-sdic-")))
@@ -545,7 +545,7 @@ See `lookup-secondary' for details.
 ;;;***
 
 ;;;### (autoloads nil "support-files/support-srd" "support-files/support-srd.el"
-;;;;;;  (23875 45254 145978 748000))
+;;;;;;  (24123 36926 163010 11000))
 ;;; Generated autoloads from support-files/support-srd.el
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "support-files/support-srd" '("srd-arrange-structure" "ipaface")))
@@ -553,7 +553,7 @@ See `lookup-secondary' for details.
 ;;;***
 
 ;;;### (autoloads nil "support-files/support-swjz" "support-files/support-swjz.el"
-;;;;;;  (23875 45254 145978 748000))
+;;;;;;  (24123 36926 163401 903000))
 ;;; Generated autoloads from support-files/support-swjz.el
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "support-files/support-swjz" '("support-swjz-")))
@@ -561,7 +561,7 @@ See `lookup-secondary' for details.
 ;;;***
 
 ;;;### (autoloads nil "support-files/support-ucd" "support-files/support-ucd.el"
-;;;;;;  (23875 45254 153979 99000))
+;;;;;;  (24123 36926 164022 427000))
 ;;; Generated autoloads from support-files/support-ucd.el
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "support-files/support-ucd" '("support-ucd-")))
@@ -569,7 +569,7 @@ See `lookup-secondary' for details.
 ;;;***
 
 ;;;### (autoloads nil "support-files/support-vera-fpw" "support-files/support-vera-fpw.el"
-;;;;;;  (23875 45254 153979 99000))
+;;;;;;  (24123 36926 164399 24000))
 ;;; Generated autoloads from support-files/support-vera-fpw.el
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "support-files/support-vera-fpw" '("vera-arrange-references")))
@@ -577,7 +577,7 @@ See `lookup-secondary' for details.
 ;;;***
 
 ;;;### (autoloads nil "support-files/support-waseikanji" "support-files/support-waseikanji.el"
-;;;;;;  (23875 45254 153979 99000))
+;;;;;;  (24123 36926 164837 339000))
 ;;; Generated autoloads from support-files/support-waseikanji.el
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "support-files/support-waseikanji" '("support-waseikanji-")))
@@ -585,7 +585,7 @@ See `lookup-secondary' for details.
 ;;;***
 
 ;;;### (autoloads nil "support-files/support-xszd" "support-files/support-xszd.el"
-;;;;;;  (23875 45254 153979 99000))
+;;;;;;  (24123 36926 165226 798000))
 ;;; Generated autoloads from support-files/support-xszd.el
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "support-files/support-xszd" '("support-xszd-")))
@@ -593,7 +593,7 @@ See `lookup-secondary' for details.
 ;;;***
 
 ;;;### (autoloads nil "support-files/support-zhongri" "support-files/support-zhongri.el"
-;;;;;;  (23875 45254 153979 99000))
+;;;;;;  (24123 36926 165587 241000))
 ;;; Generated autoloads from support-files/support-zhongri.el
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "support-files/support-zhongri" '("zhongri-")))
@@ -601,23 +601,23 @@ See `lookup-secondary' for details.
 ;;;***
 
 ;;;### (autoloads nil "support-files/support-zigen" "support-files/support-zigen.el"
-;;;;;;  (23875 45254 153979 99000))
+;;;;;;  (24123 36926 166065 105000))
 ;;; Generated autoloads from support-files/support-zigen.el
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "support-files/support-zigen" '("support-zigen-")))
 
 ;;;***
 
-;;;### (autoloads nil "tibet-util+" "tibet-util+.el" (23875 45254
-;;;;;;  153979 99000))
+;;;### (autoloads nil "tibet-util+" "tibet-util+.el" (24123 36926
+;;;;;;  166679 624000))
 ;;; Generated autoloads from tibet-util+.el
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "tibet-util+" '("tibetan-")))
 
 ;;;***
 
-;;;### (autoloads nil "view-pdf" "view-pdf.el" (23875 45254 153979
-;;;;;;  99000))
+;;;### (autoloads nil "view-pdf" "view-pdf.el" (24123 36926 167078
+;;;;;;  813000))
 ;;; Generated autoloads from view-pdf.el
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "view-pdf" '("view-pdf")))

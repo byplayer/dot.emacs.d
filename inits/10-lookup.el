@@ -2,7 +2,7 @@
 ;;; Commentary:
 ;;; Code:
 ;; lookup
-(add-to-list 'load-path "~/.emacs.d/elisp/lookup/")
+(add-to-list 'load-path "~/.emacs.d/elisp/lookup/lookup")
 
 (load "lookup-autoloads")
 
@@ -14,8 +14,7 @@
      (global-set-key (kbd "C-x w") 'lookup-pattern)
 
      (setq lookup-search-agents
-           '(
-             (ndeb "~/dic/LDOCE4")
+           '((ndeb "~/dic/LDOCE4")
              (ndeb "~/dic/sperdic200")
              (ndeb "~/dic/edict2")))))
 

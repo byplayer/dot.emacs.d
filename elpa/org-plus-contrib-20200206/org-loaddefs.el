@@ -1837,7 +1837,7 @@ element.
 
 Possible types are defined in `org-element-all-elements'.
 Properties depend on element or object type, but always include
-`:begin', `:end', `:parent' and `:post-blank' properties.
+`:begin', `:end', and `:post-blank' properties.
 
 As a special case, if point is at the very beginning of the first
 item in a list or sub-list, returned element will be that list
@@ -2746,7 +2746,7 @@ Open A Dired buffer with unused screenshots marked
 
 ;;;***
 
-;;;### (autoloads nil "org-table" "org-table.el" "18eb505e94d8aef72c905a33cb76cf9a")
+;;;### (autoloads nil "org-table" "org-table.el" "e03bdb677af1e59dd1f88412075b97a5")
 ;;; Generated autoloads from org-table.el
 
 (autoload 'org-table-create-with-table\.el "org-table" "\

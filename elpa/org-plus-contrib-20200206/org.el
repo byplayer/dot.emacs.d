@@ -7,7 +7,7 @@
 ;; Maintainer: Bastien Guerry <bzg@gnu.org>
 ;; Keywords: outlines, hypermedia, calendar, wp
 ;; Homepage: https://orgmode.org
-;; Version: 9.3.2
+;; Version: 9.3.3
 ;;
 ;; This file is part of GNU Emacs.
 ;;
@@ -414,7 +414,7 @@ Matched keyword is in group 1.")
 
 (defconst org-deadline-time-hour-regexp
   (concat "\\<" org-deadline-string
-	  " *<\\([^>]+[0-9]\\{1,2\\}:[0-9]\\{2\\}[0-9+:hdwmy \t.-]*\\)>")
+	  " *<\\([^>]+[0-9]\\{1,2\\}:[0-9]\\{2\\}[0-9+:hdwmy/ \t.-]*\\)>")
   "Matches the DEADLINE keyword together with a time-and-hour stamp.")
 
 (defconst org-deadline-line-regexp
@@ -430,7 +430,7 @@ Matched keyword is in group 1.")
 
 (defconst org-scheduled-time-hour-regexp
   (concat "\\<" org-scheduled-string
-	  " *<\\([^>]+[0-9]\\{1,2\\}:[0-9]\\{2\\}[0-9+:hdwmy \t.-]*\\)>")
+	  " *<\\([^>]+[0-9]\\{1,2\\}:[0-9]\\{2\\}[0-9+:hdwmy/ \t.-]*\\)>")
   "Matches the SCHEDULED keyword together with a time-and-hour stamp.")
 
 (defconst org-closed-time-regexp
@@ -19280,7 +19280,7 @@ indent.  The function will not indent contents of example blocks,
 verse blocks and export blocks as leading white spaces are
 assumed to be significant there."
   (interactive "r")
-  (save-excursion
+  (save-window-excursion
     (goto-char start)
     (skip-chars-forward " \r\t\n")
     (unless (eobp) (beginning-of-line))

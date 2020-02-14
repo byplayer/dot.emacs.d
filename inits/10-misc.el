@@ -449,5 +449,11 @@ e.g. 20190-4-01 15:02:33"
   :init
   (add-hook 'after-init-hook #'global-emojify-mode))
 
+(use-package undohist
+  :ensure t
+  :commands undohist-initialize
+  :init
+  (undohist-initialize))
+
 (provide '10-misc)
 ;;; 10-misc.el ends here

@@ -106,6 +106,8 @@ M-> the end of buffer
 
 C-u 8 C-f moves forward eight characters.
 
+C-u C-Spec undo cursor to mark pos
+
 C-x C-s   Save buffer
 C-x s     Save some buffers
 

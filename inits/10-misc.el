@@ -28,6 +28,9 @@
 
 (global-unset-key "\C-t")
 
+;; Pop cursor mark pos repeatedly After C-u C-Spec C-Spec...
+(setq set-mark-command-repeat-pop t)
+
 (smartrep-define-key global-map "C-t"
   '(("C-t"      . 'mc/mark-next-like-this)
     ("n"        . 'mc/mark-next-like-this)

@@ -81,14 +81,14 @@
            "* %?\nEntered on %T\n")
           ("d" "Doc" entry (file my/generate-org-doc-name)
            "* %?\nEntered on %T\n")
-          ("l" "my log" entry (file+datetree
+          ("l" "work log" entry (file+datetree
                             (lambda()
                               (format-time-string
                                (let (target_dir)
                                  (setq target_dir (format-time-string (concatenate 'string org-directory "/log")))
                                  (unless (file-directory-p target_dir)
                                    (make-directory target_dir t))
-                                 (concatenate 'string target_dir "/work_log_myself_%Y.org")))))
+                                 (concatenate 'string target_dir "/work_log_%Y.org")))))
            "* %^{description} %^g\n- %?")
           ("j" "members' log" entry (file+datetree
                             (lambda()

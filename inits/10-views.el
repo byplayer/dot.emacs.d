@@ -41,9 +41,8 @@
 ;====================================
 ; カーソル移動設定
 ;====================================
-(set-default 'truncate-lines t)
-(setq visual-line-mode nil)
-(setq line-move-visual nil)
+(global-visual-line-mode t)
+(setq line-move-visual t)
 
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 (load-theme 'byplayer t)

@@ -276,7 +276,7 @@ e.g. 20190-4-01 15:02:33"
       (cons ' ( "\\.txt\\'" . outline-mode) auto-mode-alist))
 
 ;; delete-trailing-whitespace
-(setq delete-trailing-whitespace-modes '(text-mode org-mode outline-mode))
+(setq delete-trailing-whitespace-modes '(rst-mode text-mode org-mode outline-mode))
 (defun delete-trailing-whitespace-before-save()
   (if (member major-mode delete-trailing-whitespace-modes) (delete-trailing-whitespace)))
 (add-hook 'before-save-hook 'delete-trailing-whitespace-before-save)

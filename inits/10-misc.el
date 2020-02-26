@@ -458,5 +458,20 @@ e.g. 20190-4-01 15:02:33"
   :init
   (undohist-initialize))
 
+(defun sphinx-compile ()
+  "Traveling up the path, find build.xml file and run compile."
+  (interactive)
+  (save-buffer)
+  (with-temp-buffer
+    (while (and (not (or (file-exists-p "makefile")
+                         (file-exists-p "Makefile")))
+                (not (equal "/" default-directory)))
+      (cd ".."))
+    (call-interactively 'compile)))
+
+(add-hook 'rst-mode-hook
+          '(lambda()
+             (define-key rst-mode-map "\C-cc" 'sphinx-compile)))
+
 (provide '10-misc)
 ;;; 10-misc.el ends here

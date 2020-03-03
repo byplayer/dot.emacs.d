@@ -7,4 +7,8 @@
 
 (setq ndeb-program-name "/opt/eblook/bin/eblook")
 
-;;; 90-cocoa-emacs.el ends here
+;; use option as meta also
+(setq mac-option-modifier 'meta)
+
+(provide 'cocoa-emacs-conf)
+;;; cocoa-emacs-conf.el ends here

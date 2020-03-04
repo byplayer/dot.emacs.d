@@ -472,7 +472,9 @@ e.g. 20190-4-01 15:02:33"
 (add-hook 'rst-mode-hook
           '(lambda()
              (define-key rst-mode-map "\C-cc" 'sphinx-compile)
-             (define-key rst-mode-map (kbd "<M-return>") 'org-meta-return)))
+             (define-key rst-mode-map (kbd "<M-return>") 'org-meta-return)
+             (define-key rst-mode-map "\C-cn" 'rst-forward-section)
+             (define-key rst-mode-map "\C-cp" 'rst-backward-section)))
 
 (provide '10-misc)
 ;;; 10-misc.el ends here

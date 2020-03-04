@@ -458,6 +458,10 @@ e.g. 20190-4-01 15:02:33"
   :init
   (undohist-initialize))
 
+(use-package pyenv-mode-auto
+  :ensure t
+  :init (require 'pyenv-mode-auto))
+
 (defun sphinx-compile ()
   "Traveling up the path, find build.xml file and run compile."
   (interactive)

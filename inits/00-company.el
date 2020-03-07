@@ -49,5 +49,9 @@
 ;; (add-hook 'TeX-mode-hook 'edit-category-table-for-company-dabbrev) ; 下の追記参照
 (setq company-dabbrev-char-regexp "\\(\\cs\\|_\\|-\\)")
 
+(use-package company-lsp
+  :ensure t
+  :commands company-lsp)
+
 (provide '00-company)
 ;;; 00-company.el ends here

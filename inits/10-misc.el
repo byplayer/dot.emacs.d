@@ -174,7 +174,8 @@
 (require 'savekill)
 (setq savekill-max-saved-items 1000)
 
-(defun kill-all-buffer()
+(defun kill-all-buffers()
+  "The kill-all-buffers kill all buffers."
   (interactive)
   (yes-or-no-p "kill all buffer? ")
   (dolist (buf (buffer-list))

@@ -65,7 +65,8 @@
 ;; query-replace で変換するとき
 (add-to-list 'mac-win-target-commands 'query-replace)
 
-;;
+;; change cursor color based on ime status
+;; beause mac emacs can't show ime status on mode bar
 (defvar my:cursor-color-ime-on "#FF9300")
 (defvar my:cursor-color-ime-off "#91C3FF") ;; #FF9300, #999999, #749CCC
 (defvar my:cursor-type-ime-on '(bar . 2)) ;; box

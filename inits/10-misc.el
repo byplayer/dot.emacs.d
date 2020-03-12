@@ -481,5 +481,12 @@ e.g. 20190-4-01 15:02:33"
              (define-key rst-mode-map "\C-cn" 'rst-forward-section)
              (define-key rst-mode-map "\C-cp" 'rst-backward-section)))
 
+;; Show time on mode-line
+(setq display-time-interval 1)
+(setq display-time-string-forms
+  '((format "%s:%s" 24-hours minutes seconds)))
+(setq display-time-day-and-date t)
+(display-time-mode t)
+
 (provide '10-misc)
 ;;; 10-misc.el ends here

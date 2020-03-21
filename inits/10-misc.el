@@ -481,6 +481,21 @@ e.g. 20190-4-01 15:02:33"
              (define-key rst-mode-map "\C-cn" 'rst-forward-section)
              (define-key rst-mode-map "\C-cp" 'rst-backward-section)))
 
+(defun mkdocs-compile ()
+  "Traveling up the path, find build.xml file and run compile."
+  (interactive)
+  (save-buffer)
+  (with-temp-buffer
+    (while (and (not (file-exists-p "mkdocs.yml"))
+                (not (equal "/" default-directory)))
+      (cd ".."))
+    (call-interactively 'compile)))
+
+(add-hook 'markdown-mode-hook
+          '(lambda()
+             (define-key markdown-mode-map "\C-cc" 'mkdocs-compile)
+             (define-key markdown-mode-map (kbd "<M-return>") 'org-meta-return)))
+
 ;; Show time on mode-line
 (setq display-time-interval 1)
 (setq display-time-string-forms

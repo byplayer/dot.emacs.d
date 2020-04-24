@@ -11,6 +11,12 @@
   :commands (lsp lsp-deferred)
   :hook (go-mode . lsp-deferred))
 
+(add-hook 'lsp-mode-hook
+          '(lambda()
+              (local-set-key (kbd "M-*") 'xref-pop-marker-stack)
+              (local-set-key (kbd "M-.") 'xref-find-definitions)
+              (local-set-key (kbd "M-/") 'xref-find-references)))
+
 (use-package lsp-ui
   :ensure t
   :commands lsp-ui-mode)

@@ -18,15 +18,6 @@
              ))
 (autoload 'robe-mode "robe" "Code navigation, documentation lookup and completion for Ruby" t nil)
 
-(add-hook 'robe-mode-hook
-          '(lambda()
-             (define-key robe-mode-map (kbd "M-.") 'helm-gtags-find-tag)
-             (define-key robe-mode-map (kbd "M-,") 'helm-gtags-find-rtag)
-             (define-key robe-mode-map (kbd "M-/") 'helm-gtags-find-pattern)
-             (define-key robe-mode-map (kbd "M-s") 'helm-gtags-find-symbol)
-             (define-key robe-mode-map (kbd "M-*") 'helm-gtags-pop-stack)
-             ))
-
 (setq auto-mode-alist
       (append '(
                 ("\\.rb$" . ruby-mode)

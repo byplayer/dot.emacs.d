@@ -21,10 +21,10 @@
 (add-hook 'c-mode-common-hook 'my-tag-mode-insert-hook)
 (add-hook 'feature-mode-hook 'my-tag-mode-insert-hook)
 (add-hook 'ruby-mode-hook 'my-tag-mode-insert-hook)
+(add-hook 'robe-mode-hook 'my-tag-mode-insert-hook)
 (add-hook 'emacs-lisp-mode-hook 'my-tag-mode-insert-hook)
 (add-hook 'lisp-mode-hook 'my-tag-mode-insert-hook)
 (add-hook 'nxml-mode-hook 'my-tag-mode-insert-hook)
-(add-hook 'go-mode-hook 'my-tag-mode-insert-hook)
 (add-hook 'python-mode-hook 'my-tag-mode-insert-hook)
 (add-hook 'kotlin-mode-hook 'my-tag-mode-insert-hook)
 

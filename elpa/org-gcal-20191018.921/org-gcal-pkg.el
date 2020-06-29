@@ -1,2 +1,0 @@
-;;; -*- no-byte-compile: t -*-
-(define-package "org-gcal" "20191018.921" "Org sync with Google Calendar" '((request "20190901") (request-deferred "20181129") (alert "0") (emacs "26")) :commit "36e9933b0238acb245e6d8dc89944583482fee1e" :keywords '("convenience") :authors '(("myuhe <yuhei.maeda_at_gmail.com>")) :maintainer '("Raimon Grau" . "raimonster@gmail.com") :url "https://github.com/kidd/org-gcal.el")

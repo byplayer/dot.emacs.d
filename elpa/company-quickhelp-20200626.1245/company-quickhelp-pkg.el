@@ -1,2 +1,0 @@
-;;; -*- no-byte-compile: t -*-
-(define-package "company-quickhelp" "20200626.1245" "Popup documentation for completion candidates" '((emacs "24.3") (company "0.8.9") (pos-tip "0.4.6")) :commit "c401603685edafa82454fbf045c835e055e8bc56" :keywords '("company" "popup" "documentation" "quickhelp") :authors '(("Lars Andersen" . "expez@expez.com")) :maintainer '("Lars Andersen" . "expez@expez.com") :url "https://www.github.com/expez/company-quickhelp")

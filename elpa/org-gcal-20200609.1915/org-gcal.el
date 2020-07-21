@@ -1083,6 +1083,8 @@ parsed from the Calendar API JSON response using
 an error will be thrown. Point is not preserved."
   (unless (org-at-heading-p)
     (user-error "Must be on Org-mode heading."))
+  (unless (plist-get event :summary)
+    (user-error "event error"))
   (let* ((smry  (or (plist-get event :summary)
                     "busy"))
          (desc  (plist-get event :description))

@@ -173,8 +173,7 @@
   "The kill-all-buffers kill all buffers."
   (interactive)
   (yes-or-no-p "kill all buffer? ")
-  (dolist (buf (buffer-list))
-    (kill-buffer buf)))
+  (wipe))
 
 (setq-default ispell-program-name "aspell")
 (eval-after-load "ispell"

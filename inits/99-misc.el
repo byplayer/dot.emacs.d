@@ -10,7 +10,7 @@
 (autoload 'resume "revive" "Resume Emacs" t)
 (autoload 'wipe "revive" "Wipe emacs" t)
 (define-key ctl-x-map "F" 'resume)                        ; C-x F resume
-(define-key ctl-x-map "K" 'wipe)                          ; C-x K kill
+(define-key ctl-x-map "K" 'kill-all-buffers)              ; C-x K kill
 (add-hook 'kill-emacs-hook 'save-current-configuration)   ; auto save
 (resume) ; auto resume
 

@@ -15,7 +15,7 @@
 (defvar mac-win-last-ime-status 'off) ;; {'off|'on}
 (defun mac-win-save-last-ime-status ()
   (setq mac-win-last-ime-status
-        (if (string-match "\\.\\(Roman\\|US\\)$" (mac-input-source))
+        (if (string-match "\\.\\(Roman\\|US\\|ABC\\)$" (mac-input-source))
             'off 'on)))
 
 (defun mac-win-restore-ime ()

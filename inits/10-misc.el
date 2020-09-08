@@ -444,10 +444,8 @@ e.g. 20190-4-01 15:02:33"
 
 (use-package emojify
   :ensure t
-  ;; disable global-emoijfy-mode because emojify is too heavy
-  ;; I would like to activate it only git commit mode
-  ;; :init
-  ;; (add-hook 'after-init-hook #'global-emojify-mode)
+  :init
+  (add-hook 'after-init-hook #'global-emojify-mode)
   )
 
 (use-package undohist

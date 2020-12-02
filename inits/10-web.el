@@ -4,7 +4,9 @@
 (add-to-list 'auto-mode-alist '("\\.html$"     . web-mode))
 (add-to-list 'auto-mode-alist '("\\.tpl$"     . web-mode))
 
-(require 'rainbow-mode)
+(use-package rainbow-mode
+  :ensure t)
+
 
 (require 'web-mode)
 (defun web-mode-hook ()
@@ -46,10 +48,11 @@
 (setq cssm-indent-level 2)
 (setq cssm-indent-function #'cssm-c-style-indenter)
 
-(autoload 'js2-mode "js2-mode" nil t)
-(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
-
-(add-hook 'js2-mode-hook
+(use-package js2-mode
+  :ensure t
+  :mode (("\\.js$" . js2-mode))
+  :init
+  (add-hook 'js2-mode-hook
           '(lambda ()
              (require 'js)
              (setq js2-basic-offset 2
@@ -59,14 +62,19 @@
              (flyspell-prog-mode)
              (define-key js2-mode-map "\C-m" 'newline-and-indent)
              (define-key js2-mode-map "\C-i" 'indent-and-back-to-indentation)))
-(add-hook 'js2-mode-hook #'js2-imenu-extras-mode)
+  (add-hook 'js2-mode-hook #'js2-imenu-extras-mode)
+  (defun indent-and-back-to-indentation ()
+    (interactive)
+    (indent-for-tab-command)
+    (let ((point-of-indentation
+           (save-excursion
+             (back-to-indentation)
+             (point))))
+      (skip-chars-forward "\s " point-of-indentation)))
+  )
 
-(defun indent-and-back-to-indentation ()
-  (interactive)
-  (indent-for-tab-command)
-  (let ((point-of-indentation
-         (save-excursion
-           (back-to-indentation)
-           (point))))
-    (skip-chars-forward "\s " point-of-indentation)))
+(use-package json-mode
+  :ensure t
+  :mode (("\.json" . json-mode)))
+
 ;;; 10-html.el ends here

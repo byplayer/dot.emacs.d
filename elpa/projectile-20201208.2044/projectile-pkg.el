@@ -1,0 +1,2 @@
+;;; Generated package description from /Users/yukio.goto/.emacs.d/elpa/projectile-20201208.2044/projectile.el  -*- no-byte-compile: t -*-
+(define-package "projectile" "20201208.2044" "Manage and navigate projects in Emacs easily" '((emacs "25.1") (pkg-info "0.4")) :commit "0ff73ecf7f25f47382e2d28c8ab232c18609d515" :keywords '("project" "convenience") :authors '(("Bozhidar Batsov" . "bozhidar@batsov.com")) :maintainer '("Bozhidar Batsov" . "bozhidar@batsov.com") :url "https://github.com/bbatsov/projectile")

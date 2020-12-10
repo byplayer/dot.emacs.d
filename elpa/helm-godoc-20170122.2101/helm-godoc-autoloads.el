@@ -9,15 +9,9 @@
 ;;;### (autoloads nil "helm-godoc" "helm-godoc.el" (0 0 0 0))
 ;;; Generated autoloads from helm-godoc.el
 
-(autoload 'helm-godoc "helm-godoc" "\
+(autoload 'helm-godoc "helm-godoc" nil t nil)
 
-
-\(fn)" t nil)
-
-(autoload 'helm-godoc-import "helm-godoc" "\
-
-
-\(fn)" t nil)
+(autoload 'helm-godoc-import "helm-godoc" nil t nil)
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "helm-godoc" '("helm-godoc--" "with-helm-godoc-gopath")))
 

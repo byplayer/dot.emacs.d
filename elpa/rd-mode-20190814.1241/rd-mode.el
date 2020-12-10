@@ -8,7 +8,7 @@
 ;; Author: Koji Arai, Toshiro Kuwabara, Youhei SASAKI
 ;; Created: Sat Nov 27 00:08:12 1999
 ;; Version: 0.6.38
-;; Package-Version: 20190814.1141
+;; Package-Version: 20190814.1241
 ;; Keywords: rd
 ;; URL: https://github.com/uwabami/rdtool/util/rd-mode.el
 

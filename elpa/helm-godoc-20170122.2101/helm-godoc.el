@@ -4,7 +4,7 @@
 
 ;; Author: Syohei YOSHIDA <syohex@gmail.com>
 ;; URL: https://github.com/syohex/emacs-helm-godoc
-;; Package-Version: 20170122.2001
+;; Package-Version: 20170122.2101
 ;; Version: 0.01
 ;; Package-Requires: ((emacs "25.1") (go-mode "1.0.0") (helm-core "1.7.7"))
 

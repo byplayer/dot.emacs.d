@@ -4,8 +4,8 @@
 
 ;; Author: Bozhidar Batsov <bozhidar@batsov.com>
 ;; URL: https://github.com/bbatsov/projectile
-;; Package-Version: 20201208.2044
-;; Package-Commit: 0ff73ecf7f25f47382e2d28c8ab232c18609d515
+;; Package-Version: 20201209.1708
+;; Package-Commit: c7a1d201f7dbf600e7f27eaa21c608a0a85a1abf
 ;; Keywords: project, convenience
 ;; Version: 2.4.0-snapshot
 ;; Package-Requires: ((emacs "25.1") (pkg-info "0.4"))
@@ -4394,20 +4394,27 @@ With a prefix ARG invokes `projectile-commander' instead of
                                    'projectile-commander
                                  projectile-switch-project-action)))
     (run-hooks 'projectile-before-switch-project-hook)
-    (let ((default-directory project-to-switch))
-      ;; use a temporary buffer to load PROJECT-TO-SWITCH's dir-locals before calling SWITCH-PROJECT-ACTION
-      (with-temp-buffer
-        (hack-dir-local-variables-non-file-buffer)
-        ;; Normally the project name is determined from the current
-        ;; buffer. However, when we're switching projects, we want to
-        ;; show the name of the project being switched to, rather than
-        ;; the current project, in the minibuffer. This is a simple hack
-        ;; to tell the `projectile-project-name' function to ignore the
-        ;; current buffer and the caching mechanism, and just return the
-        ;; value of the `projectile-project-name' variable.
-        (let ((projectile-project-name (funcall projectile-project-name-function
-                                                project-to-switch)))
-          (funcall switch-project-action))))
+    (let* ((default-directory project-to-switch)
+           (switched-buffer
+            ;; use a temporary buffer to load PROJECT-TO-SWITCH's dir-locals
+            ;; before calling SWITCH-PROJECT-ACTION
+            (with-temp-buffer
+              (hack-dir-local-variables-non-file-buffer)
+              ;; Normally the project name is determined from the current
+              ;; buffer. However, when we're switching projects, we want to
+              ;; show the name of the project being switched to, rather than
+              ;; the current project, in the minibuffer. This is a simple hack
+              ;; to tell the `projectile-project-name' function to ignore the
+              ;; current buffer and the caching mechanism, and just return the
+              ;; value of the `projectile-project-name' variable.
+              (let ((projectile-project-name (funcall projectile-project-name-function
+                                                      project-to-switch)))
+                (funcall switch-project-action)
+                (current-buffer)))))
+      ;; If switch-project-action switched buffers then with-temp-buffer will
+      ;; have lost that change, so switch back to the correct buffer.
+      (when (buffer-live-p switched-buffer)
+          (switch-to-buffer switched-buffer)))
     (run-hooks 'projectile-after-switch-project-hook)))
 
 ;;;###autoload

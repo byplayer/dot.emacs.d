@@ -15,20 +15,21 @@ r - refresh package
 U - Upgrade all
 q - quit list
 
-* quelpa
-
-https://github.com/quelpa/quelpa-use-package
-
-** quelpa upgrade
-(quelpa-upgrade)
-
 ** install
 package-install
 
 ** refresh
 (package-refresh-contents)
-
 (byte-recompile-directory pkg-dir 0 t)
+
+* quelpa
+https://github.com/quelpa/quelpa-use-package
+
+** quelpa upgrade
+(quelpa-upgrade)
+
+** quelpa upgrade all
+(quelpa-upgrade-all)
 
 * multiple-cursors
 キーワード選択→C-t連打でキーワードを選択
@@ -112,7 +113,6 @@ C-x C-s   Save buffer
 C-x s     Save some buffers
 
 * rst
-
 C-=          rst-adjust
 C-c C-a C-a  見出しにしたい部分に見出し文字を追加する。繰り返し入力するとその度に文字種が切り替わる。
 （= → – → ~ → + → =）

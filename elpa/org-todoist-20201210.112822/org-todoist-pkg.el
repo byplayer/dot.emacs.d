@@ -1,0 +1,2 @@
+;;; Generated package description from /Users/yukio.goto/.emacs.d/elpa/org-todoist-20201210.112822/org-todoist.el  -*- no-byte-compile: t -*-
+(define-package "org-todoist" "20201210.112822" "Org sync with todoist" '((request-deferred "20181129") (emacs "26")) :authors '(("byplayer" . "byplayer100@gmail.com")) :maintainer '("byplayer" . "byplayer100@gmail.com") :keywords '("convenience") :url "https://github.com/byplayer/org-todoist")

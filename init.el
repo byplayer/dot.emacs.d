@@ -161,8 +161,9 @@
  '(quelpa-use-package
    :fetcher git
    :url "https://framagit.org/steckerhalter/quelpa-use-package.git"))
-(require 'quelpa-use-package)
 (require 'use-package)
+(require 'quelpa-use-package)
+(setq use-package-ensure-function 'quelpa)
 (require 'dash)
 (require 'f)
 

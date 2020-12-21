@@ -79,9 +79,10 @@ I    search index
 s    search in info regex
 
 
-** undo/redo window
+** undo/redo window(winner-mode)
 undo/redo window
-C-c <-/->
+c-c <- winner-undo
+C-c -> winner-redo
 
 ** cursor
 C-f  Move forward a character

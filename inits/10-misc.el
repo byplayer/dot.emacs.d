@@ -68,10 +68,6 @@
 ;; no show start page
 (setq inhibit-startup-message t)
 
-;;; winner-mode
-(when (fboundp 'winner-mode)
-  (winner-mode t))
-
 ;; move window using meta
 (windmove-default-keybindings 'meta)
 
@@ -497,6 +493,16 @@ e.g. 20190-4-01 15:02:33"
   '((format "%s:%s" 24-hours minutes seconds)))
 (setq display-time-day-and-date t)
 (display-time-mode t)
+
+;; tab-bar-mode
+(use-package tab-bar
+  :init
+  (tab-bar-mode +1)
+  (xterm-mouse-mode +1))
+
+(use-package winner
+  :init
+  (winner-mode))
 
 (provide '10-misc)
 ;;; 10-misc.el ends here

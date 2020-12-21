@@ -16,7 +16,8 @@
   (setq win:switch-prefix "\C-cw")
   (setq win:use-frame nil)
   (win:startup-with-window)
-  (resume-windows))
+  (add-hook 'window-setup-hook
+            'resume-windows))
 
 (provide '99-misc)
 ;;; 99-misc.el ends here

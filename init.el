@@ -12,7 +12,6 @@
 (package-initialize)
 
 (add-to-list 'load-path "/opt/global/share/gtags/")
-(add-to-list 'load-path "~/.emacs.d/elisp/font-lock-plus/")
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -176,9 +175,6 @@
       (byte-recompile-directory it 0))))
 
 (ensure-packages-compiled)
-
-;; load-path
-(add-to-list 'load-path "~/.emacs.d/elisp")
 
 ;; init-loader
 ;; http://coderepos.org/share/browser/lang/elisp/init-loader/init-loader.el

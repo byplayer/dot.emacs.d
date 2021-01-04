@@ -7,7 +7,6 @@
 (setq package-archives
       '(("org"          . "http://orgmode.org/elpa/")
         ("melpa"        . "http://melpa.org/packages/")
-        ("melpa-stable" . "http://stable.melpa.org/packages/")
         ("gnu"          . "http://elpa.gnu.org/packages/")))
 
 (package-initialize)
@@ -15,13 +14,17 @@
 (add-to-list 'load-path "/opt/global/share/gtags/")
 (add-to-list 'load-path "~/.emacs.d/elisp/font-lock-plus/")
 
+(unless (package-installed-p 'leaf)
+    (package-refresh-contents)
+    (package-install 'leaf))
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(windows revive org-sticky-header helm-godoc scss-mode reinbow-mode company-lsp lsp-ui lv lsp-mode pyenv-mode-auto undohist org-todoist request-deferred request org-gcal company-jedi jedi-core jedi auto-virtualenvwrapper virtualenvwrapper rd-mode rabbit-mode font-lock+ quelpa-use-package quelpa let-alist go-mode magit sclang-mode yaml-mode web-mode volatile-highlights undo-tree smartrep smartparens savekill ruby-block rspec-mode robe rinari recentf-ext rainbow-mode popwin point-undo phpunit php-mode org-plus-contrib neotree multiple-cursors mozc-popup markdown-mode kotlin-mode keyfreq json-mode js2-mode init-loader imenu-list helm-swoop helm-projectile helm-migemo helm-ls-git helm-gtags helm-go-package helm-flycheck helm-descbinds helm-c-yasnippet helm-ag groovy-mode go-eldoc flycheck-pos-tip flycheck-kotlin flycheck-irony feature-mode expand-region dockerfile-mode crontab-mode company-quickhelp company-irony company-go clang-format avy anzu all-the-icons-dired))
+   '(leaf windows revive org-sticky-header helm-godoc scss-mode reinbow-mode company-lsp lsp-ui lv lsp-mode pyenv-mode-auto undohist org-todoist request-deferred request org-gcal company-jedi jedi-core jedi auto-virtualenvwrapper virtualenvwrapper rd-mode rabbit-mode font-lock+ quelpa-use-package quelpa let-alist go-mode magit sclang-mode yaml-mode web-mode volatile-highlights undo-tree smartrep smartparens savekill ruby-block rspec-mode robe rinari recentf-ext rainbow-mode popwin point-undo phpunit php-mode org-plus-contrib neotree multiple-cursors mozc-popup markdown-mode kotlin-mode keyfreq json-mode js2-mode init-loader imenu-list helm-swoop helm-projectile helm-migemo helm-ls-git helm-gtags helm-go-package helm-flycheck helm-descbinds helm-c-yasnippet helm-ag groovy-mode go-eldoc flycheck-pos-tip flycheck-kotlin flycheck-irony feature-mode expand-region dockerfile-mode crontab-mode company-quickhelp company-irony company-go clang-format avy anzu all-the-icons-dired))
  '(safe-local-variable-values
    '((clang-format-modes quote nil)
      (eval setq-local default-directory

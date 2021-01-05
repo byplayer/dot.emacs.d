@@ -1,2 +1,0 @@
-;;; Generated package description from /home/yukio/.emacs.d/elpa/org-sticky-header-20201223.1043/org-sticky-header.el  -*- no-byte-compile: t -*-
-(define-package "org-sticky-header" "20201223.1043" "Show off-screen Org heading at top of window" '((emacs "24.4") (org "8.3.5")) :authors '(("Adam Porter" . "adam@alphapapa.net")) :maintainer '("Adam Porter" . "adam@alphapapa.net") :keywords '("hypermedia" "outlines" "org") :url "http://github.com/alphapapa/org-sticky-header")

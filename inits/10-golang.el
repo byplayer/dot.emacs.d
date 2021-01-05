@@ -31,9 +31,9 @@
 (eval-after-load 'go-mode
   '(substitute-key-definition 'go-import-add 'helm-go-package go-mode-map))
 
-(use-package helm-godoc
-  :quelpa (helm-godoc :fetcher github :repo "syohex/emacs-helm-godoc")
-  :bind (:map go-mode-map
+(leaf helm-godoc
+  :el-get syohex/emacs-helm-godoc
+  :bind (go-mode-map
               ("C-c C-d" . helm-godoc)))
 
 ;; Set up before-save hooks to format buffer and add/delete imports.

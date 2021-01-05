@@ -235,9 +235,8 @@
 (setq imenu-list-size 0.15)
 
 ;; for dired with the all icons
-(use-package font-lock+
-  :quelpa (font-lock+ :fetcher github :repo "emacsmirror/font-lock-plus")
-  :ensure t)
+(leaf font-lock+
+  :el-get emacsmirror/font-lock-plus)
 
 (require 'dired-x)
 (add-hook 'dired-mode-hook

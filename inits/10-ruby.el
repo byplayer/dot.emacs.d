@@ -146,12 +146,12 @@
 (define-key ruby-mode-map [return] 'newline-and-indent)
 
 ;; rabbit
-(use-package rd-mode
-  :quelpa (rd-mode :fetcher github :repo "byplayer/rd-mode")
-  :ensure t)
-(use-package rabbit-mode
-  :quelpa (rabbit-mode :fetcher github :repo "byplayer/rabbit-mode")
-  :ensure t
+(leaf rd-mode
+  :el-get byplayer/rd-mode
+  :mode (("\\.rd$" . rd-mode)))
+
+(leaf rabbit-mode
+  :el-get byplayer/rabbit-mode
   :mode (("\\.rbt$" . rabbit-mode)
          ("\\.rab$" . rabbit-mode)))
 

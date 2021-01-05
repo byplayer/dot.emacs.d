@@ -1,6 +1,6 @@
 *.elc
 *~
-
+/el-get/*
 /auto-save-list
 /tutorial
 /.org-id-locations

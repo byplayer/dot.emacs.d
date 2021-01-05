@@ -6,18 +6,16 @@
 (set-frame-parameter nil 'fullscreen 'maximized)
 
 ;; windows + revive
-(use-package windows
-  :quelpa (windows :fetcher github :repo "byplayer/windows")
-  :ensure t
+(leaf windows
+  :el-get byplayer/windows
   :bind (("C-x C-c" . see-you-again)
-         ("C-x K" . kill-all-buffers)   ; This is revive finction
-         )
+         ("C-x K" . kill-all-buffers))
+  :hook ((window-setup-hook . resume-windows))
   :init
   (setq win:switch-prefix "\C-cw")
   (setq win:use-frame nil)
   (win:startup-with-window)
-  (add-hook 'window-setup-hook
-            'resume-windows))
+  (win:startup-with-window))
 
 (provide '99-misc)
 ;;; 99-misc.el ends here

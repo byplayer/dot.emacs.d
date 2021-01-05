@@ -1,38 +1,72 @@
 ;;; package --- Summary
 ;;; Commentary:
 ;;; Code:
-(setq quelpa-update-melpa-p nil)
 
-(require 'package)
-(setq package-archives
-      '(("org"          . "http://orgmode.org/elpa/")
-        ("melpa"        . "http://melpa.org/packages/")
-        ("gnu"          . "http://elpa.gnu.org/packages/")))
+;; reduce gc for loading init
+(setq gc-cons-threshold most-positive-fixnum)
 
-(package-initialize)
+(eval-and-compile
+  (when (or load-file-name byte-compile-current-file)
+    (setq user-emacs-directory
+          (expand-file-name
+           (file-name-directory (or load-file-name byte-compile-current-file))))))
 
 (add-to-list 'load-path "/opt/global/share/gtags/")
+
+(eval-and-compile
+  (customize-set-variable
+   'package-archives '(("org"   . "https://orgmode.org/elpa/")
+                       ("melpa" . "https://melpa.org/packages/")
+                       ("gnu"   . "https://elpa.gnu.org/packages/")))
+  (package-initialize)
+  (unless (package-installed-p 'leaf)
+    (package-refresh-contents)
+    (package-install 'leaf))
+
+  (leaf leaf-keywords
+    :ensure t
+    :init
+    ;; optional packages if you want to use :hydra, :el-get, :blackout,,,
+    ; (leaf hydra :ensure t)
+    (leaf el-get :ensure t)
+    ; (leaf blackout :ensure t)
+
+    :config
+    ;; initialize leaf-keywords.el
+    (leaf-keywords-init)))
+
+(leaf leaf
+  :config
+  (leaf leaf-convert :ensure t)
+  (leaf leaf-tree
+    :ensure t
+    :custom ((imenu-list-size . 30)
+             (imenu-list-position . 'left))))
+
+(leaf macrostep
+  :ensure t
+  :bind (("C-c e" . macrostep-expand)))
+
+(leaf init-loader
+  :ensure t
+  :setq ((init-loader-byte-compile . t)
+         (init-loader-show-log-after-init . nil))
+  :config
+  (init-loader-load))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(imenu-list-position 'left t)
+ '(imenu-list-size 30 t)
+ '(package-archives
+   '(("org" . "https://orgmode.org/elpa/")
+     ("melpa" . "https://melpa.org/packages/")
+     ("gnu" . "https://elpa.gnu.org/packages/")))
  '(package-selected-packages
-   '(windows revive org-sticky-header helm-godoc scss-mode reinbow-mode company-lsp lsp-ui lv lsp-mode pyenv-mode-auto undohist org-todoist request-deferred request org-gcal company-jedi jedi-core jedi auto-virtualenvwrapper virtualenvwrapper rd-mode rabbit-mode font-lock+ quelpa-use-package quelpa let-alist go-mode magit sclang-mode yaml-mode web-mode volatile-highlights undo-tree smartrep smartparens savekill ruby-block rspec-mode robe rinari recentf-ext rainbow-mode popwin point-undo phpunit php-mode org-plus-contrib neotree multiple-cursors mozc-popup markdown-mode kotlin-mode keyfreq json-mode js2-mode init-loader imenu-list helm-swoop helm-projectile helm-migemo helm-ls-git helm-gtags helm-go-package helm-flycheck helm-descbinds helm-c-yasnippet helm-ag groovy-mode go-eldoc flycheck-pos-tip flycheck-kotlin flycheck-irony feature-mode expand-region dockerfile-mode crontab-mode company-quickhelp company-irony company-go clang-format avy anzu all-the-icons-dired))
- '(safe-local-variable-values
-   '((clang-format-modes quote nil)
-     (eval setq-local default-directory
-           (expand-file-name
-            (concat
-             (file-name-directory
-              (buffer-file-name))
-             "..")))
-     (ruby-compilation-executable . "ruby")
-     (ruby-compilation-executable . "ruby1.8")
-     (ruby-compilation-executable . "ruby1.9")
-     (ruby-compilation-executable . "rbx")
-     (ruby-compilation-executable . "jruby")))
+   '(windows rabbit-mode rd-mode font-lock+ helm-godoc yaml-mode web-mode volatile-highlights undohist undo-tree smartrep smartparens scss-mode sclang-mode savekill ruby-block rubocopfmt rspec-mode robe rinari recentf-ext rainbow-mode quelpa-use-package pyenv-mode-auto py-autopep8 prettier-js posframe popwin point-undo phpunit php-mode org-sticky-header org-plus-contrib org-gcal neotree multiple-cursors mozc-popup magit macrostep lsp-ui leaf-tree leaf-convert kotlin-mode keyfreq json-mode js2-mode init-loader helm-swoop helm-projectile helm-migemo helm-ls-git helm-gtags helm-go-package helm-flycheck helm-descbinds helm-c-yasnippet helm-ag groovy-mode go-eldoc gitignore-mode git-gutter flycheck-pos-tip flycheck-plantuml flycheck-kotlin flycheck-irony feature-mode expand-region emojify el-get dockerfile-mode crontab-mode company-quickhelp company-lsp company-jedi company-irony company-go clang-format cider avy auto-virtualenvwrapper arduino-mode anzu all-the-icons-dired))
  '(term-default-bg-color "#000000")
  '(term-default-fg-color "light gray")
  '(truncate-lines nil)
@@ -42,10 +76,6 @@
 ;; This value isn't used already but keep it to migrate use-package
 (defvar my-installing-package-list
   '(
-    ;; init
-    use-package
-    init-loader
-
     ;; company
     company
 
@@ -154,38 +184,12 @@
     prettier-js
     ))
 
-(quelpa
- '(quelpa-use-package
-   :fetcher git
-   :url "https://framagit.org/steckerhalter/quelpa-use-package.git"))
-(require 'use-package)
-(require 'quelpa-use-package)
-(setq use-package-ensure-function 'quelpa)
-(require 'dash)
-(require 'f)
+(leaf dash
+  :ensure t)
 
-(defun was-compiled-p (path)
-  "Does the directory at PATH contain any .elc files?"
-  (--any-p (f-ext? it "elc") (f-files path)))
+(leaf f
+  :ensure t)
 
-(defun ensure-packages-compiled ()
-  "If any packages installed with package.el aren't compiled yet, compile them."
-  (--each (f-directories package-user-dir)
-    (unless (was-compiled-p it)
-      (byte-recompile-directory it 0))))
-
-(ensure-packages-compiled)
-
-;; init-loader
-;; http://coderepos.org/share/browser/lang/elisp/init-loader/init-loader.el
-;; デフォルトで"~/.emacs.d/inits"以下のファイルをロードする
-(require 'init-loader)
-(setq init-loader-byte-compile t)
-(setq init-loader-show-log-after-init nil)
-(init-loader-load)
-
-(provide 'init)
-;;; init.el ends here
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -200,3 +204,19 @@
  '(web-mode-html-attr-value-face ((t (:foreground "#82AE46"))))
  '(web-mode-html-tag-face ((t (:foreground "#E6B422" :weight bold))))
  '(web-mode-server-comment-face ((t (:foreground "#D9333F")))))
+
+(unless (file-exists-p "~/.emacs.d/init.elc")
+        (progn
+          (message "build init.el. and all package files")
+          (byte-recompile-file "~/.emacs.d/init.el" t 0)
+          (byte-recompile-directory "~/.emacs.d/elisp/" 0)
+          (byte-recompile-directory "~/.emacs.d/el-get/" 0)
+          (byte-recompile-directory "~/.emacs.d/elpa/" 0)))
+
+;; reset gc value
+(setq gc-cons-threshold 16777216) ; 16mb
+
+(provide 'init)
+;;; init.el ends here
+
+

@@ -263,7 +263,7 @@ The file-path is archive target file path.  If no file-path is given uses the fu
 
 (leaf org-sticky-header
   :el-get alphapapa/org-sticky-header
-  :hook (org-mode . org-sticky-header-mode)
+  :hook (org-mode-hook . org-sticky-header-mode)
   :setq ((org-sticky-header-full-path . 'full)))
 
 (leaf org-todoist

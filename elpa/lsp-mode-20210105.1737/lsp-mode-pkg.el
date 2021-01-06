@@ -1,4 +1,4 @@
-(define-package "lsp-mode" "20210105.109" "LSP mode"
+(define-package "lsp-mode" "20210105.1737" "LSP mode"
   '((emacs "26.1")
     (dash "2.14.1")
     (dash-functional "2.14.1")
@@ -7,12 +7,12 @@
     (spinner "1.7.3")
     (markdown-mode "2.3")
     (lv "0"))
-  :commit "5a33282b1e85526be8d211f4df545cf1981e1fa7" :authors
-  (("Vibhav Pant, Fangrui Song, Ivan Yonchovski"))
+  :commit "5de768ff59e39d7014da96b86e8d8e4b2e6c6426" :authors
+  '(("Vibhav Pant, Fangrui Song, Ivan Yonchovski"))
   :maintainer
-  ("Vibhav Pant, Fangrui Song, Ivan Yonchovski")
+  '("Vibhav Pant, Fangrui Song, Ivan Yonchovski")
   :keywords
-  ("languages")
+  '("languages")
   :url "https://github.com/emacs-lsp/lsp-mode")
 ;; Local Variables:
 ;; no-byte-compile: t

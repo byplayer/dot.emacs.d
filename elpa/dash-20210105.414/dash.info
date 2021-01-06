@@ -1034,19 +1034,19 @@ File: dash.info,  Node: Unfolding,  Next: Predicates,  Prev: Reductions,  Up: Fu
 2.5 Unfolding
 =============
 
-Operations dual to reductions, building lists from seed value rather
+Operations dual to reductions, building lists from a seed value rather
 than consuming a list to produce a single value.
 
  -- Function: -iterate (fun init n)
      Return a list of iterated applications of FUN to INIT.
 
-     This means a list of form:
+     This means a list of the form:
 
-     (init (fun init) (fun (fun init)) ...)
+     (INIT (FUN INIT) (FUN (FUN INIT)) ...)
 
      N is the length of the returned list.
 
-          (-iterate '1+ 1 10)
+          (-iterate #'1+ 1 10)
               ⇒ '(1 2 3 4 5 6 7 8 9 10)
           (-iterate (lambda (x) (+ x x)) 2 5)
               ⇒ '(2 4 8 16 32)
@@ -2547,23 +2547,17 @@ Functions iterating over lists for side-effect only.
           (let (s) (--dotimes 5 (push it s)) s)
               ⇒ '(4 3 2 1 0)
 
- -- Macro: -doto (eval-initial-value &rest forms)
-     Eval a form, then insert that form as the 2nd argument to other
-     forms.  The EVAL-INITIAL-VALUE form is evaluated once.  Its result
-     is passed to FORMS, which are then evaluated sequentially.  Returns
-     the target form.
+ -- Macro: -doto (init &rest forms)
+     Evaluate INIT and thread the result as the 2nd argument to other
+     FORMS.  INIT is evaluated once.  Its result is passed to FORMS,
+     which are then evaluated sequentially.  Returns the target form.
 
-          (-doto '(1 2 3) (!cdr) (!cdr))
+          (-doto (list 1 2 3) (pop) (pop))
               ⇒ '(3)
-          (-doto '(1 . 2) (setcar 3) (setcdr 4))
+          (-doto (cons 1 2) (setcar 3) (setcdr 4))
               ⇒ '(3 . 4)
-
- -- Macro: --doto (eval-initial-value &rest forms)
-     Anaphoric form of ‘-doto’ (*note -doto::).  Note: ‘it’ is not
-     required in each form.
-
-          (gethash "key" (--doto (make-hash-table :test 'equal) (puthash "key" "value" it)))
-              ⇒ "value"
+          (gethash 'k (--doto (make-hash-table) (puthash 'k 'v it)))
+              ⇒ 'v
 
 
 File: dash.info,  Node: Destructive operations,  Next: Function combinators,  Prev: Side-effects,  Up: Functions
@@ -4317,7 +4311,6 @@ Index
 * !cons:                                 Destructive operations.
                                                               (line   6)
 * -->:                                   Threading macros.    (line  32)
-* --doto:                                Side-effects.        (line  86)
 * ->:                                    Threading macros.    (line   6)
 * ->>:                                   Threading macros.    (line  19)
 * -all?:                                 Predicates.          (line  18)
@@ -4609,140 +4602,139 @@ Ref: -min-by32897
 Ref: -max33420
 Ref: -max-by33645
 Node: Unfolding34173
-Ref: -iterate34412
-Ref: -unfold34857
-Node: Predicates35665
-Ref: -any?35789
-Ref: -all?36109
-Ref: -none?36439
-Ref: -only-some?36741
-Ref: -contains?37226
-Ref: -same-items?37615
-Ref: -is-prefix?38000
-Ref: -is-suffix?38323
-Ref: -is-infix?38646
-Node: Partitioning39000
-Ref: -split-at39188
-Ref: -split-with39473
-Ref: -split-on39876
-Ref: -split-when40552
-Ref: -separate41192
-Ref: -partition41634
-Ref: -partition-all42086
-Ref: -partition-in-steps42514
-Ref: -partition-all-in-steps43011
-Ref: -partition-by43496
-Ref: -partition-by-header43878
-Ref: -partition-after-pred44482
-Ref: -partition-before-pred44826
-Ref: -partition-before-item45177
-Ref: -partition-after-item45488
-Ref: -group-by45794
-Node: Indexing46231
-Ref: -elem-index46433
-Ref: -elem-indices46828
-Ref: -find-index47211
-Ref: -find-last-index47700
-Ref: -find-indices48204
-Ref: -grade-up48612
-Ref: -grade-down49015
-Node: Set operations49425
-Ref: -union49608
-Ref: -difference50050
-Ref: -intersection50467
-Ref: -powerset50904
-Ref: -permutations51117
-Ref: -distinct51417
-Node: Other list operations51795
-Ref: -rotate52020
-Ref: -repeat52390
-Ref: -cons*52671
-Ref: -snoc53058
-Ref: -interpose53471
-Ref: -interleave53769
-Ref: -zip-with54138
-Ref: -zip54855
-Ref: -zip-lists55687
-Ref: -zip-fill56388
-Ref: -unzip56711
-Ref: -cycle57456
-Ref: -pad57858
-Ref: -table58181
-Ref: -table-flat58970
-Ref: -first59978
-Ref: -some60350
-Ref: -last60659
-Ref: -first-item60993
-Ref: -second-item61409
-Ref: -third-item61689
-Ref: -fourth-item61967
-Ref: -fifth-item62233
-Ref: -last-item62495
-Ref: -butlast62787
-Ref: -sort63034
-Ref: -list63523
-Ref: -fix63854
-Node: Tree operations64394
-Ref: -tree-seq64590
-Ref: -tree-map65448
-Ref: -tree-map-nodes65891
-Ref: -tree-reduce66741
-Ref: -tree-reduce-from67623
-Ref: -tree-mapreduce68224
-Ref: -tree-mapreduce-from69084
-Ref: -clone70370
-Node: Threading macros70698
-Ref: ->70843
-Ref: ->>71334
-Ref: -->71839
-Ref: -as->72395
-Ref: -some->72850
-Ref: -some->>73224
-Ref: -some-->73660
-Node: Binding74131
-Ref: -when-let74343
-Ref: -when-let*74828
-Ref: -if-let75351
-Ref: -if-let*75746
-Ref: -let76363
-Ref: -let*82438
-Ref: -lambda83378
-Ref: -setq84174
-Node: Side-effects84990
-Ref: -each85184
-Ref: -each-while85591
-Ref: -each-indexed86049
-Ref: -each-r86567
-Ref: -each-r-while87000
-Ref: -dotimes87375
-Ref: -doto87865
-Ref: --doto88293
-Node: Destructive operations88568
-Ref: !cons88741
-Ref: !cdr88947
-Node: Function combinators89142
-Ref: -partial89416
-Ref: -rpartial89810
-Ref: -juxt90213
-Ref: -compose90645
-Ref: -applify91198
-Ref: -on91629
-Ref: -flip92155
-Ref: -const92467
-Ref: -cut92806
-Ref: -not93292
-Ref: -orfn93602
-Ref: -andfn94036
-Ref: -iteratefn94531
-Ref: -fixfn95234
-Ref: -prodfn96797
-Node: Development97857
-Node: Contribute98210
-Node: Change log99216
-Node: Contributors106754
-Node: FDL108772
-Node: GPL134092
-Node: Index171841
+Ref: -iterate34414
+Ref: -unfold34864
+Node: Predicates35672
+Ref: -any?35796
+Ref: -all?36116
+Ref: -none?36446
+Ref: -only-some?36748
+Ref: -contains?37233
+Ref: -same-items?37622
+Ref: -is-prefix?38007
+Ref: -is-suffix?38330
+Ref: -is-infix?38653
+Node: Partitioning39007
+Ref: -split-at39195
+Ref: -split-with39480
+Ref: -split-on39883
+Ref: -split-when40559
+Ref: -separate41199
+Ref: -partition41641
+Ref: -partition-all42093
+Ref: -partition-in-steps42521
+Ref: -partition-all-in-steps43018
+Ref: -partition-by43503
+Ref: -partition-by-header43885
+Ref: -partition-after-pred44489
+Ref: -partition-before-pred44833
+Ref: -partition-before-item45184
+Ref: -partition-after-item45495
+Ref: -group-by45801
+Node: Indexing46238
+Ref: -elem-index46440
+Ref: -elem-indices46835
+Ref: -find-index47218
+Ref: -find-last-index47707
+Ref: -find-indices48211
+Ref: -grade-up48619
+Ref: -grade-down49022
+Node: Set operations49432
+Ref: -union49615
+Ref: -difference50057
+Ref: -intersection50474
+Ref: -powerset50911
+Ref: -permutations51124
+Ref: -distinct51424
+Node: Other list operations51802
+Ref: -rotate52027
+Ref: -repeat52397
+Ref: -cons*52678
+Ref: -snoc53065
+Ref: -interpose53478
+Ref: -interleave53776
+Ref: -zip-with54145
+Ref: -zip54862
+Ref: -zip-lists55694
+Ref: -zip-fill56395
+Ref: -unzip56718
+Ref: -cycle57463
+Ref: -pad57865
+Ref: -table58188
+Ref: -table-flat58977
+Ref: -first59985
+Ref: -some60357
+Ref: -last60666
+Ref: -first-item61000
+Ref: -second-item61416
+Ref: -third-item61696
+Ref: -fourth-item61974
+Ref: -fifth-item62240
+Ref: -last-item62502
+Ref: -butlast62794
+Ref: -sort63041
+Ref: -list63530
+Ref: -fix63861
+Node: Tree operations64401
+Ref: -tree-seq64597
+Ref: -tree-map65455
+Ref: -tree-map-nodes65898
+Ref: -tree-reduce66748
+Ref: -tree-reduce-from67630
+Ref: -tree-mapreduce68231
+Ref: -tree-mapreduce-from69091
+Ref: -clone70377
+Node: Threading macros70705
+Ref: ->70850
+Ref: ->>71341
+Ref: -->71846
+Ref: -as->72402
+Ref: -some->72857
+Ref: -some->>73231
+Ref: -some-->73667
+Node: Binding74138
+Ref: -when-let74350
+Ref: -when-let*74835
+Ref: -if-let75358
+Ref: -if-let*75753
+Ref: -let76370
+Ref: -let*82445
+Ref: -lambda83385
+Ref: -setq84181
+Node: Side-effects84997
+Ref: -each85191
+Ref: -each-while85598
+Ref: -each-indexed86056
+Ref: -each-r86574
+Ref: -each-r-while87007
+Ref: -dotimes87382
+Ref: -doto87872
+Node: Destructive operations88353
+Ref: !cons88526
+Ref: !cdr88732
+Node: Function combinators88927
+Ref: -partial89201
+Ref: -rpartial89595
+Ref: -juxt89998
+Ref: -compose90430
+Ref: -applify90983
+Ref: -on91414
+Ref: -flip91940
+Ref: -const92252
+Ref: -cut92591
+Ref: -not93077
+Ref: -orfn93387
+Ref: -andfn93821
+Ref: -iteratefn94316
+Ref: -fixfn95019
+Ref: -prodfn96582
+Node: Development97642
+Node: Contribute97995
+Node: Change log99001
+Node: Contributors106539
+Node: FDL108557
+Node: GPL133877
+Node: Index171626
 
 End Tag Table
 

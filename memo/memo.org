@@ -22,20 +22,9 @@ package-install
 (package-refresh-contents)
 (byte-recompile-directory pkg-dir 0 t)
 
-* quelpa
-https://github.com/quelpa/quelpa-use-package
-
-** quelpa upgrade
-(quelpa-upgrade)
-
+* el-get
 ** quelpa upgrade all
-(quelpa-upgrade-all)
-
-* multiple-cursors
-キーワード選択→C-t連打でキーワードを選択
-C-tを押した後にsを押すとキーワードをスキップ, uで一つ前に戻る、*で全て選択、dでバッファ内をいい感じで全選択
-範囲を選択してC-M-cで全ての行にカーソルを作成
-範囲を選択してC-M-rで対話的にキーワードを入力してカーソルを作成
+(el-get-update-all)
 
 * flycheck
 C-c ! n next error

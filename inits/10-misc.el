@@ -5,46 +5,16 @@
 ;; start server
 (server-start)
 
-;; regin
-(require 'expand-region)
-(global-set-key (kbd "C-<") 'er/expand-region)
-(global-set-key (kbd "C-M-,") 'er/contract-region)
+(leaf expand-region
+  :doc expand region
+  :ensure t
+  :bind (("C-<" . er/expand-region)
+         ("C-M-," . er/contract-region)))
 
-;; avy
-(global-set-key (kbd "C-c j") 'avy-goto-word-1)
-
-;; select
-(require 'multiple-cursors)
-(require 'smartrep)
-(declare-function smartrep-define-key "smartrep")
-
-(global-set-key (kbd "C-M-c") 'mc/edit-lines)
-(global-set-key (kbd "C-M-r") 'mc/mark-all-in-region)
-
-(global-unset-key "\C-t")
-
-;; Pop cursor mark pos repeatedly After C-u C-Spec C-Spec...
-(setq set-mark-command-repeat-pop t)
-
-(smartrep-define-key global-map "C-t"
-  '(("C-t"      . 'mc/mark-next-like-this)
-    ("n"        . 'mc/mark-next-like-this)
-    ("p"        . 'mc/mark-previous-like-this)
-    ("m"        . 'mc/mark-more-like-this-extended)
-    ("u"        . 'mc/unmark-next-like-this)
-    ("U"        . 'mc/unmark-previous-like-this)
-    ("s"        . 'mc/skip-to-next-like-this)
-    ("S"        . 'mc/skip-to-previous-like-this)
-    ("*"        . 'mc/mark-all-like-this)
-    ("d"        . 'mc/mark-all-like-this-dwim)
-    ("i"        . 'mc/insert-numbers)
-    ("o"        . 'mc/sort-regions)
-    ("O"        . 'mc/reverse-regions)))
-
-;; point-undo
-(require 'point-undo)
-(global-set-key (kbd "M-[") 'point-undo)
-(global-set-key (kbd "M-]") 'point-redo)
+(leaf avy
+  :doc quick search
+  :ensure t
+  :bind (("C-c j" . avy-goto-word-1)))
 
 ;; support bat moad, ini mode
 (require 'generic-x)
@@ -135,13 +105,15 @@
 (global-whitespace-mode 1)
 
 ;; undo-tree
-(eval-after-load "undo-tree"
-  '(progn
-     (global-undo-tree-mode)
-     (setq undo-tree-auto-save-history t
+(leaf undo-tree
+  :doc show undo tree
+  :ensure t
+  :commands global-undo-tree-mode
+  :init
+  (global-undo-tree-mode)
+  (setq undo-tree-auto-save-history t
            undo-tree-history-directory-alist `(("." .,
-                                                (expand-file-name "~/.emacs.d/undo-tree-hist/"))))))
-(require 'undo-tree)
+                                                (expand-file-name "~/.emacs.d/undo-tree-hist/")))))
 
 ;; backup directory configuration
 (setq backup-directory-alist

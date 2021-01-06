@@ -1,19 +1,18 @@
 ;;; package --- Summary
 ;;; Commentary:
 ;;; Code:
-(use-package gitignore-mode
-  :ensure t
-  :defer t)
+(leaf gitignore-mode
+  :ensure t)
 
-(use-package git-gutter
+(leaf git-gutter
   :ensure t
   :init
   (global-git-gutter-mode t))
 
-(use-package magit
+(leaf magit
   :ensure t
-  :bind (("C-x g" . magit-status)
-         :map magit-mode-map
+  :bind (("C-x g" . magit-status))
+  :bind (magit-mode-map
          ("c" . magit-commit-create)
          ("M-c" . magit-commit)
          ("P" . magit-push-current-to-upstream)

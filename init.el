@@ -208,10 +208,11 @@
 (unless (file-exists-p "~/.emacs.d/init.elc")
         (progn
           (message "build init.el. and all package files")
-          (byte-recompile-file "~/.emacs.d/init.el" t 0)
           (byte-recompile-directory "~/.emacs.d/elisp/" 0)
           (byte-recompile-directory "~/.emacs.d/el-get/" 0)
-          (byte-recompile-directory "~/.emacs.d/elpa/" 0)))
+          (byte-recompile-directory "~/.emacs.d/elpa/" 0)
+          (byte-recompile-directory "~/.emacs.d/inits/" 0)
+          (byte-recompile-file "~/.emacs.d/init.el" t 0)))
 
 ;; reset gc value
 (setq gc-cons-threshold 16777216) ; 16mb

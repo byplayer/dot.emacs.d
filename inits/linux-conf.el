@@ -9,9 +9,9 @@
   (setq select-enable-clipboard t)
   ))
 
-(use-package mozc
+(leaf mozc
   :init
-  (use-package mozc-popup)
+  (leaf mozc-popup)
   (setq mozc-candidate-style 'popup)
   (setq mozc-leim-title "[あ]")
   (setq default-input-method "japanese-mozc"))

@@ -2,17 +2,16 @@
 ;;; Commentary:
 ;;; Code:
 
-(use-package python
+(leaf python
   :ensure t
   :mode (("\\.py$" . python-mode)))
 
-(use-package py-autopep8
+(leaf py-autopep8
   :ensure t
   :commands (py-autopep8-before-save py-autopep8-enable-on-save)
-  :init
-  (add-hook 'python-mode-hook 'py-autopep8-enable-on-save))
+  :hook (python-mode-hook . py-autopep8-enable-on-save))
 
-(use-package jedi-core
+(leaf jedi-core
   :ensure t
   :commands (jedi:start-dedicated-server
              helm-jedi-related-names
@@ -23,14 +22,14 @@
   :init
   (setq jedi:environment-root "~/.virtualenvs/jedi"))
 
-(use-package company-jedi
+(leaf company-jedi
   :ensure t
   :init
   (defun my/python-mode-hook ()
     (add-to-list 'company-backends 'company-jedi))
   (add-hook 'python-mode-hook 'my/python-mode-hook))
 
-(use-package virtualenvwrapper
+(leaf virtualenvwrapper
   :ensure t
   :commands (venv-projectile-auto-workon
              venv-workon
@@ -40,11 +39,10 @@
              venv-lsvirtualenv
              venv-cdvirtualenv
              venv-cpvirtualenv))
-(use-package auto-virtualenvwrapper
+(leaf auto-virtualenvwrapper
   :ensure t
   :commands (auto-virtualenvwrapper-activate)
-  :init
-  (add-hook 'python-mode-hook #'auto-virtualenvwrapper-activate))
+  :hook (python-mode-hook . auto-virtualenvwrapper-activate))
 
 (provide '10-python)
 ;;; 10-python.el ends here

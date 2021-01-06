@@ -3,13 +3,13 @@
 ;;; Commentary:
 ;;; Code:
 
-(use-package lv
+(leaf lv
   :ensure t)
 
-(use-package lsp-mode
+(leaf lsp-mode
   :ensure t
   :commands (lsp lsp-deferred)
-  :hook (go-mode . lsp-deferred))
+  :hook (go-mode-hook . lsp-deferred))
 
 (add-hook 'lsp-mode-hook
           '(lambda()
@@ -17,8 +17,9 @@
               (local-set-key (kbd "M-.") 'xref-find-definitions)
               (local-set-key (kbd "M-/") 'xref-find-references)))
 
-(use-package lsp-ui
+(leaf lsp-ui
   :ensure t
+  :after lsp-mode
   :commands lsp-ui-mode)
 
 (provide '00-lsp)

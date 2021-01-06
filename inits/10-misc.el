@@ -254,9 +254,10 @@ e.g. 20190-4-01 15:02:33"
       do (add-hook hook 'prettier-js-mode))
 
 ;; clang-format
-(use-package clang-format
+(leaf clang-format
   :ensure t
   :commands (clang-format-buffer)
+  :hook (before-save-hook . my-clang-format-before-save)
   :init
   (setq clang-format-modes
         '(c++-mode c-mode java-mode))
@@ -265,12 +266,7 @@ e.g. 20190-4-01 15:02:33"
     "Usage: (add-hook 'before-save-hook 'my-clang-format-before-save)"
     (interactive)
     (if (member major-mode clang-format-modes)
-        (clang-format-buffer)))
-
-  (add-hook 'before-save-hook #'my-clang-format-before-save)
-
-  :config
-  )
+        (clang-format-buffer))))
 
 ;; mode-line
 (defvar mode-line-cleaner-alist
@@ -349,7 +345,7 @@ e.g. 20190-4-01 15:02:33"
                   mode-line-modes mode-line-misc-info mode-line-end-spaces))
 
 ;; hs-minor-mode
-(use-package hideshow
+(leaf hideshow
   :ensure t
   :commands (hs-minor-mode)
   :bind (("C-#" . hs-toggle-hiding)
@@ -381,12 +377,12 @@ e.g. 20190-4-01 15:02:33"
                (flyspell-prog-mode))))
 
 ;; plunt-uml
-(use-package flycheck-plantuml
+(leaf flycheck-plantuml
   :ensure t
   :config
   (flycheck-plantuml-setup))
 
-(use-package plantuml-mode
+(leaf plantuml-mode
   :ensure t
   :commands plantuml-mode
   :mode (("\\.puml$" . plantuml-mode)
@@ -400,7 +396,7 @@ e.g. 20190-4-01 15:02:33"
   )
 
 ;; yaml
-(use-package yaml-mode
+(leaf yaml-mode
   :mode (("\\.yml$" . yaml-mode)
          ("\\.dig$" . yaml-mode)
          ("\\.yml-[a-zA-Z]+$" . yaml-mode))
@@ -409,19 +405,16 @@ e.g. 20190-4-01 15:02:33"
           '(lambda ()
              (define-key yaml-mode-map "\C-m" 'newline-and-indent))))
 
-(use-package emojify
+(leaf emojify
   :ensure t
-  :init
-  (add-hook 'after-init-hook #'global-emojify-mode)
-  )
+  :hook (after-init-hook . global-emojify-mode))
 
-(use-package undohist
+(leaf undohist
   :ensure t
   :commands undohist-initialize
-  :init
-  (undohist-initialize))
+  :hook (after-init-hook . undohist-initialize))
 
-(use-package pyenv-mode-auto
+(leaf pyenv-mode-auto
   :ensure t
   :init (require 'pyenv-mode-auto))
 
@@ -465,7 +458,7 @@ e.g. 20190-4-01 15:02:33"
 (setq display-time-day-and-date t)
 (display-time-mode t)
 
-(use-package winner
+(leaf winner
   :init
   (winner-mode))
 

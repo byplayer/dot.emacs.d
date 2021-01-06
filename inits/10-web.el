@@ -2,18 +2,21 @@
 ;;; Commentary:
 ;;; Code:
 
-(use-package rainbow-mode
+(leaf rainbow-mode
   :ensure t)
 
-(use-package scss-mode
+(leaf scss-mode
   :ensure t
   :mode (("\\.scss" . scss-mode)))
 
-(use-package web-mode
+(leaf web-mode
   :ensure t
   :mode (("\\.css" . css-mode)
          ("\\.html$"     . web-mode)
-         ("\\.tpl$"     . web-mode))
+         ("\\.tpl$"     . web-mode)
+         ("\\.rxml$" . web-mode)
+         ("\\.erb$". web-mode)
+         ("\\.rhtml$". web-mode))
   :init
   (defun web-mode-hook ()
     (setq web-mode-markup-indent-offset 2) ;; html indent
@@ -51,7 +54,7 @@
   (setq cssm-indent-function #'cssm-c-style-indenter))
 
 
-(use-package js2-mode
+(leaf js2-mode
   :ensure t
   :mode (("\\.js$" . js2-mode))
   :init
@@ -76,7 +79,7 @@
       (skip-chars-forward "\s " point-of-indentation)))
   )
 
-(use-package json-mode
+(leaf json-mode
   :ensure t
   :mode (("\.json" . json-mode)))
 

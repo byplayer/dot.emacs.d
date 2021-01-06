@@ -3,10 +3,10 @@
 ;;; Code:
 
 
-(use-package arduino-mode
+(leaf arduino-mode
   :ensure t)
 
-(use-package cider
+(leaf cider
   :ensure t)
 
 (leaf org

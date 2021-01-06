@@ -3,7 +3,7 @@
 ;;; Code:
 (require 'ruby-mode)
 
-(use-package rubocopfmt
+(leaf rubocopfmt
   :commands (rubocopfmt-mode)
   :init
   (setq rubocopfmt-rubocop-command "rubocop-daemon-wrapper"))
@@ -46,15 +46,8 @@
 
 ;; rinari
 ;; https://github.com/eschulte/rinari
-(require 'rinari)
-
-(setq auto-mode-alist
-      (append '(
-                ("\\.rxml$" . web-mode)
-                ("\\.erb$". web-mode)
-                ("\\.rhtml$". web-mode)
-                ) auto-mode-alist))
-
+(leaf rinari
+  :ensure t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; feature-mode
@@ -64,18 +57,16 @@
 ;; ;; exactly the same localization your cucumber uses
 ;; ;(setq feature-default-i18n-file "/path/to/gherkin/gem/i18n.yml")
 ;; ;; and load feature-mode
-(require 'feature-mode)
-(add-to-list 'auto-mode-alist '("\.feature$" . feature-mode))
 
-; bind return to newline-and-indent
-(defun my-feature-mode-hook()
-  (define-key feature-mode-map "\C-m" 'newline-and-indent)
-  (rinari-launch))
-
-(add-hook 'feature-mode-hook 'my-feature-mode-hook)
-
-;; set rspec-mode like key map
-(define-key feature-mode-map  (kbd "C-c ,a") 'feature-verify-all-scenarios-in-project)
+(leaf feature-mode
+  :mode (("\.feature$" . feature-mode))
+  :hook ((feature-mode-hook . my-feature-mode-hook))
+  :bind (feature-mode-map
+         ("C-c ,a" . feature-verify-all-scenarios-in-project))
+  :config
+  (defun my-feature-mode-hook()
+    (define-key feature-mode-map "\C-m" 'newline-and-indent)
+    (rinari-launch)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; rspec-modeの設定

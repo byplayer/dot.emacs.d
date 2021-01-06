@@ -268,6 +268,7 @@ The file-path is archive target file path.  If no file-path is given uses the fu
 
 (leaf org-todoist
   :el-get byplayer/org-todoist
+  :commands org-todoist-fetch org-todoist-list
   :config (setq org-todoist-agenda-file (expand-file-name "todoist.org" my-org-agenda-directory)))
 
 (provide '10-org)

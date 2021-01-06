@@ -2,20 +2,6 @@
 ;;; Commentary:
 ;;; Code:
 
-;; start server
-(server-start)
-
-(leaf expand-region
-  :doc expand region
-  :ensure t
-  :bind (("C-<" . er/expand-region)
-         ("C-M-," . er/contract-region)))
-
-(leaf avy
-  :doc quick search
-  :ensure t
-  :bind (("C-c j" . avy-goto-word-1)))
-
 ;; support bat moad, ini mode
 (require 'generic-x)
 
@@ -457,10 +443,6 @@ e.g. 20190-4-01 15:02:33"
   '((format "%s:%s" 24-hours minutes seconds)))
 (setq display-time-day-and-date t)
 (display-time-mode t)
-
-(leaf winner
-  :init
-  (winner-mode))
 
 (provide '10-misc)
 ;;; 10-misc.el ends here

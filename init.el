@@ -207,6 +207,53 @@
          ("F" . magit-pull-from-upstream)
          ("M-F" . magit-pull)))
 
+(leaf go-mode
+  :doc for go lang development
+  :ensure t
+  :after company
+  :mode (("\.go$" . go-mode))
+  :hook ((go-mode-hook . (lambda()
+                           (go-eldoc-setup)
+                           (company-mode)
+                           (flycheck-mode)
+                           (setq indent-level 4)
+                           (setq c-basic-offset 4)
+                           (setq tab-width 4)
+                           (define-key go-mode-map (kbd "C-c c") 'go-compile)
+                           (add-to-list
+                            (make-local-variable 'company-backends)
+                            '(company-go :with company-yasnippet))))
+         (go-mode-hook . lsp-go-install-save-hooks))
+  :bind (go-mode-map
+         ("C-c d" . helm-godoc))
+  :config
+  (leaf helm-godoc
+    :el-get syohex/emacs-helm-godoc
+    :commands helm-godoc)
+
+  (leaf helm-go-package
+    :ensure t
+    :commands helm-go-package
+    :init
+    (eval-after-load 'go-mode
+      '(substitute-key-definition 'go-import-add 'helm-go-package go-mode-map)))
+
+  :init
+  (defun go-compile ()
+    "Traveling up the path, find build.xml file and run compile."
+    (interactive)
+    (save-buffer)
+    (with-temp-buffer
+      (while (and (not (or (file-exists-p "go.mod")
+                           (file-directory-p ".git")))
+                  (not (equal "/" default-directory)))
+        (cd ".."))
+      (call-interactively 'compile)))
+
+  (defun lsp-go-install-save-hooks ()
+    (add-hook 'before-save-hook #'lsp-format-buffer t t)
+    (add-hook 'before-save-hook #'lsp-organize-imports t t)))
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

@@ -306,6 +306,21 @@
   :commands (auto-virtualenvwrapper-activate)
   :hook (python-mode-hook . auto-virtualenvwrapper-activate))
 
+(leaf php-mode
+  :ensure t
+  :mode (("\\.php$" . php-mode)
+         ("\\.inc$" . php-mode))
+  :bind (php-mode-map
+         ("C-M-i" . company-complete)
+         ("C-c , s" . phpunit-current-test)
+         ("C-c , v" . phpunit-current-class)
+         ("C-c , a" . phpunit-current-project))
+  :hook (php-mode-hook . (lambda()
+             (php-set-style "php")
+             (setq c-basic-offset 4)
+             (setq tab-width 4)
+             (setq indent-tabs-mode nil))))
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

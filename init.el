@@ -261,12 +261,6 @@
  ;; If there is more than one, they won't work right.
  '(imenu-list-position 'left t)
  '(imenu-list-size 30 t)
- '(package-archives
-   '(("org" . "https://orgmode.org/elpa/")
-     ("melpa" . "https://melpa.org/packages/")
-     ("gnu" . "https://elpa.gnu.org/packages/")))
- '(package-selected-packages
-   '(windows rabbit-mode rd-mode font-lock+ helm-godoc yaml-mode web-mode volatile-highlights undohist undo-tree smartrep smartparens scss-mode sclang-mode savekill ruby-block rubocopfmt rspec-mode robe rinari recentf-ext rainbow-mode pyenv-mode-auto py-autopep8 prettier-js posframe popwin point-undo phpunit php-mode org-sticky-header org-plus-contrib org-gcal neotree multiple-cursors mozc-popup magit macrostep lsp-ui leaf-tree leaf-convert kotlin-mode keyfreq json-mode js2-mode init-loader helm-swoop helm-projectile helm-migemo helm-ls-git helm-gtags helm-go-package helm-flycheck helm-descbinds helm-c-yasnippet helm-ag groovy-mode go-eldoc gitignore-mode git-gutter flycheck-pos-tip flycheck-plantuml flycheck-kotlin flycheck-irony feature-mode expand-region emojify el-get dockerfile-mode crontab-mode company-quickhelp company-lsp company-jedi company-irony company-go clang-format cider avy auto-virtualenvwrapper arduino-mode anzu all-the-icons-dired))
  '(term-default-bg-color "#000000")
  '(term-default-fg-color "light gray")
  '(truncate-lines nil)

@@ -173,6 +173,7 @@
   (leaf irony
     :doc C/C++ suggestion tool
     :ensure t
+    :require t
     :hook (irony-mode-hook . (lambda()
                                (irony-cdb-autosetup-compile-options)
                                (add-to-list

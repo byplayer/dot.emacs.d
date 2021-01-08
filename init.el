@@ -254,6 +254,57 @@
     (add-hook 'before-save-hook #'lsp-format-buffer t t)
     (add-hook 'before-save-hook #'lsp-organize-imports t t)))
 
+(leaf *sh-mode-config
+  :doc sh-mode configuration
+  :hook ((sh-mode-hook . (lambda ()
+                           (setq sh-basic-offset 2
+                                 sh-indentation 2
+                                 sh-indent-after-continuation nil
+                                 sh-indent-for-continuation 0)))))
+
+(leaf python
+  :ensure t
+  :mode (("\\.py$" . python-mode)))
+
+(leaf py-autopep8
+  :ensure t
+  :commands (py-autopep8-before-save py-autopep8-enable-on-save)
+  :hook (python-mode-hook . py-autopep8-enable-on-save))
+
+(leaf jedi-core
+  :ensure t
+  :commands (jedi:start-dedicated-server
+             helm-jedi-related-names
+             jedi:setup
+             jedi:install-server
+             jedi:reinstall-server
+             jedi:install-server-block)
+  :init
+  (setq jedi:environment-root "~/.virtualenvs/jedi"))
+
+(leaf company-jedi
+  :ensure t
+  :init
+  (defun my/python-mode-hook ()
+    (add-to-list 'company-backends 'company-jedi))
+  (add-hook 'python-mode-hook 'my/python-mode-hook))
+
+(leaf virtualenvwrapper
+  :ensure t
+  :commands (venv-projectile-auto-workon
+             venv-workon
+             venv-mkvirtualenv-using
+             venv-mkvirtualenv
+             venv-rmvirtualenv
+             venv-lsvirtualenv
+             venv-cdvirtualenv
+             venv-cpvirtualenv))
+
+(leaf auto-virtualenvwrapper
+  :ensure t
+  :commands (auto-virtualenvwrapper-activate)
+  :hook (python-mode-hook . auto-virtualenvwrapper-activate))
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

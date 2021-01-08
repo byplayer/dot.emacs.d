@@ -164,6 +164,30 @@
   :init
   (winner-mode))
 
+(leaf *config-for-c
+  :doc configuration for c/c++
+  :hook (c-mode-common-hook . my/c-mode-hook)
+  :init
+  (leaf irony
+    :doc C/C++ suggestion tool
+    :ensure t
+    :hook (irony-mode-hook . (lambda()
+                               (irony-cdb-autosetup-compile-options)
+                               (add-to-list
+                                (make-local-variable 'company-backends)
+                                '(company-irony :with company-yasnippet))))
+    :setq (flycheck-clang-language-standard . "c++14"))
+
+  (defun my/c-mode-hook ()
+    (c-set-offset 'statement-block-intro 2)
+    (setq c-basic-offset 2)
+    (turn-on-font-lock)
+    (local-set-key "\C-cc" 'compile)
+    (when (member major-mode irony-supported-major-modes)
+      (irony-mode 1))))
+
+
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

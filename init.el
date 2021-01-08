@@ -2,6 +2,8 @@
 ;;; Commentary:
 ;;; Code:
 
+
+
 ;; reduce gc for loading init
 (setq gc-cons-threshold most-positive-fixnum)
 
@@ -186,7 +188,24 @@
     (when (member major-mode irony-supported-major-modes)
       (irony-mode 1))))
 
+(leaf gitignore-mode
+  :ensure t)
 
+(leaf git-gutter
+  :ensure t
+  :init
+  (global-git-gutter-mode t))
+
+(leaf magit
+  :ensure t
+  :bind (("C-x g" . magit-status))
+  :bind (magit-mode-map
+         ("c" . magit-commit-create)
+         ("M-c" . magit-commit)
+         ("P" . magit-push-current-to-upstream)
+         ("M-P" . magit-push)
+         ("F" . magit-pull-from-upstream)
+         ("M-F" . magit-pull)))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.

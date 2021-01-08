@@ -8,8 +8,8 @@
 ;; Maintainer: Neil Okamoto <neil.okamoto+melpa@gmail.com>
 ;;             Shen, Jen-Chieh <jcs090218@gmail.com>
 ;; URL: https://github.com/emacsorphanage/git-gutter
-;; Package-Version: 20201203.500
-;; Package-Commit: 56308dc1a1196583791cb24aa86b2669d343b9f3
+;; Package-Version: 20210106.1400
+;; Package-Commit: 34ae23dfed4f2afb06286c120cbc7793cf4c5bc1
 ;; Version: 0.91
 ;; Package-Requires: ((emacs "24.3"))
 
@@ -340,7 +340,7 @@ Argument TEST is the case before BODY execution."
   (let ((arg (git-gutter:git-diff-arguments file)))
     (apply #'start-file-process "git-gutter" proc-buf
            "git" "--no-pager" "-c" "diff.autorefreshindex=0"
-           "diff" "--no-color" "--no-ext-diff" "--relative" "-U0"
+           "diff" "--no-color" "--no-ext-diff" "--relative" "-U0" "--"
            arg)))
 
 (defun git-gutter:svn-diff-arguments (file)

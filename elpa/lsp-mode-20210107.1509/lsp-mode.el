@@ -322,6 +322,10 @@ the server has requested that."
     "[/\\\\]build-aux\\'"
     "[/\\\\]autom4te.cache\\'"
     "[/\\\\]\\.reference\\'"
+    ;; Clojure
+    "[/\\\\]\\.lsp\\'"
+    "[/\\\\]\\.clj-kondo\\'"
+    "[/\\\\]\\.cpcache\\'"
     ;; .Net Core build-output
     "[/\\\\]bin/Debug\\'"
     "[/\\\\]obj\\'")
@@ -720,6 +724,7 @@ Changes take effect only when a new session is started."
                                         (erlang-mode . "erlang")
                                         (dockerfile-mode . "dockerfile")
                                         (csharp-mode . "csharp")
+                                        (csharp-tree-sitter-mode . "csharp")
                                         (plain-tex-mode . "plaintex")
                                         (latex-mode . "latex")
                                         (vhdl-mode . "vhdl")

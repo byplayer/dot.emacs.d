@@ -1,8 +1,7 @@
 ;;; package --- Summary
 ;;; Commentary:
+;;; Author: byplayer
 ;;; Code:
-
-
 
 ;; reduce gc for loading init
 (setq gc-cons-threshold most-positive-fixnum)
@@ -320,6 +319,20 @@
              (setq c-basic-offset 4)
              (setq tab-width 4)
              (setq indent-tabs-mode nil))))
+
+(leaf *utils
+  :bind ("C-c f" . my/copy-full-path-and-linenum)
+  :init
+  (require 'lisp-mnt)
+  (defun my/copy-full-path-and-linenum ()
+  "copy buffer's full path to kill ring"
+  (interactive)
+  (when buffer-file-name
+    (let
+        ((msg  (format "%s:%d" (file-truename buffer-file-name) (line-number-at-pos))))
+
+      (kill-new msg)
+      (message "copied: %s" msg)))))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.

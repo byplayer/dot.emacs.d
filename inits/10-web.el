@@ -17,13 +17,13 @@
          ("\\.rxml$" . web-mode)
          ("\\.erb$". web-mode)
          ("\\.rhtml$". web-mode))
+  :hook ((web-mode-hook . my/web-mode-hook))
   :init
-  (defun web-mode-hook ()
+  (defun my/web-mode-hook ()
     (setq web-mode-markup-indent-offset 2) ;; html indent
     (setq web-mode-css-indent-offset 2)    ;; css indent
-    (setq web-mode-code-indent-offset 2)   ;; script indent(js,php,etc..)
-    )
-  (add-hook 'web-mode-hook  'web-mode-hook)
+    (setq web-mode-code-indent-offset 2))  ;; script indent(js,php,etc..)
+
   ;; 色の設定
   (custom-set-faces
    '(web-mode-doctype-face

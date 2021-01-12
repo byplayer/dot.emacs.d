@@ -73,6 +73,7 @@
 
 (leaf init-loader
   :ensure t
+  :defvar (init-loader-byte-compile init-loader-show-log-after-init)
   :setq ((init-loader-byte-compile . t)
          (init-loader-show-log-after-init . nil))
   :config
@@ -96,6 +97,11 @@
          ("C-s" . company-filter-candidates))
   :bind (emacs-lisp-mode-map
          ("C-M-i" . company-complete))
+  :defvar (company-idle-delay
+           company-minimum-prefix-length
+           company-selection-wrap-around
+           company-backends
+           company-dabbrev-char-regexp)
   :init
   (global-company-mode)
   (setq company-idle-delay 0.5)             ;default is 0.5
@@ -128,6 +134,7 @@
   :commands company-lsp)
 
 (leaf *encoding
+  :defvar default-buffer-file-coding-system
   :hook (after-init-hook . (lambda ()
                              (setq default-buffer-file-coding-system 'utf-8-unix)))
   :init
@@ -137,6 +144,7 @@
 (leaf popwin
   :commands popwin-mode
   :bind ("C-x p" . popwin:display-last-buffer)
+  :defvar (popwin:special-display-config)
   :init
   (popwin-mode 1)
   (setq popwin:special-display-config '(; ("*compilation*" :noselect t)
@@ -173,6 +181,7 @@
     :doc C/C++ suggestion tool
     :ensure t
     :require t
+    :defvar (flycheck-clang-language-standard c-basic-offset irony-supported-major-modes)
     :hook (irony-mode-hook . (lambda()
                                (irony-cdb-autosetup-compile-options)
                                (add-to-list
@@ -212,6 +221,7 @@
   :ensure t
   :after company
   :mode (("\.go$" . go-mode))
+  :defvar (indent-level)
   :hook ((go-mode-hook . (lambda()
                            (go-eldoc-setup)
                            (company-mode)
@@ -256,6 +266,10 @@
 
 (leaf *sh-mode-config
   :doc sh-mode configuration
+  :defvar (sh-basic-offset
+           sh-indentation
+           sh-indent-after-continuation
+           sh-indent-for-continuation)
   :hook ((sh-mode-hook . (lambda ()
                            (setq sh-basic-offset 2
                                  sh-indentation 2
@@ -279,6 +293,7 @@
              jedi:install-server
              jedi:reinstall-server
              jedi:install-server-block)
+  :defvar (jedi:environment-root)
   :init
   (setq jedi:environment-root "~/.virtualenvs/jedi"))
 
@@ -314,6 +329,7 @@
          ("C-c , s" . phpunit-current-test)
          ("C-c , v" . phpunit-current-class)
          ("C-c , a" . phpunit-current-project))
+  :defun (php-set-style)
   :hook (php-mode-hook . (lambda()
              (php-set-style "php")
              (setq c-basic-offset 4)

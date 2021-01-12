@@ -244,9 +244,8 @@
   (leaf helm-go-package
     :ensure t
     :commands helm-go-package
-    :init
-    (eval-after-load 'go-mode
-      '(substitute-key-definition 'go-import-add 'helm-go-package go-mode-map)))
+    :defer-config (go-mode (substitute-key-definition
+                            'go-import-add 'helm-go-package go-mode-map)))
 
   :init
   (defun go-compile ()

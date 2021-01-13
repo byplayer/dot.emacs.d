@@ -266,12 +266,10 @@
 (leaf *sh-mode-config
   :doc sh-mode configuration
   :defvar (sh-basic-offset
-           sh-indentation
            sh-indent-after-continuation
            sh-indent-for-continuation)
   :hook ((sh-mode-hook . (lambda ()
                            (setq sh-basic-offset 2
-                                 sh-indentation 2
                                  sh-indent-after-continuation nil
                                  sh-indent-for-continuation 0)))))
 

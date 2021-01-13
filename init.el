@@ -354,6 +354,26 @@
   (yas-reload-all)
   (yas-global-mode 1))
 
+(leaf recentf-ext
+  :ensure t
+  :require t
+  :defvar (recentf-auto-cleanup
+           recentf-max-saved-items
+           recentf-auto-save-timer
+           run-with-idle-timer
+           recentf-exclude)
+  :setq ((recentf-auto-cleanup . 'never)
+         (recentf-max-saved-items . 2000)
+         (recentf-auto-save-timer .
+                                  '(run-with-idle-timer 30 t 'recentf-save-list)))
+  :config
+  (add-to-list 'recentf-exclude "^/[^/:]+:")
+  (add-to-list 'recentf-exclude "svn-commit\.tmp$")
+  (add-to-list 'recentf-exclude "COMMIT_EDITMSG")
+  (add-to-list 'recentf-exclude "bookmarks")
+  (add-to-list 'recentf-exclude "\\.recentf")
+  (add-to-list 'recentf-exclude "\\.revive\\.el"))
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -361,6 +381,12 @@
  ;; If there is more than one, they won't work right.
  '(imenu-list-position 'left t)
  '(imenu-list-size 30 t)
+ '(package-archives
+   '(("org" . "https://orgmode.org/elpa/")
+     ("melpa" . "https://melpa.org/packages/")
+     ("gnu" . "https://elpa.gnu.org/packages/")))
+ '(package-selected-packages
+   '(yaml-mode web-mode volatile-highlights undohist undo-tree smartparens scss-mode sclang-mode savekill ruby-block rubocopfmt rspec-mode robe rinari recentf-ext rainbow-mode pyenv-mode-auto py-autopep8 prettier-js posframe popwin phpunit php-mode org-sticky-header org-plus-contrib org-gcal neotree mozc-popup magit macrostep lsp-ui leaf-tree leaf-convert kotlin-mode keyfreq json-mode js2-mode init-loader helm-swoop helm-projectile helm-migemo helm-ls-git helm-gtags helm-go-package helm-flycheck helm-descbinds helm-c-yasnippet helm-ag groovy-mode go-eldoc gitignore-mode git-gutter flycheck-pos-tip flycheck-plantuml flycheck-kotlin flycheck-irony feature-mode expand-region emojify el-get dockerfile-mode crontab-mode company-quickhelp company-lsp company-jedi company-irony company-go clang-format cider bind-key avy auto-virtualenvwrapper arduino-mode anzu all-the-icons-dired))
  '(term-default-bg-color "#000000")
  '(term-default-fg-color "light gray")
  '(truncate-lines nil)

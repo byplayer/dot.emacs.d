@@ -365,7 +365,7 @@
   :setq ((recentf-auto-cleanup . 'never)
          (recentf-max-saved-items . 2000)
          (recentf-auto-save-timer .
-                                  '(run-with-idle-timer 30 t 'recentf-save-list)))
+                                  '(run-with-idle-timer 60 t 'recentf-save-list)))
   :config
   (add-to-list 'recentf-exclude "^/[^/:]+:")
   (add-to-list 'recentf-exclude "svn-commit\.tmp$")

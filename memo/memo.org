@@ -23,7 +23,7 @@ package-install
 (byte-recompile-directory pkg-dir 0 t)
 
 * el-get
-** quelpa upgrade all
+** el-get upgrade all
 (el-get-update-all)
 
 * flycheck

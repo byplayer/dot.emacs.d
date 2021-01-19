@@ -387,8 +387,7 @@
             (start-process "gtags-update" nil
                            "global" "-uv")))))
   (defun my-tag-mode-insert-hook ()
-    (gtags-mode 1))
-  (defun my-gtags-mode-bind-hook ()
+    (gtags-mode 1)
     (local-set-key (kbd "M-.") 'helm-gtags-find-tag)
     (local-set-key (kbd "M-,") 'helm-gtags-find-rtag)
     (local-set-key (kbd "M-/") 'helm-gtags-find-pattern)
@@ -396,19 +395,7 @@
     (local-set-key (kbd "M-*") 'helm-gtags-pop-stack))
 
   :hook ((after-save-hook . my-c-mode-update-gtags)
-         (js2-mode-hook . my-tag-mode-insert-hook)
-         (perl-mode-hook . my-tag-mode-insert-hook)
-         (php-mode-hook . my-tag-mode-insert-hook)
-         (c-mode-common-hook . my-tag-mode-insert-hook)
-         (feature-mode-hook . my-tag-mode-insert-hook)
-         (ruby-mode-hook . my-tag-mode-insert-hook)
-         (robe-mode-hook . my-tag-mode-insert-hook)
-         (emacs-lisp-mode-hook . my-tag-mode-insert-hook)
-         (lisp-mode-hook . my-tag-mode-insert-hook)
-         (nxml-mode-hook . my-tag-mode-insert-hook)
-         (python-mode-hook . my-tag-mode-insert-hook)
-         (kotlin-mode-hook . my-tag-mode-insert-hook)
-         (gtags-mode-hook . my-gtags-mode-bind-hook))
+         (prog-mode-hook . my-tag-mode-insert-hook))
   :init
   (leaf helm-gtags
     :ensure t

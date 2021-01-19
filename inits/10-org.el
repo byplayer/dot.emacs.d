@@ -9,38 +9,73 @@
 (leaf cider
   :ensure t)
 
+(leaf bind-key
+  :ensure t)
+
 (leaf org
   :ensure t
+  :after bind-key
   :bind (("C-c a" . my/org-agenda)
          ("C-c C-9" . org-capture))
   :mode (("\\.org$" . org-mode))
+  :defvar (org-use-speed-commands
+           org-todo-keywords
+           org-directory
+           org-log-done
+           org-log-done-with-time
+           org-log-reschedule
+           org-agenda-restore-windows-after-quit
+           org-agenda-show-all-dates
+           org-indent-indentation-per-level
+           org-startup-indented
+           org-agenda-files
+           helm-completing-read-handlers-alist
+           my-org-agenda-directory
+           my-org-agenda-files
+           org-capture-templates
+           org-archive-location
+           daily-routine-template
+           org-mode-map
+           org-columns-default-format
+           org-agenda-mode-map
+           org-agenda-custom-commands
+           org-startup-folded
+           org-confirm-babel-evaluate
+           org-speed-commands-user
+           org-imenu-depth
+           org-plantuml-jar-path
+           org-clock-clocktable-default-properties
+           org-global-properties)
+  :setq ((org-use-speed-commands . t)
+         (org-todo-keywords . '((sequence "TODO(t)" "WAIT(w)" "SOMEDAY(s)" "|" "DONE(d)" "CANCEL(c)")))
+         (org-log-done . 'time)
+         (org-log-done-with-time . t)
+         (org-log-reschedule . 'time)
+         (org-agenda-restore-windows-after-quit . t)
+         (org-agenda-show-all-dates . t)
+         (org-indent-indentation-per-level . 2)
+         (org-startup-indented . t)
+         (org-directory . "~/docs/org_doc")
+         (my-org-agenda-directory . (concatenate 'string org-directory "/agenda"))
+         (daily-routine-template . (concatenate 'string org-directory "/templates/daily_routine.org"))
+         (org-agenda-files . (my-org-agenda-files))
+         (org-columns-default-format . "%40ITEM(Task) %17Effort(Estimated Effort){:} %CLOCKSUM")
+         (org-startup-folded . "nofold")
+         (org-confirm-babel-evaluate . 'my-org-confirm-babel-evaluate)
+         (org-plantuml-jar-path . "/usr/share/plantuml/plantuml.jar")
+         (org-imenu-depth . 3)
+         (org-clock-clocktable-default-properties . '(:maxlevel 4 :scope file))
+         (org-global-properties .
+                                (quote (("Effort_ALL" .
+                                         "00:05 00:15 00:30 01:00 01:30 02:00 02:30 03:00 04:00 05:00 06:00 07:00 08:00")))))
+  :hook ((org-mode-hook . (lambda () (add-to-list 'helm-completing-read-handlers-alist '(org-set-tags))))
+         (org-after-todo-statistics-hook . org-summary-todo)
+         (org-babel-after-execute-hook . org-redisplay-inline-images))
   :init
   (require 'org-habit)
-  (setq org-use-speed-commands t)
 
-  ;; TODO status
-  (setq org-todo-keywords '((sequence "TODO(t)" "WAIT(w)" "SOMEDAY(s)" "|" "DONE(d)" "CANCEL(c)")))
-  ;; log date when down
-  (setq
-   org-log-done 'time
-   org-log-done-with-time t
-   org-log-reschedule 'time
-   org-agenda-restore-windows-after-quit t
-   org-agenda-show-all-dates t
-   org-indent-indentation-per-level 2
-   org-startup-indented t)
-
-  (add-hook 'org-mode-hook
-            (lambda () (add-to-list 'helm-completing-read-handlers-alist '(org-set-tags))))
-
-  (setq org-directory "~/docs/org_doc")
-  (setq my-org-agenda-directory (concatenate 'string org-directory "/agenda"))
-  (setq daily-routine-template (concatenate 'string org-directory "/templates/daily_routine.org"))
   (defun my-org-agenda-files ()
     (directory-files-recursively my-org-agenda-directory "\.org$"))
-
-  (setq org-agenda-files
-        (my-org-agenda-files))
 
   (defun my/org-agenda (&optional arg org-keys restriction)
     (interactive "P")
@@ -112,7 +147,6 @@
   ;; #+STARTUP: nofold            (or ‘showall’, this is equivalent)
   ;; #+STARTUP: content
   ;; #+STARTUP: showeverything
-  (setq org-startup-folded "nofold")
 
   (add-to-list 'org-agenda-custom-commands
                '("d" "Daily todo tasks"
@@ -159,18 +193,12 @@
                  ))
 
   (defun my-org-confirm-babel-evaluate (lang body)
-  (not (member lang '("plantuml" "sh"))))
-  (setq org-confirm-babel-evaluate 'my-org-confirm-babel-evaluate)
+    (not (member lang '("plantuml" "sh"))))
 
-  (add-hook 'org-babel-after-execute-hook 'org-redisplay-inline-images)
-
-  (setq org-plantuml-jar-path "/usr/share/plantuml/plantuml.jar")
   (org-babel-do-load-languages 'org-babel-load-languages
                                '(
                                  (shell . t)
-                                 (plantuml . t)
-                                 )
-                               )
+                                 (plantuml . t)))
 
   (add-to-list 'org-speed-commands-user '("d" org-todo "DONE"))
   (add-to-list 'org-speed-commands-user '("c" org-todo "CANCEL"))
@@ -179,13 +207,6 @@
   (add-to-list 'org-speed-commands-user '("A" my/org-archive-this-file))
   (add-to-list 'org-speed-commands-user '("s" org-schedule ""))
   (add-to-list 'org-speed-commands-user '("/" helm-org-in-buffer-headings))
-
-  (setq org-imenu-depth 3)
-
-  (setq org-clock-clocktable-default-properties '(:maxlevel 4 :scope file))
-  (setq org-global-properties
-        (quote (("Effort_ALL" .
-                 "00:05 00:15 00:30 01:00 01:30 02:00 02:30 03:00 04:00 05:00 06:00 07:00 08:00"))))
 
   (defun my/org-archive-this-file ()
     "Archive current file.
@@ -227,20 +248,16 @@ The file-path is archive target file path.  If no file-path is given uses the fu
         (unless (equal effort "")
           (org-set-property "Effort" effort)))))
 
-  (setq org-columns-default-format "%40ITEM(Task) %17Effort(Estimated Effort){:} %CLOCKSUM")
-
   (defun org-summary-todo (n-done n-not-done)
     "Switch entry to DONE when all subentries are done, to TODO otherwise."
     (let (org-log-done org-log-states)   ; turn off logging
       (org-todo (if (= n-not-done 0) "DONE" "TODO"))))
 
-  (add-hook 'org-after-todo-statistics-hook 'org-summary-todo)
-
   (defun my/get-string-from-file (filePath)
-  "Return filePath's file content."
-  (with-temp-buffer
-    (insert-file-contents filePath)
-    (buffer-string)))
+    "Return filePath's file content."
+    (with-temp-buffer
+      (insert-file-contents filePath)
+      (buffer-string)))
 
   (defun insert-daily-routine-tasks ()
      "Insert daily routine tasks"
@@ -258,18 +275,19 @@ The file-path is archive target file path.  If no file-path is given uses the fu
              ("C-c f" . org-forward-heading-same-level)
              ("C-c b" . org-backward-heading-same-level))
   (bind-keys :map org-agenda-mode-map
-             ("d" . org-agenda-todo))
-  )
+             ("d" . org-agenda-todo)))
 
 (leaf org-sticky-header
-  :el-get alphapapa/org-sticky-header
+  :ensure t
+  :defvar org-sticky-header-full-path
   :hook (org-mode-hook . org-sticky-header-mode)
   :setq ((org-sticky-header-full-path . 'full)))
 
 (leaf org-todoist
   :el-get byplayer/org-todoist
   :commands org-todoist-fetch org-todoist-list
-  :config (setq org-todoist-agenda-file (expand-file-name "todoist.org" my-org-agenda-directory)))
+  :defvar (org-todoist-agenda-file)
+  :setq ((org-todoist-agenda-file . (expand-file-name "todoist.org" my-org-agenda-directory))))
 
 (provide '10-org)
 ;;; 10-org.el ends here

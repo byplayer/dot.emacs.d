@@ -12,8 +12,6 @@
           (expand-file-name
            (file-name-directory (or load-file-name byte-compile-current-file))))))
 
-(add-to-list 'load-path "/opt/global/share/gtags/")
-
 (eval-and-compile
   (customize-set-variable
    'package-archives '(("org"   . "https://orgmode.org/elpa/")
@@ -374,6 +372,51 @@
   (add-to-list 'recentf-exclude "bookmarks")
   (add-to-list 'recentf-exclude "\\.recentf")
   (add-to-list 'recentf-exclude "\\.revive\\.el"))
+
+(leaf gtags
+  :doc configuration for gtags.
+  :el-get (gtags
+           :url "https://cvs.savannah.gnu.org/viewvc/*checkout*/global/global/gtags.el")
+  :commands gtags-mode
+  :defer-config
+  (defun my-c-mode-update-gtags ()
+    (let* ((file (buffer-file-name (current-buffer)))
+           (dir (directory-file-name (file-name-directory file))))
+      (when (executable-find "global")
+        (if (string= (shell-command-to-string "pgrep gtags") "")
+            (start-process "gtags-update" nil
+                           "global" "-uv")))))
+  (defun my-tag-mode-insert-hook ()
+    (gtags-mode 1))
+  (defun my-gtags-mode-bind-hook ()
+    (local-set-key (kbd "M-.") 'helm-gtags-find-tag)
+    (local-set-key (kbd "M-,") 'helm-gtags-find-rtag)
+    (local-set-key (kbd "M-/") 'helm-gtags-find-pattern)
+    (local-set-key (kbd "M-s") 'helm-gtags-find-symbol)
+    (local-set-key (kbd "M-*") 'helm-gtags-pop-stack))
+
+  :hook ((after-save-hook . my-c-mode-update-gtags)
+         (js2-mode-hook . my-tag-mode-insert-hook)
+         (perl-mode-hook . my-tag-mode-insert-hook)
+         (php-mode-hook . my-tag-mode-insert-hook)
+         (c-mode-common-hook . my-tag-mode-insert-hook)
+         (feature-mode-hook . my-tag-mode-insert-hook)
+         (ruby-mode-hook . my-tag-mode-insert-hook)
+         (robe-mode-hook . my-tag-mode-insert-hook)
+         (emacs-lisp-mode-hook . my-tag-mode-insert-hook)
+         (lisp-mode-hook . my-tag-mode-insert-hook)
+         (nxml-mode-hook . my-tag-mode-insert-hook)
+         (python-mode-hook . my-tag-mode-insert-hook)
+         (kotlin-mode-hook . my-tag-mode-insert-hook)
+         (gtags-mode-hook . my-gtags-mode-bind-hook))
+  :init
+  (leaf helm-gtags
+    :ensure t
+    :commands (helm-gtags-find-tag
+               helm-gtags-find-rtag
+               helm-gtags-find-pattern
+               helm-gtags-find-symbol
+               helm-gtags-pop-stack)))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.

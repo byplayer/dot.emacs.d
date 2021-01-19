@@ -424,7 +424,7 @@
   :el-get byplayer/windows
   :bind (("C-x C-c" . see-you-again)
          ("C-x K" . kill-all-buffers))
-  :hook ((window-setup-hook . resume-windows))
+  ; :hook ((window-setup-hook . resume-windows))
   :setq ((win:switch-prefix . "\C-cw")
          (win:use-frame . nil))
   :init
@@ -438,6 +438,25 @@
   :init
   (eval-after-load "ispell"
     '(add-to-list 'ispell-skip-region-alist '("[^\000-\377]"))))
+
+(leaf *hostconf
+  :doc host specific configuration
+  :init
+  (let
+      ((hostname "no_host")
+       (hostconf ""))
+    (setq hostname  (system-name))
+    (if (null hostname)
+        (setq hostname "no_host"))
+
+    (setq hostname (downcase hostname))
+    (setq hostname (car (split-string hostname "\\.")))
+
+    (setq hostconf (expand-file-name (concat "~/.emacs.d/inits/hosts/"
+                                             hostname ".el")))
+
+    (if (file-exists-p hostconf)
+        (load-file hostconf))))
 
 (leaf *misc
   :doc misc configuration

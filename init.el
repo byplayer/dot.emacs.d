@@ -246,6 +246,7 @@
     :commands helm-go-package
     :defer-config (go-mode (substitute-key-definition
                             'go-import-add 'helm-go-package go-mode-map)))
+  :defun (lsp-format-buffer lsp-organize-imports)
 
   :init
   (defun go-compile ()

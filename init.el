@@ -411,6 +411,14 @@
   (add-to-list 'magic-mode-alist '("\\(.\\|\n\\)*\n@interface" . objc-mode))
   (add-to-list 'magic-mode-alist '("\\(.\\|\n\\)*\n@protocol" . objc-mode)))
 
+(leaf *octave-mode
+  :mode (("\.m$" . octave-mode))
+  :hook ((octave-mode-hook . (lambda ()
+                               (abbrev-mode 1)
+                               (auto-fill-mode 1)
+                               (if (eq window-system 'x)
+                                   (font-lock-mode 1))))))
+
 (leaf windows
   :doc windows + revive
   :el-get byplayer/windows

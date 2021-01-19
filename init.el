@@ -430,6 +430,15 @@
   :init
   (win:startup-with-window))
 
+(leaf *spell
+  :doc spell check configuration
+  :defvar (ispell-program-name ispell-grep-command)
+  :setq ((ispell-program-name . "aspell")
+         (ispell-grep-command . "grep"))
+  :init
+  (eval-after-load "ispell"
+    '(add-to-list 'ispell-skip-region-alist '("[^\000-\377]"))))
+
 (leaf *misc
   :doc misc configuration
   :init

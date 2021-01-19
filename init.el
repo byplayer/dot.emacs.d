@@ -411,6 +411,23 @@
   (add-to-list 'magic-mode-alist '("\\(.\\|\n\\)*\n@interface" . objc-mode))
   (add-to-list 'magic-mode-alist '("\\(.\\|\n\\)*\n@protocol" . objc-mode)))
 
+(leaf windows
+  :doc windows + revive
+  :el-get byplayer/windows
+  :bind (("C-x C-c" . see-you-again)
+         ("C-x K" . kill-all-buffers))
+  :hook ((window-setup-hook . resume-windows))
+  :setq ((win:switch-prefix . "\C-cw")
+         (win:use-frame . nil))
+  :init
+  (win:startup-with-window))
+
+(leaf *misc
+  :doc misc configuration
+  :init
+  (setq confirm-kill-emacs 'y-or-n-p)
+  (set-frame-parameter nil 'fullscreen 'maximized))
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

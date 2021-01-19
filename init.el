@@ -405,6 +405,12 @@
                helm-gtags-find-symbol
                helm-gtags-pop-stack)))
 
+(leaf *objc-mode
+  :init
+  (add-to-list 'magic-mode-alist '("\\(.\\|\n\\)*\n@implementation" . objc-mode))
+  (add-to-list 'magic-mode-alist '("\\(.\\|\n\\)*\n@interface" . objc-mode))
+  (add-to-list 'magic-mode-alist '("\\(.\\|\n\\)*\n@protocol" . objc-mode)))
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

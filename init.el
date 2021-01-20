@@ -429,9 +429,9 @@
   :defvar (win:switch-prefix
            win:use-frame)
   :defun (win:startup-with-window)
-  :hook ((window-setup-hook . resume-windows))
-  :setq ((win:switch-prefix . "\C-cw")
-         (win:use-frame . nil))
+  ; :hook ((window-setup-hook . resume-windows))
+  :pre-setq ((win:switch-prefix . "\C-cw"))
+  :setq ((win:use-frame . nil))
   :init
   (win:startup-with-window))
 

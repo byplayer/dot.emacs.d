@@ -100,6 +100,8 @@
            company-selection-wrap-around
            company-backends
            company-dabbrev-char-regexp)
+  :defun (company-mode/backend-with-yas
+          edit-category-table-for-company-dabbrev)
   :init
   (global-company-mode)
   (setq company-idle-delay 0.5)             ;default is 0.5
@@ -424,7 +426,10 @@
   :el-get byplayer/windows
   :bind (("C-x C-c" . see-you-again)
          ("C-x K" . kill-all-buffers))
-  ; :hook ((window-setup-hook . resume-windows))
+  :defvar (win:switch-prefix
+           win:use-frame)
+  :defun (win:startup-with-window)
+  :hook ((window-setup-hook . resume-windows))
   :setq ((win:switch-prefix . "\C-cw")
          (win:use-frame . nil))
   :init

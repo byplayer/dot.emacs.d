@@ -334,6 +334,32 @@
              (setq tab-width 4)
              (setq indent-tabs-mode nil))))
 
+(leaf :java
+  :doc
+  configuration for java
+  :defvar (java-mode-map)
+  :hook ((java-mode-hook . (lambda ()
+                             (setq c-basic-offset 2)
+                             (setq tab-width 2)
+                             (setq indent-tabs-mode nil)
+                             (define-key java-mode-map (kbd "C-c c") 'java-compile))))
+  :init
+  (defun java-compile ()
+    "Traveling up the path, find build.xml file and run compile."
+    (interactive)
+    (save-buffer)
+    (with-temp-buffer
+      (while (and (not (or (file-exists-p "build.xml")
+                           (file-exists-p "pom.xml")
+                           (file-exists-p "build.gradle")))
+                  (not (equal "/" default-directory)))
+        (cd ".."))
+      (call-interactively 'compile))))
+
+(leaf groovy-mode
+  :ensure t
+  :mode (("\\.gradle$" . groovy-mode)))
+
 (leaf *utils
   :bind ("C-c f" . my/copy-full-path-and-linenum)
   :init
@@ -499,7 +525,7 @@
      ("melpa" . "https://melpa.org/packages/")
      ("gnu" . "https://elpa.gnu.org/packages/")))
  '(package-selected-packages
-   '(yaml-mode web-mode volatile-highlights undohist undo-tree smartparens scss-mode sclang-mode savekill ruby-block rubocopfmt rspec-mode robe rinari recentf-ext rainbow-mode pyenv-mode-auto py-autopep8 prettier-js posframe popwin phpunit php-mode org-sticky-header org-plus-contrib org-gcal neotree mozc-popup magit macrostep lsp-ui leaf-tree leaf-convert kotlin-mode keyfreq json-mode js2-mode init-loader helm-swoop helm-projectile helm-migemo helm-ls-git helm-gtags helm-go-package helm-flycheck helm-descbinds helm-c-yasnippet helm-ag groovy-mode go-eldoc gitignore-mode git-gutter flycheck-pos-tip flycheck-plantuml flycheck-kotlin flycheck-irony feature-mode expand-region emojify el-get dockerfile-mode crontab-mode company-quickhelp company-lsp company-jedi company-irony company-go clang-format cider bind-key avy auto-virtualenvwrapper arduino-mode anzu all-the-icons-dired))
+   '(gradle-mode yaml-mode web-mode volatile-highlights undohist undo-tree smartparens scss-mode sclang-mode savekill ruby-block rubocopfmt rspec-mode robe rinari recentf-ext rainbow-mode pyenv-mode-auto py-autopep8 prettier-js posframe popwin phpunit php-mode org-sticky-header org-plus-contrib org-gcal neotree mozc-popup magit macrostep lsp-ui leaf-tree leaf-convert kotlin-mode keyfreq json-mode js2-mode init-loader helm-swoop helm-projectile helm-migemo helm-ls-git helm-gtags helm-go-package helm-flycheck helm-descbinds helm-c-yasnippet helm-ag groovy-mode go-eldoc gitignore-mode git-gutter flycheck-pos-tip flycheck-plantuml flycheck-kotlin flycheck-irony feature-mode expand-region emojify el-get dockerfile-mode crontab-mode company-quickhelp company-lsp company-jedi company-irony company-go clang-format cider bind-key avy auto-virtualenvwrapper arduino-mode anzu all-the-icons-dired))
  '(term-default-bg-color "#000000")
  '(term-default-fg-color "light gray")
  '(truncate-lines nil)

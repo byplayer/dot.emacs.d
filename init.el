@@ -407,6 +407,24 @@
                helm-gtags-find-symbol
                helm-gtags-pop-stack)))
 
+(leaf migemo
+  :ensure t
+  :defvar (migemo-command
+           migemo-options
+           migemo-user-dictionary
+           migemo-regex-dictionary
+           migemo-dictionary
+           migemo-coding-system)
+  :commands migemo-init
+  :pre-setq ((migemo-command . "cmigemo")
+             (migemo-options . '("-q" "--emacs"))
+             (migemo-user-dictionary . nil)
+             (migemo-regex-dictionary . nil)
+             (migemo-dictionary . "/usr/local/share/migemo/utf-8/migemo-dict") ; mac
+             (migemo-coding-system . 'utf-8-unix))
+  :init
+  (migemo-init))
+
 (leaf *objc-mode
   :init
   (add-to-list 'magic-mode-alist '("\\(.\\|\n\\)*\n@implementation" . objc-mode))

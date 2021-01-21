@@ -98,9 +98,10 @@
 (when (fboundp 'mac-input-source)
   (run-with-idle-timer 3 t 'my:mac-keyboard-input-source))
 
-
-(setq plantuml-jar-path "/usr/local/opt/plantuml/libexec/plantuml.jar")
-(setq org-plantuml-jar-path plantuml-jar-path)
+(leaf *cocoa-plantuml
+  :defvar (plantuml-jar-path org-plantuml-jar-path)
+  :pre-setq ((plantuml-jar-path ."/usr/local/opt/plantuml/libexec/plantuml.jar")
+             (org-plantuml-jar-path . plantuml-jar-path)))
 
 (provide 'cocoa-emacs-conf)
 ;;; cocoa-emacs-conf.el ends here

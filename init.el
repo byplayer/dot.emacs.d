@@ -451,6 +451,93 @@
   :init
   (migemo-init))
 
+(leaf helm
+  :ensure t
+  :defvar (helm-source-buffers-list
+           helm-source-ls-git
+           helm-source-ls-git-status
+           helm-source-ls-git-buffers
+           helm-ff-auto-update-initial-value
+           helm-ff-transformer-show-only-basename
+           helm-input-idle-delay
+           helm-display-function
+           projectile-project-root-files)
+  :setq ((helm-ff-auto-update-initial-value . nil)
+         (helm-ff-transformer-show-only-basename . nil)
+         (helm-input-idle-delay . 0.2))
+  :bind (("M-x" . helm-M-x)
+         ("M-y" . helm-show-kill-ring)
+         ("C-x b" . my-helm)
+         ("C-:" . helm-resume)
+         ("M-i" . helm-swoop)
+         ("M-I" . helm-swoop-back-to-last-point)
+         ("C-c M-i" . helm-multi-swoop)
+         ("C-x M-i" . helm-multi-swoop-all))
+  :commands (helm-mode)
+  :init
+  (leaf helm-ls-git
+    :ensure t
+    :after helm
+    :require t)
+  (require 'helm-config)
+  (require 'helm-for-files)
+
+  (helm-mode t)
+
+  (setq helm-source-buffers-list
+        (helm-make-source "Buffers" 'helm-source-buffers))
+
+  (setq helm-source-ls-git-status
+        (helm-ls-git-build-git-status-source)
+        helm-source-ls-git
+        (helm-ls-git-build-ls-git-source)
+        helm-source-ls-git-buffers
+        (helm-ls-git-build-buffers-source))
+
+  (defun my-helm ()
+    "`helm' for opening files all resource."
+    (interactive)
+    (if (helm-ls-git-not-inside-git-repo)
+        (helm-other-buffer `(helm-source-buffers-list
+                             helm-source-bookmarks
+                             helm-source-recentf
+                             helm-source-locate)
+                           "*my helm*")
+      (helm-other-buffer `(helm-source-ls-git-status
+                           helm-source-buffers-list
+                           helm-source-bookmarks
+                           helm-source-ls-git-buffers
+                           helm-source-ls-git
+                           helm-source-recentf
+                           helm-source-locate)
+                         "*my helm*")))
+  (setq helm-display-function (lambda (buf &optional _resume)
+                                (split-window-vertically)
+                                (switch-to-buffer buf)
+                                ))
+
+  (setq projectile-project-root-files
+        '(".projectile"        ; projectile project marker
+          "rebar.config"       ; Rebar project file
+          "project.clj"        ; Leiningen project file
+          "pom.xml"            ; Maven project file
+          "build.sbt"          ; SBT project file
+          "build.gradle"       ; Gradle project file
+          "Gemfile"            ; Bundler file
+          "requirements.txt"   ; Pip file
+          "package.json"       ; npm package file
+          "Gruntfile.js"       ; Grunt project file
+          "bower.json"         ; Bower project file
+          "composer.json"      ; Composer project file
+          ".git"               ; Git VCS root dir
+          ".hg"                ; Mercurial VCS root dir
+          ".bzr"               ; Bazaar VCS root dir
+          ".fslckout"          ; Fossil VCS root dir
+          "_darcs"             ; Darcs VCS root dir
+          ))
+  (helm-autoresize-mode t))
+
+
 (leaf *objc-mode
   :init
   (add-to-list 'magic-mode-alist '("\\(.\\|\n\\)*\n@implementation" . objc-mode))
@@ -525,7 +612,7 @@
      ("melpa" . "https://melpa.org/packages/")
      ("gnu" . "https://elpa.gnu.org/packages/")))
  '(package-selected-packages
-   '(gradle-mode yaml-mode web-mode volatile-highlights undohist undo-tree smartparens scss-mode sclang-mode savekill ruby-block rubocopfmt rspec-mode robe rinari recentf-ext rainbow-mode pyenv-mode-auto py-autopep8 prettier-js posframe popwin phpunit php-mode org-sticky-header org-plus-contrib org-gcal neotree mozc-popup magit macrostep lsp-ui leaf-tree leaf-convert kotlin-mode keyfreq json-mode js2-mode init-loader helm-swoop helm-projectile helm-migemo helm-ls-git helm-gtags helm-go-package helm-flycheck helm-descbinds helm-c-yasnippet helm-ag groovy-mode go-eldoc gitignore-mode git-gutter flycheck-pos-tip flycheck-plantuml flycheck-kotlin flycheck-irony feature-mode expand-region emojify el-get dockerfile-mode crontab-mode company-quickhelp company-lsp company-jedi company-irony company-go clang-format cider bind-key avy auto-virtualenvwrapper arduino-mode anzu all-the-icons-dired))
+   '(helm-for-files helm-config gradle-mode yaml-mode web-mode volatile-highlights undohist undo-tree smartparens scss-mode sclang-mode savekill ruby-block rubocopfmt rspec-mode robe rinari recentf-ext rainbow-mode pyenv-mode-auto py-autopep8 prettier-js posframe popwin phpunit php-mode org-sticky-header org-plus-contrib org-gcal neotree mozc-popup magit macrostep lsp-ui leaf-tree leaf-convert kotlin-mode keyfreq json-mode js2-mode init-loader helm-swoop helm-projectile helm-migemo helm-ls-git helm-gtags helm-go-package helm-flycheck helm-descbinds helm-c-yasnippet helm-ag groovy-mode go-eldoc gitignore-mode git-gutter flycheck-pos-tip flycheck-plantuml flycheck-kotlin flycheck-irony feature-mode expand-region emojify el-get dockerfile-mode crontab-mode company-quickhelp company-lsp company-jedi company-irony company-go clang-format cider bind-key avy auto-virtualenvwrapper arduino-mode anzu all-the-icons-dired))
  '(term-default-bg-color "#000000")
  '(term-default-fg-color "light gray")
  '(truncate-lines nil)

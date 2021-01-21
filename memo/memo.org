@@ -36,7 +36,14 @@ C-c ! c check buffer
 <left> next source
 <right> previous source
 
-M-i  helm-swoop  search word in buffer
+M-x      helm-m-x
+M-y      helm-show-kill-ring
+C-x b    my-helm
+C-:      helm-resume
+M-i      helm-swoop  search word in buffer
+M-I      helm-swoop-back-to-last-point
+C-c M-i  helm-multi-swoop
+C-x M-i  helm-multi-swoop-all
 
 * window
 move window

@@ -537,6 +537,96 @@
           ))
   (helm-autoresize-mode t))
 
+(leaf clang-format
+  :ensure t
+  :commands (clang-format-buffer)
+  :defvar (clang-format-modes
+           clang-format-style)
+  :setq ((clang-format-modes . '(c++-mode c-mode java-mode))
+         (clang-format-style . "google"))
+  :hook (before-save-hook . my-clang-format-before-save)
+  :init
+  (defun my-clang-format-before-save ()
+    "Usage: (add-hook 'before-save-hook 'my-clang-format-before-save)"
+    (interactive)
+    (if (member major-mode clang-format-modes)
+        (clang-format-buffer))))
+
+(leaf font-lock+
+  :el-get emacsmirror/font-lock-plus)
+
+(leaf hideshow
+  :ensure t
+  :commands (hs-minor-mode)
+  :bind (("C-#" . hs-toggle-hiding)
+         ("C-+" . hs-show-all)
+         ("C-=" . hs-hide-all))
+  :init
+  ;; Set up hs-mode (HideShow) for Ruby
+  (add-to-list 'hs-special-modes-alist
+               `(ruby-mode
+                 ,(rx (or "def" "class" "module" "do")) ; Block start
+                 ,(rx (or "end"))                       ; Block end
+                 ,(rx (or "#" "=begin"))                ; Comment start
+                 ruby-forward-sexp nil))
+  (defun my/add-hs-minor-mode()
+    (hs-minor-mode 1))
+  (add-hook 'prog-mode-hook 'my/add-hs-minor-mode))
+
+;; plunt-uml
+(leaf flycheck-plantuml
+  :ensure t
+  :config
+  (flycheck-plantuml-setup))
+
+(leaf plantuml-mode
+  :ensure t
+  :commands plantuml-mode
+  :mode (("\\.puml$" . plantuml-mode)
+         ("\\.plantuml$" . plantuml-mode))
+  :config
+  (setq plantuml-jar-path "/usr/share/plantuml/plantuml.jar")
+  (setq plantuml-output-type "png")
+  ;; below configuration doesn't work so directory modify plantuml-mode.el source
+  ;; (setq plantuml-default-exec-mode 'jar)
+  ;; (setq plantuml-exec-mode 'jar)
+  )
+
+;; yaml
+(leaf yaml-mode
+  :mode (("\\.yml$" . yaml-mode)
+         ("\\.dig$" . yaml-mode)
+         ("\\.yml-[a-zA-Z]+$" . yaml-mode))
+  :init
+  (add-hook 'yaml-mode-hook
+          '(lambda ()
+             (define-key yaml-mode-map "\C-m" 'newline-and-indent))))
+
+(leaf emojify
+  :ensure t
+  :hook (after-init-hook . global-emojify-mode))
+
+(leaf undohist
+  :ensure t
+  :commands undohist-initialize
+  :hook (after-init-hook . undohist-initialize))
+
+(leaf pyenv-mode-auto
+  :ensure t
+  :init (require 'pyenv-mode-auto))
+
+(leaf undo-tree
+  :doc show undo tree
+  :ensure t
+  :defvar (undo-tree-auto-save-history
+           undo-tree-history-directory-alist)
+  :commands global-undo-tree-mode
+  :init
+  (global-undo-tree-mode)
+  (setq undo-tree-auto-save-history t
+        undo-tree-history-directory-alist `(("." .,
+                                             (expand-file-name "~/.emacs.d/undo-tree-hist/")))))
+
 
 (leaf *objc-mode
   :init
@@ -596,9 +686,46 @@
 
 (leaf *misc
   :doc misc configuration
+  I would like to use setq setq-default macro but
+  those generate eval-after-load '*misc so It doesn't work.
+  :defvar (c-hungry-delete-key
+           compilation-scroll-output)
+  :pre-setq ((inhibit-startup-message . t))
+  :custom ((truncate-lines . nil)
+           (truncate-partial-width-windows . nil))
+  :bind (("C-x <right>" . windmove-right)
+         ("C-x <left>" . windmove-left)
+         ("C-x <down>" . windmove-down)
+         ("C-x <up>" . windmove-up))
   :init
+  ;; support bat moad, ini mode
+  (require 'generic-x)
+
+  (set-frame-parameter nil 'fullscreen 'maximized)
+  ;; no toolbar
+  (tool-bar-mode 0)
+  ;; show column
+  (column-number-mode 1)
+  ;; move window using meta
+  (windmove-default-keybindings 'meta)
+
+  (setq c-hungry-delete-key t)
   (setq confirm-kill-emacs 'y-or-n-p)
-  (set-frame-parameter nil 'fullscreen 'maximized))
+  (setq frame-title-format "%b")
+  (setq compilation-scroll-output 'first-error)
+  (setq indicate-empty-lines t)
+  (setq indicate-buffer-boundaries 'right)
+  (setq scroll-step 1)
+
+  (setq-default indent-level 2)
+  (setq-default tab-width 2)
+  (setq-default indent-tabs-mode nil)
+  )
+
+(leaf *saveplace
+  :setq-default ((save-place-limit . 1000))
+  :init
+  (save-place-mode 1))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.

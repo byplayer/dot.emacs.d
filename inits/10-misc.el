@@ -2,57 +2,10 @@
 ;;; Commentary:
 ;;; Code:
 
-;; support bat moad, ini mode
-(require 'generic-x)
 
-;; no toolbar
-(tool-bar-mode 0)
 
-;; indent
-(setq-default indent-level 2)
-;; default tab witdh
-(setq-default tab-width 2)
-;; use space insted of tab
-(setq-default indent-tabs-mode nil)
 
-;; hungry delete
-(setq c-hungry-delete-key t)
 
-;; show column
-(column-number-mode 1)
-
-;; no show start page
-(setq inhibit-startup-message t)
-
-;; move window using meta
-(windmove-default-keybindings 'meta)
-
-;; use C-x and arrow keys to move focus
-(global-set-key (kbd "C-x <right>") 'windmove-right)
-(global-set-key (kbd "C-x <left>") 'windmove-left)
-(global-set-key (kbd "C-x <down>") 'windmove-down)
-(global-set-key (kbd "C-x <up>") 'windmove-up)
-
-;; save edit place
-(save-place-mode 1)
-(setq-default save-place-limit 1000)
-
-;; show buffer name to title
-(setq frame-title-format "%b")
-
-;; auto scroll on compile buffer
-(setq compilation-scroll-output 'first-error)
-
-;; show EOF
-(setq-default indicate-empty-lines t)
-(setq-default indicate-buffer-boundaries 'right)
-
-(custom-set-variables
- '(truncate-lines nil)
- '(truncate-partial-width-windows nil))
-
-;; scroll step
-(setq scroll-step 1)
 
 ;; show white space of end of line
 (setq-default show-trailing-whitespace t)
@@ -89,17 +42,6 @@
         (tab-mark   ?\t   [?\xBB ?\t])
         ))
 (global-whitespace-mode 1)
-
-;; undo-tree
-(leaf undo-tree
-  :doc show undo tree
-  :ensure t
-  :commands global-undo-tree-mode
-  :init
-  (global-undo-tree-mode)
-  (setq undo-tree-auto-save-history t
-           undo-tree-history-directory-alist `(("." .,
-                                                (expand-file-name "~/.emacs.d/undo-tree-hist/")))))
 
 ;; backup directory configuration
 (setq backup-directory-alist
@@ -193,9 +135,6 @@
 (setq imenu-list-size 0.15)
 
 ;; for dired with the all icons
-(leaf font-lock+
-  :el-get emacsmirror/font-lock-plus)
-
 (require 'dired-x)
 (add-hook 'dired-mode-hook
           '(lambda()
@@ -238,21 +177,6 @@ e.g. 20190-4-01 15:02:33"
         js2-mode-hook))
 (loop for hook in prettier-js-mode-hooks
       do (add-hook hook 'prettier-js-mode))
-
-;; clang-format
-(leaf clang-format
-  :ensure t
-  :commands (clang-format-buffer)
-  :hook (before-save-hook . my-clang-format-before-save)
-  :init
-  (setq clang-format-modes
-        '(c++-mode c-mode java-mode))
-  (setq clang-format-style "google")
-  (defun my-clang-format-before-save ()
-    "Usage: (add-hook 'before-save-hook 'my-clang-format-before-save)"
-    (interactive)
-    (if (member major-mode clang-format-modes)
-        (clang-format-buffer))))
 
 ;; mode-line
 (defvar mode-line-cleaner-alist
@@ -330,25 +254,6 @@ e.g. 20190-4-01 15:02:33"
                   " "
                   mode-line-modes mode-line-misc-info mode-line-end-spaces))
 
-;; hs-minor-mode
-(leaf hideshow
-  :ensure t
-  :commands (hs-minor-mode)
-  :bind (("C-#" . hs-toggle-hiding)
-         ("C-+" . hs-show-all)
-         ("C-=" . hs-hide-all))
-  :init
-  ;; Set up hs-mode (HideShow) for Ruby
-  (add-to-list 'hs-special-modes-alist
-               `(ruby-mode
-                 ,(rx (or "def" "class" "module" "do")) ; Block start
-                 ,(rx (or "end"))                       ; Block end
-                 ,(rx (or "#" "=begin"))                ; Comment start
-                 ruby-forward-sexp nil))
-  (defun my/add-hs-minor-mode()
-    (hs-minor-mode 1))
-  (add-hook 'prog-mode-hook 'my/add-hs-minor-mode))
-
 ;; lisp
 (add-hook 'emacs-lisp-mode-hook
           '(lambda()
@@ -361,48 +266,6 @@ e.g. 20190-4-01 15:02:33"
              (progn
                (setq indent-tabs-mode nil)
                (flyspell-prog-mode))))
-
-;; plunt-uml
-(leaf flycheck-plantuml
-  :ensure t
-  :config
-  (flycheck-plantuml-setup))
-
-(leaf plantuml-mode
-  :ensure t
-  :commands plantuml-mode
-  :mode (("\\.puml$" . plantuml-mode)
-         ("\\.plantuml$" . plantuml-mode))
-  :config
-  (setq plantuml-jar-path "/usr/share/plantuml/plantuml.jar")
-  (setq plantuml-output-type "png")
-  ;; below configuration doesn't work so directory modify plantuml-mode.el source
-  ;; (setq plantuml-default-exec-mode 'jar)
-  ;; (setq plantuml-exec-mode 'jar)
-  )
-
-;; yaml
-(leaf yaml-mode
-  :mode (("\\.yml$" . yaml-mode)
-         ("\\.dig$" . yaml-mode)
-         ("\\.yml-[a-zA-Z]+$" . yaml-mode))
-  :init
-  (add-hook 'yaml-mode-hook
-          '(lambda ()
-             (define-key yaml-mode-map "\C-m" 'newline-and-indent))))
-
-(leaf emojify
-  :ensure t
-  :hook (after-init-hook . global-emojify-mode))
-
-(leaf undohist
-  :ensure t
-  :commands undohist-initialize
-  :hook (after-init-hook . undohist-initialize))
-
-(leaf pyenv-mode-auto
-  :ensure t
-  :init (require 'pyenv-mode-auto))
 
 (defun sphinx-compile ()
   "Traveling up the path, find build.xml file and run compile."

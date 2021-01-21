@@ -19,7 +19,8 @@
   :bind (("C-c a" . my/org-agenda)
          ("C-c C-9" . org-capture))
   :mode (("\\.org$" . org-mode))
-  :pre-setq ((org-directory . "~/docs/org_doc"))
+  :pre-setq ((org-directory . "~/docs/org_doc")
+             (org-plantuml-jar-path . "/usr/share/plantuml/plantuml.jar"))
   :defun (my/get-string-from-file my-org-agenda-files)
   :defvar (org-directory
            my-org-agenda-directory
@@ -56,7 +57,6 @@
          (org-indent-indentation-per-level . 2)
          (org-startup-indented . t)
          (org-startup-folded . "nofold")
-         (org-plantuml-jar-path . "/usr/share/plantuml/plantuml.jar")
          (org-imenu-depth . 3)
          (org-columns-default-format . "%40ITEM(Task) %17Effort(Estimated Effort){:} %CLOCKSUM")
          )

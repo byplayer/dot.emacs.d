@@ -582,15 +582,14 @@
 (leaf plantuml-mode
   :ensure t
   :commands plantuml-mode
+  :defvar (plantuml-default-exec-mode
+           plantuml-jar-path
+           plantuml-output-type)
+  :pre-setq ((plantuml-default-exec-mode . 'jar)
+             (plantuml-jar-path . "/usr/share/plantuml/plantuml.jar")
+             (plantuml-output-type . "png"))
   :mode (("\\.puml$" . plantuml-mode)
-         ("\\.plantuml$" . plantuml-mode))
-  :config
-  (setq plantuml-jar-path "/usr/share/plantuml/plantuml.jar")
-  (setq plantuml-output-type "png")
-  ;; below configuration doesn't work so directory modify plantuml-mode.el source
-  ;; (setq plantuml-default-exec-mode 'jar)
-  ;; (setq plantuml-exec-mode 'jar)
-  )
+         ("\\.plantuml$" . plantuml-mode)))
 
 ;; yaml
 (leaf yaml-mode

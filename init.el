@@ -281,22 +281,10 @@
   :commands (py-autopep8-before-save py-autopep8-enable-on-save)
   :hook (python-mode-hook . py-autopep8-enable-on-save))
 
-(leaf jedi-core
-  :ensure t
-  :commands (jedi:start-dedicated-server
-             helm-jedi-related-names
-             jedi:setup
-             jedi:install-server
-             jedi:reinstall-server
-             jedi:install-server-block)
-  :hook ((python-mode-hook . jedi:setup)))
-
-(leaf company-jedi
+(leaf elpy
   :ensure t
   :init
-  (defun my/python-mode-hook ()
-    (add-to-list 'company-backends 'company-jedi))
-  (add-hook 'python-mode-hook 'my/python-mode-hook))
+  (elpy-enable))
 
 (leaf php-mode
   :ensure t
@@ -742,7 +730,7 @@
      ("melpa" . "https://melpa.org/packages/")
      ("gnu" . "https://elpa.gnu.org/packages/")))
  '(package-selected-packages
-   '(helm-for-files helm-config gradle-mode yaml-mode web-mode volatile-highlights undohist undo-tree smartparens scss-mode sclang-mode savekill ruby-block rubocopfmt rspec-mode robe rinari recentf-ext rainbow-mode pyenv-mode-auto py-autopep8 prettier-js posframe popwin phpunit php-mode org-sticky-header org-plus-contrib org-gcal neotree mozc-popup magit macrostep lsp-ui leaf-tree leaf-convert kotlin-mode keyfreq json-mode js2-mode init-loader helm-swoop helm-projectile helm-migemo helm-ls-git helm-gtags helm-go-package helm-flycheck helm-descbinds helm-c-yasnippet helm-ag groovy-mode go-eldoc gitignore-mode git-gutter flycheck-pos-tip flycheck-plantuml flycheck-kotlin flycheck-irony feature-mode expand-region emojify el-get dockerfile-mode crontab-mode company-quickhelp company-lsp company-jedi company-irony company-go clang-format cider bind-key avy arduino-mode anzu all-the-icons-dired))
+   '(elpy helm-for-files helm-config gradle-mode yaml-mode web-mode volatile-highlights undohist undo-tree smartparens scss-mode sclang-mode savekill ruby-block rubocopfmt rspec-mode robe rinari recentf-ext rainbow-mode pyenv-mode-auto py-autopep8 prettier-js posframe popwin phpunit php-mode org-sticky-header org-plus-contrib org-gcal neotree mozc-popup magit macrostep lsp-ui leaf-tree leaf-convert kotlin-mode keyfreq json-mode js2-mode init-loader helm-swoop helm-projectile helm-migemo helm-ls-git helm-gtags helm-go-package helm-flycheck helm-descbinds helm-c-yasnippet helm-ag groovy-mode go-eldoc gitignore-mode git-gutter flycheck-pos-tip flycheck-plantuml flycheck-kotlin flycheck-irony feature-mode expand-region emojify el-get dockerfile-mode crontab-mode company-quickhelp company-lsp company-jedi company-irony company-go clang-format cider bind-key avy arduino-mode anzu all-the-icons-dired))
  '(term-default-bg-color "#000000")
  '(term-default-fg-color "light gray")
  '(truncate-lines nil)

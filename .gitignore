@@ -27,6 +27,7 @@
 /.org-todoist/
 /undohist/
 /.lsp-session-v1
+/elpy/
 
 GPATH
 GRTAGS

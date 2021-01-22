@@ -69,14 +69,6 @@
   :after lsp-mode
   :commands lsp-ui-mode)
 
-(leaf init-loader
-  :ensure t
-  :defvar (init-loader-byte-compile init-loader-show-log-after-init)
-  :setq ((init-loader-byte-compile . t)
-         (init-loader-show-log-after-init . nil))
-  :config
-  (init-loader-load))
-
 (leaf company-quickhelp
   :doc help support for company
   :ensure t)
@@ -725,6 +717,15 @@
   :setq-default ((save-place-limit . 1000))
   :init
   (save-place-mode 1))
+
+(leaf init-loader
+  :ensure t
+  :defvar (init-loader-byte-compile init-loader-show-log-after-init)
+  :setq ((init-loader-byte-compile . t)
+         (init-loader-show-log-after-init . nil))
+  :config
+  (init-loader-load))
+
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.

@@ -581,7 +581,6 @@
              (plantuml-jar-path . "/usr/share/plantuml/plantuml.jar")
              (plantuml-output-type . "svg"))
   :bind (plantuml-mode-map
-         ("C-c v" . plantuml-preview)
          ("C-c c" . my-plantuml-compile))
   :mode (("\\.puml$" . plantuml-mode)
          ("\\.plantuml$" . plantuml-mode))

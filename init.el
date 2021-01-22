@@ -576,10 +576,12 @@
   :commands plantuml-mode
   :defvar (plantuml-default-exec-mode
            plantuml-jar-path
-           plantuml-output-type)
+           plantuml-output-type
+           plantuml-indent-level)
   :pre-setq ((plantuml-default-exec-mode . 'jar)
              (plantuml-jar-path . "/usr/share/plantuml/plantuml.jar")
              (plantuml-output-type . "svg"))
+  :setq ((plantuml-indent-level . 2))
   :bind (plantuml-mode-map
          ("C-c c" . my-plantuml-compile))
   :mode (("\\.puml$" . plantuml-mode)

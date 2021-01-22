@@ -579,9 +579,23 @@
            plantuml-output-type)
   :pre-setq ((plantuml-default-exec-mode . 'jar)
              (plantuml-jar-path . "/usr/share/plantuml/plantuml.jar")
-             (plantuml-output-type . "png"))
+             (plantuml-output-type . "svg"))
+  :bind (plantuml-mode-map
+         ("C-c v" . plantuml-preview)
+         ("C-c c" . my-plantuml-compile))
   :mode (("\\.puml$" . plantuml-mode)
-         ("\\.plantuml$" . plantuml-mode)))
+         ("\\.plantuml$" . plantuml-mode))
+  :init
+  (defun my-plantuml-compile ()
+    "Traveling up the path, find build.xml file and run compile."
+    (interactive)
+    (save-buffer)
+    (with-temp-buffer
+      (while (and (not (or (file-exists-p "makefile")
+                           (file-exists-p "Makefile")))
+                  (not (equal "/" default-directory)))
+        (cd ".."))
+      (call-interactively 'compile))))
 
 ;; yaml
 (leaf yaml-mode

@@ -534,8 +534,8 @@
   :commands (clang-format-buffer)
   :defvar (clang-format-modes
            clang-format-style)
-  :setq ((clang-format-modes . '(c++-mode c-mode java-mode))
-         (clang-format-style . "google"))
+  :pre-setq ((clang-format-modes . '(c++-mode c-mode java-mode))
+             (clang-format-style . "google"))
   :hook (before-save-hook . my-clang-format-before-save)
   :init
   (defun my-clang-format-before-save ()

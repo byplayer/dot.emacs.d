@@ -1,0 +1,9 @@
+# -*- mode: yasnippet -*-
+# name : note ... end note
+# group : Conditions
+# key: note
+# expand-env: ((yas/indent-line 'fixed) (yas/wrap-around-region 'nil))
+# --
+note ${1:$$(yas-choose-value '("right" "left" "top" "bottom"))}
+  $0
+end note

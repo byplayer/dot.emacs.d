@@ -28,6 +28,7 @@
 /undohist/
 /.lsp-session-v1
 /elpy/
+/elpa/elpy-*/elpy/__pycache__/
 
 GPATH
 GRTAGS

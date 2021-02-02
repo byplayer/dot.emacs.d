@@ -160,7 +160,7 @@ e.g. 20190-4-01 15:02:33"
 (keyfreq-autosave-mode 1)
 
 (setq auto-mode-alist
-      (cons ' ( "\\.txt\\'" . outline-mode) auto-mode-alist))
+      (cons ' ( "\\.txt\\'" . org-mode) auto-mode-alist))
 
 ;; delete-trailing-whitespace
 (setq delete-trailing-whitespace-modes '(rst-mode text-mode org-mode outline-mode))

@@ -1,6 +1,6 @@
 # -*- mode: snippet -*-
 # name: title
-# key: title
+# key: #title
 # --
 #+TITLE: ${1:`(let ((fn (file-name-nondirectory
                           (file-name-sans-extension

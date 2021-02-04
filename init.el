@@ -91,7 +91,9 @@
            company-minimum-prefix-length
            company-selection-wrap-around
            company-backends
-           company-dabbrev-char-regexp)
+           company-dabbrev-char-regexp
+           company-dabbrev-downcase)
+  :setq ((company-dabbrev-downcase . nil))
   :defun (company-mode/backend-with-yas
           edit-category-table-for-company-dabbrev)
   :init

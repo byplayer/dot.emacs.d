@@ -232,7 +232,10 @@
          (go-mode-hook . lsp-go-install-save-hooks))
   :bind (go-mode-map
          ("C-c d" . helm-godoc))
-  :config
+
+  :defun (lsp-format-buffer lsp-organize-imports)
+
+  :init
   (leaf helm-godoc
     :el-get syohex/emacs-helm-godoc
     :commands helm-godoc)
@@ -242,9 +245,7 @@
     :commands helm-go-package
     :defer-config (go-mode (substitute-key-definition
                             'go-import-add 'helm-go-package go-mode-map)))
-  :defun (lsp-format-buffer lsp-organize-imports)
 
-  :init
   (defun go-compile ()
     "Traveling up the path, find build.xml file and run compile."
     (interactive)

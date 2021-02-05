@@ -2,11 +2,6 @@
 ;;; Commentary:
 ;;; Code:
 
-
-
-
-
-
 ;; show white space of end of line
 (setq-default show-trailing-whitespace t)
 
@@ -279,12 +274,21 @@ e.g. 20190-4-01 15:02:33"
       (cd ".."))
     (call-interactively 'compile)))
 
+(defun my/nl-indent-relative-maybe ()
+  "New line, then indent based on the previous line."
+  (interactive)
+  (newline)
+  (indent-relative-first-indent-point))
+
 (add-hook 'rst-mode-hook
           '(lambda()
              (define-key rst-mode-map "\C-cc" 'sphinx-compile)
              (define-key rst-mode-map (kbd "<M-return>") 'org-meta-return)
              (define-key rst-mode-map "\C-cn" 'rst-forward-section)
-             (define-key rst-mode-map "\C-cp" 'rst-backward-section)))
+             (define-key rst-mode-map "\C-cp" 'rst-backward-section)
+             (define-key rst-mode-map "\C-m" 'my/nl-indent-relative-maybe)))
+
+ (add-hook 'rst-adjust-hook 'rst-toc-update)
 
 (defun mkdocs-compile ()
   "Traveling up the path, find build.xml file and run compile."

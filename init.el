@@ -154,6 +154,27 @@
   :doc start server for emacs client
   :hook (window-setup-hook . server-start))
 
+(leaf *lookup
+  :doc lookup configuration
+  lookup directory is builded files of the below lookup2 sources
+  https://github.com/lookup2/lookup2
+  :defvar (lookup-enable-splash
+           lookup-search-agents)
+  :init
+  (add-to-list 'load-path "~/.emacs.d/elisp/lookup/lookup")
+  (load "lookup-autoloads")
+  (eval-after-load 'flycheck
+    '(progn
+       (setq lookup-enable-splash nil)
+                                        ; (global-set-key "\C-c\C-l" 'lookup)
+       (global-set-key (kbd "C-x W") 'lookup-region)
+       (global-set-key (kbd "C-x w") 'lookup-pattern)
+
+       (setq lookup-search-agents
+             '((ndeb "~/dic/LDOCE4")
+               (ndeb "~/dic/sperdic200")
+               (ndeb "~/dic/edict2"))))))
+
 (leaf expand-region
   :doc expand region
   :ensure t

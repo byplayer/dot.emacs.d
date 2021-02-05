@@ -174,7 +174,8 @@ e.g. 20190-4-01 15:02:33"
         yaml-mode-hook
         markdown-mode-hook
         php-mode-hook
-        js2-mode-hook))
+        js2-mode-hook
+        rst-mode))
 (loop for hook in prettier-js-mode-hooks
       do (add-hook hook 'prettier-js-mode))
 

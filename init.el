@@ -93,9 +93,11 @@
            company-backends
            company-dabbrev-char-regexp
            company-dabbrev-downcase
-           completion-ignore-case)
+           completion-ignore-case
+           company-show-numbers)
   :setq ((company-dabbrev-downcase . nil)
-         (completion-ignore-case . t))
+         (completion-ignore-case . t)
+         (company-show-numbers . t))
   :defun (company-mode/backend-with-yas
           edit-category-table-for-company-dabbrev)
   :init

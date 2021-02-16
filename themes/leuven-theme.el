@@ -199,8 +199,8 @@ more...")
 
    ;; Font lock faces.
    `(font-lock-builtin-face ((,class (:foreground "#006FE0"))))
-   `(font-lock-comment-delimiter-face ((,class (:foreground "#8D8D84")))) ; #696969
-   `(font-lock-comment-face ((,class (:slant italic :foreground "#8D8D84")))) ; #696969
+   `(font-lock-comment-delimiter-face ((,class (:foreground "#DarkOliveGreen")))) ; #696969
+   `(font-lock-comment-face ((,class (:slant italic :foreground "DarkOliveGreen")))) ; #696969
    `(font-lock-constant-face ((,class (:foreground "#D0372D"))))
    `(font-lock-doc-face ((,class (:foreground "#036A07"))))
    `(font-lock-function-name-face ((,class (:weight normal :foreground "#006699"))))
@@ -421,7 +421,7 @@ more...")
    ;; Company.
    `(company-tooltip-common-selection ((,class (:weight bold :foreground "#0474B6" :inherit company-tooltip-selection)))) ; Prefix + common part in tooltip (for selection).
    `(company-tooltip-selection ((,class ,completion-selected-candidate))) ; Suffix in tooltip (for selection).
-   `(company-tooltip-annotation-selection ((,class (:weight bold :foreground "#818181")))) ; Annotation (for selection).
+   `(company-tooltip-annotation-selection ((,class (:weight bold :foreground "black" :foreground "#818181")))) ; Annotation (for selection).
    `(company-tooltip-common ((,class (:weight normal :foreground "#0474B6" :inherit company-tooltip)))) ; Prefix + common part in tooltip.
    `(company-tooltip ((,class ,completion-other-candidates))) ; Suffix in tooltip.
    `(company-tooltip-annotation ((,class (:weight normal :foreground "#818181")))) ; Annotation.
@@ -448,7 +448,7 @@ more...")
    `(custom-button-pressed-unraised ((,class (:underline t :foreground "magenta4"))))
    `(custom-button-unraised ((,class (:underline t))))
    `(custom-changed ((,class (:foreground "white" :background "blue"))))
-   `(custom-comment ((,class (:background "gray85"))))
+   `(custom-comment ((,class (:background "DarkOliveGreen"))))
    `(custom-comment-tag ((,class (:foreground "blue4"))))
    `(custom-documentation ((,class (nil))))
    `(custom-face-tag ((,class (:family "Sans Serif" :height 1.2 :weight bold))))
@@ -548,7 +548,7 @@ more...")
    `(font-latex-string-face ((,class (:weight bold :foreground "#0066FF"))))
    `(font-latex-verbatim-face ((,class (:foreground "#000088" :background "#FFFFE0" :inherit nil))))
    `(git-commit-summary-face ((,class (:foreground "#000000"))))
-   `(git-commit-comment-face ((,class (:slant italic :foreground "#696969"))))
+   `(git-commit-comment-face ((,class (:slant italic :foreground "#8D8D84"))))
    `(git-timemachine-commit ((,class ,diff-removed)))
    `(git-timemachine-minibuffer-author-face ((,class ,diff-added)))
    `(git-timemachine-minibuffer-detail-face ((,class ,diff-header)))

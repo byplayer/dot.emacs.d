@@ -729,7 +729,7 @@
   (setq-default indent-level 2)
   (setq-default tab-width 2)
   (setq-default indent-tabs-mode nil)
-  )
+  (setq ring-bell-function 'ignore))
 
 (leaf *saveplace
   :setq-default ((save-place-limit . 1000))

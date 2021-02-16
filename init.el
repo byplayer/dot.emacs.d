@@ -124,6 +124,7 @@
   ;; (add-hook 'TeX-mode-hook 'edit-category-table-for-company-dabbrev) ; 下の追記参照
   (setq company-dabbrev-char-regexp "\\(\\cs\\|_\\|-\\)")
 
+  :config
   (let ((map company-active-map))
     (mapc (lambda (x) (define-key map (format "%d" x)
                         `(lambda () (interactive) (company-complete-number ,x))))

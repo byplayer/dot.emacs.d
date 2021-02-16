@@ -80,8 +80,6 @@
   :bind (company-active-map
          ("C-n" . company-select-next)
          ("C-p" . company-select-previous)
-         ("C-n" . company-select-next)
-         ("C-p" . company-select-previous)
          ("<tab>" . company-complete-selection)
          ("C-i" . company-complete-selection)
          ("C-s" . company-filter-candidates))

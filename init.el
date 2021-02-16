@@ -226,7 +226,11 @@
 (leaf git-gutter
   :ensure t
   :init
-  (global-git-gutter-mode t))
+  (global-git-gutter-mode t)
+  :config
+  (set-face-foreground 'git-gutter:added    "OriveDrab")
+  (set-face-foreground 'git-gutter:deleted  "DarkRed")
+  (set-face-foreground 'git-gutter:modified "DarkMagenta"))
 
 (leaf magit
   :ensure t

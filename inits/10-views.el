@@ -45,7 +45,7 @@
 (setq line-move-visual t)
 
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
-(load-theme 'byplayer t)
+(load-theme 'leuven t)
 
 ;; text-scale
 (global-set-key (kbd "<C-mouse-4>") 'text-scale-decrease)

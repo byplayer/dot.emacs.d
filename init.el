@@ -95,14 +95,14 @@
            company-show-numbers)
   :setq ((company-dabbrev-downcase . nil)
          (completion-ignore-case . t)
-         (company-show-numbers . t))
+         (company-show-numbers . t)
+         (company-idle-delay . 0.5)
+         (company-minimum-prefix-length . 2)
+         (company-selection-wrap-around . t))
   :defun (company-mode/backend-with-yas
           edit-category-table-for-company-dabbrev)
   :init
   (global-company-mode)
-  (setq company-idle-delay 0.5)             ;default is 0.5
-  (setq company-minimum-prefix-length 2)  ;default is 4
-  (setq company-selection-wrap-around t)
   (company-quickhelp-mode +1)
   (defun company-mode/backend-with-yas (backend)
     (if (and (listp backend) (member 'company-yasnippet backend))
@@ -126,8 +126,9 @@
 
   :config
   (let ((map company-active-map))
-    (mapc (lambda (x) (define-key map (format "%d" x)
-                        `(lambda () (interactive) (company-complete-number ,x))))
+    (mapc (lambda (x)
+            (define-key map (format "%d" x)
+              `(lambda () (interactive) (company-complete-number ,x))))
           (number-sequence 0 9))))
 
 (leaf company-lsp

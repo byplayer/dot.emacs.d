@@ -27,6 +27,7 @@
 /.org-todoist/
 /undohist/
 /.lsp-session-v1
+/company-statistics-cache.el
 /elpy/
 /elpa/elpy-*/elpy/__pycache__/
 

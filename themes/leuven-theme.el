@@ -96,7 +96,7 @@ more...")
       (code-block '(:foreground "#000088" :background "#FFFFE0"))
       (code-inline '(:foreground "#006400" :background "#FDFFF7"))
       (column '(:height 1.0 :weight normal :slant normal :underline nil :strike-through nil :foreground "#E6AD4F" :background "#FFF2DE"))
-      (completion-inline '(:weight normal :foreground "#C0C0C0" :inherit hl-line)) ; Like Google.
+      (completion-inline '(:weight normal :foreground "#A9A9A9" :inherit hl-line)) ; Like Google.
       (completion-other-candidates '(:foreground "black" :background "#F7F7F7"))
       (completion-selected-candidate '(:weight bold :foreground "black" :background "#C1E0FD"))
       (diff-added '(:background "#DDFFDD"))

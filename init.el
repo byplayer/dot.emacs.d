@@ -468,6 +468,12 @@
 
 (leaf helm
   :ensure t
+  :defun (helm-make-source
+          helm-ls-git-build-git-status-source
+          helm-ls-git-build-buffers-source
+          helm-ls-git-build-ls-git-source
+          helm-ls-git-not-inside-git-repo
+          helm-autoresize-mode)
   :defvar (helm-source-buffers-list
            helm-source-ls-git
            helm-source-ls-git-status
@@ -665,6 +671,13 @@
                                (auto-fill-mode 1)
                                (if (eq window-system 'x)
                                    (font-lock-mode 1))))))
+
+(leaf rainbow-mode
+  :ensure t
+  :hook ((css-mode-hook . rainbow-mode)
+         (scss-mode-hook . rainbow-mode)
+         (lisp-mode-hook . rainbow-mode)
+         (emacs-lisp-mode-hook . rainbow-mode)))
 
 (leaf windows
   :doc windows + revive

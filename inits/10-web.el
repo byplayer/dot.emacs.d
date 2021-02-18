@@ -2,9 +2,6 @@
 ;;; Commentary:
 ;;; Code:
 
-(leaf rainbow-mode
-  :ensure t)
-
 (leaf scss-mode
   :ensure t
   :mode (("\\.scss" . scss-mode)))
@@ -17,6 +14,13 @@
          ("\\.rxml$" . web-mode)
          ("\\.erb$". web-mode)
          ("\\.rhtml$". web-mode))
+  :defun (cssm-c-style-indenter)
+  :defvar(web-mode-markup-indent-offset
+          web-mode-css-indent-offset
+          web-mode-code-indent-offset
+          css-indent-offset
+          cssm-indent-level
+          cssm-indent-function)
   :hook ((web-mode-hook . my/web-mode-hook))
   :init
   (defun my/web-mode-hook ()
@@ -45,9 +49,6 @@
    '(web-mode-css-at-rule-face
      ((t (:foreground "#FF7F00"))))                          ; cssのタグ
    )
-
-  (add-hook 'css-mode-hook 'rainbow-mode)
-  (add-hook 'scss-mode-hook 'rainbow-mode)
 
   (setq css-indent-offset 2)
   (setq cssm-indent-level 2)
@@ -83,4 +84,5 @@
   :ensure t
   :mode (("\.json" . json-mode)))
 
-;;; 10-html.el ends here
+(provide '10-web)
+;;; 10-web.el ends here

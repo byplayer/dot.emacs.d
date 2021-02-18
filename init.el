@@ -235,9 +235,9 @@
   :init
   (global-git-gutter-mode t)
   :config
-  (set-face-foreground 'git-gutter:added    "OliveDrab2")
-  (set-face-foreground 'git-gutter:deleted  "red2")
-  (set-face-foreground 'git-gutter:modified "magenta2"))
+  (set-face-foreground 'git-gutter:added    "OliveDrab")
+  (set-face-foreground 'git-gutter:deleted  "DarkRed")
+  (set-face-foreground 'git-gutter:modified "DarkMagenta"))
 
 (leaf magit
   :ensure t

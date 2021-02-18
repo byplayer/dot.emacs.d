@@ -18,8 +18,7 @@
     fundamental-mode
     undo-tree-visualizer-mode
     lookup-content-mode
-    calendar-mode
-    ))
+    calendar-mode))
 
 (mapc
  (lambda (mode)
@@ -34,8 +33,7 @@
 (setq whitespace-space-regexp "\\(\x3000+\\)")
 (setq whitespace-display-mappings
       '((space-mark ?\x3000 [?\□])
-        (tab-mark   ?\t   [?\xBB ?\t])
-        ))
+        (tab-mark   ?\t   [?\xBB ?\t])))
 (global-whitespace-mode 1)
 
 ;; backup directory configuration
@@ -43,10 +41,10 @@
   (cons (cons ".*" (expand-file-name "~/.emacs.d/backup"))
         backup-directory-alist))
 
-(setq version-control t)     ; version control for backup
+(setq version-control t)      ; version control for backup
 (setq kept-new-versions 10)   ; keep 10 new files
 (setq kept-old-versions 10)   ; keep 10 old files
-(setq delete-old-versions t) ; delete old files without confirmation
+(setq delete-old-versions t)  ; delete old files without confirmation
 (setq vc-make-backup-files t) ; backup under version control
 
 ;; disable lock file
@@ -160,7 +158,8 @@ e.g. 20190-4-01 15:02:33"
 ;; delete-trailing-whitespace
 (setq delete-trailing-whitespace-modes '(rst-mode text-mode org-mode outline-mode))
 (defun delete-trailing-whitespace-before-save()
-  (if (member major-mode delete-trailing-whitespace-modes) (delete-trailing-whitespace)))
+  (if (member major-mode delete-trailing-whitespace-modes)
+      (delete-trailing-whitespace)))
 (add-hook 'before-save-hook 'delete-trailing-whitespace-before-save)
 
 ;; prettier
@@ -200,6 +199,7 @@ e.g. 20190-4-01 15:02:33"
     (smartparens-mode . "")
     (global-whitespace-mode . "")
     (visual-line-mode . "")
+    (org-indent-mode . "")
     ;; Major modes
     (lisp-interaction-mode . "Li")
     (python-mode . "Py")
@@ -212,10 +212,10 @@ e.g. 20190-4-01 15:02:33"
     (magit-status-mode . "Ms")
     (compilation-mode . "Cp")
     (fundamental-mode . "Fm")
-    (text-mode . "Tx")
-    ))
+    (text-mode . "Tx")))
 
 (defun clean-mode-line ()
+  "Clean up mode-line list."
   (interactive)
   (loop for (mode . mode-str) in mode-line-cleaner-alist
         do

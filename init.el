@@ -799,6 +799,7 @@
           (byte-recompile-directory "~/.emacs.d/elisp/" 0)
           (byte-recompile-directory "~/.emacs.d/el-get/" 0)
           (byte-recompile-directory "~/.emacs.d/elpa/" 0)
+          (byte-recompile-directory "~/.emacs.d/themes/" 0)
           (byte-recompile-directory "~/.emacs.d/inits/" 0)
           (byte-recompile-file "~/.emacs.d/init.el" t 0)))
 

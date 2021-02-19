@@ -733,7 +733,9 @@
   :bind (("C-x <right>" . windmove-right)
          ("C-x <left>" . windmove-left)
          ("C-x <down>" . windmove-down)
-         ("C-x <up>" . windmove-up))
+         ("C-x <up>" . windmove-up)
+         ("C-x h" . split-window-right)
+         ("C-x v" . split-window-below))
   :init
   ;; support bat moad, ini mode
   (require 'generic-x)

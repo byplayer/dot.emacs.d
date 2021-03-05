@@ -482,10 +482,12 @@
            helm-ff-transformer-show-only-basename
            helm-input-idle-delay
            helm-display-function
-           projectile-project-root-files)
+           projectile-project-root-files
+           helm-buffer-max-length)
   :setq ((helm-ff-auto-update-initial-value . nil)
          (helm-ff-transformer-show-only-basename . nil)
-         (helm-input-idle-delay . 0.2))
+         (helm-input-idle-delay . 0.2)
+         (helm-buffer-max-length . 40))
   :bind (("M-x" . helm-M-x)
          ("M-y" . helm-show-kill-ring)
          ("C-x b" . my-helm)

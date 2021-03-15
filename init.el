@@ -58,7 +58,10 @@
 (leaf lsp-mode
   :ensure t
   :commands (lsp lsp-deferred)
+  :custom (lsp-rust-server . 'rust-analyzer)
+  :bind ("C-c h" . lsp-describe-thing-at-point)
   :hook ((go-mode-hook . lsp-deferred)
+         (rust-mode-hook . lsp)
          (lsp-mode-hook . (lambda()
               (local-set-key (kbd "M-*") 'xref-pop-marker-stack)
               (local-set-key (kbd "M-.") 'xref-find-definitions)
@@ -684,6 +687,14 @@
          (lisp-mode-hook . rainbow-mode)
          (emacs-lisp-mode-hook . rainbow-mode)))
 
+(leaf rust-mode
+  :ensure t
+  :custom (rust-format-on-save . t))
+
+(leaf cargo
+  :ensure t
+  :hook (rust-mode-hook . cargo-minor-mode))
+
 (leaf windows
   :doc windows + revive
   :el-get byplayer/windows
@@ -792,7 +803,7 @@
      ("melpa" . "https://melpa.org/packages/")
      ("gnu" . "https://elpa.gnu.org/packages/")))
  '(package-selected-packages
-   '(company-statistics typescript-mode elpy helm-for-files helm-config gradle-mode yaml-mode web-mode volatile-highlights undo-tree smartparens scss-mode sclang-mode savekill ruby-block rubocopfmt rspec-mode robe rinari recentf-ext rainbow-mode pyenv-mode-auto py-autopep8 prettier-js posframe popwin phpunit php-mode org-sticky-header org-plus-contrib org-gcal neotree mozc-popup magit macrostep lsp-ui leaf-tree leaf-convert kotlin-mode keyfreq json-mode js2-mode init-loader helm-swoop helm-projectile helm-migemo helm-ls-git helm-gtags helm-go-package helm-flycheck helm-descbinds helm-c-yasnippet helm-ag groovy-mode go-eldoc gitignore-mode git-gutter flycheck-pos-tip flycheck-plantuml flycheck-kotlin flycheck-irony feature-mode expand-region emojify el-get dockerfile-mode crontab-mode company-quickhelp company-lsp company-irony company-go clang-format cider bind-key avy arduino-mode anzu all-the-icons-dired))
+   '(cargo rust-mode company-statistics typescript-mode elpy helm-for-files helm-config gradle-mode yaml-mode web-mode volatile-highlights undo-tree smartparens scss-mode sclang-mode savekill ruby-block rubocopfmt rspec-mode robe rinari recentf-ext rainbow-mode pyenv-mode-auto py-autopep8 prettier-js posframe popwin phpunit php-mode org-sticky-header org-plus-contrib org-gcal neotree mozc-popup magit macrostep lsp-ui leaf-tree leaf-convert kotlin-mode keyfreq json-mode js2-mode init-loader helm-swoop helm-projectile helm-migemo helm-ls-git helm-gtags helm-go-package helm-flycheck helm-descbinds helm-c-yasnippet helm-ag groovy-mode go-eldoc gitignore-mode git-gutter flycheck-pos-tip flycheck-plantuml flycheck-kotlin flycheck-irony feature-mode expand-region emojify el-get dockerfile-mode crontab-mode company-quickhelp company-lsp company-irony company-go clang-format cider bind-key avy arduino-mode anzu all-the-icons-dired))
  '(term-default-bg-color "#000000")
  '(term-default-fg-color "light gray")
  '(truncate-lines nil)

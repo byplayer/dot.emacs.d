@@ -30,6 +30,7 @@
 /company-statistics-cache.el
 /elpy/
 /elpa/elpy-*/elpy/__pycache__/
+/eshell/*
 
 GPATH
 GRTAGS

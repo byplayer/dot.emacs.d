@@ -1,0 +1,2 @@
+;;; Generated package description from helm-c-yasnippet.el  -*- no-byte-compile: t -*-
+(define-package "helm-c-yasnippet" "20210328.1239" "helm source for yasnippet.el" '((emacs "25.1") (helm "1.7.7") (yasnippet "0.8.0")) :commit "3a2099a25daa0809a46fdb399ddbf623265f43e9" :authors '(("Kenji.I (Kenji Imakado)" . "ken.imakaado@gmail.com")) :maintainer '("Kenji.I (Kenji Imakado)" . "ken.imakaado@gmail.com") :keywords '("convenience" "emulation"))

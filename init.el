@@ -775,7 +775,8 @@
   (setq-default indent-level 2)
   (setq-default tab-width 2)
   (setq-default indent-tabs-mode nil)
-  (setq ring-bell-function 'ignore))
+  (setq ring-bell-function 'ignore)
+  (put 'upcase-region 'disabled nil))
 
 (leaf *saveplace
   :setq-default ((save-place-limit . 1000))

@@ -76,6 +76,9 @@
   :doc help support for company
   :ensure t)
 
+(leaf company-emoji
+  :ensure t)
+
 (leaf company
   :ensure t
   :commands global-company-mode
@@ -107,6 +110,7 @@
   :init
   (global-company-mode)
   (company-quickhelp-mode +1)
+  (add-to-list 'company-backends 'company-emoji)
   (defun company-mode/backend-with-yas (backend)
     (if (and (listp backend) (member 'company-yasnippet backend))
         backend
@@ -125,7 +129,7 @@
         (setq i (1+ i)))))
   (edit-category-table-for-company-dabbrev)
   ;; (add-hook 'TeX-mode-hook 'edit-category-table-for-company-dabbrev) ; 下の追記参照
-  (setq company-dabbrev-char-regexp "\\(\\cs\\|_\\|-\\)")
+  (setq company-dabbrev-char-regexp "\\(\\cs\\|_\\|\\+\\|-\\)")
 
   :config
   (let ((map company-active-map))
@@ -797,14 +801,16 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(imenu-list-position 'left t)
- '(imenu-list-size 30 t)
+ '(imenu-list-position 'left)
+ '(imenu-list-size 30)
+ '(lsp-rust-server 'rust-analyzer t)
  '(package-archives
    '(("org" . "https://orgmode.org/elpa/")
      ("melpa" . "https://melpa.org/packages/")
      ("gnu" . "https://elpa.gnu.org/packages/")))
  '(package-selected-packages
-   '(cargo rust-mode company-statistics typescript-mode elpy helm-for-files helm-config gradle-mode yaml-mode web-mode volatile-highlights undo-tree smartparens scss-mode sclang-mode savekill ruby-block rubocopfmt rspec-mode robe rinari recentf-ext rainbow-mode pyenv-mode-auto py-autopep8 prettier-js posframe popwin phpunit php-mode org-sticky-header org-plus-contrib org-gcal neotree mozc-popup magit macrostep lsp-ui leaf-tree leaf-convert kotlin-mode keyfreq json-mode js2-mode init-loader helm-swoop helm-projectile helm-migemo helm-ls-git helm-gtags helm-go-package helm-flycheck helm-descbinds helm-c-yasnippet helm-ag groovy-mode go-eldoc gitignore-mode git-gutter flycheck-pos-tip flycheck-plantuml flycheck-kotlin flycheck-irony feature-mode expand-region emojify el-get dockerfile-mode crontab-mode company-quickhelp company-lsp company-irony company-go clang-format cider bind-key avy arduino-mode anzu all-the-icons-dired))
+   '(company-emoji cargo rust-mode company-statistics typescript-mode elpy helm-for-files helm-config gradle-mode yaml-mode web-mode volatile-highlights undo-tree smartparens scss-mode sclang-mode savekill ruby-block rubocopfmt rspec-mode robe rinari recentf-ext rainbow-mode pyenv-mode-auto py-autopep8 prettier-js posframe popwin phpunit php-mode org-sticky-header org-plus-contrib org-gcal neotree mozc-popup magit macrostep lsp-ui leaf-tree leaf-convert kotlin-mode keyfreq json-mode js2-mode init-loader helm-swoop helm-projectile helm-migemo helm-ls-git helm-gtags helm-go-package helm-flycheck helm-descbinds helm-c-yasnippet helm-ag groovy-mode go-eldoc gitignore-mode git-gutter flycheck-pos-tip flycheck-plantuml flycheck-kotlin flycheck-irony feature-mode expand-region emojify el-get dockerfile-mode crontab-mode company-quickhelp company-lsp company-irony company-go clang-format cider bind-key avy arduino-mode anzu all-the-icons-dired))
+ '(rust-format-on-save t)
  '(term-default-bg-color "#000000")
  '(term-default-fg-color "light gray")
  '(truncate-lines nil)

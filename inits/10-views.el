@@ -46,6 +46,8 @@
 
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 (load-theme 'leuven t)
+(setq cursor-type '(bar . 2))
+(set-cursor-color "#FF9300")
 ; (load-theme 'byplayer t)
 
 ;; text-scale

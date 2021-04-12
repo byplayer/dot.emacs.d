@@ -31,6 +31,7 @@
 /elpy/
 /elpa/elpy-*/elpy/__pycache__/
 /eshell/*
+/.org-generic-id-locations
 
 GPATH
 GRTAGS

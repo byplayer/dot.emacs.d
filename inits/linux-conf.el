@@ -11,8 +11,6 @@
 
 (leaf mozc
   :init
-  (leaf mozc-popup)
-  (setq mozc-candidate-style 'popup)
   (setq mozc-leim-title "[あ]")
   (setq default-input-method "japanese-mozc"))
 

@@ -22,6 +22,16 @@
     (package-refresh-contents)
     (package-install 'leaf))
 
+  (defvar leaf--load-file-name nil)
+
+  (leaf leaf
+    :config
+    (leaf leaf-convert :ensure t)
+    (leaf leaf-tree
+      :ensure t
+      :custom ((imenu-list-size . 30)
+               (imenu-list-position . 'left))))
+
   (leaf leaf-keywords
     :ensure t
     :init
@@ -33,14 +43,6 @@
     :config
     ;; initialize leaf-keywords.el
     (leaf-keywords-init)))
-
-(leaf leaf
-  :config
-  (leaf leaf-convert :ensure t)
-  (leaf leaf-tree
-    :ensure t
-    :custom ((imenu-list-size . 30)
-             (imenu-list-position . 'left))))
 
 (leaf macrostep
   :ensure t

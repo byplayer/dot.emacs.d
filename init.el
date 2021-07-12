@@ -816,7 +816,8 @@
  '(term-default-bg-color "#000000")
  '(term-default-fg-color "light gray")
  '(truncate-lines nil)
- '(truncate-partial-width-windows nil))
+ '(truncate-partial-width-windows nil)
+ '(warning-suppress-types '((comp))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

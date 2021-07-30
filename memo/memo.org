@@ -14,12 +14,17 @@ x - install/uninstall marked packages
 r - refresh package
 U - Upgrade all
 q - quit list
+
 ** install
 package-install
 
 ** refresh
 (package-refresh-contents)
 (byte-recompile-directory pkg-dir 0 t)
+
+** auto remove
+Auto remove unused packages
+(package-autoremove)
 
 * el-get
 ** el-get upgrade all

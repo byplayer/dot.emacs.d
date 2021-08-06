@@ -78,14 +78,14 @@
   (require 'org-agenda)
   (require 'ido)
 
-  (setq my-org-agenda-directory (concatenate 'string org-directory "/agenda"))
+  (setq my-org-agenda-directory (cl-concatenate 'string org-directory "/agenda"))
   (setq org-todo-keywords '((sequence "TODO(t)" "WAIT(w)" "SOMEDAY(s)" "|" "DONE(d)" "CANCEL(c)")))
 
   (setq daily-routine-template
-        (concatenate 'string org-directory "/templates/daily_routine.org"))
+        (cl-concatenate 'string org-directory "/templates/daily_routine.org"))
 
   (setq org-capture-templates
-        '(("t" "Todo" entry (file+headline (lambda()(concatenate 'string my-org-agenda-directory "/todo.org")) "Tasks")
+        '(("t" "Todo" entry (file+headline (lambda()(cl-concatenate 'string my-org-agenda-directory "/todo.org")) "Tasks")
            "* TODO %?")
           ("m" "Memo" entry (file my/generate-org-memo-name)
            "* %?\nEntered on %T\n")
@@ -95,24 +95,24 @@
                             (lambda()
                               (format-time-string
                                (let (target_dir)
-                                 (setq target_dir (format-time-string (concatenate 'string org-directory "/log")))
+                                 (setq target_dir (format-time-string (cl-concatenate 'string org-directory "/log")))
                                  (unless (file-directory-p target_dir)
                                    (make-directory target_dir t))
-                                 (concatenate 'string target_dir "/work_log_myself_%Y.org")))))
+                                 (cl-concatenate 'string target_dir "/work_log_myself_%Y.org")))))
            "* %^{description} %^g\n- %?")
           ("j" "members' log" entry (file+datetree
                             (lambda()
                               (format-time-string
                                (let (target_dir)
-                                 (setq target_dir (format-time-string (concatenate 'string org-directory "/log/members")))
+                                 (setq target_dir (format-time-string (cl-concatenate 'string org-directory "/log/members")))
                                  (unless (file-directory-p target_dir)
                                    (make-directory target_dir t))
-                                 (concatenate 'string target_dir
+                                 (cl-concatenate 'string target_dir
                                               "/work_log_" (my/pick-members) ".org")))))
            "* %^{description}\n- %?")))
 
   (setq org-archive-location
-        (concatenate 'string my-org-agenda-directory "/archive/"
+        (cl-concatenate 'string my-org-agenda-directory "/archive/"
                      (format-time-string "%Y" (current-time))
                      (format-time-string "/%Y%m_todo_archive.org::" (current-time))))
 
@@ -206,7 +206,7 @@
   (defun my/generate-org-memo-name ()
     (let* ((name (read-string "Name: "))
            (target_dir))
-      (setq target_dir (format-time-string (concatenate 'string org-directory "/memo/%Y/%Y%m")))
+      (setq target_dir (format-time-string (cl-concatenate 'string org-directory "/memo/%Y/%Y%m")))
       (unless (file-directory-p target_dir)
         (make-directory target_dir t))
       (format "%s/%s-%s.org" target_dir (format-time-string "%Y%m%d-%H%M%S") name )))
@@ -214,7 +214,7 @@
   (defun my/generate-org-doc-name ()
     (let* ((name (read-string "Name: "))
            (target_dir))
-      (setq target_dir (format-time-string (concatenate 'string org-directory "/docs/%Y")))
+      (setq target_dir (format-time-string (cl-concatenate 'string org-directory "/docs/%Y")))
       (unless (file-directory-p target_dir)
         (make-directory target_dir t))
       (format "%s/%s_%s.org" target_dir (format-time-string "%Y%m%d") name )))

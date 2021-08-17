@@ -1,2 +1,0 @@
-;;; Generated package description from /Users/yukio.goto/.emacs.d/elpa/leaf-convert-20201012.41/leaf-convert.el  -*- no-byte-compile: t -*-
-(define-package "leaf-convert" "20201012.41" "Convert many format to leaf format" '((emacs "26.1") (leaf "3.6.0") (leaf-keywords "1.1.0") (ppp "2.1")) :commit "c5bce825e4a171076c8f93692111979bcb428cdc" :authors '(("Naoya Yamashita" . "conao3@gmail.com")) :maintainer '("Naoya Yamashita" . "conao3@gmail.com") :keywords '("tools") :url "https://github.com/conao3/leaf-convert.el")

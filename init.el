@@ -352,7 +352,7 @@
              (php-set-style "php")
              (setq c-basic-offset 4)
              (setq tab-width 4)
-             (setq indent-tabs-mode nil))))
+             (setq indent-tabs-mode t))))
 
 (leaf :java
   :doc

@@ -653,7 +653,9 @@
 
 (leaf emojify
   :ensure t
-  :hook (after-init-hook . global-emojify-mode))
+  :hook (after-init-hook . global-emojify-mode)
+  :config
+  (add-to-list 'company-emojis '#(":pencil:" 0 1 (:unicode "📝"))))
 
 (leaf pyenv-mode-auto
   :ensure t

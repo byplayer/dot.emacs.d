@@ -786,7 +786,10 @@
   (setq-default tab-width 2)
   (setq-default indent-tabs-mode nil)
   (setq ring-bell-function 'ignore)
-  (put 'upcase-region 'disabled nil))
+  (put 'upcase-region 'disabled nil)
+  
+  ;; remove region text when select region and input
+  (delete-selection-mode t))
 
 (leaf *saveplace
   :setq-default ((save-place-limit . 1000))

@@ -1,7 +1,8 @@
-personal_ws-1.1 en 105 
+personal_ws-1.1 en 108 
 APIs
 Abhilash
 Andreas
+Ankit
 Asakai
 BBT
 CMA
@@ -10,6 +11,7 @@ DevOps
 Drucker
 EE
 Fuad
+Fujiko
 GHR
 GPG
 GRP
@@ -90,6 +92,7 @@ magit
 nullptr
 rakuten
 rbenv
+redirector
 rspec
 rst
 rubocop

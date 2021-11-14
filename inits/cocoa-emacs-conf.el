@@ -63,6 +63,7 @@
 (add-to-list 'mac-win-target-commands 'add-change-log-entry-other-window)
 ;; 個人用の関数を使うとき
 (add-to-list 'mac-win-target-commands 'my:)
+(add-to-list 'mac-win-target-commands 'my-helm)
 ;; org-mode で締め切りを設定するとき．
 (add-to-list 'mac-win-target-commands 'org-deadline)
 ;; query-replace で変換するとき

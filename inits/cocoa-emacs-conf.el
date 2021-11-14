@@ -13,18 +13,19 @@
 ;; for C-x/M-x with FEP issue on Mac
 (mac-auto-ascii-mode 1)
 
+;; google Japanese input "com.google.inputmethod.Japanese.base"
+;; Atok com.justsystems.inputmethod.atok32.Japanese
+(defvar jp-input-source "com.justsystems.inputmethod.atok32.Japanese")
+
 (defvar mac-win-last-ime-status 'off) ;; {'off|'on}
 (defun mac-win-save-last-ime-status ()
   (setq mac-win-last-ime-status
         (if (string-match "\\.\\(Roman\\|US\\|ABC\\)$" (mac-input-source))
             'off 'on)))
 
-;; google Japanese input "com.google.inputmethod.Japanese.base"
-;; Atok com.justsystems.inputmethod.atok32.Japanese
 (defun mac-win-restore-ime ()
   (when (and mac-auto-ascii-mode (eq mac-win-last-ime-status 'on))
-    (mac-select-input-source
-     "com.justsystems.inputmethod.atok32.Japanese"))) ;; Google IME 以外は要修正
+    (mac-select-input-source jp-input-source)))
 
 (defun advice:mac-auto-ascii-setup-input-source (&optional _prompt)
   "Extension to store IME status"
@@ -38,8 +39,7 @@
     (mapc (lambda (command)
             (when (string-match
                    (format "^%s" command) (format "%s" this-command))
-              (mac-select-input-source
-               "com.justsystems.inputmethod.atok32.Japanese"))) ;; Google IME 以外は要修正
+              (mac-select-input-source jp-input-source)))
           mac-win-target-commands)))
 (add-hook 'pre-command-hook 'mac-win-restore-ime-target-commands)
 

@@ -338,6 +338,7 @@
   :hook (python-mode-hook . py-autopep8-enable-on-save))
 
 (leaf elpy
+  :disabled t
   :ensure t
   :init
   (elpy-enable))

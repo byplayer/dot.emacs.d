@@ -163,7 +163,7 @@ e.g. 20190-4-01 15:02:33"
         markdown-mode-hook
         js2-mode-hook
         rst-mode))
-(loop for hook in prettier-js-mode-hooks
+(cl-loop for hook in prettier-js-mode-hooks
       do (add-hook hook 'prettier-js-mode))
 
 ;; mode-line
@@ -210,7 +210,7 @@ e.g. 20190-4-01 15:02:33"
 (defun clean-mode-line ()
   "Clean up mode-line list."
   (interactive)
-  (loop for (mode . mode-str) in mode-line-cleaner-alist
+  (cl-loop for (mode . mode-str) in mode-line-cleaner-alist
         do
         (let ((old-mode-str (cdr (assq mode minor-mode-alist))))
           (when old-mode-str
@@ -304,6 +304,8 @@ e.g. 20190-4-01 15:02:33"
              (define-key markdown-mode-map (kbd "<M-return>") 'org-meta-return)))
 
 ;; Show time on mode-line
+(defvar display-time-interval)
+(defvar display-time-string-forms)
 (setq display-time-interval 1)
 (setq display-time-string-forms
   '((format "%s:%s" 24-hours minutes seconds)))

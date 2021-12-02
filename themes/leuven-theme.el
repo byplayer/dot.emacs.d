@@ -199,7 +199,7 @@ more...")
 
    ;; Font lock faces.
    `(font-lock-builtin-face ((,class (:foreground "#006FE0"))))
-   `(font-lock-comment-delimiter-face ((,class (:foreground "#DarkOliveGreen")))) ; #696969
+   `(font-lock-comment-delimiter-face ((,class (:foreground "DarkOliveGreen")))) ; #696969
    `(font-lock-comment-face ((,class (:slant italic :foreground "DarkOliveGreen")))) ; #696969
    `(font-lock-constant-face ((,class (:foreground "#D0372D"))))
    `(font-lock-doc-face ((,class (:foreground "#036A07"))))

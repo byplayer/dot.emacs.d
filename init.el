@@ -103,10 +103,10 @@
            company-dabbrev-char-regexp
            company-dabbrev-downcase
            completion-ignore-case
-           company-show-numbers)
+           company-show-quick-access)
   :setq ((company-dabbrev-downcase . nil)
          (completion-ignore-case . t)
-         (company-show-numbers . t)
+         (company-show-quick-access . t)
          (company-idle-delay . 0.5)
          (company-minimum-prefix-length . 2)
          (company-selection-wrap-around . t))
@@ -705,19 +705,10 @@
   :ensure t
   :hook (rust-mode-hook . cargo-minor-mode))
 
-(leaf windows
-  :doc windows + revive
-  :el-get byplayer/windows
-  :bind (("C-x C-c" . see-you-again)
-         ("C-x K" . kill-all-buffers))
-  :defvar (win:switch-prefix
-           win:use-frame)
-  :defun (win:startup-with-window)
-  :hook ((window-setup-hook . resume-windows))
-  :pre-setq ((win:switch-prefix . "\C-cw"))
-  :setq ((win:use-frame . nil))
+(leaf *desktop
+  :doc for desk top save mode
   :init
-  (win:startup-with-window))
+  (desktop-save-mode 1))
 
 (leaf *spell
   :doc spell check configuration
@@ -761,7 +752,8 @@
          ("C-x <down>" . windmove-down)
          ("C-x <up>" . windmove-up)
          ("C-x h" . split-window-right)
-         ("C-x v" . split-window-below))
+         ("C-x v" . split-window-below)
+         ("C-x K" . kill-all-buffers))
   :init
   ;; support bat moad, ini mode
   (require 'generic-x)
@@ -789,7 +781,13 @@
   (put 'upcase-region 'disabled nil)
 
   ;; remove region text when select region and input
-  (delete-selection-mode t))
+  (delete-selection-mode t)
+
+  (defun kill-all-buffers()
+    (interactive)
+    (yes-or-no-p "kill all buffers? ")
+    (dolist (buf (buffer-list))
+      (kill-buffer buf))))
 
 (leaf *saveplace
   :setq-default ((save-place-limit . 1000))

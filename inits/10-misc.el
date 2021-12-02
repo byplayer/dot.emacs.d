@@ -58,12 +58,6 @@
 (require 'savekill)
 (setq savekill-max-saved-items 1000)
 
-(defun kill-all-buffers()
-  "The kill-all-buffers kill all buffers."
-  (interactive)
-  (yes-or-no-p "kill all buffer? ")
-  (wipe))
-
 (setq-default ispell-program-name "aspell")
 (eval-after-load "ispell"
   '(add-to-list 'ispell-skip-region-alist '("[^\000-\377]+")))

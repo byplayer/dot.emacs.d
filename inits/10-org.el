@@ -13,9 +13,12 @@
   :ensure t
   :require t)
 
+(leaf org-sticky-header
+  :ensure t)
+
 (leaf org
   :ensure t
-  :after bind-key
+  :after bind-key org-sticky-header
   :bind (("C-c a" . my/org-agenda)
          ("C-c C-9" . org-capture))
   :mode (("\\.org$" . org-mode))
@@ -170,14 +173,6 @@
                                  (shell . t)
                                  (plantuml . t)))
 
-  (add-to-list 'org-speed-commands '("d" org-todo "DONE"))
-  (add-to-list 'org-speed-commands '("c" org-todo "CANCEL"))
-  (add-to-list 'org-speed-commands '("C" org-clone-subtree-with-time-shift 1))
-  (add-to-list 'org-speed-commands '("D" org-deadline ""))
-  (add-to-list 'org-speed-commands '("A" my/org-archive-this-file))
-  (add-to-list 'org-speed-commands '("s" org-schedule ""))
-  (add-to-list 'org-speed-commands '("/" helm-org-in-buffer-headings))
-
   (defun my/get-string-from-file (filePath)
     "Return filePath's file content."
     (with-temp-buffer
@@ -274,7 +269,14 @@ The file-path is archive target file path.  If no file-path is given uses the fu
 
   :config
   (bind-keys :map org-agenda-mode-map
-             ("d" . org-agenda-todo)))
+             ("d" . org-agenda-todo))
+  (add-to-list 'org-speed-commands '("d" org-todo "DONE"))
+  (add-to-list 'org-speed-commands '("c" org-todo "CANCEL"))
+  (add-to-list 'org-speed-commands '("C" org-clone-subtree-with-time-shift 1))
+  (add-to-list 'org-speed-commands '("D" org-deadline ""))
+  (add-to-list 'org-speed-commands '("A" my/org-archive-this-file))
+  (add-to-list 'org-speed-commands '("s" org-schedule ""))
+  (add-to-list 'org-speed-commands '("/" helm-org-in-buffer-headings)))
 
 (leaf org-sticky-header
   :ensure t

@@ -14,8 +14,7 @@
 
 (eval-and-compile
   (customize-set-variable
-   'package-archives '(("org"   . "https://orgmode.org/elpa/")
-                       ("melpa" . "https://melpa.org/packages/")
+   'package-archives '(("melpa" . "https://melpa.org/packages/")
                        ("gnu"   . "https://elpa.gnu.org/packages/")))
   (package-initialize)
   (unless (package-installed-p 'leaf)
@@ -714,11 +713,12 @@
   :defvar (win:switch-prefix
            win:use-frame)
   :defun (win:startup-with-window)
-  :hook ((window-setup-hook . resume-windows))
+  ; :hook ((window-setup-hook . resume-windows))
   :pre-setq ((win:switch-prefix . "\C-cw"))
   :setq ((win:use-frame . nil))
   :init
-  (win:startup-with-window))
+  ; (win:startup-with-window)
+  )
 
 (leaf *spell
   :doc spell check configuration

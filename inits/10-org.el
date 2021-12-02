@@ -41,7 +41,7 @@
            org-agenda-custom-commands
            helm-completing-read-handlers-alist
            org-plantuml-jar-path
-           org-speed-commands-user
+           org-speed-commands
            org-confirm-babel-evaluate
            org-imenu-depth
            org-clock-clocktable-default-properties
@@ -170,13 +170,13 @@
                                  (shell . t)
                                  (plantuml . t)))
 
-  (add-to-list 'org-speed-commands-user '("d" org-todo "DONE"))
-  (add-to-list 'org-speed-commands-user '("c" org-todo "CANCEL"))
-  (add-to-list 'org-speed-commands-user '("C" org-clone-subtree-with-time-shift 1))
-  (add-to-list 'org-speed-commands-user '("D" org-deadline ""))
-  (add-to-list 'org-speed-commands-user '("A" my/org-archive-this-file))
-  (add-to-list 'org-speed-commands-user '("s" org-schedule ""))
-  (add-to-list 'org-speed-commands-user '("/" helm-org-in-buffer-headings))
+  (add-to-list 'org-speed-commands '("d" org-todo "DONE"))
+  (add-to-list 'org-speed-commands '("c" org-todo "CANCEL"))
+  (add-to-list 'org-speed-commands '("C" org-clone-subtree-with-time-shift 1))
+  (add-to-list 'org-speed-commands '("D" org-deadline ""))
+  (add-to-list 'org-speed-commands '("A" my/org-archive-this-file))
+  (add-to-list 'org-speed-commands '("s" org-schedule ""))
+  (add-to-list 'org-speed-commands '("/" helm-org-in-buffer-headings))
 
   (defun my/get-string-from-file (filePath)
     "Return filePath's file content."

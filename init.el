@@ -46,22 +46,22 @@
   :ensure t
   :bind (("C-c e" . macrostep-expand)))
 
-;; (leaf lsp-mode
-;;   :ensure t
-;;   :commands (lsp lsp-deferred)
-;;   :custom (lsp-rust-server . 'rust-analyzer)
-;;   :bind ("C-c h" . lsp-describe-thing-at-point)
-;;   :hook ((go-mode-hook . lsp-deferred)
-;;          (rust-mode-hook . lsp)
-;;          (lsp-mode-hook . (lambda()
-;;               (local-set-key (kbd "M-*") 'xref-pop-marker-stack)
-;;               (local-set-key (kbd "M-.") 'xref-find-definitions)
-;;               (local-set-key (kbd "M-/") 'xref-find-references)))))
+(leaf lsp-mode
+  :ensure t
+  :commands (lsp lsp-deferred)
+  :custom (lsp-rust-server . 'rust-analyzer)
+  :bind ("C-c h" . lsp-describe-thing-at-point)
+  :hook ((go-mode-hook . lsp-deferred)
+         (rust-mode-hook . lsp)
+         (lsp-mode-hook . (lambda()
+              (local-set-key (kbd "M-*") 'xref-pop-marker-stack)
+              (local-set-key (kbd "M-.") 'xref-find-definitions)
+              (local-set-key (kbd "M-/") 'xref-find-references)))))
 
-;; (leaf lsp-ui
-;;   :ensure t
-;;   :after lsp-mode
-;;   :commands lsp-ui-mode)
+(leaf lsp-ui
+  :ensure t
+  :after lsp-mode
+  :commands lsp-ui-mode)
 
 (leaf company
   :ensure t
@@ -163,6 +163,15 @@
                                       ; ("^\*helm.+\*$" :regexp t :height 0.4)
                                       ; ("*my helm*" :regexp t :height 0.4)
                                       )))
+
+(leaf markdown-mode
+  :ensure t
+  :mode "\\.markdown$" "\\.md$")
+
+(leaf ruby-mode
+  :ensure t
+  :config
+  (add-hook 'ruby-mode-hook 'lsp))
 
 (leaf *server
   :doc start server for emacs client
@@ -577,8 +586,8 @@
 ;;     (if (member major-mode clang-format-modes)
 ;;         (clang-format-buffer))))
 
-;; (leaf font-lock+
-;;   :el-get emacsmirror/font-lock-plus)
+(leaf font-lock+
+  :el-get emacsmirror/font-lock-plus)
 
 (leaf hideshow
   :ensure t
@@ -740,6 +749,11 @@
   :doc support bat moad, ini mode
   :require generic-x)
 
+(leaf leuven-theme
+  :el-get byplayer/leuven-theme
+  :config
+  (load-theme 'leuven t))
+
 (leaf *set-bindings
   :doc set key bindings. Don't mix set-variables because set variables doesn't work
   :bind
@@ -835,7 +849,11 @@
     :setq (mac-option-modifier . 'meta)
     :init
     ;; for C-x/M-x with FEP issue on Mac
-    (mac-auto-ascii-mode 1)))
+    (mac-auto-ascii-mode 1)
+    (set-face-attribute 'default nil :family "Cascadia Code NF" :height 120)
+    (set-frame-font "Cascadia Code NF")
+    (mac-auto-ascii-mode 1)
+    ))
 
 (leaf *byte-compile-init-files
   :doc "byte compile init files when init.elc doesn't exist"

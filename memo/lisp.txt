@@ -1,3 +1,5 @@
+C-c C-f elisp-byte-compile-file
+    	byte-compile current buffer lisp file
 C-h C-h lisp help
     a word RET コマンドリスト表示
     w command-name コマンド実行するバインドを調べる

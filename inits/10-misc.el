@@ -36,20 +36,6 @@
         (tab-mark   ?\t   [?\xBB ?\t])))
 (global-whitespace-mode 1)
 
-;; backup directory configuration
-(setq backup-directory-alist
-  (cons (cons ".*" (expand-file-name "~/.emacs.d/backup"))
-        backup-directory-alist))
-
-(setq version-control t)      ; version control for backup
-(setq kept-new-versions 10)   ; keep 10 new files
-(setq kept-old-versions 10)   ; keep 10 old files
-(setq delete-old-versions t)  ; delete old files without confirmation
-(setq vc-make-backup-files t) ; backup under version control
-
-;; disable lock file
-(setq create-lockfiles nil)
-
 (setq auto-save-file-name-transforms
   `((".*", (expand-file-name "~/.emacs.d/auto-save-list/") t)))
 
@@ -68,9 +54,6 @@
 
 (dolist (hook '(text-mode-hook))
   (add-hook hook (lambda () (flyspell-mode 1))))
-
-(require 'smartparens-config)
-(smartparens-global-mode t)
 
 (require 'volatile-highlights)
 (volatile-highlights-mode t)

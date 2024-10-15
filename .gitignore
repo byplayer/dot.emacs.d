@@ -16,7 +16,10 @@
 /elpa/archives/
 /bookmarks
 /undo-tree-hist
-/backup/
+/backup-file/*
+!/backup-file/.gitkeep
+/auto-save-file/*
+!/auto-save-file/.gitkeep
 /places
 /recentf
 /irony
@@ -33,6 +36,7 @@
 /elpa/elpy-*/elpy/__pycache__/
 /eshell/*
 /.org-generic-id-locations
+.DS_Store
 
 GPATH
 GRTAGS

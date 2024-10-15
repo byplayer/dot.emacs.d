@@ -189,16 +189,16 @@
 ;;                (ndeb "~/dic/sperdic200")
 ;;                (ndeb "~/dic/edict2"))))))
 
-;; (leaf expand-region
-;;   :doc expand region
-;;   :ensure t
-;;   :bind (("C-<" . er/expand-region)
-;;          ("C-M-," . er/contract-region)))
+(leaf expand-region
+  :doc expand region
+  :ensure t
+  :bind (("C-<" . er/expand-region)
+         ("C-M-," . er/contract-region)))
 
-;; (leaf avy
-;;   :doc quick search
-;;   :ensure t
-;;   :bind (("C-c j" . avy-goto-word-1)))
+(leaf avy
+  :doc quick search
+  :ensure t
+  :bind (("C-c j" . avy-goto-word-1)))
 
 ;; (leaf winner
 ;;   :init
@@ -804,8 +804,7 @@
   (setq vc-make-backup-files t) ; backup under version control
 
   ;; disable lock file
-  (setq create-lockfiles nil)
-  )
+  (setq create-lockfiles nil))
 
 (leaf *kill-all-buffers
   :bind

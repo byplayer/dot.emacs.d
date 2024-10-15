@@ -48,6 +48,7 @@
 
 (leaf lsp-mode
   :ensure t
+  :after helm
   :commands (lsp lsp-deferred)
   :custom (lsp-rust-server . 'rust-analyzer)
   :bind ("C-c h" . lsp-describe-thing-at-point)
@@ -585,6 +586,10 @@
 ;;     (interactive)
 ;;     (if (member major-mode clang-format-modes)
 ;;         (clang-format-buffer))))
+
+(leaf helm-lsp
+  :ensure t
+  :after lsp-mode)
 
 (leaf font-lock+
   :el-get emacsmirror/font-lock-plus)

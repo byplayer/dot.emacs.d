@@ -63,17 +63,6 @@
 ;;   :after lsp-mode
 ;;   :commands lsp-ui-mode)
 
-(leaf company-quickhelp
-  :doc help support for company
-  :ensure t)
-
-(leaf company-emoji
-  :ensure t)
-
-(leaf *set-emoji
-  :after company-emoji
-  :init (add-to-list 'company-emojis '#(":pencil:" 0 1 (:unicode "📝"))))
-
 (leaf company
   :ensure t
   :commands global-company-mode
@@ -105,7 +94,6 @@
   :init
   (global-company-mode)
   (company-quickhelp-mode +1)
-  (add-to-list 'company-backends 'company-emoji)
   (defun company-mode/backend-with-yas (backend)
     (if (and (listp backend) (member 'company-yasnippet backend))
         backend
@@ -132,6 +120,17 @@
             (define-key map (format "%d" x)
               `(lambda () (interactive) (company-complete-number ,x))))
           (number-sequence 0 9))))
+
+(leaf company-quickhelp
+  :doc help support for company
+  :ensure t)
+
+(leaf company-emoji
+  :ensure t
+  :require company-emoji
+  :config
+  (add-to-list 'company-emojis '#(":pencil:" 0 1 (:unicode "📝")))
+  (add-to-list 'company-backends 'company-emoji))
 
 (leaf company-lsp
   :ensure t
@@ -650,18 +649,17 @@
 ;;   :ensure t
 ;;   :init (require 'pyenv-mode-auto))
 
-;; (leaf undo-tree
-;;   :doc show undo tree
-;;   :ensure t
-;;   :defvar (undo-tree-auto-save-history
-;;            undo-tree-history-directory-alist)
-;;   :commands global-undo-tree-mode
-;;   :init
-;;   (global-undo-tree-mode)
-;;   (setq undo-tree-auto-save-history t
-;;         undo-tree-history-directory-alist `(("." .,
-;;                                              (expand-file-name "~/.emacs.d/undo-tree-hist/")))))
-
+(leaf undo-tree
+  :doc show undo tree
+  :ensure t
+  :defvar (undo-tree-auto-save-history
+           undo-tree-history-directory-alist)
+  :commands global-undo-tree-mode
+  :init
+  (global-undo-tree-mode)
+  (setq undo-tree-auto-save-history t
+        undo-tree-history-directory-alist `(("." .,
+                                             (expand-file-name "~/.emacs.d/undo-tree-hist/")))))
 
 ;; (leaf *objc-mode
 ;;   :init

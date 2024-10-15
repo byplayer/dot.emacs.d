@@ -2,20 +2,14 @@
 ;;; Commentary:
 ;;; Code:
 
-(set-face-attribute 'default nil :family "Source Han Code JP M" :height 120)
-(set-frame-font "Source Han Code JP M")
-
 (setq ndeb-program-name "/opt/eblook/bin/eblook")
 
-;; use option as meta also
-(setq mac-option-modifier 'meta)
-
 ;; for C-x/M-x with FEP issue on Mac
-(mac-auto-ascii-mode 1)
+
 
 ;; google Japanese input "com.google.inputmethod.Japanese.base"
 ;; Atok com.justsystems.inputmethod.atok32.Japanese
-(defvar jp-input-source "com.justsystems.inputmethod.atok32.Japanese")
+; (defvar jp-input-source "com.justsystems.inputmethod.atok32.Japanese")
 
 (defvar mac-win-last-ime-status 'off) ;; {'off|'on}
 (defun mac-win-save-last-ime-status ()
